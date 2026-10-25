@@ -109,7 +109,7 @@
   "tools/v04_mutations.py": "77de60557975a5a957ff7e55cbff705228859d8c16dcd30ec239aba75114ac24",
   "tools/v04_native.py": "a660e99e1559a5b77c2cda5472e2e4b9b5c7cbd3868ba26745ca0fcc91ffbacd",
   "tools/v04_oracle.py": "ab60e55b02aae5af5e1154824cbf760f027e00e8626df54bb779ff6259ac2cca",
-  "tools/v04_startup_probe.py": "ecab41c50f5698d9f761f0129fa3b4efa4cd9f5fd6eec78707ff14e7969a7b4c",
+  "tools/v04_startup_probe.py": "ec98f920306845af1c72a75b1ef2e75f63dedf556872aa41213e0b2bdcd21435",
   "tools/v04_token_probe.py": "5b39712270192c0a41b3ee12ed1bf640c09e47a4fbd195538e1d66a190f3def6",
   "tools/v04_worker.py": "40c7eaa75a14a9a6928f92671089851e225332c601420b3fcb330f560e278506",
   "tools/validate.py": "67c8b6ee06ed7f3c0c32b66ae21f5f0fa1e10ca65df2a089a450ab52666f6c21",

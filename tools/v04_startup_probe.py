@@ -6,6 +6,27 @@ ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT))
 from guardian import windows as win
 from tools.ci_tokens import reduced_token,inspect,acceptable
 
+def desktop_access(token):
+    user=c.WinDLL('user32',use_last_error=True)
+    station=win.api(user,'GetProcessWindowStation',w.HANDLE)()
+    desktop=win.api(user,'GetThreadDesktop',w.HANDLE,w.DWORD)(win.api(win.k,'GetCurrentThreadId',w.DWORD)())
+    def name(handle):
+        size=w.DWORD();buf=c.create_unicode_buffer(1024)
+        win.check(win.api(user,'GetUserObjectInformationW',w.BOOL,w.HANDLE,c.c_int,win.P,w.DWORD,c.POINTER(w.DWORD))(handle,2,buf,c.sizeof(buf),c.byref(size)));return buf.value
+    result={'station':name(station),'desktop':name(desktop),'acl_changes':False};other=w.HANDLE()
+    try:
+        win.check(win.api(win.a,'DuplicateTokenEx',w.BOOL,w.HANDLE,w.DWORD,win.P,c.c_int,c.c_int,c.POINTER(w.HANDLE))(token,0xc,None,2,2,c.byref(other)))
+        win.check(win.api(win.a,'SetThreadToken',w.BOOL,win.P,w.HANDLE)(None,other))
+        for label,api,args,close in (
+            ('station_read',win.api(user,'OpenWindowStationW',w.HANDLE,w.LPCWSTR,w.BOOL,w.DWORD),(result['station'],False,3),'CloseWindowStation'),
+            ('desktop_read',win.api(user,'OpenDesktopW',w.HANDLE,w.LPCWSTR,w.DWORD,w.BOOL,w.DWORD),(result['desktop'],0,False,1),'CloseDesktop')):
+            handle=api(*args);result[label]={'opened':bool(handle),'winerror':0 if handle else c.get_last_error()}
+            if handle:win.check(win.api(user,close,w.BOOL,w.HANDLE)(handle))
+    finally:
+        if not win.api(win.a,'RevertToSelf',w.BOOL)():os._exit(91)
+        if other:win.close(other)
+    return result
+
 def run(out):
     out.parent.mkdir(parents=True,exist_ok=True);current=w.HANDLE();reduced=None;launch=w.HANDLE()
     record={'schema':'guardian.startup-probe.v04','attempts':[],'privileges_enabled':False,'enforcement':'NOT_COVERED'}
@@ -21,15 +42,21 @@ def run(out):
         win.check(win.api(win.a,'DuplicateTokenEx',w.BOOL,w.HANDLE,w.DWORD,win.P,c.c_int,c.c_int,c.POINTER(w.HANDLE))(reduced,0x18b,None,2,1,c.byref(launch)))
         record['launch_token']=inspect(launch)
         if not acceptable(record['launch_token'],parent['user_sha256']):raise RuntimeError('TOKEN_CONTROL_BROKEN')
-        marker=out.with_suffix('.child.json').absolute()
-        if marker.exists():raise ValueError('fresh marker required')
-        snippet='import pathlib;pathlib.Path('+repr(str(marker))+').write_bytes(b"started\\n")'
+        record['desktop_access']=desktop_access(launch);save()
+        snippet=''
         candidates=[('cmd',[os.environ['COMSPEC'],'/d','/q','/c','exit','0'],False),
                     ('python-isolated',[sys.executable,'-I','-S','-B','-c',snippet],False),
-                    ('python-inherited-env',[sys.executable,'-I','-S','-B','-c',snippet],True)]
+                    ('python-inherited-env',[sys.executable,'-I','-S','-B','-c',snippet],True),
+                    ('cmd-current-desktop',[os.environ['COMSPEC'],'/d','/q','/c','exit','0'],False),
+                    ('python-current-desktop',[sys.executable,'-I','-S','-B','-c',snippet],False)]
         create=win.api(win.a,'CreateProcessWithTokenW',w.BOOL,w.HANDLE,w.DWORD,w.LPCWSTR,w.LPWSTR,w.DWORD,win.P,w.LPCWSTR,c.POINTER(win.STARTUPINFO),c.POINTER(win.PROCESSINFO))
         for name,argv,inherited in candidates:
             pi=win.PROCESSINFO();si=win.STARTUPINFO();si.cb=c.sizeof(si);row={'name':name,'argv':argv,'inherited_environment':inherited};started=time.perf_counter()
+            marker=out.with_suffix('.'+name+'.child.json').absolute()
+            if marker.exists():raise ValueError('fresh per-attempt marker required')
+            if name.startswith('python'):argv[-1]='import pathlib;pathlib.Path('+repr(str(marker))+').write_bytes(b"started\\n")'
+            if name.endswith('current-desktop'):si.lpDesktop=record['desktop_access']['station']+'\\'+record['desktop_access']['desktop']
+            row['requested_desktop']=si.lpDesktop
             values={k:os.environ[k] for k in ('SystemRoot','WINDIR','SystemDrive','USERPROFILE','LOCALAPPDATA','APPDATA','ProgramFiles','ProgramData','COMSPEC','PATH','TEMP','TMP') if k in os.environ}
             env=c.create_unicode_buffer('\0'.join(k+'='+values[k] for k in sorted(values,key=str.upper))+'\0\0')
             try:
