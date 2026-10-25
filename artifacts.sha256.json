@@ -49,6 +49,7 @@
   "tools/ci_entry.py": "619c63a6fff43a4dfb4ac2b115b0fafa47add343e1090819fe254fed78614f1f",
   "tools/ci_tokens.py": "1f2291b229ca2261d32466e872a48258d7e2370525edd72ce65f6cf7808e3dbc",
   "tools/evidence.py": "32e6aa3e89fdb31f61fac99f516a2cdf87877d6f2d21bf25afa9b6eb3815a6d5",
+  "tools/handle_control.py": "96becde90acb0665f1a40659d3ae00ca62b915362efaedfd120948d2762e9491",
   "tools/integrity.py": "fb00ee069e913202b38b8b301604d99a04749d1a36aff28d6deedcfd8f5e2852",
   "tools/lab.py": "6c7f5699c9174750d2f256de0fbd6580e4206c6f5e2f5a47e883f11985976573",
   "tools/mutation_witness.py": "55cdc6070ac421d41be54775da4847595608590d19960b1316d43e537f8feedd",
@@ -61,5 +62,5 @@
   "tools/v02_mutations.py": "91e154aaa34f066d171c92a1b3232106e690fc981cbb1908de159edf11ff9f7e",
   "tools/v02_worker.py": "f0146bd2966b1f2ad8933988393f12cba5878bcf7f706c347702d0f78f977102",
   "tools/validate.py": "67c8b6ee06ed7f3c0c32b66ae21f5f0fa1e10ca65df2a089a450ab52666f6c21",
-  "tools/validate_v02.py": "f7202a195e1ff63195a77bc3fa6b77cc6885251a334e03bc9dc96416a33501c7"
+  "tools/validate_v02.py": "6e2acbcf27890f99cf1c9c5aa7e464ec8c7ef22eb55d13653d1a1617a99655a3"
 }

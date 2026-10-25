@@ -25,6 +25,7 @@ def run(out,portable=False,no_mutations=False):
     execute('v0-regression',['tools/validate.py','--out',str(out/'v0')]+(['--portable'] if portable else [])+(['--no-mutations'] if no_mutations else []))
     deterministic='NOT_COVERED';counts={}
     if not portable:
+        execute('handle-inheritance',['tools/handle_control.py','--out',str(out/'handle-inheritance')])
         for mode,flags in [('normal',[]),('repeat',[]),('optimized',['-O'])]:
             execute('v02-'+mode,[*flags,'tools/v02_campaign.py','--out',str(out/mode)])
         paths=[out/m/'semantic.json' for m in ('normal','repeat','optimized')]
