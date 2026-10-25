@@ -45,6 +45,20 @@ def main(out,no_mutations=False,profile='v0'):
             observed=inspect(linked);record['reduced_token']=observed;save()
             if not acceptable(observed,hashlib.sha256(current['user_sid'].encode()).hexdigest()):
                 raise RuntimeError('ephemeral reduction failed security predicates')
+            # Controlled hosted diagnostics isolate TOKEN_ADJUST_SESSIONID as
+            # required handle access here. This grants no privilege and does
+            # not change the session, user, groups or privileges of the token.
+            from tools.ci_diagnostics import access
+            record['reduced_handle_before']=access(linked)
+            launch=w.HANDLE()
+            win.check(win.api(win.a,'DuplicateTokenEx',w.BOOL,w.HANDLE,w.DWORD,win.P,c.c_int,c.c_int,c.POINTER(w.HANDLE))(
+                linked,0x18b,None,2,1,c.byref(launch)))
+            win.close(linked);linked=launch
+            after=inspect(linked);record['reduced_handle_after']=access(linked)
+            record['launch_token_unchanged']=after==observed
+            record['launch_token']=after;save()
+            if after!=observed or not acceptable(after,hashlib.sha256(current['user_sid'].encode()).hexdigest()):
+                raise RuntimeError('launch handle duplication changed token security properties')
         elevated=w.DWORD()
         win.check(win.get_token(linked,20,c.byref(elevated),c.sizeof(elevated),c.byref(size)))
         if elevated.value:raise RuntimeError('linked token is elevated; refusing')

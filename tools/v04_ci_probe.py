@@ -50,7 +50,7 @@ def probe_access(token):
         if other:win.close(other)
 
 def run(out):
-    current=w.HANDLE();reduced=None;expanded=None;out.parent.mkdir(parents=True,exist_ok=True)
+    current=w.HANDLE();reduced=None;expanded=None;bounded=[];out.parent.mkdir(parents=True,exist_ok=True)
     win.check(win.open_token(win.current(),0x8b,c.byref(current)))
     record={'schema':'guardian.windows-ci-probe.v04','platform':platform.platform(),'python':sys.version,'attempts':[],
       'privileges_enabled':False,'children_resumed':False,'enforcement':'NOT_COVERED'}
@@ -69,7 +69,7 @@ def run(out):
         if not acceptable(record['expanded_token'],parent['user_sha256']):raise RuntimeError('DUPLICATE_CONTROL_BROKEN')
         env=c.create_unicode_buffer('SystemRoot='+os.environ['SystemRoot']+'\0\0')
         create=win.api(win.a,'CreateProcessWithTokenW',w.BOOL,w.HANDLE,w.DWORD,w.LPCWSTR,w.LPWSTR,w.DWORD,win.P,w.LPCWSTR,c.POINTER(win.STARTUPINFO),c.POINTER(win.PROCESSINFO))
-        candidates=[('existing',reduced),('maximum_allowed_handle',expanded)];bounded=[]
+        candidates=[('existing',reduced),('maximum_allowed_handle',expanded)]
         # Each is a new copy of the same reduced primary token. Compare narrow
         # handle rights while holding logon identity, privileges and flags fixed.
         for rights in (0x8b,0x8f,0x18b,0x9b,0xab,0xcb,0x2008b):
@@ -92,10 +92,9 @@ def run(out):
                     for h in (pi.hThread,pi.hProcess):
                         if h:win.close(h)
                 record['attempts'].append(row);save()
-        for token in bounded:win.close(token)
         return record
     finally:
-        for h in (expanded,reduced,current):
+        for h in (*bounded,expanded,reduced,current):
             if h:win.close(h)
 
 if __name__=='__main__':

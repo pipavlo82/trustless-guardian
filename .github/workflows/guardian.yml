@@ -30,6 +30,9 @@ jobs:
             build/ci-launch.*
             build/ci-diagnostics.json
             build/v04-ci-probe.json
+            build/ci-windows/**/*.json
+            build/ci-windows/**/*.stdout
+            build/ci-windows/**/*.stderr
             build/ci-windows/*.json
             build/ci-windows/*.stdout
             build/ci-windows/*.stderr
