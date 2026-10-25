@@ -16,7 +16,7 @@ credential is required or copied. Do not run as administrator. See
 ```powershell
 git clone https://github.com/pipavlo82/trustless-guardian.git guardian-replay
 cd guardian-replay
-git checkout --detach <REVIEWED_V05_SHA>
+git checkout --detach f2a25fc8ed2d1de6cb84e661d77eeeb039d5c3ec
 python -B tools/prepare.py
 python -B demo/run_demo.py --out build/demo
 python -B demo/verify_demo.py --files build/demo/snapshot-paths.json --out build/demo-post-runtime.json

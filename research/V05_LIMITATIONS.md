@@ -29,6 +29,12 @@ acceptance. The bounded laboratory demo is independently replayable.
    production profile.
 10. ReceiptOS/VECA native evidence-to-action integration is NOT_COVERED. No
     third-party implementation, frozen ERC-8404 Core, main or XRPL work changed.
+11. The scripted policy runs use the trusted laboratory clock value 1000 and
+    synthetic expiry 1030. They do not establish real-time clock integrity or
+    live-agent expiration behavior. Nonces belong to each isolated journal.
+12. Historical mutation replay is not uniformly reproducible here. The serial
+    v0.4 repeat/-O campaigns retained one/two CONTROL_BROKEN results respectively.
+    The new demo's successful timing profile does not turn those runs into passes.
 
 Proceed with a separately scoped model-provider and tool-transport experiment;
 do not remove the current containment limits merely to make the demo succeed.

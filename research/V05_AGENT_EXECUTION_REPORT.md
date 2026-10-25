@@ -11,6 +11,12 @@ Codex CLI **0.162.0-alpha.17.2**, executable SHA-256
 Command/process inventory found no Claude, Ollama or LM Studio runtime among
 the checked names. This is a bounded environment observation.
 
+The installed file's Authenticode signature was independently reported **Valid**
+by Windows, signer `OpenAI OpCo, LLC`, certificate thumbprint
+`19FC6BBDA0F7B95CFCBF6DD92C3787C31A09F8FE`. Its measured SHA-256 matches the
+confined copy. This confirms the observed runtime's signed-file identity; it
+does not establish completion of a model-backed task.
+
 The direct suspended executable's actual token and image were inspected by a
 separate process. Observed: AppContainer true, low integrity `S-1-16-4096`,
 elevated false, capabilities 0, primary token, matching synthetic package SID,

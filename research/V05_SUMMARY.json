@@ -1,0 +1,391 @@
+{
+  "branch": "research/guardian-enforcement-v0",
+  "ci": {
+    "exact_publication_checks": "See final PR checks and local delivery report; not inferred here.",
+    "hosted_windows_enforcement": "NOT_COVERED",
+    "status": "CI_BLOCKED"
+  },
+  "dependencies": {
+    "embedded_python": {
+      "architecture": "amd64",
+      "license": "PSF-2.0 and embedded runtime notices; not redistributed",
+      "python": "3.12.10",
+      "sha256": "4acbed6dd1c744b0376e3b1cf57ce906f9dc9e95e68824584c8099a63025a3c3",
+      "url": "https://www.python.org/ftp/python/3.12.10/python-3.12.10-embed-amd64.zip"
+    },
+    "no_new_packages_installed": true
+  },
+  "evidence_archives": {
+    "v05-development.zip": "8b5abca4a198abff46f8212a8fe2e7d7432824a7edceb96f4362d64a9cc16ce9",
+    "v05-replays.zip": "94e598ddfbfd55cfbe4010068f3c44cfb087714be0897bcad812c5090a1ddc84"
+  },
+  "historical_concurrent_replay": {
+    "failed_commands": [
+      "v02-mutations-repeat",
+      "v02-mutations-optimized",
+      "v03-mutations-repeat",
+      "v03-mutations-optimized",
+      "mutations-repeat",
+      "mutations-optimized"
+    ],
+    "passed": false,
+    "v04_mutations": {
+      "normal": {
+        "CONTROL_BROKEN": 0,
+        "CRASHED": 0,
+        "KILLED": 5,
+        "NOT_APPLIED": 0,
+        "SURVIVED": 0
+      },
+      "optimized": {
+        "CONTROL_BROKEN": 2,
+        "CRASHED": 0,
+        "KILLED": 3,
+        "NOT_APPLIED": 0,
+        "SURVIVED": 0
+      },
+      "repeat": {
+        "CONTROL_BROKEN": 3,
+        "CRASHED": 0,
+        "KILLED": 2,
+        "NOT_APPLIED": 0,
+        "SURVIVED": 0
+      }
+    }
+  },
+  "historical_scenarios": {
+    "v0": {
+      "normal": {
+        "passed": true,
+        "scenarios": 17
+      },
+      "optimized": {
+        "passed": true,
+        "scenarios": 17
+      },
+      "repeat": {
+        "passed": true,
+        "scenarios": 17
+      }
+    },
+    "v02": {
+      "normal": {
+        "passed": true,
+        "scenarios": 41
+      },
+      "optimized": {
+        "passed": true,
+        "scenarios": 41
+      },
+      "repeat": {
+        "passed": true,
+        "scenarios": 41
+      }
+    },
+    "v03": {
+      "normal": {
+        "passed": true,
+        "scenarios": 21
+      },
+      "optimized": {
+        "passed": true,
+        "scenarios": 21
+      },
+      "repeat": {
+        "passed": true,
+        "scenarios": 21
+      }
+    },
+    "v04": {
+      "normal": {
+        "passed": true,
+        "scenarios": 15
+      },
+      "optimized": {
+        "passed": true,
+        "scenarios": 15
+      },
+      "repeat": {
+        "passed": true,
+        "scenarios": 15
+      }
+    }
+  },
+  "historical_serial_replay": {
+    "campaigns": {
+      "v02-optimized": {
+        "counts": {
+          "CONTROL_BROKEN": 0,
+          "CRASHED": 0,
+          "KILLED": 11,
+          "NOT_APPLIED": 0,
+          "SURVIVED": 0
+        },
+        "exit_code": 0
+      },
+      "v02-repeat": {
+        "counts": {
+          "CONTROL_BROKEN": 0,
+          "CRASHED": 0,
+          "KILLED": 11,
+          "NOT_APPLIED": 0,
+          "SURVIVED": 0
+        },
+        "exit_code": 0
+      },
+      "v03-optimized": {
+        "counts": {
+          "CONTROL_BROKEN": 0,
+          "CRASHED": 0,
+          "KILLED": 3,
+          "NOT_APPLIED": 0,
+          "SURVIVED": 1
+        },
+        "exit_code": 0
+      },
+      "v03-repeat": {
+        "counts": {
+          "CONTROL_BROKEN": 0,
+          "CRASHED": 0,
+          "KILLED": 3,
+          "NOT_APPLIED": 0,
+          "SURVIVED": 1
+        },
+        "exit_code": 0
+      },
+      "v04-optimized": {
+        "counts": {
+          "CONTROL_BROKEN": 2,
+          "CRASHED": 0,
+          "KILLED": 3,
+          "NOT_APPLIED": 0,
+          "SURVIVED": 0
+        },
+        "exit_code": 1
+      },
+      "v04-repeat": {
+        "counts": {
+          "CONTROL_BROKEN": 1,
+          "CRASHED": 0,
+          "KILLED": 4,
+          "NOT_APPLIED": 0,
+          "SURVIVED": 0
+        },
+        "exit_code": 1
+      }
+    },
+    "passed": false
+  },
+  "native_receiptos_veca_integration": "NOT_COVERED",
+  "pr": "https://github.com/pipavlo82/trustless-guardian/pull/1",
+  "pre_deadline_cold_replay": {
+    "mutations": {
+      "normal": {
+        "CONTROL_BROKEN": 2,
+        "CRASHED": 0,
+        "KILLED": 2,
+        "NOT_APPLIED": 0,
+        "SURVIVED": 0
+      },
+      "optimized": {
+        "CONTROL_BROKEN": 3,
+        "CRASHED": 0,
+        "KILLED": 1,
+        "NOT_APPLIED": 0,
+        "SURVIVED": 0
+      },
+      "repeat": {
+        "CONTROL_BROKEN": 1,
+        "CRASHED": 0,
+        "KILLED": 3,
+        "NOT_APPLIED": 0,
+        "SURVIVED": 0
+      }
+    },
+    "passed": false,
+    "sha": "d2d177ae2c527ad67fd3ffaac7a2cc15a03202cb"
+  },
+  "preservation": {
+    "changed_original_paths": [
+      ".github/workflows/guardian.yml",
+      "README.md"
+    ],
+    "guardian_core_unchanged": true,
+    "historical_evidence_unchanged": true,
+    "original_inventory_entries": 120,
+    "source_differences_from_tested_code": [],
+    "source_files": 62
+  },
+  "production_ready": false,
+  "protected_main": "aaa941cf3566a6931cba539e4d8147d940459171",
+  "real_agent_scenarios": {
+    "ALLOW": "NOT_COVERED",
+    "BYPASS": "NOT_COVERED",
+    "DENY": "NOT_COVERED",
+    "POLICY_CHANGE": "NOT_COVERED",
+    "RECOVERY": "NOT_COVERED"
+  },
+  "real_agent_status": "NOT_COVERED",
+  "recommendation": "HOLD",
+  "recorded_utc": "2026-10-25T18:53:46.787540+00:00",
+  "required_real_agent_gate_exit": 3,
+  "runtime": {
+    "authenticode": {
+      "binary_sha256": "e98c516f1c8935789aabe9122ee7e05ec4c3efd1ba6acf179242e031c495b99e",
+      "signer_subject": "CN=\"OpenAI OpCo, LLC\", O=\"OpenAI OpCo, LLC\", L=San Francisco, S=California, C=US",
+      "signer_thumbprint": "19FC6BBDA0F7B95CFCBF6DD92C3787C31A09F8FE",
+      "status": "Valid",
+      "status_message": "Signature verified."
+    },
+    "blocker": "No running Ollama server detected; no native agent tool integration executed.",
+    "image_sha256": "e98c516f1c8935789aabe9122ee7e05ec4c3efd1ba6acf179242e031c495b99e",
+    "model_response_observed": false,
+    "observed_handles": [
+      {
+        "access": 1180054,
+        "attributes": 2,
+        "handle": 768,
+        "type": 42
+      },
+      {
+        "access": 1179785,
+        "attributes": 2,
+        "handle": 988,
+        "type": 42
+      },
+      {
+        "access": 1180054,
+        "attributes": 2,
+        "handle": 1020,
+        "type": 42
+      }
+    ],
+    "observed_token": {
+      "appcontainer": true,
+      "appcontainer_sid": "S-1-15-2-1530542385-2781086133-807942815-3250235723-210649339-1924186277-1576850589",
+      "capability_count": 0,
+      "elevated": false,
+      "integrity_sid": "S-1-16-4096",
+      "level": null,
+      "session_id": 1,
+      "token_type": 1,
+      "user_sha256": "2fe1ac64678a911a232a386c32c34a250891a53a3fdbff7ca63882cf9ef06f41"
+    },
+    "task_attempt_exit": 1,
+    "version": "codex-cli 0.162.0-alpha.17.2",
+    "version_exit": 0
+  },
+  "schema": "guardian.research-summary.v05",
+  "second_windows_machine": "NOT_COVERED",
+  "source_sha256": {
+    "demo/__init__.py": "8688281047f06c085aaf92146ed01afc538f966c34161940c26310493a8040e9",
+    "demo/ipc_worker.py": "eb86ff15cfb2c60eaded7b5e3fae40448625842724fea3d57279cae8bbb9f21f",
+    "demo/probe_worker.py": "868e921dd9f80c5d40afcafcb516bfc50fc14824d928376c411a488da1b7b416",
+    "demo/run_demo.py": "c655abeeec1f6a1dc6634fa19de32c58431dfaeb4c3ca2df90192c6f37a44bad",
+    "demo/runtime_launch.py": "e2cc7bd4c5c5cd08dc705347cf841448b378c469724a625ea6ae22b4ac76804b",
+    "demo/tool_adapter.py": "6ac5fbd2b4b89289e8bd9f57dcc050fa32f1a487c5b0a16056c853acbbb33c54",
+    "demo/verify_demo.py": "5ba6a16eafce896b1fff9d4a0fa33ba1558cff8a3902c15bcf09e12e63dbd1bf",
+    "guardian/__init__.py": "b026295b2cdb2e49afbff47b981eab4b3b758a2b9167b2fc3f1a5228ab923c58",
+    "guardian/adapters.py": "f1155262624fa651ba08c350f4643ca9df5878d465a6ac09c87a2cc382562208",
+    "guardian/broker.py": "edca1956b4abbace1a7ae569173008d105c979e90a8d94380d7ab457fdfc20a6",
+    "guardian/dispatch.py": "3be3fdaf5a3eba38dec8a2c7c0e3b39047af10a6e30cd494e1f6218b704e06e5",
+    "guardian/evidence.py": "6f97f38bffb178d9b5857935e212be8178967aaa3bf13bd20ac085eedb0a82fd",
+    "guardian/gateway.py": "8972baeee3b705cbcdd6689c9e9e4472dbe54c266bb547c787ee2bfcd23ed28a",
+    "guardian/hardened.py": "e2084614efe452c35533815de52de1508b6ab119b5e3395a47e29789c43f75c0",
+    "guardian/ipc.py": "e39750cb85b8fc02313b57e611c0b90ea1eba3b3c6d23caf506712de42c88757",
+    "guardian/policy.py": "7c26fe4d430209c247496727253c45892a1f25f8f2c392aadd089f3d15244f52",
+    "guardian/protocol.py": "9d1c969af99ee3d842c86d0e3f0db035766c8ab9a4053057a054ebe688852f99",
+    "guardian/recovery.py": "473a0b58079e88513527521119b149571010955a75a4211dac3a222c5619aaf6",
+    "guardian/verifier.py": "69376b7fbb7882e4a5734ee4fd80a8d66f5984b30834d31a007c66c2fa3f716f",
+    "guardian/verify_v02.py": "991a2455eae254f81fbbead1c420db540ac36dd44e36d65473751410dcf505b5",
+    "guardian/windows.py": "209cfff7da85b21bbff483edf0797986416b7f6e971de37a1ae43952f826fb46",
+    "tests/test_guardian.py": "07b02aa8873005783f4ca20c69744c5c74a943987a28bd606c2dc8fec5758466",
+    "tests/test_v02.py": "64f0476611764e78de56569372f0bb44b31223535680382a4a8571395dec92e7",
+    "tests/test_v03.py": "500d3c90a06a525088ef300f01f8093859cce5a50dfeaa9db206a1f65e3afcda",
+    "tests/test_v04.py": "eaf98d038c1908e59288d56bfd79b4aa9ff7d8ec89f397f9d0cd79cadec1c37e",
+    "tests/test_v05.py": "47c08e0636a804b52d92e46a61a69953e45e54fd5679cea44abfa01fc32f7ac8",
+    "tools/agent_worker.py": "fef14baec388a06f3d7441aee7074b44dea14693e5361299879edf2f0bb3edb8",
+    "tools/ci_diagnostics.py": "fe93b8471565d31efc6b570dffb5eb434117a3c5137c1754dfacf80481d8194c",
+    "tools/ci_entry.py": "1f1d238d7318e25243d15647204028023b6ed60d305f7260cb6b606f97740fff",
+    "tools/ci_tokens.py": "0755fdce28bc549d1bc4713c91bff6f3e10439ef460f5e887cd109fce4244629",
+    "tools/evidence.py": "32e6aa3e89fdb31f61fac99f516a2cdf87877d6f2d21bf25afa9b6eb3815a6d5",
+    "tools/handle_control.py": "96becde90acb0665f1a40659d3ae00ca62b915362efaedfd120948d2762e9491",
+    "tools/integrity.py": "fb00ee069e913202b38b8b301604d99a04749d1a36aff28d6deedcfd8f5e2852",
+    "tools/lab.py": "6c7f5699c9174750d2f256de0fbd6580e4206c6f5e2f5a47e883f11985976573",
+    "tools/mutation_witness.py": "55cdc6070ac421d41be54775da4847595608590d19960b1316d43e537f8feedd",
+    "tools/mutations.py": "a3466c9d6e4aafb0072e6160ddfa829c962c5f6fbadac47146a329830d637a9c",
+    "tools/native_probe.py": "61bd4279a7e27fa4429dcbbdf292cfee1f1e3b14b67fae041e04a2815a1f5af3",
+    "tools/ownership_control.py": "8637421140b5e85a097847542e93ca3abb26ace7ad474bd98c1e3ad49093e9ae",
+    "tools/prepare.py": "17aa74fa94a6d9917226c0adea8ced996764e78e768f157f0b45e1bb4edd0afa",
+    "tools/v02_campaign.py": "ac392d99a1404b47cd17d54dfecf879809ba3c298d03c316944e092351794b90",
+    "tools/v02_lab.py": "150c68d23422369926819400f56b27a29cbbdecdbbb1510f2056afc36af53f17",
+    "tools/v02_mutations.py": "91e154aaa34f066d171c92a1b3232106e690fc981cbb1908de159edf11ff9f7e",
+    "tools/v02_worker.py": "f0146bd2966b1f2ad8933988393f12cba5878bcf7f706c347702d0f78f977102",
+    "tools/v03_campaign.py": "19905d61f0486f370146c00ff35a09eb25335322643687e60c69cbf24a5a7643",
+    "tools/v03_harness_control.py": "b48b4fa2c89c834dce74489484613f6f910d10bf2b9c77648d5da9b07e3e8ff3",
+    "tools/v03_mutations.py": "5b5bc1a11eb537046d5c49ada6b84ef622ad9344ee75ca930780c14a7eeade05",
+    "tools/v03_worker.py": "2b316074a8135ee0089d212e6b3a38c504d6c59fe8f7425ba5a0624dd74727ea",
+    "tools/v04_campaign.py": "af7407345930126ad21890880276f414245ffec7ea97edb6442c86083308a478",
+    "tools/v04_ci_probe.py": "c60e9777142a82d0d53e0c4738f5fcbd79f9387b53b1d7f8fef003ab0c5d3c4e",
+    "tools/v04_mutations.py": "77de60557975a5a957ff7e55cbff705228859d8c16dcd30ec239aba75114ac24",
+    "tools/v04_native.py": "a660e99e1559a5b77c2cda5472e2e4b9b5c7cbd3868ba26745ca0fcc91ffbacd",
+    "tools/v04_oracle.py": "ab60e55b02aae5af5e1154824cbf760f027e00e8626df54bb779ff6259ac2cca",
+    "tools/v04_startup_probe.py": "ec98f920306845af1c72a75b1ef2e75f63dedf556872aa41213e0b2bdcd21435",
+    "tools/v04_token_probe.py": "5b39712270192c0a41b3ee12ed1bf640c09e47a4fbd195538e1d66a190f3def6",
+    "tools/v04_worker.py": "40c7eaa75a14a9a6928f92671089851e225332c601420b3fcb330f560e278506",
+    "tools/v05_mutations.py": "c3bd544e3bb8e33bed0e40b5f44cf7d1116c65b199da2804b5c8bce9737e5f3d",
+    "tools/v05_public_evidence.py": "d99959ca18e24977cac033ebc996da7dc3e9f38dfbba9d991e44d189fe4b85e0",
+    "tools/validate.py": "67c8b6ee06ed7f3c0c32b66ae21f5f0fa1e10ca65df2a089a450ab52666f6c21",
+    "tools/validate_v02.py": "6e2acbcf27890f99cf1c9c5aa7e464ec8c7ef22eb55d13653d1a1617a99655a3",
+    "tools/validate_v03.py": "b306b9d06aba1d6c3b76a7bab3e7e21e7f6a890e6d44f42808934755e41ed1b3",
+    "tools/validate_v04.py": "6dc62423d2d71d218b902dd256a933e862eecc55a547d51981bc95a2f7f164ac",
+    "tools/validate_v05.py": "f9bf872ece7499945f268afcd8d94bb173a117f682adfd893ce6fb20854bdf7d"
+  },
+  "starting_sha": "36d9b28682ceee7c59e9860203342c56304ed6d8",
+  "tested_code_sha": "f2a25fc8ed2d1de6cb84e661d77eeeb039d5c3ec",
+  "unit_tests": {
+    "normal": {
+      "count": 33,
+      "passed": true
+    },
+    "optimized": {
+      "count": 33,
+      "passed": true
+    },
+    "repeat": {
+      "count": 33,
+      "passed": true
+    }
+  },
+  "v05_bypass_attempts_per_mode": 6,
+  "v05_bypass_native_error": 5,
+  "v05_mutations": {
+    "normal": {
+      "CONTROL_BROKEN": 0,
+      "CRASHED": 0,
+      "KILLED": 4,
+      "NOT_APPLIED": 0,
+      "SURVIVED": 0
+    },
+    "optimized": {
+      "CONTROL_BROKEN": 0,
+      "CRASHED": 0,
+      "KILLED": 4,
+      "NOT_APPLIED": 0,
+      "SURVIVED": 0
+    },
+    "repeat": {
+      "CONTROL_BROKEN": 0,
+      "CRASHED": 0,
+      "KILLED": 4,
+      "NOT_APPLIED": 0,
+      "SURVIVED": 0
+    }
+  },
+  "v05_scenarios_per_mode": 5,
+  "v05_semantic_sha256": {
+    "normal": "25f1b0c280e079ab5774ca65b2564cec40b729cabaa13916460f15546b1e2c4e",
+    "optimized": "25f1b0c280e079ab5774ca65b2564cec40b729cabaa13916460f15546b1e2c4e",
+    "repeat": "25f1b0c280e079ab5774ca65b2564cec40b729cabaa13916460f15546b1e2c4e"
+  }
+}

@@ -1,4 +1,6 @@
-> v0.5: [reproducible demo](demo/README.md), [real-agent status](research/V05_AGENT_EXECUTION_REPORT.md), [limits](research/V05_LIMITATIONS.md). Actual Codex startup is confined; model-backed actions remain NOT_COVERED. Scripted Windows controls are reported separately.
+> **v0.5 — HOLD:** [demo and commands](demo/README.md), [executed results](research/V05_SECURITY_RESULTS.md), [machine summary](research/V05_SUMMARY.json), [limitations](research/V05_LIMITATIONS.md).
+>
+> The genuine Codex CLI starts inside a measured AppContainer. No model-backed task or native agent tool action ran: real-agent integration is **NOT_COVERED**. The separate scripted Windows demo passed five scenario groups, six native access denials and four physical mutations in normal/repeat/optimized cold replay. Hosted enforcement remains CI_BLOCKED. Historical repeated mutation controls also retain failures; the report preserves them rather than treating all checks as green. Reports below describe their own historical runs.
 
 # v0.4 audit update
 

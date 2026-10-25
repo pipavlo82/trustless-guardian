@@ -48,3 +48,15 @@ including response and ACK (historical budgets were 3000ms and 700ms). A 40-seco
 child-process bound remains. No request is retried and no timeout becomes PASS.
 Concurrent disk/scheduling pressure is a plausible contributor, not a proven
 root cause. Native IPC authorization, framing and cancellation are unchanged.
+
+Final clean replay at `f2a25fc8ed2d1de6cb84e661d77eeeb039d5c3ec` independently
+executed all four v0.5 mutants in normal, repeat and optimized mode: **4 KILLED /
+0 SURVIVED / 0 CRASHED / 0 NOT_APPLIED / 0 CONTROL_BROKEN in each mode**.
+Each kill contains the specific changed byte transition or false non-execution
+response, valid positive controls, and byte-exact restoration. These are four
+distinct mutations, not twelve distinct boundaries.
+
+The earlier cold checkout at `d2d177ae2c527ad67fd3ffaac7a2cc15a03202cb` recorded
+2K/2CB normal, 3K/1CB repeat and 1K/3CB optimized. It remains a failed replay.
+Historical v0.4 repeated controls also retain failures in the serial replay;
+see the exact table in [security results](V05_SECURITY_RESULTS.md).
