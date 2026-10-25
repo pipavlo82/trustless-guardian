@@ -8,6 +8,22 @@ with [Draft PR #1](https://github.com/pipavlo82/trustless-guardian/pull/1). `mai
 
 **Verification != Authorization != Enforcement != Evidence of Execution**
 
+**v0.3:** [security audit](research/V03_SECURITY_AUDIT.md),
+[executed results](research/V03_CONFORMANCE_RESULTS.md),
+[mutation report](research/V03_MUTATION_REPORT.md),
+[clean replay](research/V03_INDEPENDENT_REPLAY.md), and
+[hosted CI blocker](research/V03_CI_ROOT_CAUSE.md).
+The repair preserves uncertain post-write outcomes instead of claiming
+NOT_EXECUTED. Hosted Windows enforcement remains **CI_BLOCKED**; the new
+impersonation-level mutation **SURVIVES** because its adverse token level was
+not reached. This remains a bounded laboratory prototype, not production security.
+
+Full v0/v02/v03 replay from a non-elevated Windows Python 3.12+ process:
+`python -B tools/validate_v03.py --out build/v03-replay`.
+Use a new output directory. Portable checks:
+`python -B tools/validate_v03.py --portable --out build/v03-portable`.
+Portable success cannot certify OS enforcement.
+
 A policy refusal is useful only if the confined agent also cannot write around
 the broker. This pilot runs a separate, non-elevated AppContainer process against
 a disposable NTFS resource and checks the actual bytes from the trusted host.

@@ -1,3 +1,41 @@
+# v0.3 recovery refinement
+
+The four durable states remain PREPARED / COMMITTED / ABORTED / RECOVERY_REQUIRED.
+There is still no atomic transaction joining SQLite and NTFS. New behavior:
+
+- A caught failure from PREPARING onward returns UNVERIFIABLE, DENY,
+  execution=RECOVERY_REQUIRED, failure_stage and retry_permitted=false. DENY here
+  refuses certification/retry; it does **not** assert that bytes were untouched.
+- In-memory stages are NOT_STARTED, PREPARING, PREPARED, WRITING, WRITTEN,
+  COMMITTING and COMMITTED. They diagnose a response, not a new durable schema.
+- A same-byte intended write with no COMMITTED record remains RECOVERY_REQUIRED.
+  An unchanged digest cannot decide whether that write occurred. Other ABORTED
+  tombstones retain the limited meaning documented below, with nonce consumed.
+- Journal constructor failures release the connection; missing/corrupt/busy
+  dependencies fail closed. No missing journal is silently recreated.
+
+Native SQLite contention after a real file write reproduces the old false
+NOT_EXECUTED response. New positive/negative/restored controls inspect the actual
+resource and journal. Exceptions at PREPARED and COMMITTED, unexpected termination,
+partial writes and lost responses are separately exercised.
+
+Two simultaneous broker processes on the same pinned resource and journal were
+tested. The first holds exclusive handles at PREPARED; the second refuses without
+writing. The first commits once and restart rejects its nonce. This extends the
+old single-broker/two-client control only for this local one-resource case. It does
+not establish multi-resource transactions, distributed recovery or power-loss
+durability. No ambiguous operation is automatically retried or rolled back.
+
+Precise unresolved windows: a prepare transaction may finish before its caller
+observes success; resource writes can be partial; flush/readback can finish before
+journal commit; commit can finish before a response is delivered. The durable
+record and state observation must be inspected before any operator recovery.
+There is no production recovery/status-query API or log rollback protection.
+
+See [v03 results](../research/V03_CONFORMANCE_RESULTS.md).
+
+## Historical v0.2 behavior (preserved)
+
 # Bounded v02 recovery
 
 Resource bytes and SQLite are **not one atomic transaction**. The implementation

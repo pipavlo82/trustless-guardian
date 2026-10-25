@@ -1,3 +1,28 @@
+# v0.3 audit of guardian.ipc.v02
+
+The envelope version and action semantics remain unchanged. The broker now reads
+the effective TokenImpersonationLevel and explicitly requires identification (1).
+Actual post-authentication OpenThreadToken observations confirm RevertToSelf
+removed the thread token. On the measured host, a client requesting level 2 is
+downgraded to level 1; removing the extra comparison SURVIVES. This guard's negative
+coverage remains NOT_COVERED, not a claim of an authentication bypass repair.
+
+The actual pipe DACL is preserved in raw evidence. Direct CreateNamedPipeW by the
+agent to add an instance fails with WinError 5; requesting WRITE_DAC also fails.
+A client CreateFile request containing the append bit can succeed on this OS and
+is not equivalent to creating a server instance. The initial mistaken test is
+preserved. Anonymous, fragmented, concatenated, wrong-user and unauthorized SID
+controls fail closed. Authentication never substitutes for policy authorization.
+
+The v03 lost-response witness closes the client after sending a valid action;
+the broker still commits and stores its receipt. Restart rejects the nonce. A
+disconnect is not cancellation of a completed action. See
+[audit](../research/V03_SECURITY_AUDIT.md) and [mutation limits](../research/V03_MUTATION_REPORT.md).
+
+Reference: [named-pipe access rights](https://learn.microsoft.com/en-us/windows/win32/ipc/named-pipe-security-and-access-rights).
+
+## Preserved v0.2 protocol description
+
 # guardian.ipc.v02
 
 This is a bounded local Windows laboratory protocol. It is not a public service,

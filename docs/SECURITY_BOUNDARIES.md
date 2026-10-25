@@ -1,3 +1,26 @@
+# v0.3 boundary status
+
+Real local Windows AppContainer/NTFS witnesses remain LABORATORY_VERIFIED for the
+finite tested operations. Broader claims stay unsupported. The two AppContainers
+have distinct OS package identities under the same trusted base user; they are
+not separate user accounts or controllers.
+
+The caught post-write error no longer claims NOT_EXECUTED. Same-byte crash
+ambiguity now blocks recovery. Two-broker contention and lost-response replay
+have actual host observations. Explicit impersonation-level enforcement is
+defense in depth with one SURVIVED mutation, not complete negative coverage.
+
+Hosted Windows CI remains CI_BLOCKED / NOT_COVERED before agent launch. A second
+machine and independent human review are NOT_COVERED. ReceiptOS/VECA integration
+is a [proposed external contract](EVIDENCE_TO_ACTION_CONTRACT.md), not execution
+authority. ERC-8404 Core and native canonicalization profiles are unchanged.
+
+[v03 audit](../research/V03_SECURITY_AUDIT.md) ·
+[CI diagnosis](../research/V03_CI_ROOT_CAUSE.md) ·
+[replay](../research/V03_INDEPENDENT_REPLAY.md).
+
+## Historical v0.2 boundaries (preserved)
+
 # v02 boundaries
 
 | Boundary | Implemented mechanism | Remaining assumption |

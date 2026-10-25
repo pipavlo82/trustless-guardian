@@ -1,0 +1,123 @@
+{
+  "artifacts": {
+    "v03-baseline-and-audit.zip": "2f25d00fa0ad0a7ca885aedff08014a503c01f68428e3fec5b46596753193a32",
+    "v03-local-replay.zip": "db0b44bfb239037c133e093ec3d010b94860fedf54f1517df782777ace5df25d"
+  },
+  "baseline_fresh_replay": {
+    "passed": true,
+    "sha": "d4df3adf1a23ecd4158e97d97cef5e1a155097dd",
+    "v02_mutants": {
+      "CONTROL_BROKEN": 0,
+      "CRASHED": 0,
+      "KILLED": 11,
+      "NOT_APPLIED": 0,
+      "SURVIVED": 0
+    },
+    "v0_mutants_killed": 15
+  },
+  "branch": "research/guardian-enforcement-v0",
+  "ci": {
+    "api": "CreateProcessWithTokenW",
+    "child_created": false,
+    "deeper_internal_cause": "UNVERIFIABLE",
+    "portable": "SUCCESS",
+    "pull_request": 40197005081,
+    "push": 40197002146,
+    "security_status": "CI_BLOCKED / NOT_COVERED",
+    "sha": "7e348a7d4de75f57bb3d0193b8870aeb646b0a20",
+    "windows_enforcement": "FAILURE",
+    "winerror": 5
+  },
+  "coverage_complete": false,
+  "current_code_fresh_replay": {
+    "note": "Completed fresh replay will be appended without rewriting this archived local run.",
+    "status": "PENDING_AT_THIS_RECORD"
+  },
+  "draft": true,
+  "external_reviewer": "NOT_COVERED",
+  "implementation_sha": "7e348a7d4de75f57bb3d0193b8870aeb646b0a20",
+  "local_validation": {
+    "modes": [
+      "normal",
+      "repeat",
+      "optimized"
+    ],
+    "passed": true,
+    "semantic_determinism": "VERIFIED",
+    "source_sha256": {
+      "guardian/__init__.py": "b026295b2cdb2e49afbff47b981eab4b3b758a2b9167b2fc3f1a5228ab923c58",
+      "guardian/adapters.py": "f1155262624fa651ba08c350f4643ca9df5878d465a6ac09c87a2cc382562208",
+      "guardian/broker.py": "edca1956b4abbace1a7ae569173008d105c979e90a8d94380d7ab457fdfc20a6",
+      "guardian/evidence.py": "6f97f38bffb178d9b5857935e212be8178967aaa3bf13bd20ac085eedb0a82fd",
+      "guardian/gateway.py": "8972baeee3b705cbcdd6689c9e9e4472dbe54c266bb547c787ee2bfcd23ed28a",
+      "guardian/hardened.py": "8c0e6b0e336969cb444517a7b2bd0c6aaa5452eb6d7ee239dfb8c6d404d12040",
+      "guardian/ipc.py": "e39750cb85b8fc02313b57e611c0b90ea1eba3b3c6d23caf506712de42c88757",
+      "guardian/policy.py": "7c26fe4d430209c247496727253c45892a1f25f8f2c392aadd089f3d15244f52",
+      "guardian/protocol.py": "9d1c969af99ee3d842c86d0e3f0db035766c8ab9a4053057a054ebe688852f99",
+      "guardian/recovery.py": "473a0b58079e88513527521119b149571010955a75a4211dac3a222c5619aaf6",
+      "guardian/verifier.py": "69376b7fbb7882e4a5734ee4fd80a8d66f5984b30834d31a007c66c2fa3f716f",
+      "guardian/verify_v02.py": "991a2455eae254f81fbbead1c420db540ac36dd44e36d65473751410dcf505b5",
+      "guardian/windows.py": "209cfff7da85b21bbff483edf0797986416b7f6e971de37a1ae43952f826fb46",
+      "tests/test_guardian.py": "07b02aa8873005783f4ca20c69744c5c74a943987a28bd606c2dc8fec5758466",
+      "tests/test_v02.py": "64f0476611764e78de56569372f0bb44b31223535680382a4a8571395dec92e7",
+      "tests/test_v03.py": "500d3c90a06a525088ef300f01f8093859cce5a50dfeaa9db206a1f65e3afcda",
+      "tools/agent_worker.py": "fef14baec388a06f3d7441aee7074b44dea14693e5361299879edf2f0bb3edb8",
+      "tools/ci_diagnostics.py": "fe93b8471565d31efc6b570dffb5eb434117a3c5137c1754dfacf80481d8194c",
+      "tools/ci_entry.py": "2b8c5f131424caffa87d75ce30c57f9028161b75f073e70f7c910ec4468c26e1",
+      "tools/ci_tokens.py": "0755fdce28bc549d1bc4713c91bff6f3e10439ef460f5e887cd109fce4244629",
+      "tools/evidence.py": "32e6aa3e89fdb31f61fac99f516a2cdf87877d6f2d21bf25afa9b6eb3815a6d5",
+      "tools/handle_control.py": "96becde90acb0665f1a40659d3ae00ca62b915362efaedfd120948d2762e9491",
+      "tools/integrity.py": "fb00ee069e913202b38b8b301604d99a04749d1a36aff28d6deedcfd8f5e2852",
+      "tools/lab.py": "6c7f5699c9174750d2f256de0fbd6580e4206c6f5e2f5a47e883f11985976573",
+      "tools/mutation_witness.py": "55cdc6070ac421d41be54775da4847595608590d19960b1316d43e537f8feedd",
+      "tools/mutations.py": "a3466c9d6e4aafb0072e6160ddfa829c962c5f6fbadac47146a329830d637a9c",
+      "tools/native_probe.py": "61bd4279a7e27fa4429dcbbdf292cfee1f1e3b14b67fae041e04a2815a1f5af3",
+      "tools/ownership_control.py": "8637421140b5e85a097847542e93ca3abb26ace7ad474bd98c1e3ad49093e9ae",
+      "tools/prepare.py": "17aa74fa94a6d9917226c0adea8ced996764e78e768f157f0b45e1bb4edd0afa",
+      "tools/v02_campaign.py": "ac392d99a1404b47cd17d54dfecf879809ba3c298d03c316944e092351794b90",
+      "tools/v02_lab.py": "150c68d23422369926819400f56b27a29cbbdecdbbb1510f2056afc36af53f17",
+      "tools/v02_mutations.py": "91e154aaa34f066d171c92a1b3232106e690fc981cbb1908de159edf11ff9f7e",
+      "tools/v02_worker.py": "f0146bd2966b1f2ad8933988393f12cba5878bcf7f706c347702d0f78f977102",
+      "tools/v03_campaign.py": "c2c8eff6755ad1bc7417af340f0cda485b5344e5f23187f508a5fb66fb44b7e4",
+      "tools/v03_mutations.py": "5b5bc1a11eb537046d5c49ada6b84ef622ad9344ee75ca930780c14a7eeade05",
+      "tools/v03_worker.py": "2b316074a8135ee0089d212e6b3a38c504d6c59fe8f7425ba5a0624dd74727ea",
+      "tools/validate.py": "67c8b6ee06ed7f3c0c32b66ae21f5f0fa1e10ca65df2a089a450ab52666f6c21",
+      "tools/validate_v02.py": "6e2acbcf27890f99cf1c9c5aa7e464ec8c7ef22eb55d13653d1a1617a99655a3",
+      "tools/validate_v03.py": "ad2baac70af5c9a6882433ede64242fae017cc832ac5ea9ba05439bf163a28b3"
+    },
+    "unit_tests_per_mode": 22,
+    "v02_scenarios_per_mode": 41,
+    "v03_mutations": {
+      "normal": {
+        "CONTROL_BROKEN": 0,
+        "CRASHED": 0,
+        "KILLED": 3,
+        "NOT_APPLIED": 0,
+        "SURVIVED": 1
+      },
+      "optimized": {
+        "CONTROL_BROKEN": 0,
+        "CRASHED": 0,
+        "KILLED": 3,
+        "NOT_APPLIED": 0,
+        "SURVIVED": 1
+      }
+    },
+    "v03_scenarios_per_mode": 21,
+    "v03_semantic_sha256": "fae96bb69da6e96263dde67cf340d3dc35bc86d0987634d52cd54ba1ba6dc1db",
+    "v0_scenarios_per_mode": 17
+  },
+  "native_execution_admission": "NOT_COVERED",
+  "native_source_pins": {
+    "receiptos-verify": "f39ac3b289be6baef1140c53976d525d8eb45c8c",
+    "recompute-kit": "b4537d73bda4e4df73c4b105ee516a43c351ba02",
+    "veca": "e2aca1a029203f1d5c73db2f8872b4240e793bfb"
+  },
+  "pr": "https://github.com/pipavlo82/trustless-guardian/pull/1",
+  "production_ready": false,
+  "protected_main": "aaa941cf3566a6931cba539e4d8147d940459171",
+  "recommendation": "HOLD",
+  "schema": "guardian.research-summary.v03",
+  "second_machine": "NOT_COVERED",
+  "starting_sha": "d4df3adf1a23ecd4158e97d97cef5e1a155097dd"
+}
