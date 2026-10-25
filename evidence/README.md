@@ -43,3 +43,8 @@ See [machine summary](../research/SUMMARY.json) for both archive identities.
 `hosted-ci-initial-failure.zip` separately preserves the initial hosted Windows
 token-establishment failure and broken controls. It does not supersede the local
 success archive or count as a successful OS campaign.
+
+`public-replay-v0.zip` preserves a complete fresh public-clone replay at
+`1a8aa03bea916f62e26eb92b41374a10cf4c556b`, including 15 optimized mutations,
+and the separate hosted limited-token failure. Its SHA-256 is
+`ea2dcd9e99a87e1e4f1c0ef9942a23129dde2a634273d695f20a1fd53e53a51e`.

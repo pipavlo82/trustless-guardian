@@ -11,6 +11,10 @@
     "local-run-v0.zip": {
       "members": 1345,
       "sha256": "9aaac972c3c54f0bd784e801f7dc31f046bf6e7d417b8e8a6b959fd3f8ea0255"
+    },
+    "public-replay-v0.zip": {
+      "members": 1353,
+      "sha256": "ea2dcd9e99a87e1e4f1c0ef9942a23129dde2a634273d695f20a1fd53e53a51e"
     }
   },
   "branch": "research/guardian-enforcement-v0",
@@ -28,6 +32,16 @@
     },
     "portable": "PASS",
     "windows": "NOT_COVERED"
+  },
+  "hosted_ci_latest_observed": {
+    "head": "1a8aa03bea916f62e26eb92b41374a10cf4c556b",
+    "note": "No suitable non-elevated linked-token execution context established; no system settings weakened.",
+    "os_enforcement": "NOT_COVERED",
+    "portable": "PASS",
+    "pr_run": 40153594033,
+    "push_run": 40153591967,
+    "windows": "CI_BLOCKED",
+    "winerror": 1312
   },
   "mutations": {
     "normal": {
@@ -48,7 +62,7 @@
     "unique_variants": 15
   },
   "native_adapters": "RESEARCH_ENVELOPES_ONLY_NOT_IMPLEMENTED",
-  "optimized_mutation_commit": "977f9b33873fa0506b5599e73897b24f9eb7c23f",
+  "optimized_mutation_commit": "1a8aa03bea916f62e26eb92b41374a10cf4c556b",
   "original_prototype": "4 preliminary policy tests; all 3 source files byte-identical",
   "os_enforcement": "LABORATORY_VERIFIED",
   "policy_cases_per_run": 17,
@@ -71,7 +85,7 @@
   "scratch_positive": true,
   "semantic_sha256": "d723638ac4ded84070d5d832c85fbfdd153f28bdafa965cf0142254cf6f5aac5",
   "source_audit": "research/source-lock.json",
-  "tested_implementation_commit": "d5812be5a8dbd7b8ac9c0e579fae517905486291",
+  "tested_implementation_commit": "1a8aa03bea916f62e26eb92b41374a10cf4c556b",
   "unavailable_component_cases": 2,
   "unit_tests": {
     "fresh_normal": 14,

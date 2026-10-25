@@ -37,6 +37,12 @@ Normal, repeat and optimized semantic outputs match. See the
 [measured results](research/CONFORMANCE_RESULTS.md) and
 [mutation boundaries](research/MUTATION_REPORT.md), including untested boundaries.
 
+**Hosted CI:** portable checks pass; hosted Windows enforcement is currently
+**CI_BLOCKED** because a non-elevated execution context could not be established
+(WinError 1312). The same public code passes the full local fresh-checkout replay.
+See the [recorded distinction](research/CI_PORTABILITY.md); no failure is hidden
+by a skip or weakened token check.
+
 ## Reproduce
 
 Use 64-bit Windows on NTFS and Python 3.12+ from a normal non-elevated terminal.

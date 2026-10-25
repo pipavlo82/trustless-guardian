@@ -34,3 +34,25 @@ The child-token refusal now prints sanitized token diagnostics without the user'
 SID. Local non-elevated entry replay passes normal/repeat/optimized policy and
 OS tests. Hosted linked-token-path results must be read from the exact subsequent
 CI run; they are not inferred from local success.
+
+## Observed result of the limited-token attempt
+
+At `1a8aa03bea916f62e26eb92b41374a10cf4c556b`, both push and PR portable
+jobs passed. Both hosted Windows jobs remained blocked. The already elevated
+runner could not establish the safe linked-token launch and returned **WinError
+1312: a specified logon session does not exist**. No limited broker or OS witness
+was claimed from that attempt. This is **CI_BLOCKED / OS NOT_COVERED**, not a
+surviving Guardian mutation and not a green skip.
+
+- [Push run](https://github.com/pipavlo82/trustless-guardian/actions/runs/40153591967)
+- [PR run](https://github.com/pipavlo82/trustless-guardian/actions/runs/40153594033)
+
+The same public HEAD was freshly cloned on the non-elevated Windows 11 host and
+passed the complete normal/repeat/optimized OS suite and all 15 physical mutations
+under `-O`. Its raw replay and the hosted error are preserved together in
+`evidence/public-replay-v0.zip`. The source hashes match that commit exactly.
+
+The remaining CI requirement is an available, independently verified non-elevated
+Windows execution context. No administrator elevation, user-account provisioning,
+UAC changes or security-setting changes are performed to obtain one. The current
+workflow deliberately remains failing when that context is unavailable.

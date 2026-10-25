@@ -114,3 +114,11 @@ The publication commit `3c2ae0d` changed only evidence/documentation after that
 replay. Subsequent CI-entry and diagnostic changes, and the first failed hosted
 Windows runs, are described separately in [CI portability](CI_PORTABILITY.md).
 Hosted results must always be attributed to their exact HEAD.
+
+The final implementation at public commit `1a8aa03bea916f62e26eb92b41374a10cf4c556b`
+was cloned again from GitHub. Normal/repeat/optimized unit and OS runs, the DACL
+ownership control, all 15 optimized physical mutations, every archive hash and
+repository inventory passed. The fresh clone was clean and every recorded source
+hash matched its Git blob; semantic SHA-256 remained `d723638a...f6f5aac5` as above.
+This local result coexists with hosted Windows CI_BLOCKED (WinError 1312), not
+hosted OS verification. Both observations are preserved in `public-replay-v0.zip`.
