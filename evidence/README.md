@@ -1,5 +1,30 @@
 # Evidence and reproduction
 
+## v04 additive evidence
+
+- `v04-originals-and-diagnostics.zip`: `31433ba3108405008e616e3b4cdac00b5d3e40964ae81ec140a9d7dcdc7e2f28` (5,519 members).
+- `v04-cold-replay.zip`: `8d68cb94cccd6eccbe61b25c5ecfb6c89b2f62f33bda5ee1ea8ef1df338f445b` (14,236 members).
+- `v04-hosted-diagnostics.zip`: `adbc7cfda0070a35dbb7af70c074671c602d6dfabdb621bf494fff9cb98ee95b` (32 members).
+
+The first retains the starting inventory failure caused by authored root logs,
+its corrected portable replay, original exact-production-byte defect witnesses,
+failed token-probe control and early hosted diagnostics. The second preserves
+the complete clean6c015ce replay, all normal/repeat/-O campaigns and raw byte/token
+observations. The third retains later hosted failures and source/aggregation tools.
+Historical v0/v02/v03 archives are unchanged. No crash is counted as a mutation kill.
+New v04 mutation counts are5/0, separately from historical v03's3/1.
+
+```powershell
+python -B tools/evidence.py verify evidence/v04-originals-and-diagnostics.zip
+python -B tools/evidence.py verify evidence/v04-cold-replay.zip
+python -B tools/evidence.py verify evidence/v04-hosted-diagnostics.zip
+python -B tools/integrity.py
+python -B tools/validate_v04.py --out build/review-v04
+```
+
+See [v04 replay](../research/V04_INDEPENDENT_REPLAY.md) for exact source attribution.
+Archive hashes establish byte integrity, not independent honesty of the host.
+
 ## v02 additive evidence
 
 `v02-local-replay.zip` and its companion inventory preserve the pre-change v0

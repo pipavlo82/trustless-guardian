@@ -77,3 +77,45 @@ modes as well as the new population. Its aggregate budget is45 minutes under a
 50-minute job; per-operation process/IPC timeouts are unchanged. A timeout still
 fails the gate. This is a campaign scheduling budget, not additional execution
 authority or a relaxed security predicate.
+
+## Subsequent startup boundary (not an enforcement pass)
+
+The f658c78 push40207380217 / PR40207385004 runs actually created and
+validated the reduced child, then hit the30-minute validation watchdog. They
+produced no Python-startup marker, child stdout/stderr or conformance reports.
+The timeout is preserved as failure. A longer campaign budget cannot by itself
+explain or repair the missing startup observation.
+
+At `6e017085a4af1285e90d8151be8aca9565a304e6`, PR40210053593 ran a bounded
+startup probe. cmd /d /q /c exit0, Python -I -S, and Python with inherited environment
+all remained STILL_ACTIVE259 after a10-second wait, with no Python marker.
+ResumeThread returned1 (the observed previous suspend count). Read-only process
+inspection reported ThreadState5/Wait and WaitReason10/LpcReply. All children
+were terminated and their termination observed. The actual validation launcher
+now fails after20 seconds without its startup witness instead of waiting30 minutes.
+
+WaitReason10 identifies a wait for a local-procedure-call reply; it does not
+identify the server, missing right or Windows policy causing the wait. No claimed
+CSRSS/desktop/runner-policy root cause is inferred from this number alone.
+[Microsoft ThreadWaitReason definitions](https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.threadwaitreason).
+The named-pipe/ACL enforcement suite therefore remains NOT_COVERED on this hosted
+environment at these revisions, despite successful token creation.
+
+At `a4193593252864a7201b811682d47485ea3722f6`, push40210315112 and
+PR40210319213 reproduced the blocker. Under the reduced token, read-only opens of
+the actual WinSta0 station and Default desktop succeeded. Explicitly selecting
+WinSta0\\Default did not change cmd or Python startup: previous suspend count1,
+wait258/TIMEOUT, exit259/STILL_ACTIVE, no marker, thread wait10/LpcReply.
+Each Python attempt now has a distinct fresh marker. No desktop ACL was changed.
+
+**Current verdict: CI_BLOCKED / hosted enforcement NOT_COVERED.** Handle-rights
+failure is resolved for the measured context; subsequent child startup remains
+unresolved. Process creation, token inspection or a successful diagnostic exit
+cannot substitute for actual AppContainer conformance execution. Portable jobs
+pass. Both historical failures and bounded follow-ups remain in append-only
+archives. A successful second-Windows enforcement replay remains NOT_COVERED.
+
+Next bounded acquisition step: use an already authorized non-elevated Windows
+runner according to docs/WINDOWS_REPLAY_PROTOCOL.md, or independently diagnose
+the hosted startup wait with a Windows specialist. No account, service, persistent
+runner, privilege enabling or machine-wide adjustment is authorized by this plan.

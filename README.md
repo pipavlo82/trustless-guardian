@@ -8,6 +8,11 @@ impersonation witness are on the research branch. Start with the
 [exact replay instructions](research/V04_INDEPENDENT_REPLAY.md), and
 [independent Windows protocol](docs/WINDOWS_REPLAY_PROTOCOL.md).
 Hosted enforcement remains CI_BLOCKED until actual execution is established.
+The completed cold replay has25 unit tests and17/41/21/15 versioned scenarios in
+normal/repeat/-O. New mutations:5 KILLED/0 SURVIVED; historical v03 remains3/1.
+The hosted token-handle defect is isolated and repaired, but child startup still
+blocks before enforcement. Release/merge recommendation: **HOLD**.
+[Machine-readable v04 summary](research/V04_SUMMARY.json).
 No production or universal containment claim. Prior reports below remain historical.
 
 # Trustless Guardian

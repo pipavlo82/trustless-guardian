@@ -12,6 +12,12 @@ are reachable across the normal distinct agent/broker AppContainer principals.
 Historical v03 remains3 KILLED/1 SURVIVED; production-profile reachability is
 NOT_COVERED. Independent second-machine review is also NOT_COVERED.
 
+v04 hosted diagnostics independently observe a safe reduced token and successful
+suspended process creation. Subsequent startup waits before Python execution;
+there is no hosted enforcement pass. The local full cold replay passes. The
+separate Windows diagnostics do not count as cross-machine enforcement or external
+security certification. See the precise [CI blocker](../research/V04_WINDOWS_CI_DIAGNOSIS.md).
+
 # v0.3 boundary status
 
 Real local Windows AppContainer/NTFS witnesses remain LABORATORY_VERIFIED for the

@@ -1,0 +1,134 @@
+{
+  "archive_sha256": "adbc7cfda0070a35dbb7af70c074671c602d6dfabdb621bf494fff9cb98ee95b",
+  "members": {
+    "6e01708/pr.json": {
+      "bytes": 4147,
+      "sha256": "f448879ba76b687aaf48a2ca3896b971ea4465e986cc2a4ea3181a9cae726b2e"
+    },
+    "6e01708/pr.log": {
+      "bytes": 68092,
+      "sha256": "57cc49221923a6b501ce07e81019c3f4a6971529d0a17ca4f46cdd8cfb557ca0"
+    },
+    "6e01708/pr/windows-enforcement-logs/ci-diagnostics.json": {
+      "bytes": 5588,
+      "sha256": "63c3b09bdbbe88b6d1c94810adf3521745dffde934a07b33696ee6919e658d85"
+    },
+    "6e01708/pr/windows-enforcement-logs/ci-launch.json": {
+      "bytes": 2744,
+      "sha256": "3c9f2c6316af3d8fb0a27e4d28268cd8d7a213ad63c044860728d682c9735057"
+    },
+    "6e01708/pr/windows-enforcement-logs/v04-ci-probe.json": {
+      "bytes": 9339,
+      "sha256": "bc812d4c0686591f6610d37a89948f46514ec358761ac1019bd1d7646bafe969"
+    },
+    "6e01708/pr/windows-enforcement-logs/v04-startup-probe.json": {
+      "bytes": 8309,
+      "sha256": "e3d8415262ca5aaa794dfb7b1e5eb59a6fcb990f9e064cc5b401a851df02d75d"
+    },
+    "6e01708/push.json": {
+      "bytes": 4147,
+      "sha256": "dbde64421de4eb6ae98da64edcb5865c0da965b671f6b17f8ece671b4bf32901"
+    },
+    "6e01708/push.log": {
+      "bytes": 68084,
+      "sha256": "c5551e07a060264c80e2a810cfe2252c642cbe1d9ede9ede7b1078d148a2981e"
+    },
+    "a419359/pr.json": {
+      "bytes": 4147,
+      "sha256": "bd4fa6f7206a4e7f2c82cececc5299c55710b0494db9bed2ba21e8be4eaf6d8e"
+    },
+    "a419359/pr.log": {
+      "bytes": 68091,
+      "sha256": "379cd96da088121e74d21c4a59faa6911a9e829ddea1836c5134144785b15dbf"
+    },
+    "a419359/pr/windows-enforcement-logs/ci-diagnostics.json": {
+      "bytes": 5588,
+      "sha256": "63c3b09bdbbe88b6d1c94810adf3521745dffde934a07b33696ee6919e658d85"
+    },
+    "a419359/pr/windows-enforcement-logs/ci-launch.json": {
+      "bytes": 2744,
+      "sha256": "3c9f2c6316af3d8fb0a27e4d28268cd8d7a213ad63c044860728d682c9735057"
+    },
+    "a419359/pr/windows-enforcement-logs/v04-ci-probe.json": {
+      "bytes": 9339,
+      "sha256": "af86bdd138c3ee32d3a882625887257b415ac4fae15c511ab12394b2dda18aad"
+    },
+    "a419359/pr/windows-enforcement-logs/v04-startup-probe.json": {
+      "bytes": 11479,
+      "sha256": "112e523a3967b460dba0157efd2aeff5fd04d1d54461443d3e7fde2402649dc1"
+    },
+    "a419359/push.json": {
+      "bytes": 4147,
+      "sha256": "9f44ac80be6e356e1de836d628b7d9a045bf811125a967a0b10f7bd785ecdae8"
+    },
+    "a419359/push.log": {
+      "bytes": 68088,
+      "sha256": "039ac3788018a09171f0a9161e772b8a9fbeaeec71b2e2de001a1c54d45dc128"
+    },
+    "a419359/push/windows-enforcement-logs/ci-diagnostics.json": {
+      "bytes": 5588,
+      "sha256": "63c3b09bdbbe88b6d1c94810adf3521745dffde934a07b33696ee6919e658d85"
+    },
+    "a419359/push/windows-enforcement-logs/ci-launch.json": {
+      "bytes": 2744,
+      "sha256": "3c9f2c6316af3d8fb0a27e4d28268cd8d7a213ad63c044860728d682c9735057"
+    },
+    "a419359/push/windows-enforcement-logs/v04-ci-probe.json": {
+      "bytes": 9339,
+      "sha256": "1c91e4994b8ad3e64cfbc32a7ffdf9a6a9fe14f637547c005d774e26c6f94a9d"
+    },
+    "a419359/push/windows-enforcement-logs/v04-startup-probe.json": {
+      "bytes": 11478,
+      "sha256": "6454462067ce972d2d194006aeb8203d9d4ba77f722c7dba474514f117f4524c"
+    },
+    "analysis/collect.py": {
+      "bytes": 2904,
+      "sha256": "093112390d585b231eeaba01d3954b5080f426168ce57ce75804717e1db644cb"
+    },
+    "analysis/local-cold.json": {
+      "bytes": 14793,
+      "sha256": "2461a94777a9b3f9a94122e0dfcee2c3e00cd9349c00af6d9ad080c4005f3910"
+    },
+    "analysis/native_sources.py": {
+      "bytes": 937,
+      "sha256": "f3aa5cb2a16886c147af51b63d47053236680946bb290b70293ad4661b51f72f"
+    },
+    "analysis/preservation.json": {
+      "bytes": 5491,
+      "sha256": "6cae8d629b17313795fa5c20a39c84681d1c8d27d851787fa6f0f0b8671a4bf4"
+    },
+    "analysis/preservation.py": {
+      "bytes": 1690,
+      "sha256": "af924d535118634524037b75ded1ca8dbfd0f49ea5f24ca401889c659b6e11d7"
+    },
+    "f658c78/pr.json": {
+      "bytes": 3933,
+      "sha256": "5afdbd6a821ec8db34b573ec95dbb9d2421afb051103f4501a4e88158d5eacda"
+    },
+    "f658c78/pr.log": {
+      "bytes": 65547,
+      "sha256": "da3d8cb37067ee0a7366f5286c8d66dc3dfab8abeb2a7c1b8bc3767fd383828e"
+    },
+    "f658c78/pr/windows-enforcement-logs/ci-diagnostics.json": {
+      "bytes": 5588,
+      "sha256": "63c3b09bdbbe88b6d1c94810adf3521745dffde934a07b33696ee6919e658d85"
+    },
+    "f658c78/pr/windows-enforcement-logs/ci-launch.json": {
+      "bytes": 2684,
+      "sha256": "7dd68bba8d0320c811c30aa76c002eb09cc76c4b42733545df609c1232d4349e"
+    },
+    "f658c78/pr/windows-enforcement-logs/v04-ci-probe.json": {
+      "bytes": 9339,
+      "sha256": "b80dbbce2d8b44454cb33e17360873d783ccd865a0ac8999342701eb5237203a"
+    },
+    "f658c78/push.json": {
+      "bytes": 3933,
+      "sha256": "561b1fcbdd902f3ed50e993ad45a06b9a9877219f443e01c7dc2eaea7fd25db0"
+    },
+    "f658c78/push.log": {
+      "bytes": 61366,
+      "sha256": "1f3a003d3f6eff83304972f87e8f0c98affd312b9ac422d84fb13ae279e4790b"
+    }
+  },
+  "schema": "guardian.evidence-archive.v0"
+}

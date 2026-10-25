@@ -37,3 +37,23 @@ preflight/native-source-audit.json. These are source inspections, not new native
 verification runs. No native adapter or upstream change is included: execution
 outcomes and deployment-specific identity boundaries still need independent
 review before any external evidence can participate in an action profile.
+
+## Final research verdict
+
+**HOLD for security release/merge; local gap repairs completed.** G04-01 and
+G04-02 have real original/fixed/restored behavioral witnesses. The new controlled
+impersonation-level witness closes a function-test gap, not a demonstrated
+production bypass. Full-profile level>1 reachability remains NOT_COVERED and the
+historical v03 survivor remains SURVIVED. Hosted reduced-token creation now works,
+but child startup blocks before the enforcement suite. Cross-Windows enforcement
+and independent human review remain NOT_COVERED.
+
+No file/SQLite atomicity, exactly-once execution, power-loss safety, compromised
+broker/host containment or arbitrary agent-action authorization is established.
+The trusted host, provisioner, runtime/configuration, time source and recorded
+observations remain assumptions. The two AppContainers share a base user and do
+not prove different real-world controllers. Native ReceiptOS/VECA admission stays
+DESIGN ONLY. No main/upstream change, merge, release or deployment is included.
+
+See [machine-readable summary](V04_SUMMARY.json), [results](V04_CONFORMANCE_RESULTS.md),
+[CI diagnosis](V04_WINDOWS_CI_DIAGNOSIS.md) and [evidence inventory](../evidence/README.md).

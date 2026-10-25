@@ -37,6 +37,18 @@ The complete command above executed at
 and after, returning0. See V04_CONFORMANCE_RESULTS.md for measured counts.
 All production Guardian modules and all functional scenario/oracle/mutation
 modules remain byte-identical in the later CI-launcher changes. The only Python
-differences are tools/ci_entry.py and tools/v04_ci_probe.py; they concern hosted
+differences to existing files are tools/ci_entry.py and tools/v04_ci_probe.py;
+tools/v04_startup_probe.py is an additional hosted diagnostic. These concern hosted
 token creation/diagnostics and campaign scheduling. Those require their own
 hosted observations and are not silently attributed to this local checkout.
+
+Hosted Windows Server2022 build20348/Python3.12.10 supplied genuine token/startup
+diagnostics on separate GitHub runner environments. It did not execute a successful
+enforcement campaign: all final bounded startup candidates waited for LPC reply
+and were terminated. This is not cross-machine enforcement verification. A second
+successful Windows enforcement replay and independent reviewer remain NOT_COVERED.
+
+Archives: v04-originals-and-diagnostics.zip (starting failure and original defects),
+v04-cold-replay.zip (complete clean local replay), v04-hosted-diagnostics.zip
+(subsequent failed hosted runs, exact source correspondence and aggregation tools).
+Every member is SHA-256 inventoried; verify each with tools/evidence.py.
