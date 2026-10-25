@@ -1,3 +1,31 @@
+# v02 read-only native probe
+
+`tools/native_probe.py` validates exact source HEAD and clean tracked/untracked
+state before invoking existing native interfaces. It does not rewrite upstream
+repositories, copy native code into Guardian, replace canonicalization, or alter
+ERC-8404's six-field receipt.
+
+Pins remain ReceiptOS `f39ac3b289be6baef1140c53976d525d8eb45c8c`,
+VECA `e2aca1a029203f1d5c73db2f8872b4240e793bfb`, and recompute-kit
+`b4537d73bda4e4df73c4b105ee516a43c351ba02`. Live default HEAD retrieval matched
+these pins during this pass. Source licensing remains in THIRD_PARTY_NOTICES.
+
+Observed: the ReceiptOS verifyV2 fixture invocation cannot load the pinned
+`@noble/curves` dependency in the read-only audit checkout (exit 1). VECA's actual
+evaluate/admit invocation executes and returns REFUTED with unauthorized admission
+in this unprepared native-verifier environment; this is not proof verification or
+an upstream defect finding. Exact native outputs are preserved, not converted to
+a generic success flag. recompute-kit's agent-action contract is source-audited;
+its integration is not fabricated.
+
+Full native integration is **NOT_COVERED**. Required next contract: externally
+trusted native input bytes, executed pinned verifier/toolchain, retained native
+status/scope/authority/assumptions, and an independently adequate mapping to the
+exact Guardian actor/action/resource/policy/digest/expiry/nonce. Even then native
+evidence must pass Guardian authorization before any broker action.
+
+The following historical plan is preserved.
+
 # Integration plan and native verdict preservation
 
 `guardian/adapters.py` provides two versioned **research envelopes**:

@@ -1,3 +1,23 @@
+# v02 architecture
+
+The current experimental path is `guardian.hardened.HardenedBroker` behind
+`guardian.ipc` and `guardian.protocol`. A trusted laboratory provisioner launches
+the agent and broker as distinct AppContainer principals with separate ACL grants.
+The broker authenticates a pipe client, independently re-evaluates the unchanged
+finite v0 policy, pins held parent/file identities, records intent, writes/readbacks
+the resource, and commits a receipt. A separate process verifies that receipt;
+the host independently inspects the actual resource.
+
+See [IPC and trust-boundary diagram](IPC_SECURITY.md) and
+[recovery state protocol](CRASH_RECOVERY.md). `tools/v02_lab.py` is the provisioning
+and process witness; `tools/v02_worker.py` is the disposable child entry point.
+Trusted test fault hooks are not fields in the IPC request. No production daemon
+or general-purpose filesystem interface is provided.
+
+The architecture below is preserved as the **historical v0** design. Its host-user
+broker and mailbox transport are still regression-tested and are not represented
+as the v02 authenticated path.
+
 # Architecture: guardian.local-file.v0
 
 ```mermaid

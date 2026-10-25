@@ -1,3 +1,29 @@
+# v02 threat-model extension
+
+The protected asset remains one disposable NTFS file, its policy, pinned identities
+and durable operation journal. The trusted host/operator provisions them. An
+attacker controls the confined agent process and its requests, including bypass,
+actor substitution and malformed IPC. The OS, runtime, launcher and authorized
+broker implementation remain trusted.
+
+v02 moves the broker into a different zero-capability AppContainer SID. It shares
+the base Windows user with the agent and trusted provisioner; it is not a new
+Windows account or a defense against malicious unconfined processes under that
+user. The broker has scoped resource/journal grants and read-only policy/runtime.
+Its implicit AppContainer facilities are not a proven total capability inventory.
+The broker cannot elevate an identification-only client token into authority.
+
+Non-elevation, low integrity, exact package SID, zero capabilities and non-inherited
+handles are checked for launched confined processes. The profile uses a controlled
+laboratory clock, not a production distributed freshness service. A compromised
+broker could still abuse its declared resource and journal rights; the tested
+outside-scope canaries demonstrate only bounded damage containment.
+
+No persistent account, privileged service, UAC change, privilege enabling, runner
+registration or machine-wide policy change is part of v02. Read
+[IPC_SECURITY](IPC_SECURITY.md) and [CRASH_RECOVERY](CRASH_RECOVERY.md).
+The following v0 section is historical and remains applicable where not superseded.
+
 # Threat model v0
 
 ## Assets and authorities

@@ -3,11 +3,16 @@
 An experimental enforcement layer for AI-agent actions, with a reproducible
 Windows filesystem pilot.
 
+The implementation is on [the research branch](https://github.com/pipavlo82/trustless-guardian/tree/research/guardian-enforcement-v0),
+with [Draft PR #1](https://github.com/pipavlo82/trustless-guardian/pull/1). `main` remains the foundation.
+
 **Verification != Authorization != Enforcement != Evidence of Execution**
 
 A policy refusal is useful only if the confined agent also cannot write around
 the broker. This pilot runs a separate, non-elevated AppContainer process against
 a disposable NTFS resource and checks the actual bytes from the trusted host.
+The v02 path also confines the broker under a different AppContainer principal,
+authenticates named-pipe callers, and preserves explicit crash-recovery states.
 
 ## Current claim
 
@@ -26,10 +31,11 @@ external evidence chain, or control over arbitrary remote AI systems.
 | AppContainer + NTFS denial and broker ALLOW | EXPERIMENTALLY VERIFIED on the recorded Windows host |
 | Independent record recomputation and host byte observation | IMPLEMENTED; relies on trusted observation context |
 | ReceiptOS / VECA native-result envelopes | Research interfaces only; native integration NOT IMPLEMENTED |
-| Dedicated least-privilege broker account, production service, crash recovery | PLANNED |
+| Separate AppContainer broker, authenticated IPC, bounded recovery | IMPLEMENTED in v02; see measured scope |
+| Dedicated Windows account and production service | NOT_COVERED |
 | Administrator/kernel resistance, universal agent containment | UNSUPPORTED |
 
-Local results: 14 unit tests; 17 policy/resource scenarios; 9 direct OS-denial
+Historical v0 results: 14 unit tests; 17 policy/resource scenarios; 9 direct OS-denial
 operations with a writable-scratch positive control; unavailable-gateway/broker
 controls; evidence-tampering rejection. The executed physical mutation campaign
 contains **15 KILLED / 0 SURVIVED / 0 CRASHED / 0 NOT_APPLIED / 0 CONTROL_BROKEN**.
@@ -37,11 +43,14 @@ Normal, repeat and optimized semantic outputs match. See the
 [measured results](research/CONFORMANCE_RESULTS.md) and
 [mutation boundaries](research/MUTATION_REPORT.md), including untested boundaries.
 
-**Hosted CI:** portable checks pass; hosted Windows enforcement is currently
-**CI_BLOCKED** because a non-elevated execution context could not be established
-(WinError 1312). The same public code passes the full local fresh-checkout replay.
-See the [recorded distinction](research/CI_PORTABILITY.md); no failure is hidden
-by a skip or weakened token check.
+**v02:** see [current measured results](research/CONFORMANCE_RESULTS.md),
+[independent-oracle review](research/INDEPENDENT_SECURITY_REVIEW.md),
+[IPC](docs/IPC_SECURITY.md) and [crash recovery](docs/CRASH_RECOVERY.md).
+
+**CI:** historical v0 Windows runs are blocked by WinError 1312. v02 investigates
+an ephemeral reduced token without changing accounts, enabling privileges or
+weakening token predicates. Consult [exact-run status](research/CI_PORTABILITY.md);
+local success never substitutes for hosted execution.
 
 ## Reproduce
 
@@ -54,19 +63,19 @@ git clone https://github.com/pipavlo82/trustless-guardian.git
 cd trustless-guardian
 git switch research/guardian-enforcement-v0
 python -B tools/integrity.py
-python -B tools/validate.py --out build/replay-1
+python -B tools/validate_v02.py --out build/replay-v02-1
 ```
 
-For a published result, detach at its full commit before running. `validate.py`
+For a published result, detach at its full commit before running. `validate_v02.py` retains the original regression suite and
 runs normal/repeat/`-O` unit and OS tests, physical mutations, semantic comparison,
 and inventory verification. Use a new output directory for every invocation.
 
 ```powershell
 python -B tools/prepare.py
-python -B tools/lab.py --out build/individual-lab
-python -B tools/mutations.py --out build/individual-mutations
-python -B -O tools/mutations.py --out build/optimized-mutations
-python -B tools/validate.py --portable --out build/portable
+python -B tools/v02_campaign.py --out build/individual-v02-lab
+python -B tools/v02_mutations.py --out build/individual-v02-mutations
+python -B -O tools/v02_mutations.py --out build/optimized-v02-mutations
+python -B tools/validate_v02.py --portable --out build/portable
 ```
 
 The portable command tests policy and record logic only: OS enforcement is

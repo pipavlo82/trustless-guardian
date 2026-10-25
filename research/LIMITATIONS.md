@@ -1,3 +1,27 @@
+# v02 limitations (current experiment)
+
+- Distinct AppContainer principals share a base TokenUser. Separate Windows-account
+  separation and a deployed least-privilege service are NOT_COVERED.
+- OS witnesses cover one Windows/NTFS setup, selected APIs, one file and a trusted
+  provisioner. No universal confinement, administrative resistance or hostile-host
+  evidence authenticity is claimed.
+- Authenticated local IPC uses a measured cross-AppContainer namespace path.
+  Cross-build compatibility, flooding resistance and production configuration
+  distribution remain open. Identification is not policy authorization.
+- Partial writes remain possible. Recovery preserves ambiguity and refuses new
+  actions; it does not supply atomic rollback or an automatic repair endpoint.
+- Process termination hooks are real, but hardware power loss and arbitrary storage
+  failure are not reproduced. Concurrency covers two clients and one server loop,
+  not a distributed or multi-broker stress test.
+- The independent oracle and fresh replay are author-operated on the same host.
+  Independent third-party review remains NOT_COVERED.
+- Native ReceiptOS/VECA/recompute-kit evidence-to-action bindings remain NOT_COVERED.
+  A positive cryptographic or conformance result never grants filesystem authority.
+- Hosted CI must be judged from exact-head run artifacts. Missing suitable Windows
+  identity remains a failing enforcement gate, not a skip or simulated PASS.
+
+The remaining text preserves v0 limitations and historical result scope.
+
 # Remaining limitations and unsupported guarantees
 
 1. **Finite Windows laboratory scope.** One file profile, one Windows host and

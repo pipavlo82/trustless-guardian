@@ -1,3 +1,19 @@
+# v02 boundaries
+
+| Boundary | Implemented mechanism | Remaining assumption |
+| --- | --- | --- |
+| Agent to broker | Named-pipe DACL, OS identification token, exact package SID | Trusted host provisioning and Windows kernel |
+| Broker to assets | Separate AppContainer, scoped ACLs, no capabilities | Finite tested resources; no complete escape audit |
+| Authorization | Canonical policy pin, exact envelope and unchanged finite policy | Policy adequacy and trusted laboratory time |
+| Namespace/TOCTOU | Pinned directory identities, no delete sharing, exclusive files | Higher namespace ancestors and supported NTFS behavior |
+| Recovery | Durable intent/tombstones, conservative ambiguity gate | No atomic transaction across SQLite and resource |
+| Receipt | Separate oracle plus host snapshots | Hash integrity does not prove honest observation |
+| Native evidence | Read-only pinned probes; native verdict retained | Evidence-to-action admission NOT_COVERED |
+
+Current results are linked in the v02 result report. The historical v0 boundaries
+below are retained; its broad broker token and missing recovery/IPC are not the
+current v02 implementation.
+
 # Security boundaries
 
 | Boundary | What was established | What was not established |
