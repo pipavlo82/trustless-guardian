@@ -39,3 +39,12 @@ budget, allowing the independent observer to run before client connection;
 production IPC/authorization code remains unchanged. The classifier now also
 requires the specific forbidden byte transition or false NOT_EXECUTED response
 before calling any changed run KILLED. Transport failure alone is insufficient.
+
+The subsequent optimized development run retained **3 KILLED / 1 CONTROL_BROKEN**:
+the resource-binding original positive had changed bytes but lost its IPC reply.
+It was correctly disqualified even though the mutated witness distinguished the
+boundary. The final demo uses an explicitly separate 8-second lab I/O budget,
+including response and ACK (historical budgets were 3000ms and 700ms). A 40-second
+child-process bound remains. No request is retried and no timeout becomes PASS.
+Concurrent disk/scheduling pressure is a plausible contributor, not a proven
+root cause. Native IPC authorization, framing and cancellation are unchanged.

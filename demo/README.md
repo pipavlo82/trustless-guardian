@@ -64,6 +64,10 @@ change is needed. AppContainer profiles are removed on normal completion;
 laboratory files remain for inspection. Abnormal host termination may require
 careful manual cleanup of those identified disposable profiles/directories.
 
+This observation-heavy demo uses a versioned **8-second lab I/O deadline** and
+40-second process limit. The historical IPC tests retain their original timing.
+Lost responses remain failures/ambiguities; operations are never auto-retried.
+
 See [integration status](../docs/REAL_AGENT_INTEGRATION.md),
 [security results](../research/V05_SECURITY_RESULTS.md),
 [mutation report](../research/V05_MUTATION_REPORT.md), and

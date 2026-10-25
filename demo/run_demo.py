@@ -74,7 +74,18 @@ def run(out, probe=True, executable=None):
     from guardian import windows as win
     from guardian.policy import canonical, digest
     out = out.absolute(); out.mkdir(parents=True, exist_ok=False)
-    lab = Lab04(out/'laboratory'); rows = {}
+    class DemoLab(Lab04):
+        def __init__(self, destination):
+            super().__init__(destination)
+            shutil.copyfile(ROOT/'demo/ipc_worker.py', self.runtime/'v05_ipc_worker.py')
+            self.acl(self.runtime/'v05_ipc_worker.py')
+        def launch(self, container, cfg, name):
+            path = self.runtime/(name+'.json'); write(path, cfg); self.acl(path)
+            result = container.launch([self.runtime/'python.exe', '-B', *(['-O'] if sys.flags.optimize else []),
+                                       self.runtime/'v05_ipc_worker.py', path], self.runtime, 40)
+            result['token']['user_sid_sha256'] = digest(result['token'].pop('user_sid').encode())
+            write(self.out/(name+'.process.json'), result); return result
+    lab = DemoLab(out/'laboratory'); rows = {}
     try:
         policy = json.loads((ROOT/'demo/policy.json').read_bytes())
         policy['actors'] = [lab.agent.principal]
