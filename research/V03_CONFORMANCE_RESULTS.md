@@ -79,3 +79,25 @@ Same resource bytes cannot establish absence of past I/O. A crash hook is delibe
 process termination, not power-loss testing. Readback/flush is not a transaction with
 SQLite. The laboratory clock is fixed by trusted configuration. The host, policy
 authority, Windows kernel and pinned runtime remain trusted.
+
+## Final strengthened-harness replay
+
+A second new public clone at `2cae78637d9c596244deef007a13b83625653cb8` completed the full
+validator, exit 0, clean start and finish. Its **40 Python source files** include
+the stricter process-exit and expected-error checks and the new diagnostic control.
+All Guardian production modules remain byte-identical to implementation 7e348a7.
+
+Normal/repeat/-O: 22 units, 17 v0 scenarios, 41 v02 scenarios, 21 v03 scenarios.
+Historical normal mutations remain 15 and 11 KILLED. New normal and -O mutations
+remain 3 KILLED / 1 SURVIVED / zero other categories. The deliberately unexpected
+worker exit 74 is CONTROL_BROKEN_DETECTED with unchanged bytes, not a kill.
+The real inherited-handle control passes. All three semantic profiles are
+deterministic; v03 outputs are unchanged from both earlier campaigns.
+
+`evidence/v03-strict-cold-replay.zip` SHA-256:
+`c5db6552344eede8db5fbab1ed5f6b4c472ba25cee63b9ed7b34f41e7b324b05`. It includes raw commands/return codes, source hashes,
+OS observations, mutation restorations and exact-head hosted CI failure logs.
+The full replay is attributed to this SHA; subsequent evidence/documentation
+commits are validated by source correspondence and portable/inventory replay,
+not retroactively called this exact checkout. No second Windows machine or human
+reviewer is claimed.

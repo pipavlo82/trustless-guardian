@@ -127,3 +127,7 @@ principals, not credentials. No API tokens, passwords or private keys are includ
 - `v03-local-replay.zip`: `db0b44bfb239037c133e093ec3d010b94860fedf54f1517df782777ace5df25d`
 
 The seven pre-v03 archives and their inventories remain byte-identical.
+
+Final strict harness replay at 2cae78637d9c596244deef007a13b83625653cb8:
+`v03-strict-cold-replay.zip` SHA-256 `c5db6552344eede8db5fbab1ed5f6b4c472ba25cee63b9ed7b34f41e7b324b05`.
+Earlier v03 archives are also unchanged; this is additive.

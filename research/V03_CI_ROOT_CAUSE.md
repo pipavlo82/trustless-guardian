@@ -58,3 +58,11 @@ been provisioned. CI must remain nonzero until real enforcement executes.
 Primary references: [CreateProcessWithTokenW](https://learn.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-createprocesswithtokenw),
 [CreateProcessAsUserW](https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-createprocessasuserw),
 [restricted tokens](https://learn.microsoft.com/en-us/windows/win32/api/securitybaseapi/nf-securitybaseapi-createrestrictedtoken).
+
+## Repeated observation at the final tested code
+
+At `2cae78637d9c596244deef007a13b83625653cb8`, [push 40199526037](https://github.com/pipavlo82/trustless-guardian/actions/runs/40199526037)
+and [PR 40199529555](https://github.com/pipavlo82/trustless-guardian/actions/runs/40199529555)
+again pass portable checks and fail Windows launch at the same API before child
+creation. Exact diagnostics/logs are in v03-strict-cold-replay.zip. This does not
+establish the unresolved internal Windows access-denial cause.
