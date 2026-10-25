@@ -1,0 +1,41 @@
+# v0.5 physical mutation population
+
+The initial executed campaign killed **4 / 4** physical mutants, with **0
+SURVIVED, 0 CRASHED, 0 NOT_APPLIED, 0 CONTROL_BROKEN**. Final replay reports
+record subsequent modes separately. These are scripted OS-control mutants,
+not real-agent mutation coverage.
+
+| Physical change in disposable copy | Distinguishing witness |
+|---|---|
+| Remove native resource-ID comparison | Wrong-resource proposal modifies the broker resource instead of refusing |
+| Remove native actor membership check | Action proceeds after trusted provisioner removes the actor |
+| Return NOT_EXECUTED after possible write | Actual changed bytes disagree with definitive non-execution |
+| Grant agent write on the disposable source ACL | Direct native write succeeds and host bytes change |
+
+Each mutant runs original, changed and byte-restored implementations. The
+original/restored full demo must pass. The changed run must retain valid ALLOW,
+receipt/identity checks and scratch-write control, then fail the targeted
+negative check. Missing output, timeout or crash is not KILLED. Source hashes
+and exact restoration are recorded. The ACL variant changes only a newly created
+laboratory resource, never an existing user file or system ACL.
+
+The v0 15, v0.2 11, v0.3 3 KILLED / 1 SURVIVED, and v0.4 5 KILLED populations
+remain separate historical experiments. The v0.3 survivor is not reclassified.
+
+```powershell
+python -B tools/v05_mutations.py --out build/mutations
+python -B -O tools/v05_mutations.py --out build/mutations-optimized
+```
+
+Do not infer new defects in the unchanged broker from intentionally weakened
+copies. These controls measure whether the demonstration detects those changes.
+
+The first aggregate development replay retained **3 KILLED / 1 CRASHED** in
+optimized mode: the mutated post-write-outcome run failed its initial ALLOW
+setup (`BROKER_START_FAILED`; the server recorded an IPC timeout). This was not
+a semantic kill. Normal/repeat each recorded 4 KILLED. The report is preserved.
+The new demo gives only its laboratory connection an 8-second bounded readiness
+budget, allowing the independent observer to run before client connection;
+production IPC/authorization code remains unchanged. The classifier now also
+requires the specific forbidden byte transition or false NOT_EXECUTED response
+before calling any changed run KILLED. Transport failure alone is insufficient.

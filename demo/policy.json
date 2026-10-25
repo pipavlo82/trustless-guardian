@@ -1,0 +1,11 @@
+{
+  "action": "replace_utf8",
+  "actors": ["$PROVISIONED_AGENT_SID"],
+  "content_prefix": "approved:",
+  "max_bytes": 128,
+  "max_ttl": 60,
+  "resource": "synthetic-source",
+  "schema": "guardian.policy.v0",
+  "scope": "whole-file-laboratory",
+  "version": "guardian.demo.v05"
+}

@@ -1,3 +1,5 @@
+> v0.5: [reproducible demo](demo/README.md), [real-agent status](research/V05_AGENT_EXECUTION_REPORT.md), [limits](research/V05_LIMITATIONS.md). Actual Codex startup is confined; model-backed actions remain NOT_COVERED. Scripted Windows controls are reported separately.
+
 # v0.4 audit update
 
 Experimental execution-outcome repairs and a controlled real Windows
