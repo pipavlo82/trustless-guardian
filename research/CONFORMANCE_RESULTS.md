@@ -87,3 +87,28 @@ counterfactual. Production broker privilege separation, authenticated service
 transport, durable crash recovery, native integrations and independent review
 remain open. External execution is UNVERIFIABLE; no full external chain or
 production security claim follows from these finite tests.
+
+## Fresh-checkout corroboration
+
+A separate `git clone --no-local` reproduced the implementation at
+`977f9b33873fa0506b5599e73897b24f9eb7c23f`, including all 15 mutations under
+Python `-O`. After adding the DACL ownership control, a clean detached checkout of
+`d5812be5a8dbd7b8ac9c0e579fae517905486291` reran the full validator: 14 tests
+per mode, 17 scenarios per mode, the direct OS controls, the ownership control,
+15 normal-mode mutations, archive verification and repository inventory all passed.
+
+`tools/ownership_control.py` separately attempts `SetFileSecurityW` from the real
+AppContainer to grant write access through the file's DACL. The child exits zero,
+writes its scratch positive control, receives WinError 5 for DACL modification,
+and leaves protected bytes unchanged. This addresses the shared TokenUser SID
+question for that concrete API; it is not a proof of all ownership-related APIs.
+
+All recorded Python source hashes were checked against the cited Git commits
+after execution, with zero mismatches. The fresh worktree was clean. The exact
+semantic-output SHA-256 is identical across original/fresh/normal/repeat/optimized:
+`d723638ac4ded84070d5d832c85fbfdd153f28bdafa965cf0142254cf6f5aac5`.
+
+The two mutation runs exercise the same 15 physical variants; they are not
+reported as 30 distinct mutants. Raw records are in `evidence/fresh-replay-v0.zip`.
+Publication-only evidence/document updates after the cited commits do not change
+the tested implementation. Hosted CI is reported separately at its exact HEAD.

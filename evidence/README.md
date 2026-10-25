@@ -9,6 +9,7 @@ are excluded; original observations and command outputs are retained.
 
 ```powershell
 python -B tools/evidence.py verify evidence/local-run-v0.zip
+python -B tools/evidence.py verify evidence/fresh-replay-v0.zip
 python -B tools/integrity.py
 python -B tools/validate.py --out build/independent-replay
 ```
@@ -29,3 +30,12 @@ Fresh-checkout and hosted CI replay evidence is additional to this first archive
 See `research/CONFORMANCE_RESULTS.md` and subsequent replay manifests for exact
 tested revisions and remaining limitations. A new checkout on the same computer
 is independent of the worktree, not an independent external security review.
+
+`fresh-replay-v0.zip` contains the complete optimized campaign at `977f9b3`,
+the complete post-ownership-control campaign at `d5812be`, and post-run Git-blob
+corroboration of every recorded source hash. Its inventory gives exact archive
+and member hashes. The original archive remains byte-identical.
+
+The local archive SHA-256 is
+`9aaac972c3c54f0bd784e801f7dc31f046bf6e7d417b8e8a6b959fd3f8ea0255`.
+See [machine summary](../research/SUMMARY.json) for both archive identities.

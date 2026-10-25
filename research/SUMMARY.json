@@ -1,0 +1,70 @@
+{
+  "archives": {
+    "fresh-replay-v0.zip": {
+      "members": 2674,
+      "sha256": "12470bea792e7c732fc5c10492a4a6865bbd949d610e809da7c490a80c2013d5"
+    },
+    "local-run-v0.zip": {
+      "members": 1345,
+      "sha256": "9aaac972c3c54f0bd784e801f7dc31f046bf6e7d417b8e8a6b959fd3f8ea0255"
+    }
+  },
+  "branch": "research/guardian-enforcement-v0",
+  "direct_dacl_takeover_refused": true,
+  "direct_os_denial_operations": 9,
+  "evidence_tamper_refused": true,
+  "external_execution": "UNVERIFIABLE",
+  "foundation_commit": "aaa941cf3566a6931cba539e4d8147d940459171",
+  "mutations": {
+    "normal": {
+      "CONTROL_BROKEN": 0,
+      "CRASHED": 0,
+      "KILLED": 15,
+      "NOT_APPLIED": 0,
+      "SURVIVED": 0
+    },
+    "optimized": {
+      "CONTROL_BROKEN": 0,
+      "CRASHED": 0,
+      "KILLED": 15,
+      "NOT_APPLIED": 0,
+      "SURVIVED": 0
+    },
+    "restoration": "BYTE_EXACT",
+    "unique_variants": 15
+  },
+  "native_adapters": "RESEARCH_ENVELOPES_ONLY_NOT_IMPLEMENTED",
+  "optimized_mutation_commit": "977f9b33873fa0506b5599e73897b24f9eb7c23f",
+  "original_prototype": "4 preliminary policy tests; all 3 source files byte-identical",
+  "os_enforcement": "LABORATORY_VERIFIED",
+  "policy_cases_per_run": 17,
+  "policy_outcomes": {
+    "REFUTED_DENY": 15,
+    "UNVERIFIABLE_DENY": 1,
+    "VERIFIED_ALLOW": 1
+  },
+  "production_ready": false,
+  "recommendation": "ITERATE",
+  "remaining_obligations": [
+    "dedicated least-privilege broker identity",
+    "authenticated production IPC",
+    "atomic crash recovery",
+    "native ReceiptOS/VECA evidence-to-action binding",
+    "independent external review"
+  ],
+  "repository": "https://github.com/pipavlo82/trustless-guardian",
+  "schema": "guardian.research-summary.v0",
+  "scratch_positive": true,
+  "semantic_sha256": "d723638ac4ded84070d5d832c85fbfdd153f28bdafa965cf0142254cf6f5aac5",
+  "source_audit": "research/source-lock.json",
+  "tested_implementation_commit": "d5812be5a8dbd7b8ac9c0e579fae517905486291",
+  "unavailable_component_cases": 2,
+  "unit_tests": {
+    "fresh_normal": 14,
+    "fresh_optimized": 14,
+    "fresh_repeat": 14,
+    "normal": 14,
+    "optimized": 14,
+    "repeat": 14
+  }
+}

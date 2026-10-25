@@ -12,6 +12,10 @@ the mutated negative witness to **actually change protected file bytes** while
 its positive control still works. The runner records stdout, stderr, exit codes,
 source digests and restored-byte equality.
 
+Each phase creates a fresh disposable resource and AppContainer. Restoration means
+byte-exact source restoration and successful re-creation of the original boundary;
+it does not pretend to undo consumed nonces or written bytes in the mutant's old lab.
+
 | ID | Physical change | Isolated distinguishing witness |
 | --- | --- | --- |
 | actor | Remove actor comparison | Wrong declared actor writes |
