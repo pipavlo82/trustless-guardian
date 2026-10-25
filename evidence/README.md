@@ -24,6 +24,11 @@ The intermediate development run made while source was changing is not used as
 exact-revision evidence. Normal and optimized runs of the same mutant population
 are not separate kills. CI execution must be verified at its exact published HEAD.
 
+`v02-hosted-f70-failure.zip` separately preserves the first v02 hosted push/PR
+attempt at `f70ec99a2cf8603527d1bbd399902e40694339b3`. Reduced token inspection
+succeeded; child creation failed with WinError 5. It is not an OS-test success.
+SHA-256: `be104570f28926831215552f5187dd977b38d4b0962904acccb3fe217b87d8a9`.
+
 ```powershell
 python -B tools/evidence.py verify evidence/v02-local-replay.zip
 python -B tools/integrity.py
@@ -87,3 +92,21 @@ success archive or count as a successful OS campaign.
 `1a8aa03bea916f62e26eb92b41374a10cf4c556b`, including 15 optimized mutations,
 and the separate hosted limited-token failure. Its SHA-256 is
 `ea2dcd9e99a87e1e4f1c0ef9942a23129dde2a634273d695f20a1fd53e53a51e`.
+
+## Published-source fresh replay
+
+A fresh clone fetched from GitHub at
+`f70ec99a2cf8603527d1bbd399902e40694339b3` passed the complete suite:
+20 unit tests per mode, 17 v0 scenarios per mode, 41 v02 cases per mode,
+15 historical and 11 new physical mutations (separate populations), the
+inheritable-handle witness, all then-present archives and 68 inventory entries.
+Normal/repeat/-O v02 semantic output again has SHA-256
+`bf942e4341ceac799d382be75dfa0cb463da27cf79aae4ebc102899b74cea6f0`. Source hashes match all final
+enforcement/test/launcher Python files. Later changes are documentation, evidence
+and inventory only. This is a new checkout on the same non-elevated Windows host,
+not a separate organization or hosted-runner result.
+
+Archive: `evidence/v02-public-f70-replay.zip`; SHA-256
+`6558b3ee18bde4a938872fe90f27303955c7f8c6cf7613deefb02ea3b8749412`. Commands, exit codes, raw observations and
+source correspondence are retained. Both hosted attempts at this code commit
+remain independently **CI_BLOCKED** as documented in CI_PORTABILITY.

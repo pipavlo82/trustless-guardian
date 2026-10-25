@@ -168,3 +168,21 @@ repository inventory passed. The fresh clone was clean and every recorded source
 hash matched its Git blob; semantic SHA-256 remained `d723638a...f6f5aac5` as above.
 This local result coexists with hosted Windows CI_BLOCKED (WinError 1312), not
 hosted OS verification. Both observations are preserved in `public-replay-v0.zip`.
+
+## Published-source fresh replay
+
+A fresh clone fetched from GitHub at
+`f70ec99a2cf8603527d1bbd399902e40694339b3` passed the complete suite:
+20 unit tests per mode, 17 v0 scenarios per mode, 41 v02 cases per mode,
+15 historical and 11 new physical mutations (separate populations), the
+inheritable-handle witness, all then-present archives and 68 inventory entries.
+Normal/repeat/-O v02 semantic output again has SHA-256
+`bf942e4341ceac799d382be75dfa0cb463da27cf79aae4ebc102899b74cea6f0`. Source hashes match all final
+enforcement/test/launcher Python files. Later changes are documentation, evidence
+and inventory only. This is a new checkout on the same non-elevated Windows host,
+not a separate organization or hosted-runner result.
+
+Archive: `evidence/v02-public-f70-replay.zip`; SHA-256
+`6558b3ee18bde4a938872fe90f27303955c7f8c6cf7613deefb02ea3b8749412`. Commands, exit codes, raw observations and
+source correspondence are retained. Both hosted attempts at this code commit
+remain independently **CI_BLOCKED** as documented in CI_PORTABILITY.

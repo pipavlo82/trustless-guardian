@@ -8,7 +8,18 @@
   "full_replay_code_commit": "d6ee623eecaeffe6aaf079986af84afc2a2d3660",
   "handle_inheritance_control": "LABORATORY_VERIFIED",
   "historical_campaigns_preserved_separately": true,
-  "hosted_ci": "See exact-head GitHub checks and external delivery report; no result inferred from local replay",
+  "hosted_ci": {
+    "failure": "CreateProcessWithTokenW: WinError 5 / Access denied after successful ephemeral reduction",
+    "os_tests": "NOT_COVERED",
+    "portable_success": 2,
+    "pull_request": 40157970822,
+    "push": 40157967716,
+    "root_cause": "not established beyond failing API stage",
+    "stage": "CREATE_LIMITED_PROCESS",
+    "status": "CI_BLOCKED",
+    "tested_head": "f70ec99a2cf8603527d1bbd399902e40694339b3",
+    "windows_failure": 2
+  },
   "independent_human_review": "NOT_COVERED",
   "integrated_handle_replay_commit": "3eb3a15a68b4dc00b07a0ef2e8d04320888f52e3",
   "ipc": "LABORATORY_VERIFIED",
@@ -19,6 +30,7 @@
     "optimized"
   ],
   "native_integration": "NOT_COVERED",
+  "not_covered_selected_campaign_cases": [],
   "optimized_physical_mutations": {
     "CONTROL_BROKEN": 0,
     "CRASHED": 0,
@@ -27,11 +39,43 @@
     "SURVIVED": 0
   },
   "production_ready": false,
+  "public_fresh_replay": {
+    "archive_sha256": "6558b3ee18bde4a938872fe90f27303955c7f8c6cf7613deefb02ea3b8749412",
+    "code_commit": "f70ec99a2cf8603527d1bbd399902e40694339b3",
+    "independent_human_review": false,
+    "mutation_counts": {
+      "CONTROL_BROKEN": 0,
+      "CRASHED": 0,
+      "KILLED": 11,
+      "NOT_APPLIED": 0,
+      "SURVIVED": 0
+    },
+    "passed": true,
+    "semantic_sha256": "bf942e4341ceac799d382be75dfa0cb463da27cf79aae4ebc102899b74cea6f0",
+    "v0_mutation_counts": {
+      "CONTROL_BROKEN": 0,
+      "CRASHED": 0,
+      "KILLED": 15,
+      "NOT_APPLIED": 0,
+      "SURVIVED": 0
+    }
+  },
   "recommendation": "ITERATE",
   "schema": "guardian.v02.summary",
   "semantic_sha256": "bf942e4341ceac799d382be75dfa0cb463da27cf79aae4ebc102899b74cea6f0",
   "starting_head": "7c43ff437d15cc29bc61f85683ed0fb091dff0be",
-  "unsupported": [],
+  "unsupported_guarantees": [
+    "separate Windows-account isolation",
+    "production service or arbitrary action enforcement",
+    "universal OS confinement and hostile-host integrity",
+    "atomic file/database commit or rollback",
+    "hardware power-loss recovery",
+    "multi-broker concurrency",
+    "production clock and rollback resistance",
+    "native ReceiptOS/VECA evidence-to-action integration",
+    "independent human review",
+    "complete external execution chain"
+  ],
   "v02_cases_per_mode": 41,
   "v02_physical_mutations": {
     "CONTROL_BROKEN": 0,

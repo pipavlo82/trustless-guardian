@@ -1,5 +1,33 @@
 # v02 CI identity recovery
 
+## Observed hosted result at f70ec99
+
+**CI_BLOCKED / OS NOT_COVERED.** Exact head
+`f70ec99a2cf8603527d1bbd399902e40694339b3`:
+[push 40157967716](https://github.com/pipavlo82/trustless-guardian/actions/runs/40157967716)
+and [PR 40157970822](https://github.com/pipavlo82/trustless-guardian/actions/runs/40157970822).
+Both portable jobs passed; both Windows jobs failed before the OS campaign.
+
+The existing linked-token query still returned WinError 1312. This time the
+ephemeral reduction itself succeeded and was inspected: same user hash, medium
+integrity, non-elevated, Administrators disabled, and only SeChangeNotifyPrivilege
+present. `CreateProcessWithTokenW` then failed with **WinError 5 / Access denied**
+at `CREATE_LIMITED_PROCESS`. No child enforcement witness was established.
+The API failure is observed; its deeper runner-specific cause is not established.
+Do not label these unexecuted mutations SURVIVED or CRASHED.
+
+Raw logs, run metadata and both launch records are preserved in
+`evidence/v02-hosted-f70-failure.zip`, SHA-256
+`be104570f28926831215552f5187dd977b38d4b0962904acccb3fe217b87d8a9`.
+No account provisioning, privilege enabling, desktop/security-policy changes,
+persistent runner registration, or elevated-agent fallback was attempted. The
+existing normal-user local Windows context remains the executable replay path.
+For future CI recovery, independently audit the process-launch prerequisites or
+provide an explicitly authorized non-elevated runner; do not turn this gate into
+a skip. Subsequent documentation/evidence commits require their own exact-head CI.
+
+## Reduction design and constraints
+
 The previous WinError 1312 failure is preserved below and in immutable v0 archives.
 v02 records the exact failing API stage. It first tries the existing linked limited
 token. If its query specifically returns 1312, it may derive a new ephemeral token

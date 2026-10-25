@@ -50,9 +50,10 @@ or crashes. This is separate from the historical 15-mutation population. See
 [independent-oracle review](research/INDEPENDENT_SECURITY_REVIEW.md),
 [IPC](docs/IPC_SECURITY.md) and [crash recovery](docs/CRASH_RECOVERY.md).
 
-**CI:** historical v0 Windows runs are blocked by WinError 1312. v02 investigates
-an ephemeral reduced token without changing accounts, enabling privileges or
-weakening token predicates. Consult [exact-run status](research/CI_PORTABILITY.md);
+**CI_BLOCKED:** historical v0 Windows runs failed with WinError 1312. v02 creates
+and verifies an ephemeral reduced token, but hosted process creation fails with
+WinError 5 before OS tests. Portable CI passes. No accounts or token predicates
+were changed to bypass the blocker. Consult [exact-run status](research/CI_PORTABILITY.md);
 local success never substitutes for hosted execution.
 
 ## Reproduce

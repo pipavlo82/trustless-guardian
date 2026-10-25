@@ -13,6 +13,10 @@
 - Process termination hooks are real, but hardware power loss and arbitrary storage
   failure are not reproduced. Concurrency covers two clients and one server loop,
   not a distributed or multi-broker stress test.
+- The worker uses a host-provisioned fixed laboratory clock for deterministic
+  expiry witnesses. The request cannot select that clock. Production wall-clock
+  sourcing, clock rollback resistance and a long-running expiry service are
+  NOT_COVERED; the tests establish policy comparisons at the recorded time only.
 - The independent oracle and fresh replay are author-operated on the same host.
   Independent third-party review remains NOT_COVERED.
 - Native ReceiptOS/VECA/recompute-kit evidence-to-action bindings remain NOT_COVERED.

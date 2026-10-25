@@ -79,6 +79,10 @@ Symbolic action/resource/scope, actor, version, expiry, nonce, content and prior
 resource digest are rechecked against independently provisioned policy. An
 authenticated receipt or caller-supplied verdict is not action authority.
 
+The worker's clock and fault hooks are trusted host fixture configuration, not
+client request fields. Expiry is evaluated at the recorded fixed laboratory time;
+this pilot does not establish a production wall-clock/rollback-resistant service.
+
 ## Liveness and cancellation
 
 Overlapped connect/read/write operations have bounded waits. CancelIoEx is followed

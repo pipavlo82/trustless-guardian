@@ -13,6 +13,12 @@
 - Check mutation positive controls, raw exit codes and crash classification.
 - Compare semantic outputs across normal/repeat/optimized and fresh-checkout runs.
 - Independently inspect broker identity, file-handle and nonce transaction assumptions.
+- Verify both v02 AppContainer tokens and the distinction from separate Windows accounts.
+- Reproduce the isolated caller-token and server-PID controls and the inheritable
+  host-handle refusal with its successful host-write positive control.
+- Inspect real post-crash bytes and durable journal states; do not infer atomicity.
+- Audit the exact hosted token and process-creation failure separately from local
+  success. An unavailable enforcement campaign is not a passing CI profile.
 - Audit evidence trust anchors, canonicalization and exact authorization scope.
 - Do not treat research envelopes as working ReceiptOS/VECA integrations.
 - Keep the PR in Draft until findings and unsupported production obligations are reviewed.
