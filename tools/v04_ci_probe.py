@@ -29,9 +29,9 @@ def logon(token):
         finally:win.api(dll,'LsaFreeReturnBuffer',w.LONG,win.P)(out)
     return r
 
-def duplicate(token,kind=1):
+def duplicate(token,kind=1,rights=0x02000000):
     other=w.HANDLE();win.check(win.api(win.a,'DuplicateTokenEx',w.BOOL,w.HANDLE,w.DWORD,win.P,c.c_int,c.c_int,c.POINTER(w.HANDLE))(
-        token,0x02000000,None,2,kind,c.byref(other)));return other
+        token,rights,None,2,kind,c.byref(other)));return other
 
 def probe_access(token):
     other=None;rows=[]
@@ -69,11 +69,16 @@ def run(out):
         if not acceptable(record['expanded_token'],parent['user_sha256']):raise RuntimeError('DUPLICATE_CONTROL_BROKEN')
         env=c.create_unicode_buffer('SystemRoot='+os.environ['SystemRoot']+'\0\0')
         create=win.api(win.a,'CreateProcessWithTokenW',w.BOOL,w.HANDLE,w.DWORD,w.LPCWSTR,w.LPWSTR,w.DWORD,win.P,w.LPCWSTR,c.POINTER(win.STARTUPINFO),c.POINTER(win.PROCESSINFO))
-        for name,token in [('existing',reduced),('maximum_allowed_handle',expanded)]:
-            for flags in (4|0x400,4|0x400|0x08000000):
+        candidates=[('existing',reduced),('maximum_allowed_handle',expanded)];bounded=[]
+        # Each is a new copy of the same reduced primary token. Compare narrow
+        # handle rights while holding logon identity, privileges and flags fixed.
+        for rights in (0x8b,0x8f,0x18b,0x9b,0xab,0xcb,0x2008b):
+            token=duplicate(reduced,rights=rights);bounded.append(token);candidates.append(('duplicate_'+hex(rights),token))
+        for name,token in candidates:
+            for flags in (4|0x400|0x08000000,):
                 si=win.STARTUPINFO();si.cb=c.sizeof(si);pi=win.PROCESSINFO()
                 ok=create(token,0,sys.executable,c.create_unicode_buffer('"'+sys.executable+'" -B -c "pass"'),flags,env,str(ROOT),c.byref(si),c.byref(pi))
-                row={'token_handle':name,'flags':hex(flags),'created_suspended':bool(ok),'winerror':0 if ok else c.get_last_error(),'resumed':False}
+                row={'token_handle':name,'granted_access':access(token),'flags':hex(flags),'created_suspended':bool(ok),'winerror':0 if ok else c.get_last_error(),'resumed':False}
                 try:
                     if ok:
                         row['actual_child']=native.process(pi.dwProcessId)
@@ -87,6 +92,7 @@ def run(out):
                     for h in (pi.hThread,pi.hProcess):
                         if h:win.close(h)
                 record['attempts'].append(row);save()
+        for token in bounded:win.close(token)
         return record
     finally:
         for h in (expanded,reduced,current):
