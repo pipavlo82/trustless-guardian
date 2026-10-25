@@ -20,3 +20,12 @@ AppContainer profile still has no higher-effective-level negative witness.
 Run `python -B tools/v04_mutations.py --out build/v04-mutations` after
 `python -B tools/prepare.py`; output must be new. Mode/checkouts are recorded in the
 replay report, not inferred from this initial result.
+
+## Exact-SHA cold reproduction
+
+At clean `6c015ce4d738890c0f64932e1bdfd9b845f61969`, the full validator
+completed the five new mutations in normal, repeat and -O. Each mode reports
+5 KILLED,0 SURVIVED,0 CRASHED,0 NOT_APPLIED,0 CONTROL_BROKEN.
+All original/restored positive controls and byte-exact source restoration pass.
+Historical15/11/3+1 populations reproduce separately in the same three modes.
+Repeated executions do not multiply the number of unique mutants.

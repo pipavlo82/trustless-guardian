@@ -28,3 +28,11 @@ it does not calculate expectations by calling Guardian's implementation.
 The file/SQLite intervals remain non-atomic. PREPARED may persist before a response,
 partial or same-byte writes can occur, and COMMITTED may precede response delivery.
 No automatic retry, rollback, power-loss guarantee or universal exactly-once claim.
+
+The ordinary REPLAY refusal describes the current attempted invocation. It is
+not a historical status query for the original nonce: a prior COMMITTED write
+can coexist with a refused retry. Likewise an ABORTED tombstone records a bounded
+state-recovery decision, not proof that no physical I/O ever occurred. The API
+still lacks a reviewed operation-status/reconciliation protocol; downstream
+consumers must not infer historical non-execution from a retry refusal. This
+limitation is not retroactively assigned as a guarantee to old evidence.

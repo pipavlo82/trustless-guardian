@@ -12,6 +12,7 @@ from pathlib import Path
 import subprocess
 import sys
 import hashlib
+import time
 
 ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT))
 from guardian import windows as win
@@ -63,7 +64,9 @@ def main(out,no_mutations=False,profile='v0'):
         win.check(win.get_token(linked,20,c.byref(elevated),c.sizeof(elevated),c.byref(size)))
         if elevated.value:raise RuntimeError('linked token is elevated; refusing')
         stdout=ROOT/'build/ci-launch.stdout';stderr=ROOT/'build/ci-launch.stderr'
-        snippet=('import sys,runpy;sys.stdout=open('+repr(str(stdout))+",'w',encoding='utf-8',newline='\\n');"
+        marker=ROOT/'build/ci-started.txt'
+        if marker.exists():raise RuntimeError('fresh CI startup marker required')
+        snippet=('import sys,runpy;open('+repr(str(marker))+",'w').write('started');sys.stdout=open("+repr(str(stdout))+",'w',encoding='utf-8',newline='\\n');"
           +'sys.stderr=open('+repr(str(stderr))+",'w',encoding='utf-8',newline='\\n');"
           +'sys.argv='+repr(args)+';runpy.run_path('+repr(args[0])+",run_name='__main__')")
         argv=[sys.executable,'-B','-c',snippet]
@@ -94,8 +97,16 @@ def main(out,no_mutations=False,profile='v0'):
             record['reduced_child_token']=child;save()
             if not acceptable(child,hashlib.sha256(current['user_sid'].encode()).hexdigest()):
                 raise RuntimeError('created child did not preserve reduction')
-        if win.api(win.k,'ResumeThread',w.DWORD,w.HANDLE)(pi.hThread)==0xffffffff:raise c.WinError(c.get_last_error())
-        if win.api(win.k,'WaitForSingleObject',w.DWORD,w.HANDLE,w.DWORD)(pi.hProcess,1800000)!=0:
+        resumed=win.api(win.k,'ResumeThread',w.DWORD,w.HANDLE)(pi.hThread)
+        record['resume_previous_count']=resumed;record['stage']='WAIT_FOR_PYTHON_STARTUP';save()
+        if resumed==0xffffffff:raise c.WinError(c.get_last_error())
+        deadline=time.monotonic()+20
+        while not marker.exists() and time.monotonic()<deadline:
+            if win.api(win.k,'WaitForSingleObject',w.DWORD,w.HANDLE,w.DWORD)(pi.hProcess,100)==0:break
+        record['python_started']=marker.exists();save()
+        if not marker.exists():raise RuntimeError('LIMITED_CHILD_STARTUP_NOT_OBSERVED')
+        record['stage']='RUN_VALIDATION';save()
+        if win.api(win.k,'WaitForSingleObject',w.DWORD,w.HANDLE,w.DWORD)(pi.hProcess,2700000)!=0:
             win.api(win.k,'TerminateProcess',w.BOOL,w.HANDLE,w.UINT)(pi.hProcess,98);raise TimeoutError('limited validation timeout')
         code=w.DWORD();win.check(win.api(win.k,'GetExitCodeProcess',w.BOOL,w.HANDLE,c.POINTER(w.DWORD))(pi.hProcess,c.byref(code)))
         finished=True

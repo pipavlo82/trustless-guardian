@@ -25,3 +25,15 @@ Historical v0/v02/v03 code populations and all old evidence remain attributable 
 their original revisions. See the execution-outcome, impersonation and mutation
 reports for precise domain restrictions. Native evidence-to-action integration
 remains DESIGN ONLY / NOT_COVERED; see docs/EVIDENCE_TO_ACTION_CONTRACT.md.
+
+## Evidence-to-action review
+
+Read-only fetches again found clean checkouts with HEAD equal to origin/main:
+ReceiptOS f39ac3b289be6baef1140c53976d525d8eb45c8c,
+VECA e2aca1a029203f1d5c73db2f8872b4240e793bfb, and
+recompute-kit b4537d73bda4e4df73c4b105ee516a43c351ba02.
+Exact interface/license file hashes are in the v04 originals archive's
+preflight/native-source-audit.json. These are source inspections, not new native
+verification runs. No native adapter or upstream change is included: execution
+outcomes and deployment-specific identity boundaries still need independent
+review before any external evidence can participate in an action profile.

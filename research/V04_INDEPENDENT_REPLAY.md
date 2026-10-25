@@ -27,5 +27,16 @@ Initial witnesses against exact d64 production bytes reproduce both defects;
 new harness files are expressly additions to that disposable test copy. That
 original control is not described as an untouched whole-checkout replay.
 
-New full cold-replay evidence will be appended after execution. Independent second
-Windows environment and independent human review currently **NOT_COVERED**.
+Completed cold-replay evidence is recorded below. Independent human review remains
+**NOT_COVERED**; hosted Windows results are separately versioned in the CI report.
+
+## Completed local cold checkout
+
+The complete command above executed at
+`6c015ce4d738890c0f64932e1bdfd9b845f61969` with empty Git status before
+and after, returning0. See V04_CONFORMANCE_RESULTS.md for measured counts.
+All production Guardian modules and all functional scenario/oracle/mutation
+modules remain byte-identical in the later CI-launcher changes. The only Python
+differences are tools/ci_entry.py and tools/v04_ci_probe.py; they concern hosted
+token creation/diagnostics and campaign scheduling. Those require their own
+hosted observations and are not silently attributed to this local checkout.
