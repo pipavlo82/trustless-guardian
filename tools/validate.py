@@ -33,6 +33,7 @@ def run(out,portable=False,mutations=True):
         execute('runtime',[sys.executable,'-B','tools/prepare.py'])
         for mode,flags in [('normal',[]),('repeat',[]),('optimized',['-O'])]:
             execute('lab-'+mode,[sys.executable,'-B',*flags,'tools/lab.py','--out',str(out/('lab-'+mode))])
+        execute('ownership',[sys.executable,'-B','tools/ownership_control.py','--out',str(out/'ownership')])
         paths=[out/('lab-'+m)/'semantic.json' for m in ('normal','repeat','optimized')]
         if all(p.exists() for p in paths):
             determinism='VERIFIED' if len({p.read_bytes() for p in paths})==1 else 'REFUTED'

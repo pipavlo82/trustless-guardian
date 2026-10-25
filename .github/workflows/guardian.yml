@@ -29,6 +29,7 @@ jobs:
             build/ci-windows/*.stdout
             build/ci-windows/*.stderr
             build/ci-windows/lab-*/**
+            build/ci-windows/ownership/**
             build/ci-windows/mutations/report.json
             build/ci-windows/mutations/*/baseline/**
             build/ci-windows/mutations/*/mutated/**
