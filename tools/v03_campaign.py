@@ -23,6 +23,11 @@ class Lab03(Lab02):
         super().__init__(out)
         shutil.copyfile(ROOT/'tools/v03_worker.py',self.runtime/'v03_worker.py')
         self.acl(self.runtime/'v03_worker.py')
+    def roundtrip(self,name,value=None,container=None,server_options=None,**options):
+        row=super().roundtrip(name,value,container,server_options,**options)
+        expected_exit=73 if (server_options or {}).get('fixture_crash') else 0
+        if row['server_exit']!=expected_exit:raise RuntimeError('SERVER_CONTROL_BROKEN')
+        return row
     def launch(self,container,cfg,name):
         p=self.runtime/(name+'.json');write(p,cfg);self.acl(p)
         result=container.launch([self.runtime/'python.exe','-B',*(['-O'] if sys.flags.optimize else []),self.runtime/'v03_worker.py',p],self.runtime,20)
@@ -88,9 +93,13 @@ def run(out):
         descriptor=json.loads((lab.journal/'ready.json').read_bytes())['dacl'];write(out/'actual-pipe-dacl.json',{'dacl':descriptor,'agent_sid':lab.agent.principal})
         for name,options in [('anonymous_sqos',{'fixture_sqos':0}),('pipe_instance_creation',{'fixture_pipe_instance':True}),('write_dac_access',{'fixture_rights':0x16019b}),('fragmented_message',{'fixture_fragment':True})]:
             r=lab.roundtrip(name,server_options={'timeout_ms':600},**options)
-            record(name,r['unchanged'] and not allowed(r) and not r['response'].get('pipe_instance_created'),winerror=r['response'].get('winerror') if name!='fragmented_message' else None)
+            observed=json.loads((lab.out/(name+'.server.json')).read_bytes())[0]['response']
+            boundary=('[WinError 1347]' in observed.get('reason','') if name=='anonymous_sqos' else
+                      observed.get('reason')=='IPC_SCHEMA' and observed.get('status')=='REFUTED' if name=='fragmented_message' else
+                      r['response'].get('winerror')==5)
+            record(name,r['unchanged'] and not allowed(r) and boundary and not r['response'].get('pipe_instance_created'),winerror=r['response'].get('winerror') if name!='fragmented_message' else None)
         raw=canonical(lab.request('two'))+canonical(lab.request('three'))
-        r=lab.roundtrip('two_messages_one_frame',raw);record('two_messages_one_frame',r['unchanged'] and not allowed(r))
+        r=lab.roundtrip('two_messages_one_frame',raw);record('two_messages_one_frame',r['unchanged'] and answer(r).get('reason')=='IPC_SCHEMA' and answer(r).get('status')=='REFUTED')
         r=lab.roundtrip('wrong_base_user',server_options={'user_sha256':'0'*64});record('wrong_base_user',r['unchanged'] and 'IPC_CALLER' in answer(r).get('reason',''))
         r=lab.roundtrip('lost_reply',fixture_drop_response=True)
         saved=lab.rows()[-1];r2=lab.roundtrip('lost_reply_replay',lab.request('lost_reply_replay',nonce='lost_reply'))

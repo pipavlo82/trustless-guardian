@@ -110,3 +110,20 @@ Archive: `evidence/v02-public-f70-replay.zip`; SHA-256
 `6558b3ee18bde4a938872fe90f27303955c7f8c6cf7613deefb02ea3b8749412`. Commands, exit codes, raw observations and
 source correspondence are retained. Both hosted attempts at this code commit
 remain independently **CI_BLOCKED** as documented in CI_PORTABILITY.
+
+## v03 additive evidence
+
+The starting d4 baseline, original post-write/same-byte observations, two failed
+initial harness expectations, read-only native pins and hosted launch failures
+are preserved in v03-baseline-and-audit.zip. v03-local-replay.zip preserves the
+complete working-checkout validation; it is not called a clean checkout.
+v03-cold-replay.zip preserves the public clean 5cd4c22 replay and extra optimized
+historical mutation runs. Each ZIP has a separately verified member inventory.
+Actual named-pipe SDDL observations include Windows SIDs; these identify OS
+principals, not credentials. No API tokens, passwords or private keys are included.
+
+- `v03-baseline-and-audit.zip`: `2f25d00fa0ad0a7ca885aedff08014a503c01f68428e3fec5b46596753193a32`
+- `v03-cold-replay.zip`: `d0429923e35a836feb1ab6620d4860d5b0d572a348de3d45858a77d1ef427783`
+- `v03-local-replay.zip`: `db0b44bfb239037c133e093ec3d010b94860fedf54f1517df782777ace5df25d`
+
+The seven pre-v03 archives and their inventories remain byte-identical.

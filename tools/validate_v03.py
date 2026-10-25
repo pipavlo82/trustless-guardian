@@ -26,6 +26,7 @@ def run(out,portable=False,no_mutations=False):
     deterministic='NOT_COVERED';counts={}
     if not portable:
         execute('runner-token',['tools/ci_diagnostics.py','--out',str(out/'runner-token.json')])
+        execute('harness-crash-control',['tools/v03_harness_control.py','--out',str(out/'harness-crash-control')])
         for mode,flags in [('normal',[]),('repeat',[]),('optimized',['-O'])]:
             execute(mode,[*flags,'tools/v03_campaign.py','--out',str(out/mode)])
         paths=[out/m/'semantic.json' for m in ('normal','repeat','optimized')]

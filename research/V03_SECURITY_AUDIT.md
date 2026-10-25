@@ -47,6 +47,16 @@ token and invoke CreateNamedPipeW. They do not rewrite the first failed run.
 
 ## Recovery and concurrency
 
+The post-replay harness audit strengthened failure classification: every v03
+roundtrip now requires the expected broker exit (0, or specifically injected 73).
+Anonymous-token tests require the actual 1347 refusal; pipe permission tests
+require WinError 5; framing tests require REFUTED / IPC_SCHEMA in the server
+record. An unrelated failure cannot satisfy these expected-negative predicates.
+A separate physical test-worker mutation changes deliberate exit 73 to unexpected
+74. The host sees unchanged bytes but the harness raises SERVER_CONTROL_BROKEN;
+restoration and the following positive write pass. This diagnostic is recorded as
+CONTROL_BROKEN_DETECTED, separately from the four security mutants.
+
 Two distinct live broker processes with the same resource, journal and nonce
 were exercised. Broker A pauses at PREPARED while holding exclusive files;
 broker B is refused with unchanged bytes. A commits exactly once; a new broker

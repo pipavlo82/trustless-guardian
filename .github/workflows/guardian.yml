@@ -41,6 +41,7 @@ jobs:
             build/ci-windows/repeat/**
             build/ci-windows/optimized/**
             build/ci-windows/handle-inheritance/**
+            build/ci-windows/harness-crash-control/**
             build/ci-windows/v0/*.json
             build/ci-windows/v0/*.stdout
             build/ci-windows/v0/*.stderr

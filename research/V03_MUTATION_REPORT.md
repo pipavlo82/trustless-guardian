@@ -31,3 +31,11 @@ and [independent replay](V03_INDEPENDENT_REPLAY.md).
 
 Reproduce: `python -B tools/v03_mutations.py --out build/v03-mutations`.
 Use a fresh output directory and run `python -B tools/prepare.py` first.
+
+An additional **harness diagnostic**, outside the four-mutant population, physically
+changes the disposable worker's expected exit 73 to 74. Original/restored permitted
+writes succeed; the unexpected crash leaves protected bytes unchanged but is
+classified CONTROL_BROKEN_DETECTED, never a successful negative action test or
+KILLED security guard. Run `python -B tools/v03_harness_control.py --out build/harness-control`.
+The full validator now includes this check. No Guardian production module changed
+after implementation revision 7e348a7; later harness changes strengthen the oracle.

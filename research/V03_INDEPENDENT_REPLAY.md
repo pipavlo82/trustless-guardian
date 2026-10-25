@@ -51,3 +51,45 @@ The host witness is a separate process from both confined principals and reads
 actual protected bytes after attempts. The existing independent receipt verifier
 also reruns in v02. These are engineering independence boundaries, not an external
 human reviewer or second physical Windows machine; both remain NOT_COVERED.
+
+## Reproduce the original reporting defect
+
+In another disposable clone, retain the original production modules and add only
+the new test harness. This is explicitly a modified test checkout, not the clean
+baseline replay above:
+
+```powershell
+git clone https://github.com/pipavlo82/trustless-guardian.git guardian-v03-original
+cd guardian-v03-original
+git checkout --detach d4df3adf1a23ecd4158e97d97cef5e1a155097dd
+git restore --source 5cd4c224109818bae0e6988af582948d9da430aa -- tools/v03_worker.py tools/v03_campaign.py
+python -B tools/prepare.py
+python -B tools/v03_campaign.py --witness post_write_failure --out build/original-write
+python -B tools/v03_campaign.py --witness same_bytes --out build/original-same
+```
+
+The witness CLI exits zero when it collected a valid observation; inspect
+`witness.json`: positive_ok=true and negative_ok=false reproduce the old behavior.
+This exit code does not itself mean the security expectation passed. The full
+campaign and validator fail on an unexpected outcome. For mutations, original and
+restored negative_ok must both pass before a changed result can count as KILLED.
+
+## Completed cold replay at 5cd4c224109818bae0e6988af582948d9da430aa
+
+A new public clone started clean/detached at this exact revision. Full validator
+exit 0: 22 units, 17 v0, 41 v02 and 21 v03 scenarios in normal/repeat/-O. The real
+handle-inheritance witness passed. Historical v0 15 and v02 11 physical controls
+were also rerun separately under -O: all KILLED, all other categories zero.
+New v03 controls returned 3 KILLED / 1 SURVIVED / 0 CRASHED in both modes.
+All 39 Python source digests match implementation revision 7e348a7. Stable
+semantic outputs match the local replay byte-for-byte, including all three v03
+modes. The checkout remains clean. This remains the same Windows machine.
+
+Archive: `evidence/v03-cold-replay.zip`
+SHA-256: `d0429923e35a836feb1ab6620d4860d5b0d572a348de3d45858a77d1ef427783`.
+The archive includes actual commands, exit codes, process/host observations,
+source hashes, both historical optimized populations and exact-head CI logs.
+At this SHA the portable jobs pass and Windows jobs still fail before launch:
+[push](https://github.com/pipavlo82/trustless-guardian/actions/runs/40197985141),
+[PR](https://github.com/pipavlo82/trustless-guardian/actions/runs/40197990225).
+Later evidence/report commits do not retroactively change this tested revision.

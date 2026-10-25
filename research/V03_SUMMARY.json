@@ -1,6 +1,7 @@
 {
   "artifacts": {
     "v03-baseline-and-audit.zip": "2f25d00fa0ad0a7ca885aedff08014a503c01f68428e3fec5b46596753193a32",
+    "v03-cold-replay.zip": "d0429923e35a836feb1ab6620d4860d5b0d572a348de3d45858a77d1ef427783",
     "v03-local-replay.zip": "db0b44bfb239037c133e093ec3d010b94860fedf54f1517df782777ace5df25d"
   },
   "baseline_fresh_replay": {
@@ -21,17 +22,56 @@
     "child_created": false,
     "deeper_internal_cause": "UNVERIFIABLE",
     "portable": "SUCCESS",
-    "pull_request": 40197005081,
-    "push": 40197002146,
+    "prior_instrumented_sha": "7e348a7d4de75f57bb3d0193b8870aeb646b0a20",
+    "pull_request": 40197990225,
+    "push": 40197985141,
     "security_status": "CI_BLOCKED / NOT_COVERED",
-    "sha": "7e348a7d4de75f57bb3d0193b8870aeb646b0a20",
+    "sha": "5cd4c224109818bae0e6988af582948d9da430aa",
     "windows_enforcement": "FAILURE",
     "winerror": 5
   },
   "coverage_complete": false,
   "current_code_fresh_replay": {
-    "note": "Completed fresh replay will be appended without rewriting this archived local run.",
-    "status": "PENDING_AT_THIS_RECORD"
+    "clean_start": true,
+    "external_reviewer": "NOT_COVERED",
+    "historical_optimized_mutations": {
+      "v0": {
+        "CONTROL_BROKEN": 0,
+        "CRASHED": 0,
+        "KILLED": 15,
+        "NOT_APPLIED": 0,
+        "SURVIVED": 0
+      },
+      "v02": {
+        "CONTROL_BROKEN": 0,
+        "CRASHED": 0,
+        "KILLED": 11,
+        "NOT_APPLIED": 0,
+        "SURVIVED": 0
+      }
+    },
+    "python_source_count": 39,
+    "second_machine": "NOT_COVERED",
+    "semantic_determinism": "VERIFIED",
+    "sha": "5cd4c224109818bae0e6988af582948d9da430aa",
+    "source_matches_implementation_sha": true,
+    "status": "PASSED",
+    "v03_mutations": {
+      "normal": {
+        "CONTROL_BROKEN": 0,
+        "CRASHED": 0,
+        "KILLED": 3,
+        "NOT_APPLIED": 0,
+        "SURVIVED": 1
+      },
+      "optimized": {
+        "CONTROL_BROKEN": 0,
+        "CRASHED": 0,
+        "KILLED": 3,
+        "NOT_APPLIED": 0,
+        "SURVIVED": 1
+      }
+    }
   },
   "draft": true,
   "external_reviewer": "NOT_COVERED",
