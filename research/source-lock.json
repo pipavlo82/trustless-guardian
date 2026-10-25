@@ -1,0 +1,275 @@
+{
+  "digest_semantics": "exact Git blob bytes, not platform checkout newline conversion",
+  "retrieved_date": "2026-10-24",
+  "schema": "guardian.source-audit.v0",
+  "sources": [
+    {
+      "commit": "b4537d73bda4e4df73c4b105ee516a43c351ba02",
+      "files": {
+        "LICENSE": {
+          "sha256_git_blob": "405d0af6743b62b00a440d519b85fd9c3f159ff85b3bcfcd8c683e6372b4a7aa",
+          "size": 424
+        },
+        "research/chain-neutral-receipt-anchor-proof-v0/adapter.mjs": {
+          "sha256_git_blob": "b3f4e8b3f5b551c06dc4592ba1415a1ee5ea2bbd56e57cf6788c8063a0d956e4",
+          "size": 8314
+        },
+        "research/chain-neutral-receipt-anchor-proof-v0/mutations.py": {
+          "sha256_git_blob": "be5e123e956107b221138027a81549fe08614d1cc1f0994d29d7984d17e2c068",
+          "size": 8772
+        }
+      },
+      "repository": "trustless-ai/recompute-kit",
+      "tracked_source_unchanged": true,
+      "working_tree_status": ""
+    },
+    {
+      "commit": "e2aca1a029203f1d5c73db2f8872b4240e793bfb",
+      "files": {
+        "LICENSE": {
+          "sha256_git_blob": "650bc878c1af8e12d81ff387e7af547dad094836b1feb322654695447e0a618c",
+          "size": 1066
+        },
+        "src/integration/engine.py": {
+          "sha256_git_blob": "81707638fa076486e71e18df981cc7daaf0e91870f53d457870c0af09fd8fc3c",
+          "size": 12089
+        },
+        "src/v4_1/model.py": {
+          "sha256_git_blob": "7c7a6222a23d4d82a99e1b1f7bb20433674c9c3a4791965f6b92b48b33c3f4b5",
+          "size": 6482
+        },
+        "tests/integration/test_engine.py": {
+          "sha256_git_blob": "fa05844568e5d07ae6d9456b1c78f8949add0b9186222b3a33022e290f1b93c4",
+          "size": 3072
+        }
+      },
+      "repository": "trustless-ai/verifiable-execution-claim-authorization",
+      "tracked_source_unchanged": true,
+      "working_tree_status": ""
+    },
+    {
+      "commit": "61f7392f1c4758231517b22ba06ab608dedbae02",
+      "files": {
+        "LICENSE": {
+          "sha256_git_blob": "7179683e8000e6bdc9bbc60d85edf0a4ac8e76f951857f54fcb775d5886f1309",
+          "size": 7049
+        },
+        "src/recompute/kit.ts": {
+          "sha256_git_blob": "98307917ec384977330d0ea43bd0962863f0abe7845a5299838520f699705774",
+          "size": 15025
+        },
+        "src/recompute/receiptos-c14n-v0.ts": {
+          "sha256_git_blob": "ec85b664699203e3147438230d967639243a9c34659c3fb8324c4401c1c8c2ef",
+          "size": 6654
+        }
+      },
+      "repository": "trustless-ai/recompute-lens",
+      "tracked_source_unchanged": true,
+      "working_tree_status": ""
+    },
+    {
+      "commit": "d15c666dfccff17f7350fe97d2fc7b71cb2cbaee",
+      "files": {
+        "LICENSE": {
+          "sha256_git_blob": "c95bae1d1ce0235ecccd3560b772ec1efb97f348a79f0fbe0a634f0c2ccefe2c",
+          "size": 11358
+        },
+        "runner/src/evaluate.mjs": {
+          "sha256_git_blob": "a2f1c3caaaeeb37b7067618f7ee0b98bddece859baee7dfbfc68a44be58699b0",
+          "size": 2639
+        },
+        "runner/test/evaluate.test.mjs": {
+          "sha256_git_blob": "5fd824ef12219c1bb9d67551af2d51b0b149ea14f1b441cb456c33200891027c",
+          "size": 2094
+        },
+        "schema/LICENSE-CC0.txt": {
+          "sha256_git_blob": "7179683e8000e6bdc9bbc60d85edf0a4ac8e76f951857f54fcb775d5886f1309",
+          "size": 7049
+        }
+      },
+      "repository": "trustless-ai/semantic-abi",
+      "tracked_source_unchanged": true,
+      "working_tree_status": ""
+    },
+    {
+      "commit": "f39ac3b289be6baef1140c53976d525d8eb45c8c",
+      "files": {
+        "LICENSE": {
+          "sha256_git_blob": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "size": 11358
+        },
+        "NOTICE": {
+          "sha256_git_blob": "26f2f6ae76f46cd03852e4625aad656932ce9a1a9f48bb80e97e4693fa101c46",
+          "size": 864
+        },
+        "THIRD_PARTY_NOTICES.md": {
+          "sha256_git_blob": "e2f156d94d0af4bc6e94d298680b207243acb2d2e44d7d7809b45227f85dca06",
+          "size": 4465
+        },
+        "src/core/claim-surface.mjs": {
+          "sha256_git_blob": "b5a0237d3c642a91a89c7b73666e3e0f6d33a319495ddae08a0f86e34476ae1e",
+          "size": 6300
+        },
+        "src/core/verify-v2.mjs": {
+          "sha256_git_blob": "1c3b876fe7309b16075bd07f61cfdaf0437cf3e06ea6b28f3c369325cc8c5a3c",
+          "size": 12351
+        },
+        "src/projection/project-v2.mjs": {
+          "sha256_git_blob": "cbc0592d3f3ea7569afb19ce71f3b0d835d9d45494fe0a11062a44337ccead5e",
+          "size": 5685
+        },
+        "tests/guarantee-boundary-v2.test.mjs": {
+          "sha256_git_blob": "592f3e6584795e7ccd3b75650c02187f3b6df920192dc6d9dfae2f26fe4e99cf",
+          "size": 4034
+        }
+      },
+      "repository": "pipavlo82/receiptos-verify",
+      "tracked_source_unchanged": true,
+      "working_tree_status": ""
+    },
+    {
+      "commit": "45b46bf7df3a60b32583291f577a36bf19d22f00",
+      "files": {
+        "LICENSE": {
+          "sha256_git_blob": "fa7fe2e14249d2da31c0d2a0bbefc17a1994a93b42ae652a3dab450b6f1c0251",
+          "size": 10377
+        },
+        "src/receiptos/canon/receipt-root.ts": {
+          "sha256_git_blob": "519e532b155f3c1f4720337d09bc2a8503e4546682695e798b8597ad8d187bf0",
+          "size": 803
+        },
+        "src/receiptos/verify/verify-receipt.ts": {
+          "sha256_git_blob": "70dad3a005e0d09af6d3b4def8ab4c98e24d3ee9f19839d88894c42c5ac9da04",
+          "size": 1110
+        },
+        "tests/receiptos/canonicalize.test.ts": {
+          "sha256_git_blob": "f8d474b01e0f3eb239e3dc89ac0a2f048fe0968e2751962db3100c0ca0676f6e",
+          "size": 1091
+        }
+      },
+      "repository": "pipavlo82/crystal-receipt",
+      "tracked_source_unchanged": true,
+      "working_tree_status": ""
+    },
+    {
+      "commit": "9dd36e882dd372f264b77b179130948aa5adcbde",
+      "files": {
+        "LICENSE": {
+          "sha256_git_blob": "fa7fe2e14249d2da31c0d2a0bbefc17a1994a93b42ae652a3dab450b6f1c0251",
+          "size": 10377
+        },
+        "conformance/rvr-v0/adapter.py": {
+          "sha256_git_blob": "03505efc8ee993f118fad2c71f706870d25de0da61a393a1f18f7b310bded235",
+          "size": 50109
+        },
+        "conformance/rvr-v0/rvr.schema.json": {
+          "sha256_git_blob": "97799403d8eb96c046930396c39e0f1c3e76d6c35fd0435937446ce844bd4dae",
+          "size": 3883
+        },
+        "conformance/rvr-v0/verification-profile.json": {
+          "sha256_git_blob": "23cac7eb86aca7a8cc0422985f598b67dd3fe758bd2321f6bcbc5ab2f1c2d8ab",
+          "size": 4484
+        },
+        "docs/spec/RECOMPUTABLE_VERIFICATION_RECEIPTS_V0.md": {
+          "sha256_git_blob": "81077ddbf50624bc70941cf53a4f542604e926a653d7fcb3a36310ff5430b973",
+          "size": 13294
+        },
+        "tests/test_rvr_v0.py": {
+          "sha256_git_blob": "0d64d305d8a7c688191c808f93933f58f62ae9c02781f27d1db5509638ae315e",
+          "size": 4081
+        }
+      },
+      "repository": "pipavlo82/recomputable-verification-receipts",
+      "tracked_source_unchanged": true,
+      "working_tree_status": ""
+    },
+    {
+      "commit": "18f595b537017e5ff7b9074366c3065e877488f9",
+      "files": {
+        "LICENSE": {
+          "sha256_git_blob": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "size": 11358
+        },
+        "LICENSING.md": {
+          "sha256_git_blob": "686d67272d0b09f9e959cd8b32ee9a0505f3b21bb340818daa02ee9731884b33",
+          "size": 2910
+        },
+        "NOTICE": {
+          "sha256_git_blob": "dc67071b67b2e2cf509a1bd933e1ca555118cc89376017859f552a1a6ddc7c0b",
+          "size": 438
+        },
+        "contracts/ProtectedPriceActionTarget.sol": {
+          "sha256_git_blob": "7388ee478a8ca48f02272bbbc51690b3a0aff41a3e75370384004f0e2e7dcb9b",
+          "size": 2015
+        },
+        "contracts/SemanticExecutionGuard.sol": {
+          "sha256_git_blob": "5ce8f4da7a0cadb549a936a8ae5460fe6753b36f741162058f7071b51726ca20",
+          "size": 9553
+        },
+        "relations/robinhood-adjusted-feed-consumption-v0/test/mutation.test.mjs": {
+          "sha256_git_blob": "85289596286549a4bfcc5dec5a9f4ee0c90bb77e1c7976039d19f78e19208190",
+          "size": 1717
+        }
+      },
+      "repository": "pipavlo82/semantic-execution-guard",
+      "tracked_source_unchanged": true,
+      "working_tree_status": ""
+    },
+    {
+      "commit": "3d3038f90c3dd98e79f948398167c5cc3ef2fdd8",
+      "files": {
+        "LICENSE": {
+          "sha256_git_blob": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "size": 11358
+        },
+        "NOTICE": {
+          "sha256_git_blob": "1c7ece91d6653277d92702db0cdbc226325e4ad59bf7959e80cd55224cb8a23a",
+          "size": 416
+        },
+        "requirements-dev.txt": {
+          "sha256_git_blob": "2f0e8f283cba31c964fcbc37b39f17d472474c83448fa27c5a805982674f690d",
+          "size": 109
+        },
+        "rsi/run.py": {
+          "sha256_git_blob": "3cee105292d30a558f276b37b6e209c06ea2ce56d7ed57fddba93a53f34b3e7e",
+          "size": 3097
+        },
+        "runner/expectation_contract.py": {
+          "sha256_git_blob": "bfe87feb88e843809dd6a0311a52bc78a634a59fa2c6f992d0a438cedfb7cb52",
+          "size": 5530
+        },
+        "tests/test_expectations.py": {
+          "sha256_git_blob": "d04c17111beec5d56d38b15f18d1bf7e278a062f2b3ca9d1b7be832525400edf",
+          "size": 15884
+        }
+      },
+      "repository": "pipavlo82/relational-security-invariants",
+      "tracked_source_unchanged": true,
+      "working_tree_status": ""
+    },
+    {
+      "commit": "fac26d2e8346aeab08194343b78c345d235c6935",
+      "files": {
+        "LICENSE": {
+          "sha256_git_blob": "11d93abd8b3371d3d3dbc536e11e132f3482dc6334eca0006601cfd58229253e",
+          "size": 1074
+        },
+        "adapters/v0/contract.py": {
+          "sha256_git_blob": "3d10c9f225e9d62a4174081abd69317c0e8e09aa63e0842db6bada316b6e9c13",
+          "size": 20478
+        },
+        "adapters/v0/reference_adapter.py": {
+          "sha256_git_blob": "49a8192543f7b68ca7535bc0aee7e8d43d22d3d8a07d1769f32525ee703c11f2",
+          "size": 5274
+        },
+        "tests/test_external_adapter_contract.py": {
+          "sha256_git_blob": "bf4da693af3db049dab56d6329614e52a108ff327a417566681a2d3af8dcdb30",
+          "size": 18460
+        }
+      },
+      "repository": "pipavlo82/protected-relation-fixtures",
+      "tracked_source_unchanged": true,
+      "working_tree_status": ""
+    }
+  ]
+}

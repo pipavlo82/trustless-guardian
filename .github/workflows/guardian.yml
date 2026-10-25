@@ -1,0 +1,35 @@
+name: Guardian conformance
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  portable:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - run: python -B tools/validate.py --portable --out build/ci-portable
+  windows-enforcement:
+    runs-on: windows-2022
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - run: python -B tools/validate.py --out build/ci-windows
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: windows-enforcement-logs
+          path: |
+            build/ci-windows/*.json
+            build/ci-windows/*.stdout
+            build/ci-windows/*.stderr
+            build/ci-windows/lab-*/**
+            build/ci-windows/mutations/report.json
+            build/ci-windows/mutations/*/baseline/**
+            build/ci-windows/mutations/*/mutated/**
+            build/ci-windows/mutations/*/restored/**
