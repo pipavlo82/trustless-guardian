@@ -1,4 +1,8 @@
-> **v0.5 — HOLD:** [demo and commands](demo/README.md), [executed results](research/V05_SECURITY_RESULTS.md), [machine summary](research/V05_SUMMARY.json), [limitations](research/V05_LIMITATIONS.md).
+> **v0.6 — real Hermes laboratory integration:** [demo and commands](demo/real-agent/README.md), [results](research/V06_REAL_AGENT_RESULTS.md), [tool protocol](docs/REAL_AGENT_TOOL_PROTOCOL.md), [security report](research/V06_SECURITY_REPORT.md), [limitations](research/V06_LIMITATIONS.md).
+>
+> A genuine model selects a tool; the native Hermes agent loop executes it inside a measured AppContainer. Guardian independently authorizes the request, and a separate observer checks real resource bytes. This is a narrow local experiment through an explicit Codex CLI inference relay. It is not native Nous authentication, arbitrary agent containment or production authorization. Hosted Windows enforcement remains CI_BLOCKED; the full report preserves historical and development failures.
+
+> **Historical v0.5 — HOLD:** [demo and commands](demo/README.md), [executed results](research/V05_SECURITY_RESULTS.md), [machine summary](research/V05_SUMMARY.json), [limitations](research/V05_LIMITATIONS.md).
 >
 > The genuine Codex CLI starts inside a measured AppContainer. No model-backed task or native agent tool action ran: real-agent integration is **NOT_COVERED**. The separate scripted Windows demo passed five scenario groups, six native access denials and four physical mutations in normal/repeat/optimized cold replay. Hosted enforcement remains CI_BLOCKED. Historical repeated mutation controls also retain failures; the report preserves them rather than treating all checks as green. Reports below describe their own historical runs.
 
