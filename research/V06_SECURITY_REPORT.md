@@ -60,6 +60,14 @@ with a durable `PREPARED` journal row and changed bytes. No retry is made.
   all actual messages remain in evidence. Explicit provider instructions explain
   the remote invocation rather than claiming that Codex itself owns the tools.
 
+An additional adapter preflight defect was found during review: checking only
+listed file hashes allowed an unlisted runtime module to escape the inventory
+check. The final preflight pins the manifest itself, requires an exact file set,
+rejects reparse paths, and checks every file hash. Negative controls cover an
+extra module, missing module, changed module and caller-resealed manifest. No
+unexpected module was observed in the actual recorded runtime. This is a
+pre-launch integrity repair, not evidence of a prior OS confinement bypass.
+
 No demonstrated defect in the frozen Guardian core was repaired in this version.
 The new work is an adapter, real-runtime evidence and conformance instrumentation.
 Physical mutations measure the dependence of that full path on existing guards;

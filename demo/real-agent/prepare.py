@@ -11,6 +11,35 @@ import shutil
 import subprocess
 
 PIN = 'f7c79efbac19ae18e8dee7c79a4e4c0935299b5f'
+RUNTIME_MANIFEST_SHA256 = 'fb9eab6c61bf1da7ecce053956faf29f17feb725592dd01342e1fa6d453267ac'
+
+
+def verify_files(destination, files):
+    destination = Path(destination).resolve()
+    for name in files:
+        p = Path(name)
+        if p.is_absolute() or '..' in p.parts or not (destination/p).resolve().is_relative_to(destination):
+            raise ValueError('RUNTIME_PATH')
+    entries = list(destination.rglob('*'))
+    if any(p.is_symlink() or getattr(p.lstat(),'st_file_attributes',0) & 0x400 for p in entries):
+        raise ValueError('RUNTIME_REPARSE')
+    actual = {p.relative_to(destination).as_posix() for p in entries if p.is_file()}-{'runtime-inventory.json'}
+    if actual != set(files):
+        raise ValueError('RUNTIME_FILE_SET')
+    for name, expected in files.items():
+        if hashlib.sha256((destination/name).read_bytes()).hexdigest() != expected:
+            raise ValueError('RUNTIME_HASH:'+name)
+
+
+def verify_runtime(destination):
+    raw = (Path(destination)/'runtime-inventory.json').read_bytes()
+    if hashlib.sha256(raw).hexdigest() != RUNTIME_MANIFEST_SHA256:
+        raise ValueError('RUNTIME_MANIFEST_PIN')
+    inventory = json.loads(raw)
+    if inventory.get('hermes_commit') != PIN or inventory.get('profile_copied') is not False or inventory.get('credentials_copied') is not False:
+        raise ValueError('RUNTIME_PROVENANCE')
+    verify_files(destination, inventory['files'])
+    return inventory
 
 
 def prepare(source, destination):

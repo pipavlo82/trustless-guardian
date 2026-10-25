@@ -1,5 +1,6 @@
 import ast
 import copy
+import hashlib
 import importlib.util
 import json
 from pathlib import Path
@@ -16,6 +17,8 @@ spec = importlib.util.spec_from_file_location('guardian_v06_mutations', DIRECTOR
 mutations = importlib.util.module_from_spec(spec); spec.loader.exec_module(mutations)
 spec = importlib.util.spec_from_file_location('guardian_v06_oracle', DIRECTORY/'verify.py')
 oracle = importlib.util.module_from_spec(spec); spec.loader.exec_module(oracle)
+spec = importlib.util.spec_from_file_location('guardian_v06_preflight', DIRECTORY/'prepare.py')
+preflight = importlib.util.module_from_spec(spec); spec.loader.exec_module(preflight)
 
 
 class V06(unittest.TestCase):
@@ -70,6 +73,23 @@ class V06(unittest.TestCase):
         for resource,content in [('protected-config','BYPASS'),('synthetic-source','ignored')]:
             with self.assertRaises(ValueError):
                 protocol.proposal({'tool':'guardian_direct_probe','resource':resource,'content':content})
+
+    def test_runtime_inventory_rejects_extra_missing_and_changed_files(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory);source=root/'module.py';source.write_bytes(b'original')
+            pins={'module.py':hashlib.sha256(b'original').hexdigest()}
+            preflight.verify_files(root,pins)
+            extra=root/'sitecustomize.py';extra.write_bytes(b'not listed')
+            with self.assertRaisesRegex(ValueError,'RUNTIME_FILE_SET'):preflight.verify_files(root,pins)
+            extra.unlink();source.write_bytes(b'changed')
+            with self.assertRaisesRegex(ValueError,'RUNTIME_HASH'):preflight.verify_files(root,pins)
+            source.unlink()
+            with self.assertRaisesRegex(ValueError,'RUNTIME_FILE_SET'):preflight.verify_files(root,pins)
+
+    def test_runtime_manifest_cannot_be_resealed_by_caller(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory);(root/'runtime-inventory.json').write_bytes(b'{}')
+            with self.assertRaisesRegex(ValueError,'RUNTIME_MANIFEST_PIN'):preflight.verify_runtime(root)
 
     def test_model_mapping_preserves_arguments(self):
         v = {'tool':'guardian_action','resource':'protected-config','content':'approved:x'}

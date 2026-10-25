@@ -32,6 +32,15 @@ browser profile is an agent target. Do not run two demos sharing one copied
 runtime concurrently: each run grants that runtime's read/execute ACL to its
 own disposable package SID.
 
+The runtime manifest is itself pinned to
+`fb9eab6c61bf1da7ecce053956faf29f17feb725592dd01342e1fa6d453267ac`.
+Missing, changed, additional or reparse-point files are rejected before launch.
+The [source lock](../../research/V06_SOURCE_LOCK.json) records all 126 installed
+distribution versions; the [runtime inventory](../../evidence/v06-runtime-inventory.json)
+records 14,114 exact program/dependency hashes. A differently built dependency
+set requires a separately reviewed lock/profile; do not overwrite this pin to
+make an incompatible installation pass.
+
 Each scenario preserves the exact request, actual Codex JSONL, tool mapping,
 Hermes frames, token/handle observation, broker response, resource snapshots and
 independent verifier report. Local logs contain synthetic absolute paths; use

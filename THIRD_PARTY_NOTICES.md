@@ -27,3 +27,7 @@ Codex CLI is an installed external runtime, not redistributed by Guardian. The
 adapter uses the normal authorized ChatGPT login without copying credentials.
 No claim is made that this experimental transport is an official Hermes or
 OpenAI integration. Cursor/Grok identification does not establish runtime support.
+
+Preserved Hermes request transcripts include its upstream system-prompt text.
+That MIT-licensed text remains attributed to Nous Research; the complete license
+is reproduced in [docs/licenses/hermes-MIT.txt](docs/licenses/hermes-MIT.txt).

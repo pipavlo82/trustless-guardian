@@ -36,13 +36,8 @@ def run(out, runtime, only=None, mutation=None):
     runtime = runtime.resolve()
     if not runtime.is_relative_to(ROOT/'build'):
         raise ValueError('RUNTIME_MUST_BE_DISPOSABLE_UNDER_BUILD')
-    inventory = json.loads((runtime/'runtime-inventory.json').read_bytes())
-    from prepare import PIN
-    if inventory.get('hermes_commit') != PIN or inventory.get('profile_copied') is not False or inventory.get('credentials_copied') is not False:
-        raise ValueError('RUNTIME_PROVENANCE')
-    for name, expected in inventory['files'].items():
-        if digest((runtime/name).read_bytes()) != expected:
-            raise ValueError('RUNTIME_HASH:'+name)
+    from prepare import verify_runtime
+    inventory = verify_runtime(runtime)
     executable = shutil.which('codex')
     if not executable or Path(executable).suffix.lower() != '.exe':
         raise RuntimeError('NATIVE_CODEX_NOT_AVAILABLE')
