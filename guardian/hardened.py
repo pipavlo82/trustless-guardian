@@ -46,7 +46,7 @@ class HardenedBroker:
         except Exception:self.stack.close();raise
     def close(self):self.stack.close()
     def execute(self,raw,principal,now,hook=lambda *a:None):
-        cfg=self.config
+        cfg=self.config;stage='NOT_STARTED'
         try:request=envelope(raw,cfg['policy_sha256'])
         except (ValueError,TypeError,UnicodeError,RecursionError):return refusal('IPC_SCHEMA')
         try:
@@ -64,9 +64,13 @@ class HardenedBroker:
                     intended=request['content'].encode()
                     intent={'request_sha256':digest(canonical(request)),'policy_sha256':cfg['policy_sha256'],
                             'before_sha256':digest(before),'after_sha256':digest(intended),'resource_identity':rf.identity}
+                    stage='PREPARING'
                     journal.prepare(request['nonce'],intent)
+                    stage='PREPARED'
                     hook('PREPARED',rf,intended)
+                    stage='WRITING'
                     rf.replace(intended)
+                    stage='WRITTEN'
                     hook('WRITTEN',rf,intended)
                     after=rf.read()
                     if after!=intended:raise OSError('READBACK_MISMATCH')
@@ -75,9 +79,16 @@ class HardenedBroker:
                       'decision':decision,'before_base64':base64.b64encode(before).decode(),
                       'after_base64':base64.b64encode(after).decode(),'execution':'LOCAL_WRITE_OBSERVED',
                       'external_execution':'UNVERIFIABLE'})
+                    stage='COMMITTING'
                     journal.commit(request['nonce'],receipt)
+                    stage='COMMITTED'
                     hook('COMMITTED',rf,intended)
                     return {**decision,'execution':'COMMITTED','receipt':receipt}
                 finally:journal.close()
         except (OSError,ValueError,TypeError,KeyError,AttributeError,UnicodeError,RecursionError,__import__('sqlite3').Error):
+            if stage!='NOT_STARTED':  # V03 ambiguous_failure
+                # A failure can follow a durable intent, partial write, or commit.
+                # DENY here is a refusal to certify/retry, never evidence of no write.
+                return {**refusal('EXECUTION_OUTCOME_UNCERTAIN','UNVERIFIABLE'),
+                        'execution':'RECOVERY_REQUIRED','failure_stage':stage,'retry_permitted':False}
             return refusal('DEPENDENCY_OR_IO_FAILURE','UNVERIFIABLE')

@@ -23,7 +23,7 @@ def main(out,no_mutations=False,profile='v0'):
     current=win.token_info();safe={k:v for k,v in current.items() if k!='user_sid'}
     record={'initial_token':safe,'policy':'non-elevated same-user token; existing linked or ephemeral LUA reduction','status':'NOT_COVERED','profile':profile,'stage':'INITIAL_TOKEN'}
     def save():log.write_bytes(json.dumps(record,indent=2,sort_keys=True).encode()+b'\n')
-    args=['tools/validate_v02.py' if profile=='v02' else 'tools/validate.py','--out',str(out)]+(['--no-mutations'] if no_mutations else [])
+    args=[{'v0':'tools/validate.py','v02':'tools/validate_v02.py','v03':'tools/validate_v03.py'}[profile],'--out',str(out)]+(['--no-mutations'] if no_mutations else [])
     if not current['elevated']:
         record['mode']='ALREADY_NON_ELEVATED';save()
         code=subprocess.run([sys.executable,'-B',*args],cwd=ROOT).returncode
@@ -53,6 +53,9 @@ def main(out,no_mutations=False,profile='v0'):
           +'sys.stderr=open('+repr(str(stderr))+",'w',encoding='utf-8',newline='\\n');"
           +'sys.argv='+repr(args)+';runpy.run_path('+repr(args[0])+",run_name='__main__')")
         argv=[sys.executable,'-B','-c',snippet]
+        command_line=subprocess.list2cmdline(argv)
+        record['command_utf16_units']=len(command_line.encode('utf-16-le'))//2
+        record['create_api']='CreateProcessWithTokenW';record['created_suspended']=False
         si=win.STARTUPINFO();si.cb=c.sizeof(si)
         create=win.api(win.a,'CreateProcessWithTokenW',w.BOOL,w.HANDLE,w.DWORD,w.LPCWSTR,w.LPWSTR,w.DWORD,win.P,w.LPCWSTR,c.POINTER(win.STARTUPINFO),c.POINTER(win.PROCESSINFO))
         names=['SystemRoot','WINDIR','SystemDrive','USERPROFILE','LOCALAPPDATA','APPDATA','ProgramFiles','ProgramData','COMSPEC','PATH']
@@ -62,7 +65,8 @@ def main(out,no_mutations=False,profile='v0'):
         record['stage']='CREATE_LIMITED_PROCESS';save()
         # No new logon/profile; parent already has its profile. API may require an
         # existing SeImpersonatePrivilege, but this launcher never enables it.
-        win.check(create(linked,0,sys.executable,c.create_unicode_buffer(subprocess.list2cmdline(argv)),4|0x08000000|0x400,env,str(ROOT),c.byref(si),c.byref(pi)))
+        win.check(create(linked,0,sys.executable,c.create_unicode_buffer(command_line),4|0x08000000|0x400,env,str(ROOT),c.byref(si),c.byref(pi)))
+        record['created_suspended']=True;record['stage']='VALIDATE_LIMITED_CHILD_TOKEN';save()
         observed=win.token_info(pi.hProcess)
         record['limited_process_token']={k:v for k,v in observed.items() if k!='user_sid'}
         record['same_user']=observed['user_sid']==current['user_sid'];save()
@@ -94,5 +98,5 @@ def main(out,no_mutations=False,profile='v0'):
 
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser();p.add_argument('--out',type=Path,required=True);p.add_argument('--no-mutations',action='store_true');p.add_argument('--profile',choices=['v0','v02'],default='v0');a=p.parse_args()
+    p=argparse.ArgumentParser();p.add_argument('--out',type=Path,required=True);p.add_argument('--no-mutations',action='store_true');p.add_argument('--profile',choices=['v0','v02','v03'],default='v0');a=p.parse_args()
     raise SystemExit(main(a.out,a.no_mutations,a.profile))

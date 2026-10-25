@@ -41,12 +41,16 @@ def authenticate(pipe, expected_sid, expected_user):
         win.check(win.api(win.a,'OpenThreadToken',w.BOOL,w.HANDLE,w.DWORD,w.BOOL,c.POINTER(w.HANDLE))(
             win.api(win.k,'GetCurrentThread',w.HANDLE)(),8,True,c.byref(token)))
         observed=token_details(token)
+        level=w.DWORD();size=w.DWORD()
+        win.check(win.get_token(token,9,c.byref(level),c.sizeof(level),c.byref(size)))
+        observed['impersonation_level']=level.value
     finally:
         if token: win.close(token)
         # Failure must terminate the serving process, never execute under the client.
         if not win.api(win.a,'RevertToSelf',w.BOOL)():
             win.api(win.k,'TerminateProcess',w.BOOL,w.HANDLE,w.UINT)(win.current(),91)
             raise RuntimeError('REVERT_FAILED')
+    if observed['impersonation_level']!=1:raise PermissionError('IPC_IMPERSONATION_LEVEL')  # V03 impersonation_level
     if (not observed['appcontainer'] or observed['elevated'] or observed['capability_count'] != 0
         or observed['integrity_sid'] != 'S-1-16-4096' or observed['user_sha256'] != expected_user
         or observed['appcontainer_sid'] != expected_sid):  # V02 caller_identity

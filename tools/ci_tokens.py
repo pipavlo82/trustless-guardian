@@ -22,12 +22,16 @@ def inspect(token):
     entries=c.cast(c.addressof(groups)+GROUPS.groups.offset,c.POINTER(SIDATTR))
     result['administrators_enabled']=any(win.sid_string(entries[i].sid)=='S-1-5-32-544' and bool(entries[i].attributes&4) for i in range(count))
     privs=query(token,3);count=c.cast(privs,c.POINTER(w.DWORD))[0]
-    entries=c.cast(c.addressof(privs)+PRIVS.privileges.offset,c.POINTER(PRIV));names=[]
+    entries=c.cast(c.addressof(privs)+PRIVS.privileges.offset,c.POINTER(PRIV));names=[];attributes={}
     lookup=win.api(win.a,'LookupPrivilegeNameW',w.BOOL,w.LPCWSTR,c.POINTER(LUID),w.LPWSTR,c.POINTER(w.DWORD))
     for i in range(count):
         size=w.DWORD(128);buf=c.create_unicode_buffer(128);win.check(lookup(None,c.byref(entries[i].luid),buf,c.byref(size)))
         names.append(buf.value)
-    result['present_privileges']=sorted(names);return result
+        attributes[buf.value]={'attributes':int(entries[i].attributes),'enabled':bool(entries[i].attributes&2)}
+    result['present_privileges']=sorted(names);result['privilege_attributes']=attributes
+    for name,kind in (('token_type',8),('session_id',12),('elevation_type',18),('has_restrictions',21)):
+        result[name]=int(c.cast(query(token,kind),c.POINTER(w.DWORD))[0])
+    return result
 
 
 def reduced_token(original):
