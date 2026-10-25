@@ -6,7 +6,7 @@ from pathlib import Path
 import subprocess
 import sys
 import time
-from mutation_spec import MUTATIONS, classify
+from mutation_spec import MUTATIONS, classify, divergence
 
 HERE = Path(__file__).resolve().parent
 
@@ -32,7 +32,10 @@ def run(out, runtime):
         restored_file = out/(name+'-mutated')/'physical-restoration.json'
         applied = applied_file.exists() and json.loads(applied_file.read_bytes())['applied']
         exact = restored_file.exists() and json.loads(restored_file.read_bytes())['exact']
-        result = {'mutation':name,'target':target,'classification':classify(base,changed,restored,target,exact,applied),
+        observation_file = out/(name+'-mutated')/'observations.json'
+        observed = json.loads(observation_file.read_bytes()) if observation_file.exists() else None
+        result = {'mutation':name,'target':target,'classification':classify(base,changed,restored,target,exact,applied,observed),
+                  'unsafe_behavior_observed':divergence(observed,target),
                   'physical_restoration':exact,'target_changed':bool(changed and changed['checks'].get(target) is False)}
         results.append(result); print(json.dumps(result),flush=True); base = restored
         write(out/'report.json', {'population':'v06-real-model-tools','mutations':results,'counts':dict(Counter(r['classification'] for r in results)),'commands':commands})

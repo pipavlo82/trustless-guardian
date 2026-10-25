@@ -43,6 +43,11 @@ called an OpenAI API function tool or that the native Hermes Nous provider worke
 The trusted host/relay can fabricate responses and remains inside the trust
 boundary. The evidence oracle checks consistency, not external provider attestation.
 
+Completion IDs, `created: 0`, and zero-valued usage fields in the compatibility
+envelope are adapter placeholders. They are not provider timestamps or billing
+measurements. The original Codex JSONL is retained separately, including its
+reported usage. No provider signature or remote execution attestation is claimed.
+
 `guardian_direct_probe` is an adversarial laboratory tool. It can only attempt
 write/delete/rename/extended-path write against the provisioner's synthetic
 source. It supplies no privileged handles. Its return value alone is insufficient:

@@ -112,5 +112,20 @@ class V06(unittest.TestCase):
     def test_mutation_missing_edit_is_not_covered(self):
         self.assertEqual(mutations.classify(None,None,None,'bypass',False,False),'NOT_APPLIED')
 
+    def test_failed_predicate_without_unsafe_bytes_is_not_kill(self):
+        changed = self.check_record(self.observed)
+        changed['checks']['bypass'] = False
+        self.assertEqual(mutations.classify({'passed':True},changed,{'passed':True},'bypass',True,True,self.observed),'CONTROL_BROKEN')
+        self.assertFalse(mutations.divergence(None,'bypass'))
+
+    def test_mutation_requires_actual_postwrite_contradiction(self):
+        v=copy.deepcopy(self.observed)
+        self.assertFalse(mutations.divergence(v,'recovery'))
+        result=v['controls']['RECOVERY']['tool_observations'][0]['result']
+        result['execution']='NOT_EXECUTED';result['failure_stage']='WRITTEN'
+        self.assertTrue(mutations.divergence(v,'recovery'))
+        v['controls']['RECOVERY']['after']['source']['sha256']='0'*64
+        self.assertFalse(mutations.divergence(v,'recovery'))
+
 
 if __name__ == '__main__': unittest.main()
