@@ -110,5 +110,7 @@ semantic-output SHA-256 is identical across original/fresh/normal/repeat/optimiz
 
 The two mutation runs exercise the same 15 physical variants; they are not
 reported as 30 distinct mutants. Raw records are in `evidence/fresh-replay-v0.zip`.
-Publication-only evidence/document updates after the cited commits do not change
-the tested implementation. Hosted CI is reported separately at its exact HEAD.
+The publication commit `3c2ae0d` changed only evidence/documentation after that
+replay. Subsequent CI-entry and diagnostic changes, and the first failed hosted
+Windows runs, are described separately in [CI portability](CI_PORTABILITY.md).
+Hosted results must always be attributed to their exact HEAD.

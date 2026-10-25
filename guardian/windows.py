@@ -155,7 +155,8 @@ class Container:
                     terminate(pi.hProcess,97);raise c.WinError(c.get_last_error())
                 token=token_info(pi.hProcess)
                 if not token['appcontainer'] or token['appcontainer_sid'] != self.principal or token['elevated']:
-                    terminate(pi.hProcess,99);raise RuntimeError('agent token isolation not established')
+                    diagnostic={key:value for key,value in token.items() if key!='user_sid'}
+                    terminate(pi.hProcess,99);raise RuntimeError('agent token isolation not established: '+str(diagnostic))
                 if resume(pi.hThread)==0xffffffff:raise c.WinError(c.get_last_error())
                 if wait(pi.hProcess,timeout*1000)!=0:
                     terminate(pi.hProcess,98);raise TimeoutError('agent process timeout')

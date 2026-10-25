@@ -76,6 +76,7 @@ logs remain for inspection. Never point the broker at existing user resources.
 - [Source audit and exact pins](research/SOURCE_AUDIT.md)
 - [Integration plan](docs/INTEGRATION_PLAN.md)
 - [Evidence and replay](evidence/README.md)
+- [Hosted CI portability and preserved failures](research/CI_PORTABILITY.md)
 - [Limitations](research/LIMITATIONS.md) and [independent review checklist](docs/REVIEW_CHECKLIST.md)
 
 `main` contains the foundation. Experimental implementation stays on

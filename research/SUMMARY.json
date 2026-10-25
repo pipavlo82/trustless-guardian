@@ -4,6 +4,10 @@
       "members": 2674,
       "sha256": "12470bea792e7c732fc5c10492a4a6865bbd949d610e809da7c490a80c2013d5"
     },
+    "hosted-ci-initial-failure.zip": {
+      "members": 420,
+      "sha256": "2b47ff570757319917aa22a693864603a0cfc7f269c914dd623052ab87033662"
+    },
     "local-run-v0.zip": {
       "members": 1345,
       "sha256": "9aaac972c3c54f0bd784e801f7dc31f046bf6e7d417b8e8a6b959fd3f8ea0255"
@@ -15,6 +19,16 @@
   "evidence_tamper_refused": true,
   "external_execution": "UNVERIFIABLE",
   "foundation_commit": "aaa941cf3566a6931cba539e4d8147d940459171",
+  "hosted_ci_initial": {
+    "detail": "research/CI_PORTABILITY.md",
+    "head": "3c2ae0d67be725858139ff4e164d07d21abbb5c1",
+    "mutation_counts": {
+      "CONTROL_BROKEN": 15,
+      "KILLED": 0
+    },
+    "portable": "PASS",
+    "windows": "NOT_COVERED"
+  },
   "mutations": {
     "normal": {
       "CONTROL_BROKEN": 0,

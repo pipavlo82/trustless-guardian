@@ -39,3 +39,7 @@ and member hashes. The original archive remains byte-identical.
 The local archive SHA-256 is
 `9aaac972c3c54f0bd784e801f7dc31f046bf6e7d417b8e8a6b959fd3f8ea0255`.
 See [machine summary](../research/SUMMARY.json) for both archive identities.
+
+`hosted-ci-initial-failure.zip` separately preserves the initial hosted Windows
+token-establishment failure and broken controls. It does not supersede the local
+success archive or count as a successful OS campaign.
