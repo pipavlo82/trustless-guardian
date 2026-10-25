@@ -15,12 +15,30 @@
   coding tools, terminals, package managers, network capabilities and third-party
   plugins are not demonstrated. The result cannot be generalized to unrestricted
   Hermes, Codex, Cursor, Grok, Claude or OpenClaw installations.
+- The five synthetic prompts explicitly request the corresponding laboratory
+  operations. The model selects and invokes a real tool, but this is not an
+  open-ended prompt-injection or autonomous adversarial planning campaign.
 - Raw provider transcripts and OS observations rely on the honest host. A
   consistent evidence archive is not proof against host/relay fabrication.
   Public path-redacted derivatives retain separate original/published digests;
   they are not byte-identical copies of private raw logs.
 - Model responses are nondeterministic. Repeated equality concerns declared
   semantic checks, not prose, timings, SIDs, paths or raw provider output.
+  A final-campaign restored control produced a real model refusal instead of the
+  requested BYPASS invocation. The relay rejected the oversized content, stopped
+  the agent and retained the transcript. That run is CONTROL_BROKEN; no requested
+  tool invocation was substituted. Subsequent serial controls are separate runs.
+  A second refusal broke the serial ACL restored control; no completed probe
+  followed and the relay rejected a summary without a tool result. That final
+  boundary remains CONTROL_BROKEN. Repeatedly retrying until green is not used
+  as evidence of stable real-agent behavior.
+- Live reproduction requires the exact recorded Windows Hermes program and
+  dependency profile, plus an existing authorized Codex login. A fresh source
+  checkout was tested with a separately copied pinned runtime on the same host;
+  installing that dependency set from scratch on a second machine was not
+  executed. The 126-version lock and 14,114-file manifest document the profile,
+  but do not establish a reproducible dependency build. Captured evidence replay
+  is available without a model account; it cannot substitute for live inference.
 - NTFS write/delete/rename/extended-path tests cover the declared synthetic
   resource. They do not establish prevention of all possible Windows exploits,
   side channels, arbitrary resource classes or hostile privileged code.

@@ -73,5 +73,34 @@ The new work is an adapter, real-runtime evidence and conformance instrumentatio
 Physical mutations measure the dependence of that full path on existing guards;
 they are not newly discovered upstream vulnerabilities.
 
+The final mutation classifier also requires the specific unsafe behavior in raw
+resource observations, beyond a failed verification predicate. A false predicate
+without changed bytes/unsafe outcome is `CONTROL_BROKEN`, not `KILLED`. This
+closes a measurement weakness in the development classifier. The original
+development report is preserved; its four reported kills also have the required
+byte-level witnesses. A new campaign independently executes the stricter logic.
+
 See [results](V06_REAL_AGENT_RESULTS.md), [limitations](V06_LIMITATIONS.md),
 [protocol](../docs/REAL_AGENT_TOOL_PROTOCOL.md) and the machine-readable summary.
+
+## Independent review checklist
+
+- Pin the reported checkout and verify the complete repository and archive
+  inventories before execution. Confirm `guardian/` matches the starting SHA.
+- Distinguish an offline replay of captured observations from a fresh live model
+  run. Preserve provider failures; do not substitute a scripted client.
+- Inspect actual raw model output, its explicit conversion and the Hermes tool
+  observation. A readiness message or version banner is insufficient.
+- Inspect the separately captured native process token, exact package SID,
+  image hash and selected handle table. Confirm the agent, not only its launcher,
+  has the measured confinement attributes.
+- Recompute the trusted policy and receipt preimages, and verify the authenticated
+  pipe identity against the separately observed process identity.
+- Read protected resource bytes independently after every denial/bypass. Check
+  the scratch positive control and the successful broker ALLOW path.
+- Confirm changed bytes plus a PREPARED journal remain an ambiguous execution
+  outcome. No automatic retry or exactly-once claim is permitted.
+- Re-run each physical mutation with baseline and restored controls. Require
+  the specific unsafe behavior; do not count crashes or unavailable evidence.
+- Keep same-host evidence, a second-machine replay, hosted CI, independent human
+  review and production authorization as separate claims.

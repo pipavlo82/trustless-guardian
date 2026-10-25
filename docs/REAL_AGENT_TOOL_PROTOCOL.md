@@ -56,3 +56,9 @@ the separate host observer reads the actual bytes and file identity afterwards.
 No automatic retry follows `UNVERIFIABLE / RECOVERY_REQUIRED`. A durable PREPARED
 row can remain after a post-write failure; that is an unresolved operation, not
 proof of non-execution or an exactly-once guarantee.
+
+The independent oracle is a fixed five-scenario laboratory verifier. It checks
+those declared model/tool, policy/request/receipt and native post-state bindings;
+it is not a general authorization engine for caller-designed policies. Supporting
+another action, policy language or resource class requires a separately reviewed
+verification contract and new behavioral controls.

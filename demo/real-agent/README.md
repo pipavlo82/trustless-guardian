@@ -25,6 +25,25 @@ python -B -O -m unittest discover -s tests -v
 python -B tools/integrity.py
 ```
 
+The orchestration command that records normal/repeat/optimized commands, raw
+stdout/stderr, source hashes and semantic comparison is:
+
+```powershell
+python -B tools/validate_v06.py --runtime build/guardian-lab-hermes-runtime --out build/full-v06
+python -B demo/real-agent/mutations.py --runtime build/guardian-lab-hermes-runtime --out build/mutations-v06
+python -B tools/validate_v06.py --portable --out build/portable-v06
+```
+
+The physical mutation campaign uses one baseline and a mutated/restored pair
+for each of four guards: nine full model-driven runs. It consumes existing
+provider quota. Missing or crashed output is never a semantic mutation kill.
+Historical full regressions are separate commands, preserving their populations:
+
+```powershell
+python -B tools/validate_v04.py --no-mutations --out build/historical-v04
+python -B tools/validate_v05.py --no-mutations --out build/historical-v05
+```
+
 Use a new output directory for every run. Runtime preparation requires the exact
 source pin and a clean source tree. All writable data and ACL changes stay in
 new `build/guardian-lab-*` directories. No real project, personal file, wallet or

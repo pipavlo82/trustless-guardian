@@ -15,8 +15,9 @@ independent history calculation. Codex CLI 0.162.0-alpha.17.2 provides genuine
 
 The first complete successful development run recorded five real model-driven
 scenarios and separately verified token, model/tool, broker, receipt and byte
-bindings. Subsequent frozen-checkout and mutation results are recorded below
-when executed; development observations are not substituted for those results.
+bindings. A clean checkout at `18b3dec7aa6f2236bd93b75f8778c22b5d266d59`
+subsequently reproduced all five in normal, repeat and Python `-O` modes.
+Development observations are not substituted for these clean-checkout results.
 
 | Scenario | Observed finite result |
 | --- | --- |
@@ -46,6 +47,46 @@ after the independent bytes showed the write; v0.4 repeat `same_bytes` failed
 broker startup. These are broken controls, not successful denials. Original
 reports remain intact. Timing/load is a hypothesis, not a proven root cause.
 
+Both targeted serial controls subsequently passed at the unchanged starting SHA.
+This does not make the earlier aggregate green. The v0.5 scripted regression also
+passed all five groups, six native access-denial attempts per mode, and semantic
+determinism in normal/repeat/optimized runs. These scripted results remain
+separate from the actual v0.6 model-driven results.
+
+## Executed test matrix
+
+| Population | Normal | Repeat | Python -O | Qualification |
+| --- | --- | --- | --- | --- |
+| Starting baseline unit suite | 33/33 | 33/33 | 33/33 | Starting SHA, unchanged |
+| v0 policy/resource scenarios | 17/17 | 17/17 | 17/17 | Actual Windows laboratory |
+| v0.2 adversarial scenarios | 41/41 | 41/41 | 41/41 | Includes IPC and replay boundaries |
+| v0.3 scenarios | 20/21 | 21/21 | 21/21 | Normal positive control lost IPC response |
+| v0.4 scenarios | 15/15 | 14/15 | 15/15 | Repeat broker-start control failed |
+| v0.5 scripted OS groups | 5/5 | 5/5 | 5/5 | Scripted; no real-agent promotion |
+| v0.6 real-model groups at 18b3dec7 | 5/5 | 5/5 | 5/5 | Actual Hermes dispatch, provider inference, native observations |
+| v0.6 direct OS attempts at 18b3dec7 | 4/4 denied | 4/4 denied | 4/4 denied | Scratch write positive and independently unchanged bytes |
+| Final portable unit suite at 04120d6e | 50/50 | 50/50 | 50/50 | Portable tests are not OS enforcement |
+
+The three clean real-agent modes took 123.76, 125.49 and 126.54 seconds on this
+host, excluding the 17.57-second portable prerequisite. These are local elapsed
+measurements, not a performance claim. Their declared semantic checks are
+byte-identical; raw model prose, nonces, times and package identities are not.
+An earlier clean `5639d203decf09b4790ed768d989ad6118cc5052` replay also passed
+all three modes and is preserved separately.
+
+Only mutation classification, its campaign driver and two unit controls changed
+between the three-mode agent replay and `04120d6e2e694e05106607e33eeae2a3af2bfb43`.
+The agent, transport, independent oracle and all Guardian core bytes match the
+three-mode replay. The final mutation campaign executes that later exact SHA.
+No historical mutation population is combined with the new population.
+
+The final nine-run mutation campaign reports **2 KILLED / 2 CONTROL_BROKEN**;
+the separate five-run targeted replay reports **1 KILLED / 1 CONTROL_BROKEN**.
+Both have zero SURVIVED, CRASHED or NOT_APPLIED. Actual model refusals broke
+restored BYPASS controls, so these are not all-green campaigns. No scripted
+invocation was substituted. See the [mutation report](V06_MUTATION_REPORT.md)
+for the exact populations and the remaining ACL-control limitation.
+
 Starting exact-head CI push `40223495590` and PR `40223498339` had successful
 portable jobs and failed Windows jobs. Actual failed logs report a created and
 resumed limited-token child but `WAIT_FOR_PYTHON_STARTUP` /
@@ -57,6 +98,6 @@ Reproduction: [demo commands](../demo/real-agent/README.md). The full runner is
 Physical model-driven controls:
 `python -B demo/real-agent/mutations.py --runtime build/guardian-lab-hermes-runtime --out build/mutations-v06`.
 
-Recommendation scope: continue research and independent replay; production
-authorization and cross-machine portability remain unsupported. See
+Recommendation: **ITERATE**. The narrow real-agent laboratory path is established;
+production authorization and cross-machine portability remain unsupported. See
 [limitations](V06_LIMITATIONS.md) and [security analysis](V06_SECURITY_REPORT.md).

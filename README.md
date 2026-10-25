@@ -1,4 +1,4 @@
-> **v0.6 — real Hermes laboratory integration:** [demo and commands](demo/real-agent/README.md), [results](research/V06_REAL_AGENT_RESULTS.md), [tool protocol](docs/REAL_AGENT_TOOL_PROTOCOL.md), [security report](research/V06_SECURITY_REPORT.md), [limitations](research/V06_LIMITATIONS.md).
+> **v0.6 — real Hermes laboratory integration:** [demo and commands](demo/real-agent/README.md), [results](research/V06_REAL_AGENT_RESULTS.md), [machine summary](research/V06_SUMMARY.json), [mutation report](research/V06_MUTATION_REPORT.md), [tool protocol](docs/REAL_AGENT_TOOL_PROTOCOL.md), [security report](research/V06_SECURITY_REPORT.md), [limitations](research/V06_LIMITATIONS.md).
 >
 > A genuine model selects a tool; the native Hermes agent loop executes it inside a measured AppContainer. Guardian independently authorizes the request, and a separate observer checks real resource bytes. This is a narrow local experiment through an explicit Codex CLI inference relay. It is not native Nous authentication, arbitrary agent containment or production authorization. Hosted Windows enforcement remains CI_BLOCKED; the full report preserves historical and development failures.
 

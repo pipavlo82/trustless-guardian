@@ -31,6 +31,11 @@ fallback providers are disabled. The native AIAgent conversation and registry
 dispatch execute inside the observed AppContainer; this is not a scripted
 Python replacement described as an agent.
 
+This integration uses the pinned Python AIAgent API and its private client
+replacement hook. It is not an installed Hermes CLI plugin or a stable upstream
+transport contract. A Hermes upgrade requires renewed source review and replay;
+the current source/runtime pins intentionally reject an unreviewed replacement.
+
 Runtime preparation copies only program/dependency files into a new disposable
 directory. Installed profiles, `.env`, auth stores and user memory are excluded.
 The copied Python 3.11 runtime and broker Python 3.12 runtime have separate module
