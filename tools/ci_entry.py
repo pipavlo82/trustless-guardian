@@ -23,7 +23,7 @@ def main(out,no_mutations=False,profile='v0'):
     current=win.token_info();safe={k:v for k,v in current.items() if k!='user_sid'}
     record={'initial_token':safe,'policy':'non-elevated same-user token; existing linked or ephemeral LUA reduction','status':'NOT_COVERED','profile':profile,'stage':'INITIAL_TOKEN'}
     def save():log.write_bytes(json.dumps(record,indent=2,sort_keys=True).encode()+b'\n')
-    args=[{'v0':'tools/validate.py','v02':'tools/validate_v02.py','v03':'tools/validate_v03.py'}[profile],'--out',str(out)]+(['--no-mutations'] if no_mutations else [])
+    args=[{'v0':'tools/validate.py','v02':'tools/validate_v02.py','v03':'tools/validate_v03.py','v04':'tools/validate_v04.py'}[profile],'--out',str(out)]+(['--no-mutations'] if no_mutations else [])
     if not current['elevated']:
         record['mode']='ALREADY_NON_ELEVATED';save()
         code=subprocess.run([sys.executable,'-B',*args],cwd=ROOT).returncode
@@ -98,5 +98,5 @@ def main(out,no_mutations=False,profile='v0'):
 
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser();p.add_argument('--out',type=Path,required=True);p.add_argument('--no-mutations',action='store_true');p.add_argument('--profile',choices=['v0','v02','v03'],default='v0');a=p.parse_args()
+    p=argparse.ArgumentParser();p.add_argument('--out',type=Path,required=True);p.add_argument('--no-mutations',action='store_true');p.add_argument('--profile',choices=['v0','v02','v03','v04'],default='v0');a=p.parse_args()
     raise SystemExit(main(a.out,a.no_mutations,a.profile))

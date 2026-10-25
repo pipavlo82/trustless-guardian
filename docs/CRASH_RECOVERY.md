@@ -1,3 +1,17 @@
+# v0.4 execution-outcome correction
+
+The broker now catches every ordinary Exception after entering execution, not
+only a selected exception tuple. Its stage guard preserves uncertainty. The
+separate dispatch boundary also preserves uncertainty if a backend raises outside
+that guard. Termination or missing output produces no fabricated successful
+response. Unknown outcomes never authorize automatic retries.
+
+A restart seeing PREPARED / RECOVERY_REQUIRED now returns execution=RECOVERY_REQUIRED,
+status=UNVERIFIABLE, retry_permitted=false. The old recovery-gate response mixed an
+ambiguous reason with NOT_EXECUTED, which could misstate a prior same-nonce write.
+Historical ABORTED retains its limited observed-state meaning; file and SQLite
+still are not atomic. [Exact fault boundaries](../research/V04_EXECUTION_OUTCOME_AUDIT.md).
+
 # v0.3 recovery refinement
 
 The four durable states remain PREPARED / COMMITTED / ABORTED / RECOVERY_REQUIRED.

@@ -57,7 +57,7 @@ class HardenedBroker:
                 journal=Journal(self.root/'journal/operations.sqlite')
                 try:
                     rows=journal.recover(before,rf.identity,cfg['policy_sha256'])
-                    if any(r['state'] in ('PREPARED','RECOVERY_REQUIRED') for r in rows):return refusal('RECOVERY_REQUIRED','UNVERIFIABLE')  # V02 recovery_gate
+                    if any(r['state'] in ('PREPARED','RECOVERY_REQUIRED') for r in rows):return {**refusal('RECOVERY_REQUIRED','UNVERIFIABLE'),'execution':'RECOVERY_REQUIRED','retry_permitted':False}  # V02 recovery_gate
                     used={r['nonce'] for r in rows}
                     decision=evaluate(request,policy,principal,now,digest(before),used)
                     if decision['decision']!='ALLOW':return {**decision,'execution':'NOT_EXECUTED'}  # V02 enforcement
@@ -85,7 +85,7 @@ class HardenedBroker:
                     hook('COMMITTED',rf,intended)
                     return {**decision,'execution':'COMMITTED','receipt':receipt}
                 finally:journal.close()
-        except (OSError,ValueError,TypeError,KeyError,AttributeError,UnicodeError,RecursionError,__import__('sqlite3').Error):
+        except Exception:  # V04 ordinary_exception_boundary
             if stage!='NOT_STARTED':  # V03 ambiguous_failure
                 # A failure can follow a durable intent, partial write, or commit.
                 # DENY here is a refusal to certify/retry, never evidence of no write.

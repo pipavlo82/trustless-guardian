@@ -1,3 +1,15 @@
+# v0.4 audit update
+
+Experimental execution-outcome repairs and a controlled real Windows
+impersonation witness are on the research branch. Start with the
+[gap audit](research/V04_SECURITY_GAP_AUDIT.md),
+[results](research/V04_CONFORMANCE_RESULTS.md),
+[mutations](research/V04_MUTATION_REPORT.md),
+[exact replay instructions](research/V04_INDEPENDENT_REPLAY.md), and
+[independent Windows protocol](docs/WINDOWS_REPLAY_PROTOCOL.md).
+Hosted enforcement remains CI_BLOCKED until actual execution is established.
+No production or universal containment claim. Prior reports below remain historical.
+
 # Trustless Guardian
 
 An experimental enforcement layer for AI-agent actions, with a reproducible

@@ -1,3 +1,17 @@
+# v0.4 additional boundary
+
+Unexpected ordinary exceptions after execution begins and ambiguous restart
+responses must preserve UNVERIFIABLE / RECOVERY_REQUIRED. The new dispatcher is
+an execution-outcome boundary, not a verifier or authority. A native receipt or
+authentication success cannot select policy or grant a write. See
+[gap audit](../research/V04_SECURITY_GAP_AUDIT.md).
+
+The new same-AppContainer pipe diagnostic supplies actual level2/3 thread tokens
+and tests the explicit identification-only guard. It does not show those tokens
+are reachable across the normal distinct agent/broker AppContainer principals.
+Historical v03 remains3 KILLED/1 SURVIVED; production-profile reachability is
+NOT_COVERED. Independent second-machine review is also NOT_COVERED.
+
 # v0.3 boundary status
 
 Real local Windows AppContainer/NTFS witnesses remain LABORATORY_VERIFIED for the
