@@ -1,3 +1,49 @@
+# v02 measured results
+
+Starting commit: `7c43ff437d15cc29bc61f85683ed0fb091dff0be`. Main remains `aaa941cf3566a6931cba539e4d8147d940459171`.
+Full fresh-checkout code replay: `d6ee623eecaeffe6aaf079986af84afc2a2d3660`.
+Later handle-witness addition is tested separately and changes no broker/IPC/
+recovery/policy implementation. Final source identities are checked against the
+published tree; raw commands and per-file hashes are in the v02 evidence archive.
+
+| Executed group | Normal | Repeat | Python -O |
+| --- | --- | --- | --- |
+| Current unit suite (14 unchanged v0 + 6 new) | 20 | 20 | 20 |
+| Existing v0 policy/resource scenarios | 17/17 | 17/17 | 17/17 |
+| v02 adversarial cases | 41/41 | 41/41 | 41/41 |
+| Inheritable host-handle refusal | PASS | PASS | PASS |
+| Semantic output comparison | identical | identical | identical |
+
+Semantic SHA-256: `bf942e4341ceac799d382be75dfa0cb463da27cf79aae4ebc102899b74cea6f0`.
+The v02 matrix includes nine independently observed agent direct denials, five
+broker scope denials, four locked TOCTOU operations, actual file symlink and
+hardlink controls, authenticated/unauthorized clients, envelope substitution,
+concurrent nonce reuse, restart replay, unknown/missing journal and four crash
+stages. Every direct operation gets a host byte snapshot. These are finite
+observations, not universal OS confinement or production claims.
+
+Historical baseline was replayed before edits: 14 unit tests/mode, 17 scenarios,
+15 physical mutants killed, all four evidence archives and 47 inventory entries
+valid. The current regression run additionally discovers the six new unit tests;
+it does not turn them into historical v0 results.
+
+New physical population: 11 KILLED / 0 SURVIVED /
+0 CRASHED / 0 NOT_APPLIED /
+0 CONTROL_BROKEN. The same population was replayed under
+`-O`; do not double-count it. Existing v0 15/15 remains a separate population.
+
+The native ReceiptOS probe is unavailable because its read-only checkout lacks
+`@noble/curves`. VECA evaluate/admit executes and refuses; the native proof binary
+and prepared crypto dependency tree are absent, so no complete native verification
+is claimed. Native statuses are preserved. All evidence-to-action integration is
+NOT_COVERED. No six-field RVR receipt or upstream repository was changed.
+
+Hosted CI must be read from the exact published commit. Local replay is independent
+of the broker process and uses a separate oracle implementation, but is not an
+independent human/organization review. Recommendation: **ITERATE**.
+
+## Historical v0 report (preserved)
+
 # Guardian v0 conformance results
 
 Initial foundation commit: `aaa941cf3566a6931cba539e4d8147d940459171`.

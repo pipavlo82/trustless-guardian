@@ -1,3 +1,39 @@
+# v02 CI identity recovery
+
+The previous WinError 1312 failure is preserved below and in immutable v0 archives.
+v02 records the exact failing API stage. It first tries the existing linked limited
+token. If its query specifically returns 1312, it may derive a new ephemeral token
+from the existing runner token with `CreateRestrictedToken(DISABLE_MAX_PRIVILEGE |
+LUA_TOKEN)` and lower **only that new token's** integrity label to medium.
+
+Before execution it requires the same user, no enabled Administrators group,
+non-elevation, medium integrity, no AppContainer on the trusted orchestrator and
+no remaining privilege except SeChangeNotifyPrivilege. It launches suspended and
+checks the actual child's token again before resume. The confined agent and broker
+still independently require their exact AppContainer SIDs, low integrity and zero
+capabilities. No predicate is relaxed to obtain green checks.
+
+No Windows account, new logon, persistent runner, UAC/security policy change or
+privilege-enabling API is used. CreateProcessWithTokenW may require an already
+available impersonation privilege; the launcher does not enable or obtain it.
+Any unsuitable/missing token or launch failure remains NOT_COVERED and exits nonzero.
+Portable CI is separate and never certifies OS enforcement.
+
+The local reduction probe observed only SeChangeNotifyPrivilege remaining and an
+unchanged parent token. That probe started non-elevated; it does not establish
+hosted elevated-runner compatibility. Exact published-head Actions results and
+raw launch metadata are the authority for that separate claim.
+
+Alternatives considered: a pre-existing non-elevated interactive context (used
+locally); an explicitly provisioned test account or dedicated hardened self-hosted
+runner (not created/registered; would require approval). A broad elevated-agent
+fallback or a green unavailable-OS skip is not permitted.
+
+Sources: [CreateRestrictedToken](https://learn.microsoft.com/en-us/windows/win32/api/securitybaseapi/nf-securitybaseapi-createrestrictedtoken)
+and [CreateProcessWithTokenW](https://learn.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-createprocesswithtokenw).
+
+## Historical v0 hosted CI (preserved)
+
 # Hosted CI portability
 
 The first push and PR runs at `3c2ae0d67be725858139ff4e164d07d21abbb5c1`

@@ -1,5 +1,44 @@
 # Evidence and reproduction
 
+## v02 additive evidence
+
+`v02-local-replay.zip` and its companion inventory preserve the pre-change v0
+baseline, full fresh replay at `d6ee623eecaeffe6aaf079986af84afc2a2d3660`, the
+same 11-mutant campaign under `-O`, and integrated handle-witness replay at
+`3eb3a15a68b4dc00b07a0ef2e8d04320888f52e3`. Raw process outputs, exit codes,
+per-attempt host byte observations, native probe failures, source correspondence
+and development failures are separate members. Source code hashes corroborate
+the final unchanged enforcement modules. A later CI-dispatch fix affects only
+the elevated launcher's choice of validator; its expression controls are included.
+
+Archive SHA-256:
+`6c91855b06983f4d7bb8e28a933f5aaed05ea43f7cd210bc066eadf74ba05922`.
+The companion `v02-final-corroboration.json` records final source hashes and a
+separate replay of the CI-dispatch controls with full literal subprocess argv
+(the archive's first dispatch report used an abbreviated description in argv).
+
+The archive is additive: all four v0 archives stay byte-identical. Public
+development-probe derivatives redact personal SIDs and record both original and
+derivative hashes; original local files are retained. Package SIDs are disposable.
+The intermediate development run made while source was changing is not used as
+exact-revision evidence. Normal and optimized runs of the same mutant population
+are not separate kills. CI execution must be verified at its exact published HEAD.
+
+```powershell
+python -B tools/evidence.py verify evidence/v02-local-replay.zip
+python -B tools/integrity.py
+python -B tools/validate_v02.py --out build/replay-v02
+python -B -O tools/v02_mutations.py --out build/replay-v02-optimized-mutants
+python -B -O tools/handle_control.py --out build/replay-v02-optimized-handle
+```
+
+See [machine summary](../research/V02_SUMMARY.json),
+[measured results](../research/CONFORMANCE_RESULTS.md), and
+[limitations](../research/LIMITATIONS.md). A hosted token failure remains a failed
+OS gate; portable tests are never evidence of Windows confinement.
+
+## Historical v0 evidence (preserved)
+
 `local-run-v0.zip` preserves the original local normal/repeat/optimized logs,
 the first 15-mutation campaign, selected upstream checks (including failed
 attempts), original prototype tests and source-preservation hashes. Its companion

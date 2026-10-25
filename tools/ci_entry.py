@@ -51,7 +51,7 @@ def main(out,no_mutations=False,profile='v0'):
         stdout=ROOT/'build/ci-launch.stdout';stderr=ROOT/'build/ci-launch.stderr'
         snippet=('import sys,runpy;sys.stdout=open('+repr(str(stdout))+",'w',encoding='utf-8',newline='\\n');"
           +'sys.stderr=open('+repr(str(stderr))+",'w',encoding='utf-8',newline='\\n');"
-          +'sys.argv='+repr(args)+";runpy.run_path('tools/validate.py',run_name='__main__')")
+          +'sys.argv='+repr(args)+';runpy.run_path('+repr(args[0])+",run_name='__main__')")
         argv=[sys.executable,'-B','-c',snippet]
         si=win.STARTUPINFO();si.cb=c.sizeof(si)
         create=win.api(win.a,'CreateProcessWithTokenW',w.BOOL,w.HANDLE,w.DWORD,w.LPCWSTR,w.LPWSTR,w.DWORD,win.P,w.LPCWSTR,c.POINTER(win.STARTUPINFO),c.POINTER(win.PROCESSINFO))

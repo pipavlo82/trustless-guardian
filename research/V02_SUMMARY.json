@@ -1,0 +1,52 @@
+{
+  "archive_sha256": "6c91855b06983f4d7bb8e28a933f5aaed05ea43f7cd210bc066eadf74ba05922",
+  "branch": "research/guardian-enforcement-v0",
+  "broker_identity": "separate AppContainer SID; same underlying TokenUser",
+  "crash_recovery": "bounded ambiguity gate; no transactional atomicity",
+  "current_unit_tests_per_mode": 20,
+  "external_execution": "UNVERIFIABLE",
+  "full_replay_code_commit": "d6ee623eecaeffe6aaf079986af84afc2a2d3660",
+  "handle_inheritance_control": "LABORATORY_VERIFIED",
+  "historical_campaigns_preserved_separately": true,
+  "hosted_ci": "See exact-head GitHub checks and external delivery report; no result inferred from local replay",
+  "independent_human_review": "NOT_COVERED",
+  "integrated_handle_replay_commit": "3eb3a15a68b4dc00b07a0ef2e8d04320888f52e3",
+  "ipc": "LABORATORY_VERIFIED",
+  "main": "aaa941cf3566a6931cba539e4d8147d940459171",
+  "modes": [
+    "normal",
+    "repeat",
+    "optimized"
+  ],
+  "native_integration": "NOT_COVERED",
+  "optimized_physical_mutations": {
+    "CONTROL_BROKEN": 0,
+    "CRASHED": 0,
+    "KILLED": 11,
+    "NOT_APPLIED": 0,
+    "SURVIVED": 0
+  },
+  "production_ready": false,
+  "recommendation": "ITERATE",
+  "schema": "guardian.v02.summary",
+  "semantic_sha256": "bf942e4341ceac799d382be75dfa0cb463da27cf79aae4ebc102899b74cea6f0",
+  "starting_head": "7c43ff437d15cc29bc61f85683ed0fb091dff0be",
+  "unsupported": [],
+  "v02_cases_per_mode": 41,
+  "v02_physical_mutations": {
+    "CONTROL_BROKEN": 0,
+    "CRASHED": 0,
+    "KILLED": 11,
+    "NOT_APPLIED": 0,
+    "SURVIVED": 0
+  },
+  "v0_baseline_policy_cases_per_mode": 17,
+  "v0_baseline_unit_tests_per_mode": 14,
+  "v0_physical_mutations": {
+    "CONTROL_BROKEN": 0,
+    "CRASHED": 0,
+    "KILLED": 15,
+    "NOT_APPLIED": 0,
+    "SURVIVED": 0
+  }
+}

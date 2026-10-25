@@ -25,6 +25,12 @@ The same base TokenUser remains underneath both. This is OS-principal separation
 not separate Windows accounts, separate humans, or independence from the host.
 The broker's token is checked before resuming it and again inside the broker.
 
+An additional witness gives the parent a real inheritable resource-write handle,
+proves that handle can write, then launches the agent with inheritance disabled.
+The agent's WriteFile attempt records INVALID_HANDLE and the host independently
+reads unchanged bytes. Native STATUS_INVALID_HANDLE exceptions are caught and
+recorded explicitly; an unhandled child crash would fail this control.
+
 Only the broker SID receives read/write access to the sample resource and full
 access to its journal directory. It gets read/execute access to its runtime and
 read access to policy. It receives no DELETE or WRITE_DAC grant on the resource,

@@ -15,7 +15,7 @@ The machine report and immutable evidence archive identify the executed revision
    a live pipe client's OS token, then separately evaluates the request. A second
    principal is tested both against the pipe DACL and an intentionally permissive
    **test-only** DACL to isolate the token check. For the latter, the research
-   policy permits both keys while the channel permits one; disabling only the
+   policy permits both principals while the channel permits one; disabling only the
    channel check must cause an observable unauthorized write.
 3. v0 nonce-before-write could leave an unexplained consumed nonce. v02 records
    intent and explicit recovery states. Physical partial/complete writes without

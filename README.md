@@ -43,7 +43,10 @@ Normal, repeat and optimized semantic outputs match. See the
 [measured results](research/CONFORMANCE_RESULTS.md) and
 [mutation boundaries](research/MUTATION_REPORT.md), including untested boundaries.
 
-**v02:** see [current measured results](research/CONFORMANCE_RESULTS.md),
+**v02 measured results:** 20 unit tests per mode; 41/41 adversarial cases in
+normal/repeat/optimized runs; 11/11 new physical mutations killed, with no survivors
+or crashes. This is separate from the historical 15-mutation population. See
+[current measured results](research/CONFORMANCE_RESULTS.md),
 [independent-oracle review](research/INDEPENDENT_SECURITY_REVIEW.md),
 [IPC](docs/IPC_SECURITY.md) and [crash recovery](docs/CRASH_RECOVERY.md).
 

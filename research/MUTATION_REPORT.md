@@ -1,3 +1,31 @@
+# v02 physical mutation population
+
+**11 KILLED / 0 SURVIVED / 0 CRASHED /
+0 NOT_APPLIED / 0 CONTROL_BROKEN**,
+with separate normal and optimized runs against the same 11 mutations.
+
+Boundaries: envelope policy pin, OS caller identity, server PID, canonical policy
+pin, resource identity, directory identity, authorization enforcement, recovery
+gate, reparse/hardlink predicate, resource ACL grant and journal-state admission.
+The ACL mutant changes only a disposable provisioning grant; the others physically
+edit one source guard. Every kill has a successful ALLOW control, actual unauthorized
+bytes in its negative, restored behavior and byte-exact source restoration.
+
+The isolated caller-token witness uses a deliberately permissive test pipe DACL
+and a policy allowing both laboratory principals. Only the authenticated channel
+still restricts the caller. This separates that guard from the policy actor check.
+The directory witness retains original child files while replacing their parent.
+The recovery-gate witness starts from actual partial bytes and a retained intent.
+
+This campaign does not prove every guard is independently necessary. Duplicate
+nonce enforcement includes both policy checks and SQLite uniqueness; the extra
+nonce-memory witness is an exercised negative, not an additional mutation kill.
+The inherited-handle control is also not counted as a physical mutation. Kernel,
+all Win32 APIs, arbitrary storage faults, remote clients and multi-broker stress
+remain outside mutation coverage.
+
+## Historical v0 campaign (preserved)
+
 # Physical mutation report
 
 Executed campaign: **15 KILLED, 0 SURVIVED, 0 CRASHED, 0 NOT_APPLIED,
