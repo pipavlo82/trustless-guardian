@@ -29,6 +29,8 @@ provisioned named-pipe namespace and retained server PID handle bind the endpoin
 Authentication checks exact AppContainer SID, base user, low integrity, zero
 capabilities, non-elevation and identification-level token. It confers no permission.
 Lab connection timeout: 110 seconds; I/O: 8 seconds; agent: 120 seconds with cancellation.
+Inherited stdio frames, including provider and tool results, are capped at 131,072
+bytes. A bound violation fails the run; no truncated result is accepted as success.
 
 The response contains schema, stage=TOOL_RESULT, status, authorization, execution,
 retry=PROHIBITED, native and evidence_refs. Native tri-state and ambiguity remain;

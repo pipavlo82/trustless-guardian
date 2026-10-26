@@ -14,6 +14,9 @@ Use a non-elevated Windows x64 session and Python 3.12.10. Start from a clean
 checkout of the exact reviewed research commit. Do not use personal resources.
 
 ```powershell
+git clone --branch research/guardian-enforcement-v0 https://github.com/pipavlo82/trustless-guardian.git guardian-v07
+cd guardian-v07
+git checkout --detach 0d45aae8cfed7e06f9f2c742af0ffbf768b2bd79
 python -B tools/prepare.py
 python -B demo/developer-preview/run.py --mode deterministic --out build/preview-offline
 ```
@@ -39,6 +42,9 @@ Each demo command displays **ALLOW → DENY → BYPASS → POLICY_CHANGE → REC
 Use a new output directory for each run. Do not run two live demos against the same
 copied runtime concurrently. No current-user Hermes/Codex profiles enter the agent.
 Only newly created disposable resources receive ACL changes.
+Full runtime hashing and per-file ACL provisioning can take several minutes
+before the first ALLOW line. This preparation is part of the measured boundary;
+the preview does not skip it on repeated runs.
 
 ## What success means
 
@@ -71,6 +77,18 @@ The v07 runner records normal/repeat/-O independently for both populations and
 physical deterministic mutants. Portable captured-evidence tamper controls cannot
 establish current Windows enforcement. Historical mutation populations retain
 their original reports and are not folded into v07 counts.
+
+For portable inspection of the published evidence, use the final research branch
+checkout containing the archive (the earlier implementation commit precedes it):
+
+```powershell
+python -B tools/evidence.py verify evidence/v07-cold-replay.zip
+Expand-Archive evidence/v07-cold-replay.zip build/published-v07
+python -B demo/developer-preview/verify.py build/published-v07/public/replay/live-normal/observations.json --out build/rechecked.json --redaction-manifest build/published-v07/public/redaction-manifest.json
+```
+
+This rechecks captured evidence and redaction digests; it does not invoke a model
+or establish present-day enforcement on the reviewing machine.
 
 ## Troubleshooting
 
