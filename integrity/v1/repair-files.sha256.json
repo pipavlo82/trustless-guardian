@@ -31,7 +31,7 @@
     "tools/restricted_exec_v1.py": "3c3f87d9d30f62cbdf12152fe2078ff8cb704d879ad6072e025f5b63b937e7de",
     "tools/restricted_startup_v1.py": "6ff7471aaa1745c4b4eeed958decaf4847aa8abf9953840e1bb2071c67200d84",
     "tools/source_mutations_v1.py": "85a671edd9d7c3fc6f34adb5b2076ac8313ce992d3a38e6acec36671212a6570",
-    "tools/windows_assessment_v1.py": "86c5003c71e9edceb007fa7524c8383f69e3ea1cb4c81b1443ef02ee2e766e65",
+    "tools/windows_assessment_v1.py": "d3b87ff2904eef8e3fa2ee08c19153288867f6aa6d771868c26f6e3ffe80694c",
     "verification/security-repair-v1.json": "363526ab22e04af8dc1645a3990ea53e459d45ff8a5b92943b27920c41bd157f"
   },
   "replacements": {}
