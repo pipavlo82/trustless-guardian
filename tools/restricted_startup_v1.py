@@ -100,7 +100,31 @@ def environment():
     )
 
 
-def launch(name, api_name, token, parent, marker, argv, desktop=None, timeout=20):
+def safer_normal_user_token(original):
+    """Return the documented SAFER NormalUser restriction without inert flags."""
+    level = w.HANDLE(); token = w.HANDLE()
+    create = win.api(
+        win.a, "SaferCreateLevel", w.BOOL, w.DWORD, w.DWORD, w.DWORD,
+        c.POINTER(w.HANDLE), win.P,
+    )
+    compute = win.api(
+        win.a, "SaferComputeTokenFromLevel", w.BOOL, w.HANDLE, w.HANDLE,
+        c.POINTER(w.HANDLE), w.DWORD, win.P,
+    )
+    close_level = win.api(win.a, "SaferCloseLevel", w.BOOL, w.HANDLE)
+    win.check(create(2, 0x00020000, 1, c.byref(level), None))
+    try:
+        win.check(compute(level, original, c.byref(token), 0, None))
+        return token
+    except Exception:
+        if token:
+            win.close(token)
+        raise
+    finally:
+        win.check(close_level(level))
+
+
+def launch(name, api_name, token, parent, marker, argv, desktop=None, timeout=20, expected_token=None):
     if marker.exists():
         raise ValueError("fresh startup marker required")
     command = c.create_unicode_buffer(subprocess.list2cmdline(argv))
@@ -133,6 +157,14 @@ def launch(name, api_name, token, parent, marker, argv, desktop=None, timeout=20
             )
             ok = create(token, 0, sys.executable, command, flags, environment(),
                         str(ROOT), c.byref(si), c.byref(pi))
+        elif api_name == "CreateProcessW":
+            create = win.api(
+                win.k, "CreateProcessW", w.BOOL, w.LPCWSTR, w.LPWSTR, win.P,
+                win.P, w.BOOL, w.DWORD, win.P, w.LPCWSTR,
+                c.POINTER(win.STARTUPINFO), c.POINTER(win.PROCESSINFO),
+            )
+            ok = create(sys.executable, command, None, None, False, flags,
+                        environment(), str(ROOT), c.byref(si), c.byref(pi))
         else:
             raise ValueError("unsupported launch API")
         if not ok:
@@ -146,8 +178,12 @@ def launch(name, api_name, token, parent, marker, argv, desktop=None, timeout=20
         finally:
             win.close(child)
         row["child_acceptable"] = acceptable(row["child_token"], parent["user_sha256"])
-        if not row["child_acceptable"]:
+        row["child_matches_expected"] = row["child_token"] == expected_token if expected_token is not None else None
+        if expected_token is None and not row["child_acceptable"]:
             row["error"] = "CHILD_TOKEN_CONTROL_BROKEN"
+            return row
+        if expected_token is not None and not row["child_matches_expected"]:
+            row["error"] = "POSITIVE_CONTROL_TOKEN_MISMATCH"
             return row
         resumed = win.api(win.k, "ResumeThread", w.DWORD, w.HANDLE)(pi.hThread)
         row["resume_previous_count"] = int(resumed)
@@ -184,7 +220,7 @@ def run(out):
         "manual_privilege_adjustment": False,
         "attempts": [],
     }
-    current = w.HANDLE(); restricted = None; launch_token = w.HANDLE(); private = None
+    current = w.HANDLE(); restricted = None; launch_token = w.HANDLE(); safer = None; private = None
     win.check(win.open_token(win.current(), 0x8B, c.byref(current)))
     try:
         before = inspect(current); record["parent_before"] = before
@@ -207,27 +243,44 @@ def run(out):
             "qualified_name": private.qualified_name,
             "existing_acl_modified": False,
         }
+        try:
+            safer = safer_normal_user_token(current)
+            record["safer_normal_user_token"] = inspect(safer)
+            record["safer_token_acceptable"] = acceptable(record["safer_normal_user_token"], before["user_sha256"])
+        except OSError as exc:
+            record["safer_token_error"] = type(exc).__name__ + ": " + str(exc)
         cases = [
-            ("python-inherited-desktop", "CreateProcessAsUserW", None, 5),
-            ("cmd-private-desktop", "CreateProcessAsUserW", private.qualified_name, 10),
-            ("python-private-desktop", "CreateProcessAsUserW", private.qualified_name, 20),
-            ("legacy-with-token", "CreateProcessWithTokenW", None, 5),
+            ("parent-createprocess-positive-control", "CreateProcessW", current, None, 10, before),
+            ("parent-createprocessasuser-diagnostic", "CreateProcessAsUserW", current, None, 10, before),
+            ("python-inherited-desktop", "CreateProcessAsUserW", launch_token, None, 5, None),
+            ("cmd-private-desktop", "CreateProcessAsUserW", launch_token, private.qualified_name, 10, None),
+            ("python-private-desktop", "CreateProcessAsUserW", launch_token, private.qualified_name, 20, None),
+            ("legacy-with-token", "CreateProcessWithTokenW", launch_token, None, 5, None),
         ]
-        for name, api_name, desktop, timeout in cases:
+        if safer and record.get("safer_token_acceptable"):
+            cases.insert(4, ("safer-python-private-desktop", "CreateProcessAsUserW", safer, private.qualified_name, 20, None))
+        for name, api_name, token, desktop, timeout, expected in cases:
             marker = out.with_suffix("." + name + ".marker")
             if name.startswith("cmd"):
                 argv = [os.environ["COMSPEC"], "/d", "/q", "/c", 'echo started>"' + str(marker) + '"']
             else:
                 snippet = "import pathlib;pathlib.Path(" + repr(str(marker)) + ").write_bytes(b'started\\n')"
                 argv = [sys.executable, "-I", "-S", "-B", "-c", snippet]
-            row = launch(name, api_name, launch_token, before, marker, argv, desktop, timeout)
+            row = launch(name, api_name, token, before, marker, argv, desktop, timeout, expected)
             after = inspect(current)
             row["parent_token_unchanged"] = after == before
             record["attempts"].append(row)
-        primary = next(row for row in record["attempts"] if row["name"] == "python-private-desktop")
+        safer_primary = next((row for row in record["attempts"] if row["name"] == "safer-python-private-desktop"), None)
+        primary = safer_primary if safer_primary and safer_primary.get("started") else next(
+            row for row in record["attempts"] if row["name"] == "python-private-desktop"
+        )
+        positive = next(row for row in record["attempts"] if row["name"] == "parent-createprocess-positive-control")
         record["parent_after"] = inspect(current)
         record["parent_token_unchanged"] = record["parent_after"] == before
-        if primary.get("started") and primary.get("child_acceptable") and record["parent_token_unchanged"]:
+        record["positive_control"] = "PASS" if positive.get("started") and positive.get("child_matches_expected") else "CONTROL_BROKEN"
+        if record["positive_control"] != "PASS":
+            record.update(status="CONTROL_BROKEN", reason="CREATEPROCESSASUSER_POSITIVE_CONTROL_FAILED")
+        elif primary.get("started") and primary.get("child_acceptable") and record["parent_token_unchanged"]:
             record["status"] = "VERIFIED"
         elif primary.get("created") and not primary.get("child_acceptable", False):
             record.update(status="CONTROL_BROKEN", reason="CHILD_TOKEN_PREDICATES_FAILED")
@@ -237,7 +290,7 @@ def run(out):
     finally:
         if private:
             private.close()
-        for handle in (launch_token, restricted, current):
+        for handle in (safer, launch_token, restricted, current):
             if handle:
                 win.close(handle)
         out.write_bytes(json.dumps(record, sort_keys=True, indent=2).encode("ascii") + b"\n")
