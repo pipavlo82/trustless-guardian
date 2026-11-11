@@ -1,0 +1,97 @@
+{
+  "base_commit": "e772eebd3ae3fee91237fa62b2caa3be0517684f",
+  "branch": "research/independent-auth-linux-v1",
+  "ci": {
+    "current_branch": "PENDING_PUBLICATION",
+    "workflow": ".github/workflows/auth-linux-v1.yml"
+  },
+  "cryptography": {
+    "algorithms": {
+      "execution_grant": "Ed25519",
+      "jwt": "RS256",
+      "siwe": "EIP-4361 with EIP-191 personal_sign"
+    },
+    "dependency_versions": {
+      "PyJWT": "2.15.1",
+      "abnf": "2.4.0",
+      "cryptography": "50.0.2",
+      "eth-account": "0.13.7",
+      "siwe": "4.4.0"
+    },
+    "hash_locked_requirements_sha256": "8e8ef602eff67f90dd874b8e0980506497a58a7efa067d846c099a585b770b60",
+    "independent_paths": [
+      "PyJWT verification plus direct cryptography RSASSA-PKCS1-v1_5/SHA-256 verification",
+      "SIWE EIP-4361 verification plus independent eth-account EIP-191 address recovery",
+      "Ed25519 grant verification before container admission"
+    ]
+  },
+  "integrity": {
+    "actual_files": 307,
+    "authorized_additions": 30,
+    "authorized_replacements": 1,
+    "base_inventory_entries": 273,
+    "historical_v1_policy_unchanged": true,
+    "status": "PASS"
+  },
+  "linux": {
+    "cached_image_id": "sha256:08e466006f0860e54fc299378de998935333e0e130a15f6f98482e9f8dab3058",
+    "checks_passed": 19,
+    "checks_total": 19,
+    "image_pull": false,
+    "local_pilot_report_sha256": "bd6dccab35b23427f2feae0ca6dad6afcb4fb660042d0c1d71264c5c47276f02",
+    "production_authenticated_invocation": "NOT_COVERED",
+    "production_rootless_isolation": "NOT_COVERED",
+    "rootless_container_daemon": "NOT_COVERED",
+    "rootless_user_namespace": "VERIFIED",
+    "status": "VERIFIED_LOCAL_PILOT"
+  },
+  "mutations": {
+    "authentication_source": {
+      "CONTROL_BROKEN": 0,
+      "CRASHED": 0,
+      "KILLED": 15,
+      "NOT_APPLIED": 0,
+      "SURVIVED": 0,
+      "local_report_sha256": "db52319e173e4624cd34569c196d6c8cf2c57f6aa4f6c9853d14581a1da9a673"
+    },
+    "integrity": {
+      "CONTROL_BROKEN": 0,
+      "CRASHED": 0,
+      "KILLED": 12,
+      "NOT_APPLIED": 0,
+      "SURVIVED": 0
+    }
+  },
+  "production_credentials_used": false,
+  "production_ready": false,
+  "schema": "guardian.independent-auth-linux-verification.v1",
+  "scope": "LOCAL_SYNTHETIC_TARGETS_ONLY",
+  "tests": {
+    "authentication": {
+      "linux_wsl": {
+        "normal": 58,
+        "python_O": 58
+      },
+      "windows": {
+        "normal": 58,
+        "python_O": 58,
+        "repeat": 58
+      }
+    },
+    "inherited_guardian": {
+      "windows": {
+        "normal": 177,
+        "python_O": 177,
+        "repeat": 177
+      }
+    }
+  },
+  "verdict": "HOLD",
+  "windows": {
+    "authentication_gateway": "PASS",
+    "current_local_native_assessment": "CONTROL_BROKEN_ELEVATED_CALLER_REQUIRED",
+    "inherited_pr4_hosted_native_status": "VERIFIED",
+    "inherited_pr4_hosted_run": 43050138530,
+    "production_ready": false
+  }
+}
