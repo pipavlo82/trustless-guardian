@@ -34,5 +34,11 @@
     "tools/windows_assessment_v1.py": "d3b87ff2904eef8e3fa2ee08c19153288867f6aa6d771868c26f6e3ffe80694c",
     "verification/security-repair-v1.json": "363526ab22e04af8dc1645a3990ea53e459d45ff8a5b92943b27920c41bd157f"
   },
-  "replacements": {}
+  "replacements": {
+    ".github/workflows/guardian.yml": {
+      "source_layer": "legacy-v07",
+      "previous_sha256": "ffb357eac8fbc286b55d47dc3d7ee9bcd02ebd7a53db5b0e89723bcde55bcba3",
+      "sha256": "fa89b39f5c7fb61bb78ce764a62edc33f5b9686ed5dfefd5c0d53432698622ac"
+    }
+  }
 }
