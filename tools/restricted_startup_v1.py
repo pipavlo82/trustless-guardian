@@ -25,6 +25,69 @@ from guardian import windows as win
 from tools.ci_tokens import acceptable, inspect, reduced_token
 
 
+class SECURITY_ATTRIBUTES(c.Structure):
+    _fields_ = [("nLength", w.DWORD), ("lpSecurityDescriptor", win.P), ("bInheritHandle", w.BOOL)]
+
+
+class PrivateDesktop:
+    """Disposable window station/desktop; never edits an existing object ACL."""
+
+    def __init__(self, user_sid):
+        self.user = c.WinDLL("user32", use_last_error=True)
+        self.station = w.HANDLE(); self.desktop = w.HANDLE(); self.sd = win.P()
+        self.station_name = "Guardian-" + str(os.getpid()) + "-" + str(time.time_ns())
+        self.desktop_name = "Worker"
+        convert = win.api(
+            win.a, "ConvertStringSecurityDescriptorToSecurityDescriptorW", w.BOOL,
+            w.LPCWSTR, w.DWORD, c.POINTER(win.P), win.P,
+        )
+        win.check(convert("D:P(A;;GA;;;SY)(A;;GA;;;" + user_sid + ")", 1, c.byref(self.sd), None))
+        sa = SECURITY_ATTRIBUTES(c.sizeof(SECURITY_ATTRIBUTES), self.sd, False)
+        create_station = win.api(
+            self.user, "CreateWindowStationW", w.HANDLE, w.LPCWSTR, w.DWORD,
+            w.DWORD, c.POINTER(SECURITY_ATTRIBUTES),
+        )
+        create_desktop = win.api(
+            self.user, "CreateDesktopW", w.HANDLE, w.LPCWSTR, w.LPCWSTR, win.P,
+            w.DWORD, w.DWORD, c.POINTER(SECURITY_ATTRIBUTES),
+        )
+        get_station = win.api(self.user, "GetProcessWindowStation", w.HANDLE)
+        set_station = win.api(self.user, "SetProcessWindowStation", w.BOOL, w.HANDLE)
+        original = get_station(); win.check(original)
+        switched = False
+        try:
+            self.station = create_station(self.station_name, 0, 0x000F037F, c.byref(sa))
+            win.check(self.station)
+            win.check(set_station(self.station)); switched = True
+            self.desktop = create_desktop(self.desktop_name, None, None, 0, 0x000F01FF, c.byref(sa))
+            win.check(self.desktop)
+        except Exception:
+            if switched:
+                set_station(original); switched = False
+            if self.desktop:
+                win.api(self.user, "CloseDesktop", w.BOOL, w.HANDLE)(self.desktop); self.desktop = None
+            if self.station:
+                win.api(self.user, "CloseWindowStation", w.BOOL, w.HANDLE)(self.station); self.station = None
+            if self.sd:
+                win.local_free(self.sd); self.sd = None
+            raise
+        finally:
+            if switched:
+                win.check(set_station(original))
+
+    @property
+    def qualified_name(self):
+        return self.station_name + "\\" + self.desktop_name
+
+    def close(self):
+        if self.desktop:
+            win.check(win.api(self.user, "CloseDesktop", w.BOOL, w.HANDLE)(self.desktop)); self.desktop = None
+        if self.station:
+            win.check(win.api(self.user, "CloseWindowStation", w.BOOL, w.HANDLE)(self.station)); self.station = None
+        if self.sd:
+            win.local_free(self.sd); self.sd = None
+
+
 def environment():
     names = (
         "SystemRoot", "WINDIR", "SystemDrive", "USERPROFILE", "LOCALAPPDATA",
@@ -37,18 +100,18 @@ def environment():
     )
 
 
-def launch(api_name, token, parent, marker):
+def launch(name, api_name, token, parent, marker, argv, desktop=None, timeout=20):
     if marker.exists():
         raise ValueError("fresh startup marker required")
-    snippet = "import pathlib;pathlib.Path(" + repr(str(marker)) + ").write_bytes(b'started\\n')"
-    argv = [sys.executable, "-I", "-S", "-B", "-c", snippet]
     command = c.create_unicode_buffer(subprocess.list2cmdline(argv))
-    si = win.STARTUPINFO(); si.cb = c.sizeof(si)
+    si = win.STARTUPINFO(); si.cb = c.sizeof(si); si.lpDesktop = desktop
     pi = win.PROCESSINFO()
     flags = 0x00000004 | 0x00000400 | 0x08000000
     row = {
+        "name": name,
         "api": api_name,
         "argv": argv,
+        "desktop": desktop,
         "created_suspended": False,
         "manual_privilege_adjustment": False,
     }
@@ -92,7 +155,7 @@ def launch(api_name, token, parent, marker):
             error = c.get_last_error()
             row.update(winerror=error, error=str(c.WinError(error)))
             return row
-        row["wait"] = int(win.api(win.k, "WaitForSingleObject", w.DWORD, w.HANDLE, w.DWORD)(pi.hProcess, 20000))
+        row["wait"] = int(win.api(win.k, "WaitForSingleObject", w.DWORD, w.HANDLE, w.DWORD)(pi.hProcess, timeout * 1000))
         code = w.DWORD()
         win.check(win.api(win.k, "GetExitCodeProcess", w.BOOL, w.HANDLE, c.POINTER(w.DWORD))(pi.hProcess, c.byref(code)))
         row["exit_code"] = int(code.value)
@@ -121,7 +184,7 @@ def run(out):
         "manual_privilege_adjustment": False,
         "attempts": [],
     }
-    current = w.HANDLE(); restricted = None; launch_token = w.HANDLE()
+    current = w.HANDLE(); restricted = None; launch_token = w.HANDLE(); private = None
     win.check(win.open_token(win.current(), 0x8B, c.byref(current)))
     try:
         before = inspect(current); record["parent_before"] = before
@@ -138,13 +201,30 @@ def run(out):
         if not record["launch_token_acceptable"]:
             record.update(status="CONTROL_BROKEN", reason="RESTRICTED_TOKEN_PREDICATES_FAILED")
             return record
-        for name in ("CreateProcessAsUserW", "CreateProcessWithTokenW"):
+        private = PrivateDesktop(win.token_info()["user_sid"])
+        record["private_desktop"] = {
+            "created": True,
+            "qualified_name": private.qualified_name,
+            "existing_acl_modified": False,
+        }
+        cases = [
+            ("python-inherited-desktop", "CreateProcessAsUserW", None, 5),
+            ("cmd-private-desktop", "CreateProcessAsUserW", private.qualified_name, 10),
+            ("python-private-desktop", "CreateProcessAsUserW", private.qualified_name, 20),
+            ("legacy-with-token", "CreateProcessWithTokenW", None, 5),
+        ]
+        for name, api_name, desktop, timeout in cases:
             marker = out.with_suffix("." + name + ".marker")
-            row = launch(name, launch_token, before, marker)
+            if name.startswith("cmd"):
+                argv = [os.environ["COMSPEC"], "/d", "/q", "/c", 'echo started>"' + str(marker) + '"']
+            else:
+                snippet = "import pathlib;pathlib.Path(" + repr(str(marker)) + ").write_bytes(b'started\\n')"
+                argv = [sys.executable, "-I", "-S", "-B", "-c", snippet]
+            row = launch(name, api_name, launch_token, before, marker, argv, desktop, timeout)
             after = inspect(current)
             row["parent_token_unchanged"] = after == before
             record["attempts"].append(row)
-        primary = record["attempts"][0]
+        primary = next(row for row in record["attempts"] if row["name"] == "python-private-desktop")
         record["parent_after"] = inspect(current)
         record["parent_token_unchanged"] = record["parent_after"] == before
         if primary.get("started") and primary.get("child_acceptable") and record["parent_token_unchanged"]:
@@ -155,6 +235,8 @@ def run(out):
             record["reason"] = "RESTRICTED_CHILD_STARTUP_NOT_OBSERVED"
         return record
     finally:
+        if private:
+            private.close()
         for handle in (launch_token, restricted, current):
             if handle:
                 win.close(handle)
