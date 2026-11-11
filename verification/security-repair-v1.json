@@ -61,7 +61,10 @@
       "named_pipe_authentication": "VERIFIED",
       "restricted_token_child_startup": "NOT_COVERED"
     },
+    "fresh_clone_initial_runtime_precondition": "CONTROL_BROKEN",
     "local_status": "PARTIAL",
+    "pinned_runtime_sha256": "4acbed6dd1c744b0376e3b1cf57ce906f9dc9e95e68824584c8099a63025a3c3",
+    "post_prepare_runtime_precondition": "VERIFIED_PINNED_SHA256",
     "production_ready": false,
     "v02_case_count": 41,
     "v04_scenario_count": 15

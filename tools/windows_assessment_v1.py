@@ -1,6 +1,7 @@
 """Independent bounded Windows assessment; never promotes NOT_COVERED to PASS."""
 
 import argparse
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -39,6 +40,28 @@ def run(out):
     out = Path(out).resolve(); out.mkdir(parents=True, exist_ok=False)
     report = {"schema": "guardian.windows-security-assessment.v1", "platform": platform.platform(),
               "production_ready": False, "commands": [], "status": "NOT_COVERED"}
+    if os.name == "nt":
+        archive = ROOT / "build/runtime/python-3.12.10-embed-amd64.zip"
+        lock = json.loads((ROOT / "runtime-lock.json").read_bytes())
+        runtime_ok = archive.is_file() and hashlib.sha256(archive.read_bytes()).hexdigest() == lock.get("sha256")
+        if not runtime_ok:
+            report.update(
+                status="HOLD",
+                reason="PINNED_RUNTIME_MISSING_OR_MISMATCH",
+                runtime_precondition="CONTROL_BROKEN",
+                checks={
+                    "appcontainer_identity": "NOT_COVERED",
+                    "named_pipe_authentication": "NOT_COVERED",
+                    "broker_permissions": "NOT_COVERED",
+                    "file_access_bypass": "NOT_COVERED",
+                    "execution_and_crash_recovery": "NOT_COVERED",
+                    "restricted_token_child_startup": "NOT_COVERED",
+                },
+            )
+            (out / "report.json").write_bytes(json.dumps(report, sort_keys=True, indent=2).encode("ascii") + b"\n")
+            print(json.dumps(report, sort_keys=True))
+            return report
+        report["runtime_precondition"] = "VERIFIED_PINNED_SHA256"
     if os.name != "nt":
         report["reason"] = "WINDOWS_UNAVAILABLE"
     else:

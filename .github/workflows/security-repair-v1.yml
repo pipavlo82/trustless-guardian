@@ -41,8 +41,8 @@ jobs:
         run: python -B tools/source_mutations_v1.py --out build/source-mutations-v1/report.json
       - name: Layered integrity and physical mutations
         run: |
-          python -B tools/integrity_v1.py --policy-sha256 ab0de20bd180b69ce9a24a5e06dafec138f23daecfc31fe520350806de9c01ae --out build/integrity-v1/report.json
-          python -B tools/integrity_mutations_v1.py --policy-sha256 ab0de20bd180b69ce9a24a5e06dafec138f23daecfc31fe520350806de9c01ae --out build/integrity-v1/mutations.json
+          python -B tools/integrity_v1.py --policy-sha256 77b2d6ab6c6dafce8baf65e1277de7f7f634843cfa494659790419cae70d723e --out build/integrity-v1/report.json
+          python -B tools/integrity_mutations_v1.py --policy-sha256 77b2d6ab6c6dafce8baf65e1277de7f7f634843cfa494659790419cae70d723e --out build/integrity-v1/mutations.json
       - name: Replay frozen PR 1 portable invariants
         shell: bash
         run: |
@@ -79,7 +79,9 @@ jobs:
           python -B -m unittest discover -s tests -q
           python -B -O -m unittest discover -s tests -q
       - name: Layered integrity
-        run: python -B tools/integrity_v1.py --policy-sha256 ab0de20bd180b69ce9a24a5e06dafec138f23daecfc31fe520350806de9c01ae --out build/integrity-v1/report.json
+        run: python -B tools/integrity_v1.py --policy-sha256 77b2d6ab6c6dafce8baf65e1277de7f7f634843cfa494659790419cae70d723e --out build/integrity-v1/report.json
+      - name: Fetch and verify pinned Windows test runtime
+        run: python -B tools/prepare.py
       - name: Execute native Windows assessment
         run: python -B tools/windows_assessment_v1.py --out build/windows-assessment-v1
       - name: Upload Windows evidence before gate

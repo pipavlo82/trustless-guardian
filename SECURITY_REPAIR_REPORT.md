@@ -36,7 +36,7 @@ The v1 verifier rejects missing, modified, unexpected, and unauthorized files; t
 
 ### Windows enforcement
 
-On local Windows 11, the independent assessment executed 41 v0.2 cases and 15 v0.4 scenarios. AppContainer identity/isolation, named-pipe authentication, broker permissions, nine file-access bypass operations, and execution/crash recovery were `VERIFIED` locally. The assessment report SHA-256 is `fa823bc66308bf80142de567ca376157deba940def87264e8d297e2d6e8eb1ef`.
+On local Windows 11, the independent assessment executed 41 v0.2 cases and 15 v0.4 scenarios. AppContainer identity/isolation, named-pipe authentication, broker permissions, nine file-access bypass operations, and execution/crash recovery were `VERIFIED` locally. A fresh clone initially returned `CONTROL_BROKEN` because the ignored embedded test runtime was absent; no security PASS was taken from that run. After fetching the source-pinned runtime and verifying SHA-256 `4acbed6dd1c744b0376e3b1cf57ce906f9dc9e95e68824584c8099a63025a3c3`, the fresh-clone campaigns exited 0 and returned the same 41/15 coverage. The post-prepare fresh report SHA-256 is `6e81257a1ef7330267b0c129acc4e9d9d2b87a6b407eb2d11dfaad3e0eff0a7b`.
 
 Restricted-token child startup was `NOT_COVERED` locally because the assessment caller was not elevated. In the existing Windows Server 2022 hosted artifact, five reduced-token attempts were created and resumed but remained `STILL_ACTIVE` with wait timeout and thread `WaitReason=10` (`LpcReply`); no marker was written. The bounded classifier is `CREATEPROCESSWITHTOKEN_CHILD_STALLED_IN_LPC_REPLY`. The internal Windows cause is not established. This remains a required failing gate.
 

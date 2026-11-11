@@ -25,6 +25,8 @@ The first layered-integrity baseline returned `invalid base commit`: the verifie
 
 The first source-mutation run from the fresh clone returned `CONTROL_BROKEN=16`: after the v0 defect reproducer became a test dependency, the disposable mutation tree copied `research/` and the test file but omitted `tools/audit_v0_bindings.py`. The harness was fixed to copy that dependency; no broken-control case was counted as killed, and the full population was rerun from the fresh clone.
 
+The first native Windows assessment from the fresh clone was also `CONTROL_BROKEN`: the ignored pinned embedded runtime had not been prepared, so v0.2 failed before producing cases and all 15 v0.4 scenarios recorded missing-runtime controls. The assessment now classifies this precondition as `CONTROL_BROKEN/NOT_COVERED`, the workflow runs the hash-verifying preparation step, and the full native campaigns were rerun successfully after preparation.
+
 ## Historical mutation truth
 
 The repair does not rewrite historical results. PR #1 continues to report `IMMUTABLE_V06_2_KILLED_2_CONTROL_BROKEN`, and older v0.3 evidence includes its recorded survivor. A passing new repair population cannot erase those frozen outcomes.

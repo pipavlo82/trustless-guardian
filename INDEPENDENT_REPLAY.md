@@ -55,7 +55,7 @@ Observed in the detached worktree: `historical-portable exit=0`, `frozen-baselin
 python -B tools/windows_assessment_v1.py --out build/windows-assessment-v1
 ```
 
-Observed on Windows 11: v0.2 exited 0 in 62.757 seconds, v0.4 exited 0 in 96.548 seconds, diagnostics exited 0, 41 cases and 15 recovery scenarios were present. Overall status was `PARTIAL` because restricted-token startup was `NOT_COVERED` for the non-elevated caller.
+Observed on Windows 11 in the original repair worktree: v0.2 exited 0 in 62.757 seconds, v0.4 exited 0 in 96.548 seconds, diagnostics exited 0, 41 cases and 15 recovery scenarios were present. A fresh clone initially returned `CONTROL_BROKEN` for both campaigns because `build/runtime/python-3.12.10-embed-amd64.zip` is intentionally ignored and had not been prepared. After `python -B tools/prepare.py` fetched the pinned official runtime and verified SHA-256 `4acbed6dd1c744b0376e3b1cf57ce906f9dc9e95e68824584c8099a63025a3c3`, the fresh-clone v0.2/v0.4 commands exited 0 in 63.945/86.689 seconds and again produced 41/15 coverage. Overall status remained `PARTIAL` because restricted-token startup was `NOT_COVERED` for the non-elevated caller.
 
 Existing upstream PR #3 Windows Server 2022 evidence was downloaded separately and hashed before review: diagnostics `1f1b40f…`, launch `4c5235dc…`, CI probe `4b923caf…`, startup probe `cd21e241…`. Five startup variants all had `wait=258`, `exit_code=259`, prior suspend count 1, no marker, and thread `WaitReason=10`. This is a reproducible hosted symptom, not a verified internal root cause.
 
@@ -69,4 +69,4 @@ The named image must already be local; the pilot uses `--pull never`. Final loca
 
 ## Fresh checkout
 
-CI performs an actual fresh checkout with `persist-credentials: false`, recomputes normal/repeat/optimized tests, gateway evidence, source mutations, layered integrity, integrity mutations, and the exact PR #1 replay. The Windows job uploads evidence before enforcing `status == VERIFIED`; any `PARTIAL`/`NOT_COVERED` result fails the gate.
+CI performs an actual fresh checkout with `persist-credentials: false`, recomputes normal/repeat/optimized tests, gateway evidence, source mutations, layered integrity, integrity mutations, and the exact PR #1 replay. The Windows job fetches only the URL in `runtime-lock.json`, verifies its pinned SHA-256 before native testing, uploads evidence before enforcing `status == VERIFIED`, and fails the gate for `PARTIAL`, `HOLD`, or `NOT_COVERED`.
