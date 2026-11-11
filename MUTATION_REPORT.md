@@ -23,6 +23,8 @@ The first Linux pilot returned `HOLD` because the observer assumed cgroup v2 pat
 
 The first layered-integrity baseline returned `invalid base commit`: the verifier incorrectly applied a 64-hex SHA-256 predicate to the repository's 40-hex Git object ID. No PASS was claimed. The Git-object predicate was corrected, manifests and the independent policy pin were recomputed, and only then were the passing baseline and 11 physical mutations executed.
 
+The first source-mutation run from the fresh clone returned `CONTROL_BROKEN=16`: after the v0 defect reproducer became a test dependency, the disposable mutation tree copied `research/` and the test file but omitted `tools/audit_v0_bindings.py`. The harness was fixed to copy that dependency; no broken-control case was counted as killed, and the full population was rerun from the fresh clone.
+
 ## Historical mutation truth
 
 The repair does not rewrite historical results. PR #1 continues to report `IMMUTABLE_V06_2_KILLED_2_CONTROL_BROKEN`, and older v0.3 evidence includes its recorded survivor. A passing new repair population cannot erase those frozen outcomes.

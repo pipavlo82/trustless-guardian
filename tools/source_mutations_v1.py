@@ -53,6 +53,7 @@ def run(out, timeout=30):
         root = Path(temp)
         shutil.copytree(ROOT / "research", root / "research")
         (root / "tests").mkdir(); shutil.copy2(ROOT / "tests" / TEST, root / "tests" / TEST)
+        (root / "tools").mkdir(); shutil.copy2(ROOT / "tools/audit_v0_bindings.py", root / "tools/audit_v0_bindings.py")
         for name, relative, old, new in SPECS:
             path = root / relative; original = path.read_bytes(); text = original.decode("utf-8")
             baseline = test(root, timeout)
