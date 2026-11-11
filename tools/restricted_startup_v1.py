@@ -228,6 +228,40 @@ def launch(name, api_name, token, parent, marker, argv, desktop=None, timeout=20
         row["seconds"] = time.perf_counter() - started
 
 
+def run_stage(out, marker):
+    """Run inside the SAFER process and launch a direct LUA child."""
+    out = Path(out).resolve(); marker = Path(marker).resolve()
+    record = {"schema": "guardian.restricted-startup-stage.v1", "status": "NOT_COVERED"}
+    current = w.HANDLE(); restricted = None
+    win.check(win.open_token(win.current(), 0x8B, c.byref(current)))
+    try:
+        before = inspect(current); record["stage_token"] = before
+        restricted = reduced_token(current)
+        record["final_launch_token"] = inspect(restricted)
+        record["final_launch_token_acceptable"] = acceptable(record["final_launch_token"], before["user_sha256"])
+        if not record["final_launch_token_acceptable"]:
+            record["reason"] = "FINAL_TOKEN_CONTROL_BROKEN"
+            return record
+        snippet = "import pathlib;pathlib.Path(" + repr(str(marker)) + ").write_bytes(b'started\\n')"
+        argv = [sys.executable, "-I", "-S", "-B", "-c", snippet]
+        row = launch("final-lua-child", "CreateProcessAsUserW", restricted, before, marker, argv)
+        record["attempt"] = row
+        record["parent_after"] = inspect(current)
+        record["parent_token_unchanged"] = record["parent_after"] == before
+        if row.get("started") and row.get("child_acceptable") and record["parent_token_unchanged"]:
+            record["status"] = "VERIFIED"
+        else:
+            record["reason"] = "FINAL_RESTRICTED_CHILD_STARTUP_NOT_OBSERVED"
+        return record
+    finally:
+        for handle in (restricted, current):
+            if handle:
+                win.close(handle)
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_bytes(json.dumps(record, sort_keys=True, indent=2).encode("ascii") + b"\n")
+        print(json.dumps(record, sort_keys=True))
+
+
 def run(out):
     out = Path(out).resolve(); out.parent.mkdir(parents=True, exist_ok=True)
     record = {
@@ -283,6 +317,10 @@ def run(out):
                 "safer-python-private-desktop", "CreateProcessAsUserW", safer,
                 private.qualified_name, 20, record["safer_normal_user_token"],
             ))
+            cases.insert(5, (
+                "safer-staged-lua-private-desktop", "CreateProcessAsUserW", safer,
+                private.qualified_name, 30, record["safer_normal_user_token"],
+            ))
         if safer_lua and record.get("safer_then_lua_acceptable"):
             cases.insert(5, (
                 "safer-lua-python-private-desktop", "CreateProcessAsUserW", safer_lua,
@@ -290,7 +328,11 @@ def run(out):
             ))
         for name, api_name, token, desktop, timeout, expected in cases:
             marker = out.with_suffix("." + name + ".marker")
-            if name.startswith("cmd"):
+            if name == "safer-staged-lua-private-desktop":
+                stage_out = out.with_suffix(".stage.json")
+                argv = [sys.executable, "-I", "-S", "-B", str(Path(__file__).resolve()),
+                        "--out", str(stage_out), "--stage-marker", str(marker)]
+            elif name.startswith("cmd"):
                 argv = [os.environ["COMSPEC"], "/d", "/q", "/c", 'echo started>"' + str(marker) + '"']
             else:
                 snippet = "import pathlib;pathlib.Path(" + repr(str(marker)) + ").write_bytes(b'started\\n')"
@@ -299,7 +341,11 @@ def run(out):
             after = inspect(current)
             row["parent_token_unchanged"] = after == before
             record["attempts"].append(row)
+        stage_out = out.with_suffix(".stage.json")
+        if stage_out.exists():
+            record["staged_reduction"] = json.loads(stage_out.read_bytes())
         safer_lua_primary = next((row for row in record["attempts"] if row["name"] == "safer-lua-python-private-desktop"), None)
+        staged_primary = next((row for row in record["attempts"] if row["name"] == "safer-staged-lua-private-desktop"), None)
         primary = safer_lua_primary if safer_lua_primary and safer_lua_primary.get("started") else next(
             row for row in record["attempts"] if row["name"] == "python-private-desktop"
         )
@@ -309,6 +355,10 @@ def run(out):
         record["positive_control"] = "PASS" if positive.get("started") and positive.get("child_matches_expected") else "CONTROL_BROKEN"
         if record["positive_control"] != "PASS":
             record.update(status="CONTROL_BROKEN", reason="CREATEPROCESSASUSER_POSITIVE_CONTROL_FAILED")
+        elif (staged_primary and staged_primary.get("started")
+              and record.get("staged_reduction", {}).get("status") == "VERIFIED"
+              and record["parent_token_unchanged"]):
+            record["status"] = "VERIFIED"
         elif primary.get("started") and primary.get("child_acceptable") and record["parent_token_unchanged"]:
             record["status"] = "VERIFIED"
         elif primary.get("created") and not primary.get("child_acceptable", False):
@@ -328,4 +378,9 @@ def run(out):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(); parser.add_argument("--out", type=Path, required=True)
-    args = parser.parse_args(); run(args.out)
+    parser.add_argument("--stage-marker", type=Path)
+    args = parser.parse_args()
+    if args.stage_marker:
+        result = run_stage(args.out, args.stage_marker)
+        raise SystemExit(0 if result["status"] == "VERIFIED" else 2)
+    run(args.out)
