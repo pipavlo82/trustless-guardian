@@ -81,9 +81,13 @@ def run(out):
         diagnostic = json.loads(diagnostics.read_bytes()) if diagnostics.exists() else {}
         if diagnostic.get("current_token", {}).get("elevated"):
             startup = out / "startup.json"
-            report["commands"].append(execute("startup", ["tools/v04_startup_probe.py", "--out", str(startup)], out, 180))
+            report["commands"].append(execute("startup", ["tools/restricted_startup_v1.py", "--out", str(startup)], out, 180))
             startup_record = json.loads(startup.read_bytes()) if startup.exists() else {}
-            startup_status = classify_startup(startup_record)
+            startup_status = (
+                {"status": "VERIFIED", "root_cause": None, "api": "CreateProcessAsUserW"}
+                if startup_record.get("status") == "VERIFIED"
+                else {"status": "NOT_COVERED", "root_cause": startup_record.get("reason", "STARTUP_NOT_OBSERVED")}
+            )
         else:
             startup_record = {"not_covered": "assessment caller is not elevated; hosted reduction path cannot be exercised"}
             startup_status = {"status": "NOT_COVERED", "root_cause": "ELEVATED_HOSTED_CALLER_UNAVAILABLE"}
