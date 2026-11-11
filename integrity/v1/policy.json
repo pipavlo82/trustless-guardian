@@ -17,7 +17,7 @@
   ],
   "repair": {
     "manifest": "integrity/v1/repair-files.sha256.json",
-    "manifest_sha256": "68c1492a0861ad75f8a29331a109467f0f5b8ac8fc1b3b529a40d429c6db62b1",
+    "manifest_sha256": "4a1bf6e082eb7ed500c14511fb77da8921c95c20eb86263d88355c3ade029ce7",
     "additions": 31,
     "replacements": 0
   },

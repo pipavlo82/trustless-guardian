@@ -22,7 +22,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 from guardian import windows as win
-from tools.ci_tokens import acceptable, inspect, reduced_token
+from tools.ci_tokens import SIDATTR, acceptable, inspect, reduced_token
 
 
 class SECURITY_ATTRIBUTES(c.Structure):
@@ -122,6 +122,22 @@ def safer_normal_user_token(original):
         raise
     finally:
         win.check(close_level(level))
+
+
+def set_medium_integrity(token):
+    sid = win.P()
+    try:
+        win.check(win.api(
+            win.a, "ConvertStringSidToSidW", w.BOOL, w.LPCWSTR, c.POINTER(win.P),
+        )("S-1-16-8192", c.byref(sid)))
+        label = SIDATTR(sid, 0x20)
+        size = c.sizeof(label) + win.api(win.a, "GetLengthSid", w.DWORD, win.P)(sid)
+        win.check(win.api(
+            win.a, "SetTokenInformation", w.BOOL, w.HANDLE, c.c_int, win.P, w.DWORD,
+        )(token, 25, c.byref(label), size))
+    finally:
+        if sid:
+            win.local_free(sid)
 
 
 def launch(name, api_name, token, parent, marker, argv, desktop=None, timeout=20, expected_token=None):
@@ -245,6 +261,8 @@ def run(out):
         }
         try:
             safer = safer_normal_user_token(current)
+            record["safer_before_medium_integrity"] = inspect(safer)
+            set_medium_integrity(safer)
             record["safer_normal_user_token"] = inspect(safer)
             record["safer_token_acceptable"] = acceptable(record["safer_normal_user_token"], before["user_sha256"])
         except OSError as exc:
