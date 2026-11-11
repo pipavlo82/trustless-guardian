@@ -1,0 +1,112 @@
+name: Independent authentication and Linux isolation v1
+
+on:
+  push:
+    branches: [research/independent-auth-linux-v1]
+  pull_request:
+
+permissions:
+  contents: read
+
+env:
+  INTEGRITY_V2_POLICY_SHA256: 1736667d014a8e636d4cff0c24b44db477e862981d018f690d79ba2160cff4ff
+
+jobs:
+  linux-independent-recompute:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - name: Checkout exact candidate
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
+        with:
+          python-version: '3.12'
+      - name: Install hash-locked authentication dependencies
+        run: python -m pip install --disable-pip-version-check --require-hashes -r requirements-auth-v1.txt
+      - name: Preserve PR 4 portable invariants in normal repeat and optimized modes
+        run: |
+          python -B -m unittest discover -s tests -q
+          python -B -m unittest discover -s tests -q
+          python -B -O -m unittest discover -s tests -q
+      - name: Independent authentication in normal repeat and optimized modes
+        run: |
+          python -B tools/auth_assessment_v1.py --out build/auth-v1/normal.json
+          python -B tools/auth_assessment_v1.py --out build/auth-v1/repeat.json
+          python -B -O tools/auth_assessment_v1.py --out build/auth-v1/optimized.json
+      - name: Physical authentication source mutations
+        run: python -B tools/auth_source_mutations_v1.py --out build/auth-v1/source-mutations.json
+      - name: Hosted Linux isolation capability report
+        run: python -B -m research.linux_isolated_worker_v2.pilot --out build/linux-v2/hosted.json
+      - name: Layered integrity and physical mutations
+        run: |
+          python -B tools/integrity_v2.py --policy-sha256 "$INTEGRITY_V2_POLICY_SHA256" --out build/integrity-v2/report.json
+          python -B tools/integrity_mutations_v2.py --policy-sha256 "$INTEGRITY_V2_POLICY_SHA256" --out build/integrity-v2/mutations.json
+      - name: Upload Linux evidence
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: independent-auth-linux-v1-linux
+          path: build/
+          if-no-files-found: error
+
+  windows-independent-recompute:
+    runs-on: windows-2022
+    timeout-minutes: 40
+    steps:
+      - name: Checkout exact candidate
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
+        with:
+          python-version: '3.12'
+      - name: Install hash-locked authentication dependencies
+        run: python -m pip install --disable-pip-version-check --require-hashes -r requirements-auth-v1.txt
+      - name: Preserve PR 4 portable invariants
+        shell: pwsh
+        run: |
+          python -B -m unittest discover -s tests -q
+          python -B -m unittest discover -s tests -q
+          python -B -O -m unittest discover -s tests -q
+      - name: Independent authentication in normal repeat and optimized modes
+        shell: pwsh
+        run: |
+          python -B tools/auth_assessment_v1.py --out build/auth-v1/normal.json
+          python -B tools/auth_assessment_v1.py --out build/auth-v1/repeat.json
+          python -B -O tools/auth_assessment_v1.py --out build/auth-v1/optimized.json
+      - name: Layered integrity
+        run: python -B tools/integrity_v2.py --policy-sha256 "$env:INTEGRITY_V2_POLICY_SHA256" --out build/integrity-v2/report.json
+      - name: Fetch and verify pinned Windows test runtime
+        run: python -B tools/prepare.py
+      - name: Execute inherited native Windows assessment
+        continue-on-error: true
+        run: python -B tools/restricted_exec_v1.py --out build/windows-launch-v1.json --proof build/windows-startup-proof-v1.json --timeout 1200 tools/windows_assessment_v1.py --out build/windows-assessment-v1 --startup-proof build/windows-startup-proof-v1.json
+      - name: Upload Windows evidence before gate
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: independent-auth-linux-v1-windows
+          path: |
+            build/auth-v1/*.json
+            build/integrity-v2/*.json
+            build/windows-assessment-v1/**/*.json
+            build/windows-assessment-v1/**/*.stdout
+            build/windows-assessment-v1/**/*.stderr
+            build/windows-assessment-v1/**/*.log
+            build/windows-assessment-v1/**/*.marker
+            build/windows-launch-v1*
+            build/windows-startup-proof-v1.json
+          if-no-files-found: error
+      - name: Enforce inherited Windows security gate
+        shell: pwsh
+        run: |
+          $report = Get-Content build/windows-assessment-v1/report.json -Raw | ConvertFrom-Json
+          if ($report.status -ne 'VERIFIED') {
+            Write-Error "Windows gate is $($report.status); production promotion remains blocked."
+          }

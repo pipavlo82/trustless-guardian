@@ -4,6 +4,7 @@ on:
   push:
     branches: [repair/full-guardian-security-v1]
   pull_request:
+    branches: [main]
 
 permissions:
   contents: read
