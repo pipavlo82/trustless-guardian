@@ -2,7 +2,7 @@
 
 ## Required blockers
 
-1. **Windows restricted-token child startup — `NOT_COVERED`.** Hosted Windows Server 2022 creates and resumes the reduced-token child but does not observe user-code startup. Local Windows 11 testing was not elevated and cannot exercise the same reduction path. The observed hosted `LpcReply` wait is a symptom classification, not an internal root-cause proof.
+1. **Windows restricted-token child startup — `NOT_COVERED`.** Hosted Windows Server 2022 creates and resumes the reduced-token child but does not observe user-code startup; hosted v0.2/v0.4 campaigns are consequently control-broken and their core properties remain `NOT_COVERED`. Local Windows 11 testing was not elevated and cannot exercise the same reduction path. The observed hosted `LpcReply` wait is a symptom classification, not an internal root-cause proof.
 2. **Production identity and provenance — `NOT_COVERED`.** Synthetic token booleans do not prove JWT signature, issuer, audience, expiry, nonce, wallet control, registry state, MCP bearer validation, or event origin. Reports are deterministically recomputable but unauthenticated.
 3. **Production Linux isolation — `NOT_COVERED`.** Rootless daemon mode, production tool invocation, real secrets handling, and production network policy were not exercised. Only a local synthetic non-root/zero-capability container was validated.
 

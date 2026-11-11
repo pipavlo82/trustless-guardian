@@ -10,7 +10,7 @@ python -B -m unittest discover -s tests -q
 python -B -O -m unittest discover -s tests -q
 ```
 
-Observed locally: 176 tests in each mode; all passed. Assertions remain enabled under `-O` because the security oracles use explicit comparisons and exceptions rather than relying on application `assert` statements.
+Observed locally: 177 tests in each mode; all passed. Assertions remain enabled under `-O` because the security oracles use explicit comparisons and exceptions rather than relying on application `assert` statements.
 
 ## Gateway audit and recomputation
 
@@ -58,6 +58,8 @@ python -B tools/windows_assessment_v1.py --out build/windows-assessment-v1
 Observed on Windows 11 in the original repair worktree: v0.2 exited 0 in 62.757 seconds, v0.4 exited 0 in 96.548 seconds, diagnostics exited 0, 41 cases and 15 recovery scenarios were present. A fresh clone initially returned `CONTROL_BROKEN` for both campaigns because `build/runtime/python-3.12.10-embed-amd64.zip` is intentionally ignored and had not been prepared. After `python -B tools/prepare.py` fetched the pinned official runtime and verified SHA-256 `4acbed6dd1c744b0376e3b1cf57ce906f9dc9e95e68824584c8099a63025a3c3`, the fresh-clone v0.2/v0.4 commands exited 0 in 63.945/86.689 seconds and again produced 41/15 coverage. Overall status remained `PARTIAL` because restricted-token startup was `NOT_COVERED` for the non-elevated caller.
 
 Existing upstream PR #3 Windows Server 2022 evidence was downloaded separately and hashed before review: diagnostics `1f1b40f…`, launch `4c5235dc…`, CI probe `4b923caf…`, startup probe `cd21e241…`. Five startup variants all had `wait=258`, `exit_code=259`, prior suspend count 1, no marker, and thread `WaitReason=10`. This is a reproducible hosted symptom, not a verified internal root cause.
+
+Repair push CI run `43031478459` independently repeated that startup symptom. Its v0.2 campaign produced zero cases and its 15 v0.4 scenarios were control-broken, so hosted core enforcement is `NOT_COVERED`. The assessment classifier was tightened after this run so absent/control-broken campaign evidence cannot be mislabeled `REFUTED`; the following workflow run preserves `CONTROL_BROKEN` explicitly and fails the final Windows gate.
 
 ## Linux local pilot
 

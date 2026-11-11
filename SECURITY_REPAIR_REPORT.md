@@ -40,6 +40,8 @@ On local Windows 11, the independent assessment executed 41 v0.2 cases and 15 v0
 
 Restricted-token child startup was `NOT_COVERED` locally because the assessment caller was not elevated. In the existing Windows Server 2022 hosted artifact, five reduced-token attempts were created and resumed but remained `STILL_ACTIVE` with wait timeout and thread `WaitReason=10` (`LpcReply`); no marker was written. The bounded classifier is `CREATEPROCESSWITHTOKEN_CHILD_STALLED_IN_LPC_REPLY`. The internal Windows cause is not established. This remains a required failing gate.
 
+On repair CI run `43031478459`, the pinned runtime was verified but the hosted v0.2 campaign produced no cases and all 15 v0.4 scenarios were control-broken before enforcement could be exercised. Those core properties are therefore `NOT_COVERED` on the hosted runner, not `REFUTED` and not inherited from the local result. The Windows job remains failed and uploads bounded JSON/stdout/stderr evidence.
+
 ### Linux isolated-worker pilot
 
 The local Docker Desktop/WSL2 pilot used only an already-cached image pinned as `curlimages/curl@sha256:08e466006f0860e54fc299378de998935333e0e130a15f6f98482e9f8dab3058`. It independently observed non-root UID 65534, `NoNewPrivs=1`, zero effective capabilities, read-only rootfs, bounded tmpfs, `network=none`, TEST-NET denial, PID/memory/CPU/nofile limits, host-side synthetic bearer rejection, scoped request rejection, and clean recovery. Report SHA-256: `571f206d7fee0007ce51fb4f1ab6ffc66dd8d913db44bc1625d670987b273741`.
@@ -48,7 +50,7 @@ This is `VERIFIED_LOCAL_PILOT`, not production enforcement. The daemon was not r
 
 ## Independent test summary
 
-- Unit suite: 176 tests, normal/repeat/Python `-O`, all passed locally.
+- Unit suite: 177 tests, normal/repeat/Python `-O`, all passed locally.
 - Gateway input/report mutants: 15 `KILLED`; zero `SURVIVED`, `NOT_APPLIED`, `CRASHED`, or `CONTROL_BROKEN`.
 - Gateway physical source mutants: 16 `KILLED`; all had passing baselines and restored controls.
 - Integrity physical mutants: 11 `KILLED`; all had passing baselines and restored controls.

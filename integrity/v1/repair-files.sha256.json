@@ -1,10 +1,10 @@
 {
   "schema": "guardian.repair-files.v1",
   "additions": {
-    "DEFECT_REGISTER.md": "209c346883c6f0cf8e487a878f2c193e9865d40c79cd1a459b5fcaabbdfbec53",
-    "INDEPENDENT_REPLAY.md": "3f2d0f88436a0d5ac42257d6133c1b40572b1b668a3e31671fd0826f07b92feb",
+    "DEFECT_REGISTER.md": "deac4802b1b8d149e6264a9ee4b56f1338573b8267bca74901a48d6acdcb620f",
+    "INDEPENDENT_REPLAY.md": "03f5a076442a2ba02121215af48da695f3d5f99ca9eb872075684d567cc75940",
     "MUTATION_REPORT.md": "c0a97c16760cd22cad7cde94ec4f466c24b691f28aec446eb951d8fd1bb2d090",
-    "REMAINING_LIMITATIONS.md": "e0edd083b8c8170cde83e0e08f244dc71157580b0835b6760a97f2001a0794b0",
+    "REMAINING_LIMITATIONS.md": "0c7391972ddc77a84e5f8abf1d02f73759ef4fc0d3265236280e337646855ae5",
     "research/gateway_abuse_replay_v1/__init__.py": "3046086b9c561ca0090366f241daf01d62750c91e721996b7f93394d790bae93",
     "research/gateway_abuse_replay_v1/cli.py": "82bf304040dda949b038c9039b9ff2039fb93eb8fb7bf6f75d92ed6b41600bf5",
     "research/gateway_abuse_replay_v1/detector.py": "a7f80e4107726cfcf0fec70d388130fd10ca702eb77ea196458fe9c2facf1657",
@@ -21,16 +21,16 @@
     "research/linux_isolated_worker_v1/pilot.py": "66eecf08c5aeeacef443ec9ed81b371b8573c61d6105d57ca7495944fff9cfc0",
     "research/linux_isolated_worker_v1/README.md": "06c895ae3f10100e8158167ae7860b65ed26230a55f3236c13b2cc2d7ad47a11",
     "research/linux_isolated_worker_v1/worker.sh": "087472178f5549fe36d5187821fb6e81993904be71023e43d56dae5bb6c23eae",
-    "SECURITY_REPAIR_REPORT.md": "3f8066e3f31b6dfd7d17d7c3805cab712e78f062433ce65ea8abcadd70d0c1eb",
+    "SECURITY_REPAIR_REPORT.md": "210fa022d482a062bed93e70e31a187fe5535c25f65df42113c3758c3c0e6977",
     "tests/test_gateway_abuse_replay_v1.py": "783563d606b8b9e3d20a0d4848759cb223ce3230255093df6710c4b62b37a020",
     "tests/test_linux_pilot_v1.py": "3023c58458cd080228173f6643d79039a454ef2896d58231fa8d34931aea94ab",
-    "tests/test_windows_assessment_v1.py": "67d665e81da0a387ee5f07f207ae71ff6c508a3eb430851557c053ae0aad9fc1",
+    "tests/test_windows_assessment_v1.py": "9bb4f7ad472c499eab57579d102bf46156eee6b5d96f3ff9bf88b33ebee44893",
     "tools/audit_v0_bindings.py": "ed36c232d676ccb4a81e02c3e9d22bbfe9db276771f90ecbc79ddc8fe4ea0462",
     "tools/integrity_mutations_v1.py": "678443cd4cdd39a216ddfc74efa90080ae5c76870f663189c3d06012d7bd6543",
     "tools/integrity_v1.py": "5db9f8eec974b73bb29cf3c293060d494ee0ec02756fbfeb26a50adfc75fd159",
     "tools/source_mutations_v1.py": "85a671edd9d7c3fc6f34adb5b2076ac8313ce992d3a38e6acec36671212a6570",
-    "tools/windows_assessment_v1.py": "e8b0833c216f7dcdee7283dd420c29a082cfdc361bb10d63a826b8b113b4ed3f",
-    "verification/security-repair-v1.json": "31024c41a9008c02c6b46791cdc8b702b8f1567a03f91469a17af2f53bde0a6f"
+    "tools/windows_assessment_v1.py": "41b0d69cfb9917a828a952a6533313f1faa1b2f95008391d790984e5c4d780a6",
+    "verification/security-repair-v1.json": "363526ab22e04af8dc1645a3990ea53e459d45ff8a5b92943b27920c41bd157f"
   },
   "replacements": {}
 }

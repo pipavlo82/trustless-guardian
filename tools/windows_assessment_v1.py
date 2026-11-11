@@ -36,6 +36,15 @@ def named(cases, name):
     return next((row for row in cases if row.get("name") == name), None)
 
 
+def campaign_control_causes(cases, scenarios):
+    causes = []
+    if not cases or any("control_broken" in row for row in cases):
+        causes.append("V02_CAMPAIGN_CONTROL_BROKEN")
+    if not scenarios or any("control_broken" in row for row in scenarios):
+        causes.append("V04_CAMPAIGN_CONTROL_BROKEN")
+    return causes
+
+
 def run(out):
     out = Path(out).resolve(); out.mkdir(parents=True, exist_ok=False)
     report = {"schema": "guardian.windows-security-assessment.v1", "platform": platform.platform(),
@@ -81,18 +90,32 @@ def run(out):
         v02_report = json.loads((v02 / "report.json").read_bytes()) if (v02 / "report.json").exists() else {}
         v04_report = json.loads((v04 / "report.json").read_bytes()) if (v04 / "report.json").exists() else {}
         cases = v02_report.get("cases", [])
-        checks = {
-            "appcontainer_identity": "VERIFIED" if all((named(cases, key) or {}).get("passed") for key in ("caller_identity", "broker_os_scope")) else "REFUTED",
-            "named_pipe_authentication": "VERIFIED" if all((named(cases, key) or {}).get("passed") for key in ("unauthorized_pipe_client", "caller_identity", "server_identity")) else "REFUTED",
-            "broker_permissions": "VERIFIED" if (named(cases, "broker_os_scope") or {}).get("passed") else "REFUTED",
-            "file_access_bypass": "VERIFIED" if (named(cases, "agent_os_bypass") or {}).get("passed") and (named(cases, "agent_os_bypass") or {}).get("operations") == 9 else "REFUTED",
-            "execution_and_crash_recovery": "VERIFIED" if v04_report.get("passed") and len(v04_report.get("scenarios", [])) == 15 else "REFUTED",
-            "restricted_token_child_startup": startup_status["status"],
-        }
+        scenarios = v04_report.get("scenarios", [])
+        control_causes = campaign_control_causes(cases, scenarios)
+        if control_causes:
+            checks = {
+                "appcontainer_identity": "NOT_COVERED",
+                "named_pipe_authentication": "NOT_COVERED",
+                "broker_permissions": "NOT_COVERED",
+                "file_access_bypass": "NOT_COVERED",
+                "execution_and_crash_recovery": "NOT_COVERED",
+                "restricted_token_child_startup": startup_status["status"],
+            }
+            report["campaign_precondition"] = "CONTROL_BROKEN"
+            report["control_broken_causes"] = control_causes
+        else:
+            checks = {
+                "appcontainer_identity": "VERIFIED" if all((named(cases, key) or {}).get("passed") for key in ("caller_identity", "broker_os_scope")) else "REFUTED",
+                "named_pipe_authentication": "VERIFIED" if all((named(cases, key) or {}).get("passed") for key in ("unauthorized_pipe_client", "caller_identity", "server_identity")) else "REFUTED",
+                "broker_permissions": "VERIFIED" if (named(cases, "broker_os_scope") or {}).get("passed") else "REFUTED",
+                "file_access_bypass": "VERIFIED" if (named(cases, "agent_os_bypass") or {}).get("passed") and (named(cases, "agent_os_bypass") or {}).get("operations") == 9 else "REFUTED",
+                "execution_and_crash_recovery": "VERIFIED" if v04_report.get("passed") and len(scenarios) == 15 else "REFUTED",
+                "restricted_token_child_startup": startup_status["status"],
+            }
         core = all(value == "VERIFIED" for key, value in checks.items() if key != "restricted_token_child_startup")
         report.update(status="VERIFIED" if core and checks["restricted_token_child_startup"] == "VERIFIED" else "PARTIAL" if core else "HOLD",
                       checks=checks, startup_classification=startup_status, startup_observation=startup_record,
-                      v02_case_count=len(cases), v04_scenario_count=len(v04_report.get("scenarios", [])),
+                      v02_case_count=len(cases), v04_scenario_count=len(scenarios),
                       limited_child_requirement="REQUIRED_FOR_WINDOWS_GATE", hosted_runner="NOT_AN_INDEPENDENT_SECOND_MACHINE")
     (out / "report.json").write_bytes(json.dumps(report, sort_keys=True, indent=2).encode("ascii") + b"\n")
     print(json.dumps(report, sort_keys=True))
