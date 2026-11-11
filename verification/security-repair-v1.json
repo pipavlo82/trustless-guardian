@@ -1,0 +1,69 @@
+{
+  "base_commit": "23bc33f81a7216b11efd7e614eb065275fd67a1e",
+  "branch": "repair/full-guardian-security-v1",
+  "gateway": {
+    "binding_defects_reproduced": 4,
+    "input_report_mutations": {
+      "CONTROL_BROKEN": 0,
+      "CRASHED": 0,
+      "KILLED": 15,
+      "NOT_APPLIED": 0,
+      "SURVIVED": 0
+    },
+    "metrics_scope": "PREDECLARED_SYNTHETIC_ONLY",
+    "source_mutations": {
+      "CONTROL_BROKEN": 0,
+      "CRASHED": 0,
+      "KILLED": 16,
+      "NOT_APPLIED": 0,
+      "SURVIVED": 0
+    },
+    "v0_original_metrics": {"FN": 18, "FP": 6, "TN": 276, "TP": 52},
+    "v0_projection_on_v1_holdout": {"FN": 4, "FP": 8, "TN": 80, "TP": 4},
+    "v1_holdout": {"FN": 0, "FP": 0, "TN": 88, "TP": 8}
+  },
+  "historical": {
+    "legacy_inventory_entries": 210,
+    "legacy_manifest_sha256": "7638540733f2654d4f95cd6e5294e7bdb4026c3e0a835a6a29092d41069303cb",
+    "pr1_head": "03f6ffc6f4b983cfcc39f401f47165021e67e673",
+    "pr1_portable_replay": "PASS",
+    "pr3_additions_entries": 26
+  },
+  "implementation_commit": "d0a7cbf593d4563ef0406b00b76331980934da59",
+  "integrity_mutations": {
+    "CONTROL_BROKEN": 0,
+    "CRASHED": 0,
+    "KILLED": 11,
+    "NOT_APPLIED": 0,
+    "SURVIVED": 0
+  },
+  "linux": {
+    "checks_passed": 14,
+    "checks_total": 14,
+    "production_authenticated_invocation": "NOT_COVERED",
+    "rootless_daemon": "NOT_COVERED",
+    "status": "VERIFIED_LOCAL_PILOT"
+  },
+  "production_ready": false,
+  "schema": "guardian.security-repair-verification.v1",
+  "tests": {
+    "modes": ["normal", "repeat", "python-O"],
+    "passed_each": 176,
+    "status": "PASS"
+  },
+  "verdict": "HOLD",
+  "windows": {
+    "checks": {
+      "appcontainer_identity": "VERIFIED",
+      "broker_permissions": "VERIFIED",
+      "execution_and_crash_recovery": "VERIFIED",
+      "file_access_bypass": "VERIFIED",
+      "named_pipe_authentication": "VERIFIED",
+      "restricted_token_child_startup": "NOT_COVERED"
+    },
+    "local_status": "PARTIAL",
+    "production_ready": false,
+    "v02_case_count": 41,
+    "v04_scenario_count": 15
+  }
+}

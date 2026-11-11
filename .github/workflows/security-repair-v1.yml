@@ -1,0 +1,98 @@
+name: Security repair v1
+
+on:
+  push:
+    branches: [repair/full-guardian-security-v1]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  portable-recompute:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - name: Checkout exact candidate
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Unit tests normal
+        run: python -B -m unittest discover -s tests -q
+      - name: Unit tests repeat
+        run: python -B -m unittest discover -s tests -q
+      - name: Unit tests optimized
+        run: python -B -O -m unittest discover -s tests -q
+      - name: Recompute gateway evidence
+        run: |
+          mkdir -p build/gateway-v1
+          python -B -m research.gateway_abuse_replay_v1.cli fixture --out build/gateway-v1/events.jsonl
+          python -B -m research.gateway_abuse_replay_v1.cli run --events build/gateway-v1/events.jsonl --out build/gateway-v1/report.json
+          python -B -m research.gateway_abuse_replay_v1.cli verify --events build/gateway-v1/events.jsonl --report build/gateway-v1/report.json
+          python -B -m research.gateway_abuse_replay_v1.cli evaluate --out build/gateway-v1/holdout.json
+          python -B -m research.gateway_abuse_replay_v1.cli mutations --out build/gateway-v1/input-report-mutations.json
+          python -B tools/audit_v0_bindings.py --out build/gateway-v1/v0-binding-audit.json
+      - name: Physical source mutations
+        run: python -B tools/source_mutations_v1.py --out build/source-mutations-v1/report.json
+      - name: Layered integrity and physical mutations
+        run: |
+          python -B tools/integrity_v1.py --policy-sha256 8c16b7b77b51d65c63f89854d9f3a12194f5a07884510e5c2f2abcfc8da7cdc6 --out build/integrity-v1/report.json
+          python -B tools/integrity_mutations_v1.py --policy-sha256 8c16b7b77b51d65c63f89854d9f3a12194f5a07884510e5c2f2abcfc8da7cdc6 --out build/integrity-v1/mutations.json
+      - name: Replay frozen PR 1 portable invariants
+        shell: bash
+        run: |
+          git fetch --no-tags origin 03f6ffc6f4b983cfcc39f401f47165021e67e673
+          git worktree add --detach "$RUNNER_TEMP/guardian-pr1" 03f6ffc6f4b983cfcc39f401f47165021e67e673
+          python -B "$RUNNER_TEMP/guardian-pr1/tools/validate_v07.py" --portable --out "$RUNNER_TEMP/v07-portable"
+      - name: Hosted Linux isolation remains explicit
+        run: python -B -m research.linux_isolated_worker_v1.pilot --out build/linux-pilot-v1/hosted.json
+      - name: Upload portable evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: security-repair-v1-portable
+          path: build/
+          if-no-files-found: error
+
+  windows-enforcement:
+    runs-on: windows-2022
+    timeout-minutes: 30
+    steps:
+      - name: Checkout exact candidate
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Unit tests normal repeat and optimized
+        shell: pwsh
+        run: |
+          python -B -m unittest discover -s tests -q
+          python -B -m unittest discover -s tests -q
+          python -B -O -m unittest discover -s tests -q
+      - name: Layered integrity
+        run: python -B tools/integrity_v1.py --policy-sha256 8c16b7b77b51d65c63f89854d9f3a12194f5a07884510e5c2f2abcfc8da7cdc6 --out build/integrity-v1/report.json
+      - name: Execute native Windows assessment
+        run: python -B tools/windows_assessment_v1.py --out build/windows-assessment-v1
+      - name: Upload Windows evidence before gate
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: security-repair-v1-windows
+          path: build/
+          if-no-files-found: error
+      - name: Enforce Windows security gate
+        shell: pwsh
+        run: |
+          $report = Get-Content build/windows-assessment-v1/report.json -Raw | ConvertFrom-Json
+          if ($report.status -ne 'VERIFIED') {
+            Write-Error "Windows gate is $($report.status); production promotion remains blocked."
+          }
