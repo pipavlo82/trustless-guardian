@@ -1,0 +1,33 @@
+{
+  "schema": "guardian.layered-integrity.v1",
+  "base_commit": "23bc33f81a7216b11efd7e614eb065275fd67a1e",
+  "layers": [
+    {
+      "name": "legacy-v07",
+      "manifest": "artifacts.sha256.json",
+      "manifest_sha256": "7638540733f2654d4f95cd6e5294e7bdb4026c3e0a835a6a29092d41069303cb",
+      "entries": 210
+    },
+    {
+      "name": "pr3-research-v0",
+      "manifest": "integrity/v1/pr3-additions.sha256.json",
+      "manifest_sha256": "f2dcbc0f15e18845502bfd85ad397b9b201a4f0cbce8261ec5cc0d5756d28a87",
+      "entries": 26
+    }
+  ],
+  "repair": {
+    "manifest": "integrity/v1/repair-files.sha256.json",
+    "manifest_sha256": "179a4bc0fbd204aa533206ef92ed5725a74c417f2a90326563bc406c3eec048b",
+    "additions": 32,
+    "replacements": 1
+  },
+  "control_files": [
+    "artifacts.sha256.json",
+    "integrity/v1/pr3-additions.sha256.json",
+    "integrity/v1/repair-files.sha256.json",
+    "integrity/v1/policy.json"
+  ],
+  "bootstrap_trust": [
+    ".github/workflows/security-repair-v1.yml"
+  ]
+}
