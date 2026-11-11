@@ -52,10 +52,12 @@ def safer_stage_acceptable(token, user_sha256):
     )
 
 
-def wrapped_argv(target, args, marker):
+def wrapped_argv(target, args, marker, stdout, stderr):
     script = (
         "import pathlib,runpy,sys;"
         "pathlib.Path(" + repr(str(marker)) + ").write_bytes(b'started\\n');"
+        "sys.stdout=open(" + repr(str(stdout)) + ",'w',encoding='utf-8',newline='\\n');"
+        "sys.stderr=open(" + repr(str(stderr)) + ",'w',encoding='utf-8',newline='\\n');"
         "sys.argv=" + repr([str(target), *[str(value) for value in args]]) + ";"
         "runpy.run_path(" + repr(str(target)) + ",run_name='__main__')"
     )
@@ -88,9 +90,10 @@ def stage(out, proof, marker, timeout, target, target_args):
         if proof.exists():
             raise ValueError("fresh startup proof required")
         write(proof, proof_record)
+        stdout = out.with_suffix(".target.stdout"); stderr = out.with_suffix(".target.stderr")
         row = launch(
             "restricted-validator", "CreateProcessAsUserW", final, before, marker,
-            wrapped_argv(resolved, target_args, marker), timeout=timeout,
+            wrapped_argv(resolved, target_args, marker, stdout, stderr), timeout=timeout,
         )
         record["launch"] = row
         record["parent_after"] = inspect(current)

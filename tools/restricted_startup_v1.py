@@ -41,7 +41,11 @@ class PrivateDesktop:
             win.a, "ConvertStringSecurityDescriptorToSecurityDescriptorW", w.BOOL,
             w.LPCWSTR, w.DWORD, c.POINTER(win.P), win.P,
         )
-        win.check(convert("D:P(A;;GA;;;SY)(A;;GA;;;" + user_sid + ")", 1, c.byref(self.sd), None))
+        sddl = (
+            "D:P(A;;GA;;;SY)(A;;GA;;;" + user_sid + ")"
+            "(A;;GA;;;S-1-15-2-1)S:(ML;;NW;;;LW)"
+        )
+        win.check(convert(sddl, 1, c.byref(self.sd), None))
         sa = SECURITY_ATTRIBUTES(c.sizeof(SECURITY_ATTRIBUTES), self.sd, False)
         create_station = win.api(
             self.user, "CreateWindowStationW", w.HANDLE, w.LPCWSTR, w.DWORD,
