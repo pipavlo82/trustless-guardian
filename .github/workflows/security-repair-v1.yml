@@ -41,8 +41,8 @@ jobs:
         run: python -B tools/source_mutations_v1.py --out build/source-mutations-v1/report.json
       - name: Layered integrity and physical mutations
         run: |
-          python -B tools/integrity_v1.py --policy-sha256 c187d6e0cc88ffca585618d24bd1f6cf5b1a5ff0eadf7c224248391eb483ddef --out build/integrity-v1/report.json
-          python -B tools/integrity_mutations_v1.py --policy-sha256 c187d6e0cc88ffca585618d24bd1f6cf5b1a5ff0eadf7c224248391eb483ddef --out build/integrity-v1/mutations.json
+          python -B tools/integrity_v1.py --policy-sha256 7c7d776aa1e5bc19b5407e10037b6d3bf8fb5a1d912e9be3668f76649b5dbaa6 --out build/integrity-v1/report.json
+          python -B tools/integrity_mutations_v1.py --policy-sha256 7c7d776aa1e5bc19b5407e10037b6d3bf8fb5a1d912e9be3668f76649b5dbaa6 --out build/integrity-v1/mutations.json
       - name: Replay frozen PR 1 portable invariants
         shell: bash
         run: |
@@ -79,12 +79,12 @@ jobs:
           python -B -m unittest discover -s tests -q
           python -B -O -m unittest discover -s tests -q
       - name: Layered integrity
-        run: python -B tools/integrity_v1.py --policy-sha256 c187d6e0cc88ffca585618d24bd1f6cf5b1a5ff0eadf7c224248391eb483ddef --out build/integrity-v1/report.json
+        run: python -B tools/integrity_v1.py --policy-sha256 7c7d776aa1e5bc19b5407e10037b6d3bf8fb5a1d912e9be3668f76649b5dbaa6 --out build/integrity-v1/report.json
       - name: Fetch and verify pinned Windows test runtime
         run: python -B tools/prepare.py
       - name: Execute native Windows assessment
         continue-on-error: true
-        run: python -B tools/windows_assessment_v1.py --out build/windows-assessment-v1
+        run: python -B tools/restricted_exec_v1.py --out build/windows-launch-v1.json --proof build/windows-startup-proof-v1.json --timeout 1200 tools/windows_assessment_v1.py --out build/windows-assessment-v1 --startup-proof build/windows-startup-proof-v1.json
       - name: Upload Windows evidence before gate
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
@@ -97,6 +97,9 @@ jobs:
             build/windows-assessment-v1/**/*.stderr
             build/windows-assessment-v1/**/*.log
             build/windows-assessment-v1/**/*.marker
+            build/windows-launch-v1*.json
+            build/windows-launch-v1*.marker
+            build/windows-startup-proof-v1.json
           if-no-files-found: error
       - name: Enforce Windows security gate
         shell: pwsh

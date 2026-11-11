@@ -28,9 +28,10 @@
     "tools/audit_v0_bindings.py": "ed36c232d676ccb4a81e02c3e9d22bbfe9db276771f90ecbc79ddc8fe4ea0462",
     "tools/integrity_mutations_v1.py": "678443cd4cdd39a216ddfc74efa90080ae5c76870f663189c3d06012d7bd6543",
     "tools/integrity_v1.py": "5db9f8eec974b73bb29cf3c293060d494ee0ec02756fbfeb26a50adfc75fd159",
+    "tools/restricted_exec_v1.py": "fd972a00da65f9d58300cca61cb57c51aa7990ae1c306e4408a816271094c802",
     "tools/restricted_startup_v1.py": "d05f4bd607223d7d8a5a8a984717663aa882ac71d2268df1ee44c9b1b9dd169d",
     "tools/source_mutations_v1.py": "85a671edd9d7c3fc6f34adb5b2076ac8313ce992d3a38e6acec36671212a6570",
-    "tools/windows_assessment_v1.py": "7b3737661b8340c92ad8cae4864eb4824e23984dccc9058acd5dbf33a6789ab7",
+    "tools/windows_assessment_v1.py": "86c5003c71e9edceb007fa7524c8383f69e3ea1cb4c81b1443ef02ee2e766e65",
     "verification/security-repair-v1.json": "363526ab22e04af8dc1645a3990ea53e459d45ff8a5b92943b27920c41bd157f"
   },
   "replacements": {}
