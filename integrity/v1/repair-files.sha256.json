@@ -1,10 +1,10 @@
 {
   "schema": "guardian.repair-files.v1",
   "additions": {
-    "DEFECT_REGISTER.md": "deac4802b1b8d149e6264a9ee4b56f1338573b8267bca74901a48d6acdcb620f",
-    "INDEPENDENT_REPLAY.md": "03f5a076442a2ba02121215af48da695f3d5f99ca9eb872075684d567cc75940",
-    "MUTATION_REPORT.md": "c0a97c16760cd22cad7cde94ec4f466c24b691f28aec446eb951d8fd1bb2d090",
-    "REMAINING_LIMITATIONS.md": "0c7391972ddc77a84e5f8abf1d02f73759ef4fc0d3265236280e337646855ae5",
+    "DEFECT_REGISTER.md": "58d7b83ab07ea61a48921aa5b0b07bb30570ac468eabc77057db020e323bf595",
+    "INDEPENDENT_REPLAY.md": "bb6241a0bb2073956ca1ea8709bd6d382cecc0a6dd6aaba8c0902088fa723107",
+    "MUTATION_REPORT.md": "1d300cb043b698a63670f1b7f4bf659da16cdad4a33f18fbb851506f372371d8",
+    "REMAINING_LIMITATIONS.md": "ee9a8b062f8237c08125c39265884e2b958b7fe803752dcd2851efee7573ce89",
     "research/gateway_abuse_replay_v1/__init__.py": "3046086b9c561ca0090366f241daf01d62750c91e721996b7f93394d790bae93",
     "research/gateway_abuse_replay_v1/cli.py": "82bf304040dda949b038c9039b9ff2039fb93eb8fb7bf6f75d92ed6b41600bf5",
     "research/gateway_abuse_replay_v1/detector.py": "a7f80e4107726cfcf0fec70d388130fd10ca702eb77ea196458fe9c2facf1657",
@@ -21,7 +21,7 @@
     "research/linux_isolated_worker_v1/pilot.py": "66eecf08c5aeeacef443ec9ed81b371b8573c61d6105d57ca7495944fff9cfc0",
     "research/linux_isolated_worker_v1/README.md": "06c895ae3f10100e8158167ae7860b65ed26230a55f3236c13b2cc2d7ad47a11",
     "research/linux_isolated_worker_v1/worker.sh": "087472178f5549fe36d5187821fb6e81993904be71023e43d56dae5bb6c23eae",
-    "SECURITY_REPAIR_REPORT.md": "210fa022d482a062bed93e70e31a187fe5535c25f65df42113c3758c3c0e6977",
+    "SECURITY_REPAIR_REPORT.md": "b6c0bf2bf9907d13ded01b38db3f7e230acca53834d6b25e42d9aabd52a3848f",
     "tests/test_gateway_abuse_replay_v1.py": "783563d606b8b9e3d20a0d4848759cb223ce3230255093df6710c4b62b37a020",
     "tests/test_linux_pilot_v1.py": "3023c58458cd080228173f6643d79039a454ef2896d58231fa8d34931aea94ab",
     "tests/test_windows_assessment_v1.py": "9bb4f7ad472c499eab57579d102bf46156eee6b5d96f3ff9bf88b33ebee44893",
@@ -32,7 +32,7 @@
     "tools/restricted_startup_v1.py": "6ff7471aaa1745c4b4eeed958decaf4847aa8abf9953840e1bb2071c67200d84",
     "tools/source_mutations_v1.py": "85a671edd9d7c3fc6f34adb5b2076ac8313ce992d3a38e6acec36671212a6570",
     "tools/windows_assessment_v1.py": "d3b87ff2904eef8e3fa2ee08c19153288867f6aa6d771868c26f6e3ffe80694c",
-    "verification/security-repair-v1.json": "363526ab22e04af8dc1645a3990ea53e459d45ff8a5b92943b27920c41bd157f"
+    "verification/security-repair-v1.json": "b16bf2338d55b13e5ff6e60f79a821cefed61b4d1085b6f4162f515acd185117"
   },
   "replacements": {
     ".github/workflows/guardian.yml": {

@@ -27,6 +27,8 @@ The first source-mutation run from the fresh clone returned `CONTROL_BROKEN=16`:
 
 The first native Windows assessment from the fresh clone was also `CONTROL_BROKEN`: the ignored pinned embedded runtime had not been prepared, so v0.2 failed before producing cases and all 15 v0.4 scenarios recorded missing-runtime controls. The assessment now classifies this precondition as `CONTROL_BROKEN/NOT_COVERED`, the workflow runs the hash-verifying preparation step, and the full native campaigns were rerun successfully after preparation.
 
+Hosted Windows startup repair also retained each failed control: direct `CreateProcessWithTokenW` stalled in `LpcReply`; direct LUA `CreateProcessAsUserW` exited `0xC0000142`; and the first private-desktop attempt started the restricted process but left AppContainer broker controls broken. None was counted as PASS. Only the two-stage SAFER/Medium plus direct LUA launch, with the final disposable Low/AppContainer desktop and matching pre-resume/running-token proof, advanced to the final 41/41 and 15/15 campaigns.
+
 ## Historical mutation truth
 
 The repair does not rewrite historical results. PR #1 continues to report `IMMUTABLE_V06_2_KILLED_2_CONTROL_BROKEN`, and older v0.3 evidence includes its recorded survivor. A passing new repair population cannot erase those frozen outcomes.
