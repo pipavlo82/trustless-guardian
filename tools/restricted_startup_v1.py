@@ -236,7 +236,7 @@ def run(out):
         "manual_privilege_adjustment": False,
         "attempts": [],
     }
-    current = w.HANDLE(); restricted = None; launch_token = w.HANDLE(); safer = None; private = None
+    current = w.HANDLE(); restricted = None; launch_token = w.HANDLE(); safer = None; safer_lua = None; private = None
     win.check(win.open_token(win.current(), 0x8B, c.byref(current)))
     try:
         before = inspect(current); record["parent_before"] = before
@@ -265,6 +265,9 @@ def run(out):
             set_medium_integrity(safer)
             record["safer_normal_user_token"] = inspect(safer)
             record["safer_token_acceptable"] = acceptable(record["safer_normal_user_token"], before["user_sha256"])
+            safer_lua = reduced_token(safer)
+            record["safer_then_lua_token"] = inspect(safer_lua)
+            record["safer_then_lua_acceptable"] = acceptable(record["safer_then_lua_token"], before["user_sha256"])
         except OSError as exc:
             record["safer_token_error"] = type(exc).__name__ + ": " + str(exc)
         cases = [
@@ -275,8 +278,16 @@ def run(out):
             ("python-private-desktop", "CreateProcessAsUserW", launch_token, private.qualified_name, 20, None),
             ("legacy-with-token", "CreateProcessWithTokenW", launch_token, None, 5, None),
         ]
-        if safer and record.get("safer_token_acceptable"):
-            cases.insert(4, ("safer-python-private-desktop", "CreateProcessAsUserW", safer, private.qualified_name, 20, None))
+        if safer:
+            cases.insert(4, (
+                "safer-python-private-desktop", "CreateProcessAsUserW", safer,
+                private.qualified_name, 20, record["safer_normal_user_token"],
+            ))
+        if safer_lua and record.get("safer_then_lua_acceptable"):
+            cases.insert(5, (
+                "safer-lua-python-private-desktop", "CreateProcessAsUserW", safer_lua,
+                private.qualified_name, 20, None,
+            ))
         for name, api_name, token, desktop, timeout, expected in cases:
             marker = out.with_suffix("." + name + ".marker")
             if name.startswith("cmd"):
@@ -288,8 +299,8 @@ def run(out):
             after = inspect(current)
             row["parent_token_unchanged"] = after == before
             record["attempts"].append(row)
-        safer_primary = next((row for row in record["attempts"] if row["name"] == "safer-python-private-desktop"), None)
-        primary = safer_primary if safer_primary and safer_primary.get("started") else next(
+        safer_lua_primary = next((row for row in record["attempts"] if row["name"] == "safer-lua-python-private-desktop"), None)
+        primary = safer_lua_primary if safer_lua_primary and safer_lua_primary.get("started") else next(
             row for row in record["attempts"] if row["name"] == "python-private-desktop"
         )
         positive = next(row for row in record["attempts"] if row["name"] == "parent-createprocess-positive-control")
@@ -308,7 +319,7 @@ def run(out):
     finally:
         if private:
             private.close()
-        for handle in (safer, launch_token, restricted, current):
+        for handle in (safer_lua, safer, launch_token, restricted, current):
             if handle:
                 win.close(handle)
         out.write_bytes(json.dumps(record, sort_keys=True, indent=2).encode("ascii") + b"\n")
