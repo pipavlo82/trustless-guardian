@@ -1,0 +1,131 @@
+{
+  "schema": "guardian.replay-challenge-verification.v1",
+  "recorded_date": "2026-11-12",
+  "base_commit": "5d98af242d4869d07bbfa6c5fb0028d7bb31d67d",
+  "branch": "repair/guardian-replay-challenge-v1",
+  "scope": "LOCAL_SYNTHETIC_KEYS_REQUESTS_STATE_AND_AVAILABLE_PLATFORM_CONTROLS",
+  "production_ready": false,
+  "production_verdict": "HOLD",
+  "windows": {
+    "python": "3.12.10",
+    "guardian_per_mode": {
+      "pass": 177,
+      "fail": 0,
+      "error": 0,
+      "skip": 0,
+      "modes": [
+        "normal",
+        "repeat",
+        "optimized"
+      ]
+    },
+    "authentication_per_mode": {
+      "pass": 58,
+      "fail": 0,
+      "error": 0,
+      "skip": 0,
+      "modes": [
+        "normal",
+        "repeat",
+        "optimized"
+      ]
+    },
+    "replay_challenge_per_mode": {
+      "pass": 53,
+      "fail": 0,
+      "error": 0,
+      "skip": 0,
+      "modes": [
+        "normal",
+        "repeat",
+        "optimized"
+      ]
+    },
+    "replay_source_mutations": {
+      "killed": 19,
+      "survived": 0,
+      "not_applied": 0,
+      "crashed": 0,
+      "control_broken": 0,
+      "report_sha256": "588b3868befdbbb6e7e2776228d4e315d58120c5f3a79a6a62ffd3bfdcb729ff"
+    },
+    "native_assessment": {
+      "status": "CONTROL_BROKEN",
+      "reason": "ELEVATED_CALLER_REQUIRED",
+      "report_sha256": "a74d39f663b86e25a029de3106f13ee22b09c7938736030009a7dc8da4dd58d4"
+    }
+  },
+  "linux": {
+    "python": "3.12.3",
+    "guardian_per_mode": {
+      "pass": 177,
+      "fail": 0,
+      "error": 0,
+      "skip": 0,
+      "modes": [
+        "normal",
+        "repeat",
+        "optimized"
+      ]
+    },
+    "authentication_per_mode": {
+      "pass": 58,
+      "fail": 0,
+      "error": 0,
+      "skip": 0,
+      "modes": [
+        "normal",
+        "repeat",
+        "optimized"
+      ]
+    },
+    "replay_challenge_per_mode": {
+      "pass": 53,
+      "fail": 0,
+      "error": 0,
+      "skip": 0,
+      "modes": [
+        "normal",
+        "repeat",
+        "optimized"
+      ]
+    },
+    "replay_source_mutations": {
+      "killed": 19,
+      "survived": 0,
+      "not_applied": 0,
+      "crashed": 0,
+      "control_broken": 0,
+      "report_sha256": "91e2602067b2ac4b20771acfd690b54a67818fc5e9eab2b1b5a2af3b4c676490"
+    },
+    "user_namespace": "VERIFIED",
+    "rootless_container_daemon": "NOT_COVERED",
+    "container_pilot": {
+      "status": "NOT_COVERED",
+      "reason": "PINNED_LOCAL_IMAGE_UNAVAILABLE",
+      "image_pull": false,
+      "report_sha256": "bc40beb8ac113900ef59b2c6a6b1c1dde6895768b54fb045342fe2fe14aa7ed0"
+    }
+  },
+  "historical_development_controls": {
+    "initial_population": {
+      "killed": 15,
+      "survived": 1,
+      "report_sha256": "ef299d963a3319edc933280fde44969577fe185e2edf756e628c1ad4a9f46c65"
+    },
+    "after_atomic_witness": {
+      "killed": 16,
+      "survived": 0,
+      "report_sha256": "852da809f35fba97a4e33bf0a900f4ad391c8a65179135eec9a9d0cc75d2e765"
+    },
+    "later_not_applied_run": {
+      "killed": 18,
+      "not_applied": 1,
+      "report_sha256": "fe0d040498b446240b3b16deb02a3b331f2c00e8d5e0cddfa48f9b9dedb0f15b"
+    }
+  },
+  "no_image_pull": true,
+  "no_vertice_access": true,
+  "no_production_credentials": true,
+  "no_merge": true
+}

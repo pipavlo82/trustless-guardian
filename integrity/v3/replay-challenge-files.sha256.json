@@ -1,0 +1,33 @@
+{
+  "additions": {
+    "REPLAY_CHALLENGE_INDEPENDENT_REPLAY.md": "a05fbaad74a06ec114ee07ab812d17bf4482b7d521c32ce96cc60b7420512c75",
+    "REPLAY_CHALLENGE_MUTATION_REPORT.md": "50565416ca814074271b79522951d1dae73dce1c680edcbd4f0e58fc97c6c475",
+    "REPLAY_CHALLENGE_REMAINING_LIMITATIONS.md": "b200fcdd1d53e575ee0e286a79121b45d1ea7fde04b510b2873cb22cc40665f5",
+    "REPLAY_CHALLENGE_SECURITY_REPORT.md": "3b0e35ac1a605f25c477c5592f7096183fab6a082d404338580948797680b953",
+    "research/replay_challenge_v1/__init__.py": "16b85208e8c395edc6725593e8b615577f4efffa77c109eb5beacfa93255f508",
+    "research/replay_challenge_v1/challenge.py": "be05a8333097a3df9b2e409c4a69ac620277091ac5ea326c3dec8f34e5ce7ee8",
+    "research/replay_challenge_v1/durable.py": "1290d37f9928883ed7554e7e08e594d6c3aa001bab1bd49989e6dce80262c20d",
+    "research/replay_challenge_v1/execution.py": "0ad63289398f2d55b56841f1e85b4a804cf8bd861b19ae22590cb3873e15c502",
+    "research/replay_challenge_v1/gateway.py": "be7045c45e1b9e80da81fe2f0c027b5911adc319115d87037cc69c3af255f0db",
+    "research/replay_challenge_v1/receipt.py": "792beb3c151e336340bd878377f6a4b919a286384e3d629264af7085d3aa13e2",
+    "research/replay_challenge_v1/scoped_grant.py": "88bf32ad7a700a8432b356d0a89d0fe72b555dbad35604c1a5e4b9c6dd6c7b3c",
+    "tests_replay_v1/__init__.py": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+    "tests_replay_v1/fixtures.py": "9f613b540b79a6dd08dc6307f5a5b0605115ea52b37a095fb79897614f49f22e",
+    "tests_replay_v1/process_worker.py": "bf354421ff82078eebb78412353682cc07bc7feb1b9049b34525c1edcedf8eed",
+    "tests_replay_v1/test_replay_challenge_v1.py": "8d5e633124be2474fa5657228a980edf003869a094a808124eed34234a8a788f",
+    "tools/guardian_regression_assessment_v1.py": "ce1b9566710fd2099713eb3d4cd4ef9555a143c17b56831e5fd78720faac75fb",
+    "tools/integrity_mutations_v3.py": "8375ace7b011e4c04b0d335e741d6a9704a799136120f5425b4c7d8cdbdc6d29",
+    "tools/integrity_v3.py": "5bc02330a71ebc4caa7583ba519ed90ff8969a7158e072b950c551d32a4f8e61",
+    "tools/replay_challenge_assessment_v1.py": "7574db163159158a35fb151056768262bcb2b3768fd47d5ed36e917c552eb8df",
+    "tools/replay_challenge_mutations_v1.py": "ff7f10a971b07da53ec4321fd52ada37413bf522e41faf6ec23140acc1b0f48c",
+    "tools/verify_execution_receipt_v1.py": "493eb9f5e2fd8d805975c813e08d21eae2c5ff7ffedf4ec0c9ad27124ad39fca",
+    "verification/replay-challenge-v1.json": "bf0bf151c1dc103944aa987a3f3a5db94db8b5b4bf7499a74240b656dc3aea8b"
+  },
+  "replacements": {
+    "research/linux_isolated_worker_v2/pilot.py": {
+      "previous_sha256": "a2f3f21ee2e46b6e1762c397364e1fb94bbcb332e4c1ef95cd5651cdf34409b3",
+      "sha256": "462a8c9833e281ad47f678ec914a93548f016a4f660538044af79162b7baf224"
+    }
+  },
+  "schema": "guardian.authorized-additions.v3"
+}
