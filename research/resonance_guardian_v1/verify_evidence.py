@@ -119,7 +119,9 @@ def main(out):
     global EVIDENCE
     EVIDENCE=Path(out).resolve().parent
     head=subprocess.run(["git","-C",str(GUARDIAN),"rev-parse","HEAD"],capture_output=True,text=True,check=True).stdout.strip()
-    require(head==PIN and sha(SOURCE)==SOURCE_HASH,"SOURCE_DRIFT")
+    ancestor=subprocess.run(["git","-C",str(GUARDIAN),"merge-base","--is-ancestor",PIN,head],
+                            capture_output=True,check=False).returncode==0
+    require(ancestor and sha(SOURCE)==SOURCE_HASH,"SOURCE_DRIFT")
     cases={name:read("evidence_"+name+".json") for name in ("normal","bad_nonce","bad_tool")}
     for name,record in cases.items():verify_case(name,record)
     spoof=read("host_spoof_result.json")

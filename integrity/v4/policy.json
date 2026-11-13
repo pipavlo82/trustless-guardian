@@ -2,7 +2,7 @@
   "authorized": {
     "additions": 17,
     "manifest": "integrity/v4/resonance-ipc-files.sha256.json",
-    "manifest_sha256": "9a3bb46c011f19e9fe83979a68a818cb3c64abf21509442565c3896d7b7593b7",
+    "manifest_sha256": "18951327a8a016034beb9b40b9e241c6cb0a9af8b086f51c141488f15a390ba4",
     "replacements": 1
   },
   "base_commit": "457148f43d0cfb28b4c7c88bbf8a1d92963d77ab",

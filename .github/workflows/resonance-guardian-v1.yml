@@ -9,7 +9,7 @@ permissions:
   contents: read
 
 env:
-  INTEGRITY_V4_POLICY_SHA256: ca40a442b148b3571c0dd51a90d9567a8418aa7fd643772ff4b1064dc59aea20
+  INTEGRITY_V4_POLICY_SHA256: 9bc5fd0be81c67cee5f5561c7d26ad657695025857bc27cd04b3f28e09c9b4bc
 
 jobs:
   portable:

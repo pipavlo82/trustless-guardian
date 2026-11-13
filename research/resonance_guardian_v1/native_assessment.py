@@ -50,16 +50,30 @@ def run(output):
         for name, expected in EXPECTED.items():
             path=output/("evidence_"+name+".json")
             p=process([ROOT/"run_ipc_lab.py","--out",path,"--case",name])
+            if not path.is_file():
+                raise RuntimeError("NATIVE_CASE_"+name+"_NO_EVIDENCE; exit="+str(p.returncode)+
+                                   "; stdout_tail="+p.stdout[-350:]+
+                                   "; stderr_tail="+p.stderr[-350:])
             record=inspect(path,"verdict",expected)
-            if p.returncode!=0:raise RuntimeError("AGENT_EXIT_"+name+":"+str(p.returncode))
+            if p.returncode!=0:
+                raise RuntimeError("AGENT_EXIT_"+name+":"+str(p.returncode)+
+                                   "; stdout_tail="+p.stdout[-350:])
             report["case_results"][name]=record["verdict"]
         path=output/"host_spoof_result.json"
         p=process([ROOT/"host_spoof_lab.py","--out",path])
+        if not path.is_file():
+            raise RuntimeError("HOST_SPOOF_NO_EVIDENCE; exit="+str(p.returncode)+
+                               "; stdout_tail="+p.stdout[-350:]+
+                               "; stderr_tail="+p.stderr[-350:])
         inspect(path,"verdict","HOST_SPOOF_DENIED")
         if p.returncode:raise RuntimeError("SPOOF_EXIT")
         report["case_results"]["host_spoof"]="DENIED_CLIENT_IDENTITY"
         path=output/"outage_result.json"
         p=process([ROOT/"outage_lab.py","--out",path])
+        if not path.is_file():
+            raise RuntimeError("BROKER_OUTAGE_NO_EVIDENCE; exit="+str(p.returncode)+
+                               "; stdout_tail="+p.stdout[-350:]+
+                               "; stderr_tail="+p.stderr[-350:])
         inspect(path,"verdict","BROKER_UNAVAILABLE_TOOL_DENIED")
         if p.returncode:raise RuntimeError("OUTAGE_EXIT")
         report["case_results"]["broker_outage"]="DENIED"

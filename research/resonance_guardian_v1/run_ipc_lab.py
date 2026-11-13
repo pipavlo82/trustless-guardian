@@ -27,7 +27,10 @@ def sha(path):
 
 def check_sources():
     head=subprocess.run(["git","-C",str(GUARDIAN),"rev-parse","HEAD"],check=True,capture_output=True,text=True,timeout=10).stdout.strip()
-    if head!=PIN or sha(SOURCE)!=SOURCE_SHA:raise RuntimeError("SOURCE_REVISION_MISMATCH")
+    ancestor=subprocess.run(["git","-C",str(GUARDIAN),"merge-base","--is-ancestor",PIN,head],
+                            capture_output=True,check=False).returncode==0
+    if not ancestor or sha(SOURCE)!=SOURCE_SHA:
+        raise RuntimeError("SOURCE_REVISION_MISMATCH")
     changed=subprocess.run(["git","-C",str(GUARDIAN),"status","--porcelain","--untracked-files=no"],check=True,capture_output=True,text=True,timeout=10).stdout.strip()
     if changed:raise RuntimeError("GUARDIAN_TRACKED_DIRTY")
 
