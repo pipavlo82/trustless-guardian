@@ -8,9 +8,9 @@
   },
   "authorized": {
     "manifest": "integrity/v3/replay-challenge-files.sha256.json",
-    "manifest_sha256": "547ba5384e0cb79d4c1c9017ee4005657cfc5eb3ba31f81c2b932ba25a0dd966",
+    "manifest_sha256": "67da3139f982128740c82c4ff4fad6a3bb75c72c3a318c714b2c0f04e4cabe10",
     "additions": 22,
-    "replacements": 1
+    "replacements": 2
   },
   "control_files": [
     "integrity/v3/policy.json",

@@ -20,6 +20,7 @@ SPECS = (
     ("modified-replay-source", "append", "research/replay_challenge_v1/durable.py"),
     ("missing-replay-source", "remove", "research/replay_challenge_v1/durable.py"),
     ("modified-linux-replacement", "append", "research/linux_isolated_worker_v2/pilot.py"),
+    ("modified-inherited-auth-workflow", "append", ".github/workflows/auth-linux-v1.yml"),
     ("tampered-policy", "append", "integrity/v3/policy.json"),
     ("missing-bootstrap", "remove", ".github/workflows/replay-challenge-v1.yml"),
     ("unexpected-file", "create", "INTEGRITY_V3_UNAUTHORIZED.tmp"),

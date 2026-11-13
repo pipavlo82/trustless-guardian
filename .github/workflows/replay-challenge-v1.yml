@@ -9,7 +9,7 @@ permissions:
   contents: read
 
 env:
-  INTEGRITY_V3_POLICY_SHA256: 52568f9828cca342938d53429994025ecb02f2a27fd8c216f56d812fd944ae6f
+  INTEGRITY_V3_POLICY_SHA256: 0682c632cf24c350bb5495dab419b643e788b4f73153d38ceb38c0118b3b7a3c
 
 jobs:
   linux-replay-challenge:

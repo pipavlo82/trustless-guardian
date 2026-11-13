@@ -16,7 +16,7 @@
     "tests_replay_v1/process_worker.py": "bf354421ff82078eebb78412353682cc07bc7feb1b9049b34525c1edcedf8eed",
     "tests_replay_v1/test_replay_challenge_v1.py": "8d5e633124be2474fa5657228a980edf003869a094a808124eed34234a8a788f",
     "tools/guardian_regression_assessment_v1.py": "ce1b9566710fd2099713eb3d4cd4ef9555a143c17b56831e5fd78720faac75fb",
-    "tools/integrity_mutations_v3.py": "8375ace7b011e4c04b0d335e741d6a9704a799136120f5425b4c7d8cdbdc6d29",
+    "tools/integrity_mutations_v3.py": "86e4658821d81d5e8e021fb5c5d74841deebd76f8aecb2e5c12eb95e7fd80b0d",
     "tools/integrity_v3.py": "5bc02330a71ebc4caa7583ba519ed90ff8969a7158e072b950c551d32a4f8e61",
     "tools/replay_challenge_assessment_v1.py": "7574db163159158a35fb151056768262bcb2b3768fd47d5ed36e917c552eb8df",
     "tools/replay_challenge_mutations_v1.py": "ff7f10a971b07da53ec4321fd52ada37413bf522e41faf6ec23140acc1b0f48c",
@@ -24,6 +24,10 @@
     "verification/replay-challenge-v1.json": "bf0bf151c1dc103944aa987a3f3a5db94db8b5b4bf7499a74240b656dc3aea8b"
   },
   "replacements": {
+    ".github/workflows/auth-linux-v1.yml": {
+      "previous_sha256": "ab629be551143895f8cabe28d0ccc8a011cf33d1c321022849f9ddd0b9c316b2",
+      "sha256": "c7e2e3fb414b01ec02efc53a3642941050575a04c8b0ac631ad83600684badbb"
+    },
     "research/linux_isolated_worker_v2/pilot.py": {
       "previous_sha256": "a2f3f21ee2e46b6e1762c397364e1fb94bbcb332e4c1ef95cd5651cdf34409b3",
       "sha256": "462a8c9833e281ad47f678ec914a93548f016a4f660538044af79162b7baf224"
