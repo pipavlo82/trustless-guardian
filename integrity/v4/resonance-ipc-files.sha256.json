@@ -1,0 +1,28 @@
+{
+  "additions": {
+    "research/resonance_guardian_v1/README.md": "16904b63a1053ff2667cbeb2015d6b9feabf127e8db038247063b5f87ae002d9",
+    "research/resonance_guardian_v1/REPLAY.md": "d05569cd4fe66fd1d89d79d1b32dbc4789b65c9f6ee8b9d502bb61b34a0a9af3",
+    "research/resonance_guardian_v1/SECURITY_REPORT.md": "228fd3f19d71178a40b1a8d6fa0a5ecbc891aa6571176da8fbdc234c3f5c6f2e",
+    "research/resonance_guardian_v1/__init__.py": "8316eded55c2f2c58de0062ee6e84f2ad550b17dc3ce745b904ccdac37b6cf82",
+    "research/resonance_guardian_v1/appcontainer_client.py": "37f638f37588c20e1b7d87c4b4d6e18eb0f9637346372a6a8d13d0289344847a",
+    "research/resonance_guardian_v1/broker_host.py": "bdb790e201b203d7d89793befc481e19cb27433153bdf1fcc80ea9e308688137",
+    "research/resonance_guardian_v1/host_pipe_client.py": "a5cca3425dda720b5bce044a7ba9edd6dc4bccd852ba0d1f8d2d7164ce00659d",
+    "research/resonance_guardian_v1/host_spoof_lab.py": "4c24834f4cb7b35a7448d80ac839779dd6fedbc9cb63300be3d4b79f511491b7",
+    "research/resonance_guardian_v1/native_assessment.py": "7f2a56fb38d71c5b5b934271575018b51f22cc2b583970605e197c8234bfbf0c",
+    "research/resonance_guardian_v1/outage_lab.py": "d09c9ac8a52425e31c96743e57170410a201f0276c9e7b83bde723b89fb8ab25",
+    "research/resonance_guardian_v1/reference_core/agent.py": "6bb44b71c62f54a3e1da2c11c73de5cf33766b8146c9c73f67711b9c07f0f1f6",
+    "research/resonance_guardian_v1/run_ipc_lab.py": "fca233aed6ee06e073ce11714a8695e27365fe4df70e7f24872ce8f818d99483",
+    "research/resonance_guardian_v1/tests/__init__.py": "aa0d049aab7237d274eebb698a7e1ffd46336e34aee5485b7c61106ed0a54124",
+    "research/resonance_guardian_v1/tests/test_portable.py": "6fb949b2de60ad1799b12378508c5f92f4d381263fe7ea59de8fcb94d7f23214",
+    "research/resonance_guardian_v1/verify_evidence.py": "82029f372c79a04c6567891f683c1d9bbbc8b3fad0353e0f96d3ec05153d438c",
+    "tools/integrity_mutations_v4.py": "023697fd471715b4387273f72e99b2f29dab0f673d9328f76c4dace350f44285",
+    "tools/integrity_v4.py": "43ecc3bb6abc120f5a4de9f14d7bfb9fd580169b12ae1bcf8b66c3c4be446681"
+  },
+  "replacements": {
+    ".github/workflows/replay-challenge-v1.yml": {
+      "previous_sha256": "e703d4c8cdc8517d20fc91b2a8f4bc7c0afd35b8a6690d4cfc8a619b204e2db5",
+      "sha256": "3dbeee6829a63e74ca6901e228bca759a2cb409a5ac2b503b686284f28bccbf6"
+    }
+  },
+  "schema": "guardian.authorized-additions.v4"
+}

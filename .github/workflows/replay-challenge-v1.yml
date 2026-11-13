@@ -47,6 +47,7 @@ jobs:
       - name: Hosted Linux capability report without image pulls
         run: python -B -m research.linux_isolated_worker_v2.pilot --out build/linux-v3/hosted.json
       - name: Layered integrity and physical mutations
+        if: ${{ hashFiles('integrity/v4/policy.json') == '' }}
         run: |
           python -B tools/integrity_v3.py --policy-sha256 "$INTEGRITY_V3_POLICY_SHA256" --out build/integrity-v3/report.json
           python -B tools/integrity_mutations_v3.py --policy-sha256 "$INTEGRITY_V3_POLICY_SHA256" --out build/integrity-v3/mutations.json
@@ -92,6 +93,7 @@ jobs:
           python -B tools/replay_challenge_assessment_v1.py --out build/replay-v1/repeat.json
           python -B -O tools/replay_challenge_assessment_v1.py --out build/replay-v1/optimized.json
       - name: Layered integrity
+        if: ${{ hashFiles('integrity/v4/policy.json') == '' }}
         shell: pwsh
         run: python -B tools/integrity_v3.py --policy-sha256 "$env:INTEGRITY_V3_POLICY_SHA256" --out build/integrity-v3/report.json
       - name: Upload Windows evidence

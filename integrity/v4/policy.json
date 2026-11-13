@@ -1,0 +1,23 @@
+{
+  "authorized": {
+    "additions": 17,
+    "manifest": "integrity/v4/resonance-ipc-files.sha256.json",
+    "manifest_sha256": "9a3bb46c011f19e9fe83979a68a818cb3c64abf21509442565c3896d7b7593b7",
+    "replacements": 1
+  },
+  "base_commit": "457148f43d0cfb28b4c7c88bbf8a1d92963d77ab",
+  "bootstrap_trust": [
+    ".github/workflows/resonance-guardian-v1.yml"
+  ],
+  "control_files": [
+    "integrity/v4/policy.json",
+    "integrity/v4/pr6-base.sha256.json",
+    "integrity/v4/resonance-ipc-files.sha256.json"
+  ],
+  "frozen": {
+    "entries": 333,
+    "manifest": "integrity/v4/pr6-base.sha256.json",
+    "manifest_sha256": "4b389f134007a3567c327a1a168e951ee443a072571db0c7b5c83b34ee53910c"
+  },
+  "schema": "guardian.layered-integrity.v4"
+}
