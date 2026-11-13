@@ -41,7 +41,8 @@ jobs:
         run: python -B tools/auth_source_mutations_v1.py --out build/auth-v1/source-mutations.json
       - name: Hosted Linux isolation capability report
         run: python -B -m research.linux_isolated_worker_v2.pilot --out build/linux-v2/hosted.json
-      - name: Layered integrity and physical mutations
+      - name: Layered integrity and physical mutations for v2 candidates
+        if: ${{ hashFiles('integrity/v3/policy.json') == '' }}
         run: |
           python -B tools/integrity_v2.py --policy-sha256 "$INTEGRITY_V2_POLICY_SHA256" --out build/integrity-v2/report.json
           python -B tools/integrity_mutations_v2.py --policy-sha256 "$INTEGRITY_V2_POLICY_SHA256" --out build/integrity-v2/mutations.json
@@ -80,7 +81,8 @@ jobs:
           python -B tools/auth_assessment_v1.py --out build/auth-v1/normal.json
           python -B tools/auth_assessment_v1.py --out build/auth-v1/repeat.json
           python -B -O tools/auth_assessment_v1.py --out build/auth-v1/optimized.json
-      - name: Layered integrity
+      - name: Layered integrity for v2 candidates
+        if: ${{ hashFiles('integrity/v3/policy.json') == '' }}
         run: python -B tools/integrity_v2.py --policy-sha256 "$env:INTEGRITY_V2_POLICY_SHA256" --out build/integrity-v2/report.json
       - name: Fetch and verify pinned Windows test runtime
         run: python -B tools/prepare.py

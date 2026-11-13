@@ -1,0 +1,103 @@
+name: Guardian replay and challenge v1
+
+on:
+  push:
+    branches: [repair/guardian-replay-challenge-v1]
+  pull_request:
+
+permissions:
+  contents: read
+
+env:
+  INTEGRITY_V3_POLICY_SHA256: 0682c632cf24c350bb5495dab419b643e788b4f73153d38ceb38c0118b3b7a3c
+
+jobs:
+  linux-replay-challenge:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - name: Checkout exact candidate
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
+        with:
+          python-version: '3.12'
+      - name: Install hash-locked authentication dependencies
+        run: python -m pip install --disable-pip-version-check --require-hashes -r requirements-auth-v1.txt
+      - name: Preserve inherited Guardian tests in normal repeat and optimized modes
+        run: |
+          python -B tools/guardian_regression_assessment_v1.py --out build/guardian-regression-v1/normal.json
+          python -B tools/guardian_regression_assessment_v1.py --out build/guardian-regression-v1/repeat.json
+          python -B -O tools/guardian_regression_assessment_v1.py --out build/guardian-regression-v1/optimized.json
+      - name: Preserve authentication tests in normal repeat and optimized modes
+        run: |
+          python -B tools/auth_assessment_v1.py --out build/auth-v1/normal.json
+          python -B tools/auth_assessment_v1.py --out build/auth-v1/repeat.json
+          python -B -O tools/auth_assessment_v1.py --out build/auth-v1/optimized.json
+      - name: Replay challenge and receipt assessment in normal repeat and optimized modes
+        run: |
+          python -B tools/replay_challenge_assessment_v1.py --out build/replay-v1/normal.json
+          python -B tools/replay_challenge_assessment_v1.py --out build/replay-v1/repeat.json
+          python -B -O tools/replay_challenge_assessment_v1.py --out build/replay-v1/optimized.json
+      - name: Physical replay challenge and receipt mutations
+        run: python -B tools/replay_challenge_mutations_v1.py --out build/replay-v1/source-mutations.json --timeout 45
+      - name: Hosted Linux capability report without image pulls
+        run: python -B -m research.linux_isolated_worker_v2.pilot --out build/linux-v3/hosted.json
+      - name: Layered integrity and physical mutations
+        run: |
+          python -B tools/integrity_v3.py --policy-sha256 "$INTEGRITY_V3_POLICY_SHA256" --out build/integrity-v3/report.json
+          python -B tools/integrity_mutations_v3.py --policy-sha256 "$INTEGRITY_V3_POLICY_SHA256" --out build/integrity-v3/mutations.json
+      - name: Upload Linux evidence
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: replay-challenge-v1-linux
+          path: build/
+          if-no-files-found: error
+
+  windows-replay-challenge:
+    runs-on: windows-2022
+    timeout-minutes: 45
+    steps:
+      - name: Checkout exact candidate
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
+        with:
+          python-version: '3.12'
+      - name: Install hash-locked authentication dependencies
+        run: python -m pip install --disable-pip-version-check --require-hashes -r requirements-auth-v1.txt
+      - name: Preserve inherited Guardian tests in normal repeat and optimized modes
+        shell: pwsh
+        run: |
+          python -B tools/guardian_regression_assessment_v1.py --out build/guardian-regression-v1/normal.json
+          python -B tools/guardian_regression_assessment_v1.py --out build/guardian-regression-v1/repeat.json
+          python -B -O tools/guardian_regression_assessment_v1.py --out build/guardian-regression-v1/optimized.json
+      - name: Preserve authentication tests in normal repeat and optimized modes
+        shell: pwsh
+        run: |
+          python -B tools/auth_assessment_v1.py --out build/auth-v1/normal.json
+          python -B tools/auth_assessment_v1.py --out build/auth-v1/repeat.json
+          python -B -O tools/auth_assessment_v1.py --out build/auth-v1/optimized.json
+      - name: Replay challenge and receipt assessment in normal repeat and optimized modes
+        shell: pwsh
+        run: |
+          python -B tools/replay_challenge_assessment_v1.py --out build/replay-v1/normal.json
+          python -B tools/replay_challenge_assessment_v1.py --out build/replay-v1/repeat.json
+          python -B -O tools/replay_challenge_assessment_v1.py --out build/replay-v1/optimized.json
+      - name: Layered integrity
+        shell: pwsh
+        run: python -B tools/integrity_v3.py --policy-sha256 "$env:INTEGRITY_V3_POLICY_SHA256" --out build/integrity-v3/report.json
+      - name: Upload Windows evidence
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: replay-challenge-v1-windows
+          path: build/
+          if-no-files-found: error
