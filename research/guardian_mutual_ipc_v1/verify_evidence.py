@@ -70,6 +70,8 @@ def verify_case(case,r,root):
     # Low-level transcript checks establish historical consistency only. Authority
     # is admitted separately by assess using independently pinned policy evidence.
     canonical(r)
+    if 'started_at' in r:
+        require(type(r['started_at']) is int and type(r['finished_at']) is int and r['started_at']<=r['finished_at'],'EVIDENCE_TIME_ORDER')
     root_at(root,r['finished_at'])
     require(r['case']==case and r['schema']=='guardian.mutual-native-case.v1' and r['status']=='OBSERVED','CASE_NOT_OBSERVED')
     require(r['trust']==root,'TRUST_SUBSTITUTION')
@@ -80,7 +82,7 @@ def verify_case(case,r,root):
         require(r['broker']['client_identity']['appcontainer'] is False,'HOST_IDENTITY')
         return 'UNCONFINED_CLIENT_REFUSED'
     t=r['client_token']
-    require(t['appcontainer'] is True and t['capability_count']==0 and t['elevated'] is False and t['integrity_sid']=='S-1-16-4096','TOKEN')
+    require(t['appcontainer'] is True and type(t['capability_count']) is int and t['capability_count']==0 and t['elevated'] is False and t['integrity_sid']=='S-1-16-4096','TOKEN')
     require(hashlib.sha256(t['appcontainer_sid'].encode()).hexdigest()==r['expected_sid_sha256'],'TOKEN_SID')
     if case in ('missing_trust','revoked_trust','expired_trust'):
         require(r['client_exit']==89 and 'broker' not in r,'TRUST_REFUSAL')
@@ -95,13 +97,30 @@ def verify_case(case,r,root):
     require(ident['appcontainer'] is True and ident['capability_count']==0 and ident['sid_sha256']==r['expected_sid_sha256'],'BROKER_CLIENT_IDENTITY')
     require(b['grant_issued'] is False and b['tool_executed'] is False and b['production_ready'] is False,'BROKER_SCOPE')
     if case in ('silent_hello','silent_result'):
+        selected=r['configured_trust']
+        require(selected==root,'CONFIGURED_TRUST')
         diag=r['client_io'];events=diag['io']
+        require(type(events) is list and len(events)==(3 if case=='silent_hello' else 5),'IO_PHASE')
+        expected_ops=['open','write','read'] if case=='silent_hello' else ['open','write','read','write','read']
+        require([e.get('op') for e in events]==expected_ops,'IO_OPERATION_SEQUENCE')
         require(r['client_exit']==91 and diag['exit']==91 and 2500<=r['client_wall_ms']<10000,'IO_DEADLINE')
         require(events[0]['client_pid']==r['client_pid'] and events[0]['broker_pid']==b['broker_pid'] and events[0]['identity_authority'] is False,'OS_PID_OBSERVATION')
         cancelled=[e for e in events if e.get('deadline_refused') is True]
-        require(len(cancelled)==1 and cancelled[0]['cancel_requested'] is True and cancelled[0]['completion_wait']==0 and cancelled[0]['completion_error']==995,'IO_CANCELLATION')
-        require(2500<=cancelled[0]['elapsed_ms']<5000,'IO_CANCELLATION_BOUND')
-        require(len(events)==(3 if case=='silent_hello' else 5),'IO_PHASE')
+        require(len(cancelled)==1 and cancelled[0] is events[-1] and cancelled[0]['cancel_requested'] is True and type(cancelled[0]['completion_wait']) is int and cancelled[0]['completion_wait']==0 and type(cancelled[0]['completion_error']) is int and cancelled[0]['completion_error']==995,'IO_CANCELLATION')
+        require(type(cancelled[0]['elapsed_ms']) is int and 2500<=cancelled[0]['elapsed_ms']<5000,'IO_CANCELLATION_BOUND')
+        transcript=b['transcript']
+        require(type(transcript) is list and len(transcript)==(0 if case=='silent_hello' else 2),'IO_TRANSCRIPT_LENGTH')
+        if case=='silent_result':
+            hello=transcript[0]['request']
+            hello_valid(hello,root,r['channel_id'])
+            require(response_failure(transcript[0]['reply'],selected,hello,hello,'hello',r['finished_at']) is None,'IO_HELLO_AUTH')
+            proposal=transcript[1]['request']
+            nonce=transcript[0]['reply']['payload']['response']['nonce']
+            expected_proposal={**{k:hello[k] for k in CONTEXT},'op':'PROPOSE_TOOL','agent_id':'resonance-agent-v5',
+                'nonce':nonce,'tool':'resonance.synthetic-hash-only.v0',
+                'resource_id':'resonance-synthetic-observation-v0','decision':'OBSERVE','ticks':3,
+                'docker_errors':{'linux':5,'legacy':5}}
+            require(canonical(proposal)==canonical(expected_proposal),'IO_PROPOSAL_BINDING')
         return 'LOCAL_IO_DEADLINE_CANCELLED'
     if case=='broker_crash':
         require(r['client_exit']==87 and b['verdict']=='CONTROL_BROKEN' and b.get('reason')=='SYNTHETIC_BROKER_CRASH','CRASH_REFUSAL')
@@ -149,6 +168,7 @@ def assess(folder,pin,policy_path,policy_pin,minimum_policy_epoch,minimum_trust_
     for case in cases:
         try:
             record=load((folder/(case+'.json')).read_bytes())
+            require('started_at' in record and type(record['started_at']) is int and type(record['finished_at']) is int and record['started_at']<=record['finished_at'],'EVIDENCE_TIME_ORDER')
             capture_authorized(policy,root,record['finished_at'])
             rows[case]=verify_case(case,record,root)
         except (OSError,ValueError,KeyError,TypeError) as e:errors[case]=str(e)
