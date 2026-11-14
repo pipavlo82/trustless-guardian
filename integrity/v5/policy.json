@@ -1,0 +1,14 @@
+{
+  "additions": {
+    "count": 12,
+    "manifest": "integrity/v5/additions.sha256.json",
+    "sha256": "a1076237531fda4915553199de3dfbce08027161ba63915a6b18375d991f1f24"
+  },
+  "base_commit": "2a40075a7f217e9c385cdfaf27c0267fa788d574",
+  "frozen": {
+    "count": 354,
+    "manifest": "integrity/v5/pr7-base.sha256.json",
+    "sha256": "33121ec60a1288bb1519de6592d3248133f360ac55da57f016d13ed3bed885a7"
+  },
+  "schema": "guardian.additive-integrity.v5"
+}

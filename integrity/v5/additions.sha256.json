@@ -1,0 +1,14 @@
+{
+  "research/guardian_mutual_ipc_v1/README.md": "f63e704e9b0575300bf82ca20d06e832692017c1dd87b6f7d9e3916779aa6598",
+  "research/guardian_mutual_ipc_v1/__init__.py": "63bf9be4eaf6f878cd5269c39edef610c2a2b02a99cf3f491e578c1fcc8f4d4c",
+  "research/guardian_mutual_ipc_v1/broker.py": "05157a404d3015063af1d755171ff69f84442d1886c8fce987c378ad649b2adb",
+  "research/guardian_mutual_ipc_v1/client.py": "185740d12ad344ba094b1c237e1550dbb77e62221cbe58f85016ee54527d7627",
+  "research/guardian_mutual_ipc_v1/lab_server.py": "7f64044d58860ae971b94efbb60bc550b89c137e93759f31009e2bd64c324cac",
+  "research/guardian_mutual_ipc_v1/mutations.py": "684acadebfa005e3fbfd6ec97b5930d1185ccd23a869a1c2f7fff7f70166ab12",
+  "research/guardian_mutual_ipc_v1/native.py": "80a6f3d2f3b71dc0c138e4d3353f4b7815c446a35538c8c52d0a5ad436dcf7fa",
+  "research/guardian_mutual_ipc_v1/protocol.py": "7905c4a722869b37dee671fecdeaaa9f44f6dd9f944658206beb75e7431e8100",
+  "research/guardian_mutual_ipc_v1/tests/test_evidence.py": "b243ae3aff2e57312bb77a4772977b992263374aed65d1567540da64245d2f14",
+  "research/guardian_mutual_ipc_v1/tests/test_protocol.py": "531a0077a659ab0249c29ec6c74a4d5a9778e2449c9785644dbd093a071ee88a",
+  "research/guardian_mutual_ipc_v1/verify_evidence.py": "0d51449f4d792361ede2e610b25d681412acfab64611edac85c4d219e082d8eb",
+  "tools/integrity_v5.py": "644faed5231c9dfb80ef3744dbbc863382a2009ea4dac03003bf163e3d136ecf"
+}
