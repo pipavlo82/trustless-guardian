@@ -7,21 +7,17 @@ import time
 import agent  # unchanged original reference core
 import ipc_transport as wire  # byte-for-byte PR7 transport copy
 from protocol import ClientSession, Refused, decode, encode, require
+import bounded_io as io
 
 
 def send(handle, value):
     raw = encode(value)
     require(len(raw) <= 4096, "FRAME_SIZE")
-    b = wire.c.create_string_buffer(raw); n = wire.w.DWORD()
-    if not wire.WriteFile(handle, b, len(raw), wire.c.byref(n), None) or n.value != len(raw):
-        raise OSError("IPC_WRITE")
+    io.transfer(handle, raw)
 
 
 def receive(handle):
-    b = wire.c.create_string_buffer(8192); n = wire.w.DWORD()
-    if not wire.ReadFile(handle, b, 8192, wire.c.byref(n), None):
-        raise OSError("IPC_READ")
-    return decode(b.raw[:n.value])
+    return decode(io.transfer(handle))
 
 
 def run(channel, mode):
@@ -35,7 +31,7 @@ def run(channel, mode):
     try:
         docker = {"linux": wire.direct_pipe_error("linux"), "legacy": wire.direct_pipe_error("legacy")}
         require(docker == {"linux": 5, "legacy": 5}, "CONFINEMENT")
-        handle = wire.pipe_open(channel)
+        handle = io.open_pipe(channel)
         send(handle, session.hello)
         answer = session.accept(receive(handle), "hello", session.hello, int(time.time()))
         s = agent.State()
@@ -59,6 +55,8 @@ def run(channel, mode):
             try: send(handle, {"op": "CLIENT_RESULT", "code": 88, "reason": e.code})
             except OSError: pass
         return 88
+    except io.Deadline:
+        return 91  # local transport deadline, never authenticated broker refusal
     except OSError:
         return 86 if handle is None else 87
     finally:
@@ -66,5 +64,9 @@ def run(channel, mode):
 
 
 if __name__ == "__main__":
-    try: sys.exit(run(sys.argv[1], sys.argv[2]))
-    except Exception: sys.exit(99)  # harness/runtime failure, never an authenticated negative PASS
+    try: code=run(sys.argv[1], sys.argv[2])
+    except Exception: code=99  # harness/runtime failure, never an authenticated negative PASS
+    # Optional untrusted diagnostic output: one lab-provisioned file, not runtime write access.
+    if len(sys.argv)==4:
+        Path(sys.argv[3]).write_bytes(encode({'exit':code,'io':io.events}))
+    sys.exit(code)

@@ -9,22 +9,33 @@ import hashlib
 import json
 from pathlib import Path
 import sys
+import re
+import time
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PublicKey
 from cryptography.exceptions import InvalidSignature
+from research.guardian_mutual_ipc_v1.replay_policy import canonical, load, root_at, admit, capture_authorized
 
 CASES = ("normal", "bad_nonce", "bad_tool", "missing_auth", "bad_signature", "wrong_key", "wrong_session",
          "wrong_challenge", "wrong_request", "wrong_broker", "wrong_root", "wrong_channel", "wrong_version",
          "wrong_phase", "stale", "replay", "final_bad_signature", "final_missing_auth", "final_execution_claim",
-         "missing_trust", "revoked_trust", "incorrect_trust_key", "expired_trust", "broker_crash", "outage", "host_spoof")
+         "missing_trust", "revoked_trust", "incorrect_trust_key", "expired_trust", "broker_crash", "outage", "host_spoof", "silent_hello", "silent_result")
 
 
 def require(ok, reason):
     if not ok: raise ValueError(reason)
 
 
-def canonical(v): return json.dumps(v, sort_keys=True, separators=(",", ":"), ensure_ascii=True, allow_nan=False).encode('ascii')
+CONTEXT = {'protocol','session_id','client_challenge','broker_id','trust_root_version','key_id','channel_id'}
+
+
+def hello_valid(hello, root, channel):
+    require(type(hello) is dict and set(hello) == CONTEXT | {'op','agent_id'}, 'HELLO_SHAPE')
+    require(hello['protocol']=='guardian.mutual-ipc-auth.v1' and hello['op']=='HELLO' and hello['agent_id']=='resonance-agent-v5', 'HELLO_VERSION')
+    require(all(type(hello[k]) is str and re.fullmatch(r'[0-9a-f]{64}',hello[k]) for k in ('session_id','client_challenge')), 'HELLO_FRESHNESS')
+    require(type(channel) is str and re.fullmatch(r'guardian-resonance-[0-9a-f]{24}',channel) and hello['channel_id']==channel, 'HELLO_CHANNEL')
+    require(all(hello[k]==root[k] for k in ('broker_id','trust_root_version','key_id')), 'HELLO_AUTHORITY')
 
 
 def response_failure(e, root, hello, request, phase, now):
@@ -39,11 +50,15 @@ def response_failure(e, root, hello, request, phase, now):
     if p['phase']!=phase:return 'AUTH_PHASE'
     if p['request_sha256']!=hashlib.sha256(canonical(request)).hexdigest():return 'AUTH_REQUEST'
     if not (type(p['issued_at']) is int and type(p['expires_at']) is int and 0<p['expires_at']-p['issued_at']<=30 and p['issued_at']<=now<p['expires_at']):return 'AUTH_TIME'
+    root_at(root,p['issued_at'])
+    if type(e['signature']) is not str or not re.fullmatch(r'[0-9a-f]{128}',e['signature']):return 'AUTH_SIGNATURE_SHAPE'
     try:Ed25519PublicKey.from_public_bytes(bytes.fromhex(root['public_key'])).verify(bytes.fromhex(e['signature']),b'GUARDIAN-BROKER-AUTH-V1\x00'+canonical(p))
     except (InvalidSignature,ValueError,TypeError):return 'AUTH_SIGNATURE'
     value=p['response']
     if phase=='hello':
         if type(value) is not dict or set(value)!={'verdict','nonce','observations_scaled','scale','tools_enabled'}:return 'RESPONSE_SHAPE'
+        if type(value['nonce']) is not str or not re.fullmatch(r'[0-9a-f]{64}',value['nonce']):return 'RESPONSE_SIGNALS'
+        if type(value['scale']) is not int or type(value['observations_scaled']) is not list or any(type(x) is not int for x in value['observations_scaled']):return 'RESPONSE_SIGNALS'
         if value['verdict']!='SYNTHETIC_OBSERVATIONS' or value['tools_enabled'] is not False or value['scale']!=100 or value['observations_scaled']!=[20,30,40]:return 'RESPONSE_SIGNALS'
     else:
         if type(value) is not dict or set(value)!={'verdict','grant_issued','tool_executed'}:return 'RESPONSE_SHAPE'
@@ -52,6 +67,10 @@ def response_failure(e, root, hello, request, phase, now):
 
 
 def verify_case(case,r,root):
+    # Low-level transcript checks establish historical consistency only. Authority
+    # is admitted separately by assess using independently pinned policy evidence.
+    canonical(r)
+    root_at(root,r['finished_at'])
     require(r['case']==case and r['schema']=='guardian.mutual-native-case.v1' and r['status']=='OBSERVED','CASE_NOT_OBSERVED')
     require(r['trust']==root,'TRUST_SUBSTITUTION')
     require(all(r[k] is False for k in ('production_ready','grant_issued','tool_executed','global_runtime_acl_changed')),'SCOPE')
@@ -75,12 +94,21 @@ def verify_case(case,r,root):
     b=r['broker'];ident=b['client_identity']
     require(ident['appcontainer'] is True and ident['capability_count']==0 and ident['sid_sha256']==r['expected_sid_sha256'],'BROKER_CLIENT_IDENTITY')
     require(b['grant_issued'] is False and b['tool_executed'] is False and b['production_ready'] is False,'BROKER_SCOPE')
+    if case in ('silent_hello','silent_result'):
+        diag=r['client_io'];events=diag['io']
+        require(r['client_exit']==91 and diag['exit']==91 and 2500<=r['client_wall_ms']<10000,'IO_DEADLINE')
+        require(events[0]['client_pid']==r['client_pid'] and events[0]['broker_pid']==b['broker_pid'] and events[0]['identity_authority'] is False,'OS_PID_OBSERVATION')
+        cancelled=[e for e in events if e.get('deadline_refused') is True]
+        require(len(cancelled)==1 and cancelled[0]['cancel_requested'] is True and cancelled[0]['completion_wait']==0 and cancelled[0]['completion_error']==995,'IO_CANCELLATION')
+        require(2500<=cancelled[0]['elapsed_ms']<5000,'IO_CANCELLATION_BOUND')
+        require(len(events)==(3 if case=='silent_hello' else 5),'IO_PHASE')
+        return 'LOCAL_IO_DEADLINE_CANCELLED'
     if case=='broker_crash':
         require(r['client_exit']==87 and b['verdict']=='CONTROL_BROKEN' and b.get('reason')=='SYNTHETIC_BROKER_CRASH','CRASH_REFUSAL')
         return 'CRASHED_BROKER_TRANSPORT_REFUSED'
     transcript=b['transcript'];require(len(transcript) in (1,2),'TRANSCRIPT_LENGTH')
     hello=transcript[0]['request']
-    require(hello['channel_id']==r['channel_id'] and hello['op']=='HELLO','HELLO_CHANNEL')
+    hello_valid(hello,root,r['channel_id'])
     selected=r['configured_trust']
     if case!='incorrect_trust_key':require(selected==root,'CONFIGURED_TRUST')
     else:require(selected['public_key']!=root['public_key'] and all(selected[k]==root[k] for k in root if k!='public_key'),'INCORRECT_KEY_CONTROL')
@@ -88,6 +116,10 @@ def verify_case(case,r,root):
     if case in ('normal','bad_nonce','bad_tool'):
         require(reasons==[None,None],'AUTH_POSITIVE')
         proposal=transcript[1]['request'];nonce=transcript[0]['reply']['payload']['response']['nonce']
+        expected_proposal={**{k:hello[k] for k in CONTEXT},'op':'PROPOSE_TOOL','agent_id':'resonance-agent-v5',
+            'nonce':'0'*64 if case=='bad_nonce' else nonce,'tool':'shell' if case=='bad_tool' else 'resonance.synthetic-hash-only.v0',
+            'resource_id':'resonance-synthetic-observation-v0','decision':'OBSERVE','ticks':3,'docker_errors':{'linux':5,'legacy':5}}
+        require(canonical(proposal)==canonical(expected_proposal),'PROPOSAL_BINDING')
         require(proposal['docker_errors']=={'linux':5,'legacy':5} and proposal['ticks']==3 and proposal['decision']=='OBSERVE','CORE_OR_PIPE_BOUNDARY')
         require(proposal['nonce']==('0'*64 if case=='bad_nonce' else nonce),'NONCE')
         require(proposal['tool']==('shell' if case=='bad_tool' else 'resonance.synthetic-hash-only.v0'),'TOOL')
@@ -105,17 +137,34 @@ def verify_case(case,r,root):
     return expected
 
 
-def assess(folder,pin):
+def assess(folder,pin,policy_path,policy_pin,minimum_policy_epoch,minimum_trust_epoch,now=None,suite='repair-v1'):
     raw=(folder/'trust.json').read_bytes();require(hashlib.sha256(raw).hexdigest()==pin,'INDEPENDENT_TRUST_PIN')
-    root=json.loads(raw);rows={};errors={}
-    for case in CASES:
-        try:rows[case]=verify_case(case,json.loads((folder/(case+'.json')).read_bytes()),root)
+    root=load(raw);rows={};errors={}
+    policy_raw=Path(policy_path).read_bytes()
+    require(hashlib.sha256(policy_raw).hexdigest()==policy_pin,'INDEPENDENT_POLICY_PIN')
+    policy=admit(load(policy_raw),root,pin,now=int(time.time()) if now is None else now,
+        minimum_policy_epoch=minimum_policy_epoch,minimum_trust_epoch=minimum_trust_epoch)
+    require(suite in ('original-v1','repair-v1'),'EVIDENCE_SUITE')
+    cases=CASES if suite=='repair-v1' else CASES[:-2]
+    for case in cases:
+        try:
+            record=load((folder/(case+'.json')).read_bytes())
+            capture_authorized(policy,root,record['finished_at'])
+            rows[case]=verify_case(case,record,root)
         except (OSError,ValueError,KeyError,TypeError) as e:errors[case]=str(e)
-    return {'schema':'guardian.mutual-independent-result.v1','cases':rows,'errors':errors,'passed':len(rows)==len(CASES) and not errors,
+    return {'schema':'guardian.mutual-independent-result.v1','suite':suite,'cases':rows,'errors':errors,'passed':len(rows)==len(cases) and not errors,
+            'verification_mode':policy['mode'],'current_authorization':'ROOT_ADMITTED_ONLY' if policy['mode']=='current' else 'NOT_ESTABLISHED',
+            'process_identity':'NOT_ESTABLISHED_BY_SIGNATURE','policy_sha256':policy_pin,
             'production_ready':False,'grant_issued':False,'tool_executed':False,'trust_sha256':pin}
 
 
 if __name__=='__main__':
     p=argparse.ArgumentParser();p.add_argument('--evidence',type=Path,required=True);p.add_argument('--trust-sha256',required=True)
-    a=p.parse_args();r=assess(a.evidence,a.trust_sha256);print(json.dumps(r,sort_keys=True,separators=(',',':')))
+    p.add_argument('--policy',type=Path,required=True);p.add_argument('--policy-sha256',required=True)
+    p.add_argument('--minimum-policy-epoch',type=int,required=True);p.add_argument('--minimum-trust-epoch',type=int,required=True)
+    p.add_argument('--suite',choices=('original-v1','repair-v1'),default='repair-v1')
+    a=p.parse_args()
+    try:r=assess(a.evidence,a.trust_sha256,a.policy,a.policy_sha256,a.minimum_policy_epoch,a.minimum_trust_epoch,suite=a.suite)
+    except (OSError,ValueError,KeyError,TypeError) as e:r={'passed':False,'error':str(e),'production_ready':False}
+    print(json.dumps(r,sort_keys=True,separators=(',',':')))
     raise SystemExit(0 if r['passed'] else 1)

@@ -3,6 +3,7 @@ import argparse
 import json
 from pathlib import Path
 import sys
+import time
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
@@ -21,6 +22,7 @@ def main():
     original = broker.sign_response
     def altered(key_arg, context, phase, request, response, now):
         if args.case == "broker_crash": raise OSError("SYNTHETIC_BROKER_CRASH")
+        if (args.case,phase) in (('silent_hello','hello'),('silent_result','result')): time.sleep(6)
         out = original(key_arg, context, phase, request, response, now)
         if phase != ("result" if args.case.startswith("final_") else "hello"): return out
         case = args.case.removeprefix("final_")

@@ -1,0 +1,141 @@
+{
+  "broker": {
+    "client_identity": {
+      "appcontainer": true,
+      "capability_count": 0,
+      "sid_sha256": "175eb89729b4d697aed2f0b6eebb3d23cea8f60e808fb705032e045cfb79b56d"
+    },
+    "client_result": {
+      "code": 73,
+      "op": "CLIENT_RESULT",
+      "reason": "HOLD_GUARDIAN_GRANT_REQUIRED"
+    },
+    "grant_issued": false,
+    "production_ready": false,
+    "tool_executed": false,
+    "transcript": [
+      {
+        "reply": {
+          "payload": {
+            "broker_id": "audit",
+            "channel_id": "guardian-resonance-333333333333333333333333",
+            "client_challenge": "2222222222222222222222222222222222222222222222222222222222222222",
+            "expires_at": 1900000030,
+            "issued_at": 1900000000,
+            "key_id": "k",
+            "phase": "hello",
+            "protocol": "guardian.mutual-ipc-auth.v1",
+            "request_sha256": "5f1a539504319d5ce4d039ec35ee89735e9382c1f13dc260af40ded2711e487e",
+            "response": {
+              "nonce": "4444444444444444444444444444444444444444444444444444444444444444",
+              "observations_scaled": [
+                20,
+                30,
+                40
+              ],
+              "scale": 100,
+              "tools_enabled": false,
+              "verdict": "SYNTHETIC_OBSERVATIONS"
+            },
+            "session_id": "1111111111111111111111111111111111111111111111111111111111111111",
+            "trust_root_version": "v1"
+          },
+          "signature": "cd8bd0bdbbb958c34044cd2cce763fff56c019b148932655fc01633d2a53788c0d04ef418f6505166f8f7bc45266f11706334b817f90f89096b7ca789e20db0b"
+        },
+        "request": {
+          "agent_id": "attacker-agent",
+          "broker_id": "audit",
+          "channel_id": "guardian-resonance-333333333333333333333333",
+          "client_challenge": "2222222222222222222222222222222222222222222222222222222222222222",
+          "key_id": "k",
+          "op": "HELLO",
+          "protocol": "guardian.mutual-ipc-auth.v1",
+          "session_id": "1111111111111111111111111111111111111111111111111111111111111111",
+          "trust_root_version": "v1"
+        }
+      },
+      {
+        "reply": {
+          "payload": {
+            "broker_id": "audit",
+            "channel_id": "guardian-resonance-333333333333333333333333",
+            "client_challenge": "2222222222222222222222222222222222222222222222222222222222222222",
+            "expires_at": 1900000030,
+            "issued_at": 1900000000,
+            "key_id": "k",
+            "phase": "result",
+            "protocol": "guardian.mutual-ipc-auth.v1",
+            "request_sha256": "e49ff49fc22be310c4867a66d74c1e30de879c141e6294d67ecd6dc4aa326d3f",
+            "response": {
+              "grant_issued": false,
+              "tool_executed": false,
+              "verdict": "HOLD_GUARDIAN_GRANT_REQUIRED"
+            },
+            "session_id": "1111111111111111111111111111111111111111111111111111111111111111",
+            "trust_root_version": "v1"
+          },
+          "signature": "9bfc996e3be4856849096334fe32879f23360b65672d6dfe9504c02ef85eb0d637c341efc0a496c83dd0e8d9be48476c88bcb6d5b674666f1de5bfce79975e04"
+        },
+        "request": {
+          "agent_id": "resonance-agent-v5",
+          "broker_id": "audit",
+          "channel_id": "guardian-resonance-333333333333333333333333",
+          "client_challenge": "2222222222222222222222222222222222222222222222222222222222222222",
+          "decision": "OBSERVE",
+          "docker_errors": {
+            "legacy": 5,
+            "linux": 5
+          },
+          "key_id": "k",
+          "nonce": "4444444444444444444444444444444444444444444444444444444444444444",
+          "op": "PROPOSE_TOOL",
+          "protocol": "guardian.mutual-ipc-auth.v1",
+          "resource_id": "resonance-synthetic-observation-v0",
+          "session_id": "1111111111111111111111111111111111111111111111111111111111111111",
+          "ticks": 3,
+          "tool": "resonance.synthetic-hash-only.v0",
+          "trust_root_version": "v1"
+        }
+      }
+    ]
+  },
+  "case": "normal",
+  "channel_id": "guardian-resonance-333333333333333333333333",
+  "client_exit": 73,
+  "client_token": {
+    "appcontainer": true,
+    "appcontainer_sid": "S-1-15-2-1-2-3-4-5-6-7",
+    "capability_count": 0,
+    "elevated": false,
+    "integrity_sid": "S-1-16-4096"
+  },
+  "configured_trust": {
+    "broker_id": "audit",
+    "expires_at": 1900000100,
+    "key_id": "k",
+    "not_before": 1899999990,
+    "public_key": "03a107bff3ce10be1d70dd18e74bc09967e4d6309ba50d5f1ddc8664125531b8",
+    "revoked": false,
+    "schema": "guardian.broker-trust.v1",
+    "trust_root_version": "v1"
+  },
+  "expected_sid_sha256": "175eb89729b4d697aed2f0b6eebb3d23cea8f60e808fb705032e045cfb79b56d",
+  "finished_at": 1900000001,
+  "global_runtime_acl_changed": false,
+  "grant_issued": false,
+  "production_ready": false,
+  "schema": "guardian.mutual-native-case.v1",
+  "status": "OBSERVED",
+  "temporary_root_deleted": true,
+  "tool_executed": false,
+  "trust": {
+    "broker_id": "audit",
+    "expires_at": 1900000100,
+    "key_id": "k",
+    "not_before": 1899999990,
+    "public_key": "03a107bff3ce10be1d70dd18e74bc09967e4d6309ba50d5f1ddc8664125531b8",
+    "revoked": false,
+    "schema": "guardian.broker-trust.v1",
+    "trust_root_version": "v1"
+  }
+}

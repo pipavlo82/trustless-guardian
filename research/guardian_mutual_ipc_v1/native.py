@@ -28,7 +28,7 @@ CORE_SHA = "6bb44b71c62f54a3e1da2c11c73de5cf33766b8146c9c73f67711b9c07f0f1f6"
 CASES = ("normal", "bad_nonce", "bad_tool", "missing_auth", "bad_signature", "wrong_key", "wrong_session",
          "wrong_challenge", "wrong_request", "wrong_broker", "wrong_root", "wrong_channel", "wrong_version",
          "wrong_phase", "stale", "replay", "final_bad_signature", "final_missing_auth", "final_execution_claim",
-         "missing_trust", "revoked_trust", "incorrect_trust_key", "expired_trust", "broker_crash", "outage", "host_spoof")
+         "missing_trust", "revoked_trust", "incorrect_trust_key", "expired_trust", "broker_crash", "outage", "host_spoof", "silent_hello", "silent_result")
 
 
 def sha(p): return hashlib.sha256(Path(p).read_bytes()).hexdigest()
@@ -54,7 +54,8 @@ def package(root, trust):
         if not rel.endswith("__init__.py"): shutil.copy2(ROOT / rel, dest)
         else: dest.write_bytes(b"")
     for src, name in [(OLD / "reference_core/agent.py", "agent.py"), (OLD / "appcontainer_client.py", "ipc_transport.py"),
-                      (HERE / "client.py", "client.py"), (HERE / "protocol.py", "protocol.py")]: shutil.copy2(src, rt / name)
+                      (HERE / "client.py", "client.py"), (HERE / "protocol.py", "protocol.py"),
+                      (HERE / "bounded_io.py", "bounded_io.py")]: shutil.copy2(src, rt / name)
     (rt / "psutil.py").write_bytes(b"def __getattr__(name):\n raise RuntimeError('HOST_SENSORS_DISABLED')\n")
     (rt / "python312._pth").write_bytes(b"python312.zip\nDLLs\n.\n")
     (rt / "broker-trust.json").write_bytes(encode(trust))
@@ -84,11 +85,14 @@ def execute_case(case, folder, key, trust, replay=None):
         result["configured_trust"] = configured if case != "missing_trust" else None
         result["runtime_files"] = {p.relative_to(rt).as_posix(): sha(p) for p in sorted(rt.rglob("*")) if p.is_file()}
         container = Container("guardian-mutual-" + uuid.uuid4().hex[:12])
+        diagnostic=root/'client-io.json';diagnostic.write_bytes(b'')
         for p in [root, rt, *rt.rglob("*")]: acl(root, p, container.principal, writable=False)
+        acl(root,diagnostic,container.principal,writable=True)
         low_label(root, root)
         channel = "guardian-resonance-" + secrets.token_hex(12)
         result["channel_id"] = channel
         result["expected_sid_sha256"] = hashlib.sha256(container.principal.encode()).hexdigest()
+        result["appcontainer_sid"] = container.principal
         ready = folder / (case + "-ready.txt"); broker_out = folder / (case + "-broker.json")
         trustfile = folder / (case + "-public-trust.json"); trustfile.write_bytes(encode(trust))
         if case not in ("outage", "missing_trust", "revoked_trust", "expired_trust"):
@@ -96,6 +100,7 @@ def execute_case(case, folder, key, trust, replay=None):
                     "--ready", str(ready), "--out", str(broker_out), "--trust", str(trustfile), "--case", case]
             proc = subprocess.Popen(args, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
                                     cwd=ROOT, creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0))
+            result['broker_pid']=proc.pid
             secret = {"key": key.private_bytes_raw().hex()}
             if replay is not None: secret["replay"] = replay
             proc.stdin.write(encode(secret) + b"\n"); proc.stdin.close(); proc.stdin = None
@@ -117,10 +122,14 @@ def execute_case(case, folder, key, trust, replay=None):
                 result["host_reply"] = receive(h)
             finally: transport.close(h)
         else:
+            launched_at=time.monotonic()
             observed = container.launch([str(rt / "python.exe"), "-I", "-B", str(rt / "client.py"), channel,
-                                         case if case in ("bad_nonce", "bad_tool") else "normal"], root, timeout=20)
+                                         case if case in ("bad_nonce", "bad_tool") else "normal",str(diagnostic)], root, timeout=20)
+            result['client_wall_ms']=round((time.monotonic()-launched_at)*1000)
+            result['client_pid']=observed['pid']
             result["client_exit"] = observed["exit_code"]
             result["client_token"] = {k: observed["token"].get(k) for k in ("appcontainer", "appcontainer_sid", "capability_count", "integrity_sid", "elevated")}
+            result['client_io']=json.loads(diagnostic.read_bytes())
         if proc:
             stdout, stderr = proc.communicate(timeout=5)
             result["broker_exit"] = proc.returncode

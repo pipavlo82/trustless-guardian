@@ -37,6 +37,7 @@ def serve(channel, app_sid, ready, out, trust, signing_key):
     pipe = None
     result = {"schema": "guardian.mutual-broker-evidence.v1", "grant_issued": False,
               "tool_executed": False, "production_ready": False, "transcript": [], "verdict": "CONTROL_BROKEN"}
+    result.update(broker_pid=os.getpid(),pipe_sddl=sddl,expected_client_sid=app_sid)
     try:
         # First pipe instance, message mode, local clients only. Original SID/owner ACL unchanged.
         pipe = win.create_pipe(os.path.join(r"\\.\pipe", channel), 3 | 0x80000, 6 | 8, 1, 4096, 4096, 5000, c.byref(attr))
@@ -47,6 +48,7 @@ def serve(channel, app_sid, ready, out, trust, signing_key):
         hello = receive(pipe)
         ident = win.client_identity(pipe)
         result["client_identity"] = {"appcontainer": ident["appcontainer"], "capability_count": ident["capability_count"],
+                                     "appcontainer_sid":ident['sid'],
                                      "sid_sha256": hashlib.sha256(ident["sid"].encode()).hexdigest()}
         if not ident["appcontainer"] or ident["capability_count"] != 0 or ident["sid"] != app_sid:
             result["verdict"] = "DENY_CLIENT_IDENTITY"
