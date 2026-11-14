@@ -109,10 +109,10 @@ def verify_case(case,r,root):
         require(len(cancelled)==1 and cancelled[0] is events[-1] and cancelled[0]['cancel_requested'] is True and type(cancelled[0]['completion_wait']) is int and cancelled[0]['completion_wait']==0 and type(cancelled[0]['completion_error']) is int and cancelled[0]['completion_error']==995,'IO_CANCELLATION')
         require(type(cancelled[0]['elapsed_ms']) is int and 2500<=cancelled[0]['elapsed_ms']<5000,'IO_CANCELLATION_BOUND')
         transcript=b['transcript']
-        require(type(transcript) is list and len(transcript)==(0 if case=='silent_hello' else 2),'IO_TRANSCRIPT_LENGTH')
+        require(type(transcript) is list and len(transcript)==(1 if case=='silent_hello' else 2),'IO_TRANSCRIPT_LENGTH')
+        hello=transcript[0]['request']
+        hello_valid(hello,root,r['channel_id'])
         if case=='silent_result':
-            hello=transcript[0]['request']
-            hello_valid(hello,root,r['channel_id'])
             require(response_failure(transcript[0]['reply'],selected,hello,hello,'hello',r['finished_at']) is None,'IO_HELLO_AUTH')
             proposal=transcript[1]['request']
             nonce=transcript[0]['reply']['payload']['response']['nonce']
