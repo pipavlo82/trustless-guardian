@@ -10,6 +10,8 @@ permissions:
 
 env:
   INTEGRITY_V4_POLICY_SHA256: 9bc5fd0be81c67cee5f5561c7d26ad657695025857bc27cd04b3f28e09c9b4bc
+  INTEGRITY_V8_POLICY_SHA256: 44db7457272224e56603239cc3d64375d1fbcb5de620a7e2ce7253801a9c066d
+  INTEGRITY_V8_VERIFIER_SHA256: 5d6ce0885ea0862ab079960e9f22c6e6ace7e141006aeaaeba38ea0e1dbcc4e6
 
 jobs:
   portable:
@@ -37,19 +39,45 @@ jobs:
           python -B -m unittest discover -s research/resonance_guardian_v1/tests -q
           python -B -m unittest discover -s research/resonance_guardian_v1/tests -q
           python -B -O -m unittest discover -s research/resonance_guardian_v1/tests -q
-      - name: PR7 layered integrity from independent pin
+      - name: Version-specific integrity gate (historical v4 or current v8)
         shell: bash
-        run: python -B tools/integrity_v4.py --policy-sha256 "$INTEGRITY_V4_POLICY_SHA256" --out build/integrity-v4/report.json
-      - name: Physical layered integrity mutation controls on Linux
+        run: |
+          set -euo pipefail
+          if [ -f integrity/v8/policy.json ]; then
+            python -B - <<'PY'
+          import hashlib,os,pathlib,sys
+          actual=hashlib.sha256(pathlib.Path('tools/integrity_v8.py').read_bytes()).hexdigest()
+          if actual != os.environ['INTEGRITY_V8_VERIFIER_SHA256']:
+              sys.exit('VERIFIER_BOOTSTRAP_PIN_MISMATCH')
+          PY
+            python -B tools/integrity_v8.py --policy-sha256 "$INTEGRITY_V8_POLICY_SHA256" --out build/integrity-v8/report.json
+          elif [ -f integrity/v5/policy.json ]; then
+            echo 'UNROUTED_INTEGRITY_SUCCESSOR: refusing silent fallback to v4' >&2
+            exit 1
+          else
+            python -B tools/integrity_v4.py --policy-sha256 "$INTEGRITY_V4_POLICY_SHA256" --out build/integrity-v4/report.json
+          fi
+      - name: Physical integrity mutation controls on Linux
         if: runner.os == 'Linux'
         shell: bash
-        run: python -B tools/integrity_mutations_v4.py --policy-sha256 "$INTEGRITY_V4_POLICY_SHA256" --out build/integrity-v4/mutations.json
+        run: |
+          set -euo pipefail
+          if [ -f integrity/v8/policy.json ]; then
+            python -B tools/integrity_v8.py --policy-sha256 "$INTEGRITY_V8_POLICY_SHA256" --self-test --out build/integrity-v8/mutations.json
+          elif [ -f integrity/v5/policy.json ]; then
+            echo 'UNROUTED_INTEGRITY_SUCCESSOR' >&2
+            exit 1
+          else
+            python -B tools/integrity_mutations_v4.py --policy-sha256 "$INTEGRITY_V4_POLICY_SHA256" --out build/integrity-v4/mutations.json
+          fi
       - name: Upload portable evidence
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         with:
           name: resonance-guardian-portable-${{ matrix.os }}
-          path: build/integrity-v4/
+          path: |
+            build/integrity-v4/
+            build/integrity-v8/
           if-no-files-found: warn
 
   windows-native-assessment:
