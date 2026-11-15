@@ -1,0 +1,21 @@
+{
+  "authorized": {
+    "additions": 9,
+    "manifest": "integrity/v6/repair-files.sha256.json",
+    "manifest_sha256": "0ce36a68c0c879e917ef2d9a101d0009a9ee07f08dffc776fe6b8ec4abcd3659",
+    "replacements": 5
+  },
+  "base_commit": "b76064fba76d1c2c367e725d6402631038c9e4eb",
+  "bootstrap_trust": [],
+  "control_files": [
+    "integrity/v6/policy.json",
+    "integrity/v6/candidate-base.sha256.json",
+    "integrity/v6/repair-files.sha256.json"
+  ],
+  "frozen": {
+    "entries": 369,
+    "manifest": "integrity/v6/candidate-base.sha256.json",
+    "manifest_sha256": "a3653553a2c7d4658b6a29228343fe5cf9ec3dfab9bbb0d32da1c0842f9d85cb"
+  },
+  "schema": "guardian.layered-integrity.v4"
+}
