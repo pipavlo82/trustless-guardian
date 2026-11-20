@@ -1,0 +1,17 @@
+{
+  "research/scoped_execution_lab_v1/Dockerfile": "fe79a98ba4310588c7a03f81949230d42732f7d16a99ac7a907fc75477653517",
+  "research/scoped_execution_lab_v1/README.md": "978cc0e740b6b9d920f67309811d01d1d1584566b415903f578ab789c5e0aa5d",
+  "research/scoped_execution_lab_v1/SOURCE_PINS.json": "1ce6b5e86a488b4a7a6c16e78430522b8ef07b0d2e3c2ca8c7fbbebb80042cff",
+  "research/scoped_execution_lab_v1/__init__.py": "65b60ff139ff2f934e8fa56ede65e02814731aac94a018951e13303f99d05562",
+  "research/scoped_execution_lab_v1/image.json": "e9a9208773d245b383b6bf87d10212c6f8d9bbe47bb514ddeef68f0d34c894b7",
+  "research/scoped_execution_lab_v1/integrity.py": "9a9bba1a00c17bd3e071fd51bd6c5f978e6f99ee0c7584501f09be674f5aeaf4",
+  "research/scoped_execution_lab_v1/lab.py": "665dd191a6e77c99d5bb7034d78f927d7fa1a041114b9d7b93b43317469ae064",
+  "research/scoped_execution_lab_v1/mutations.py": "544a9914da8ac12800c56176584992d07304e27a9371a191725fdc50ee283fb0",
+  "research/scoped_execution_lab_v1/native_run.py": "e0f88225205089bf1dd216016d3ef72aa809db5deb3ae0da0c4b4d2894a547ff",
+  "research/scoped_execution_lab_v1/native_server.py": "1e674fdc7da543182b8034230c22868224de0ab332c03a917260a669801f2e95",
+  "research/scoped_execution_lab_v1/test_lab.py": "d50f9601303bdc91a9710a829135ddc964138f1a0d88ca8be3c07c1698a0691b",
+  "research/scoped_execution_lab_v1/verify.mjs": "6b4c9397482aeeabc36142e7fb1c1d8aec72b03eb941b4fd2fd3d9a0e9508ef4",
+  "research/scoped_execution_lab_v1/verify_native.mjs": "8eb1bff1359af98297563f6552d81037beaec07bb1c3684d30938dc3f20e887e",
+  "research/scoped_execution_lab_v1/worker": "aea1148ecbdae6159656e83bf418eee0cd4b8b77c0716bde38e8721cfc4a48c3",
+  "research/scoped_execution_lab_v1/worker.c": "76610a80c9f50d8f7456b895e9982fe22ab4d14676d9a7600e2cbfdba5e04f15"
+}
