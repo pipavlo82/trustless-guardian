@@ -33,7 +33,7 @@ def run(out,case):
         rt=package(root,trust);diag=root/'client-io.json';diag.write_bytes(b'')
         protected=out/'protected-state-sentinel.txt';protected.write_bytes(b'PUBLIC_SYNTHETIC_PROTECTED_SENTINEL\n')
         probe=rt/'probe.py'
-        probe.write_bytes(b"import sys,json\nfrom pathlib import Path\np=Path(sys.argv[1]);r={}\nfor mode in ['rb','wb']:\n try:\n  with p.open(mode) as f:\n   if mode=='rb':f.read(1)\n   else:f.write(b'UNAUTHORIZED')\n  r[mode]='UNEXPECTED_ACCESS'\n except OSError as e:r[mode]=e.winerror\nPath(sys.argv[2]).write_text(json.dumps(r))\nraise SystemExit(0 if r=={'rb':5,'wb':5} else 1)\n")
+        probe.write_bytes(b"import sys,json,ctypes as c\nfrom ctypes import wintypes as w\nfrom pathlib import Path\nk=c.WinDLL('kernel32',use_last_error=True)\nf=k.CreateFileW;f.restype=w.HANDLE;f.argtypes=[w.LPCWSTR,w.DWORD,w.DWORD,c.c_void_p,w.DWORD,w.DWORD,w.HANDLE]\nk.CloseHandle.argtypes=[w.HANDLE]\nr={}\nfor mode,access in [('rb',0x80000000),('wb',0x40000000)]:\n h=f(sys.argv[1],access,0,None,3,0,None)\n if h==c.c_void_p(-1).value:r[mode]=c.get_last_error()\n else:r[mode]='UNEXPECTED_ACCESS';k.CloseHandle(h)\nPath(sys.argv[2]).write_text(json.dumps(r))\nraise SystemExit(0 if r=={'rb':5,'wb':5} else 1)\n")
         container=Container('guardian-scoped-'+uuid.uuid4().hex[:12]);sid=container.principal
         for path in [root,rt,*rt.rglob('*')]:acl(root,path,sid,writable=False)
         acl(root,diag,sid,writable=True);low_label(root,root)
