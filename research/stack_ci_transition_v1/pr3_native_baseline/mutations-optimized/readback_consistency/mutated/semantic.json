@@ -1,0 +1,22 @@
+{
+  "scenarios": [
+    {
+      "case": "readback_mismatch",
+      "checks": {
+        "actual_bytes": true,
+        "controlled_process": true,
+        "durable_state": false,
+        "fault_reached": true,
+        "host_digest": true,
+        "independent_broker_token": true,
+        "independent_host_bytes": true,
+        "no_false_nonexecution": false,
+        "positive": false,
+        "restart_control": false,
+        "restart_preserves_ambiguity": false
+      },
+      "external_execution": "UNVERIFIABLE",
+      "passed": false
+    }
+  ]
+}

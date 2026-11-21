@@ -1,0 +1,12 @@
+{
+  "completed": true,
+  "response": {
+    "decision": "DENY",
+    "execution": "RECOVERY_REQUIRED",
+    "failure_stage": "DISPATCH_UNKNOWN",
+    "reason": "DISPATCH_OUTCOME_UNCERTAIN",
+    "retry_permitted": false,
+    "scope": null,
+    "status": "UNVERIFIABLE"
+  }
+}

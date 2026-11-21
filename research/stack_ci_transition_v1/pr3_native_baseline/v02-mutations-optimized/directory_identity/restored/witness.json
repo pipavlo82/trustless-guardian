@@ -1,0 +1,13 @@
+{
+  "boundary": "directory_identity",
+  "expected": "DENY_AND_UNCHANGED",
+  "negative": {
+    "name": "negative",
+    "response": {
+      "error": "BROKER_START_FAILED"
+    },
+    "unchanged": true
+  },
+  "negative_wrote": false,
+  "positive_ok": true
+}

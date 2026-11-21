@@ -1,0 +1,324 @@
+{
+  "boundary": "committed_failure",
+  "journal_after_restart": [
+    {
+      "nonce": "positive",
+      "receipt": {
+        "body": {
+          "after_base64": "YXBwcm92ZWQ6cG9zaXRpdmU=",
+          "after_sha256": "e79a792393c71088b51660d4d2b9fde4b0070f6c0c84e3e3839b64995f113ca5",
+          "before_base64": "aW5pdGlhbAo=",
+          "before_sha256": "da68f54607d5f5644954096ce1597c006c5bb9f2497e07441bf064b81003ef8a",
+          "decision": {
+            "decision": "ALLOW",
+            "reason": "EXACT_POLICY_MATCH",
+            "scope": {
+              "action": "replace_utf8",
+              "actor": "S-1-15-2-320340556-3669930549-1355446899-4246074455-3929344657-332572836-2933770506",
+              "content_sha256": "e79a792393c71088b51660d4d2b9fde4b0070f6c0c84e3e3839b64995f113ca5",
+              "expires_at": 1030,
+              "nonce": "positive",
+              "policy_version": "guardian.local-file.v0",
+              "resource": "sample",
+              "scope": "whole-file-laboratory"
+            },
+            "status": "VERIFIED"
+          },
+          "execution": "LOCAL_WRITE_OBSERVED",
+          "external_execution": "UNVERIFIABLE",
+          "policy": {
+            "action": "replace_utf8",
+            "actors": [
+              "S-1-15-2-320340556-3669930549-1355446899-4246074455-3929344657-332572836-2933770506"
+            ],
+            "content_prefix": "approved:",
+            "max_bytes": 128,
+            "max_ttl": 60,
+            "resource": "sample",
+            "schema": "guardian.policy.v0",
+            "scope": "whole-file-laboratory",
+            "version": "guardian.local-file.v0"
+          },
+          "policy_sha256": "6048318c4cf723efe64928a2d050a4dd16f45fcae3e5d196b029bf9c931cc690",
+          "principal": "S-1-15-2-320340556-3669930549-1355446899-4246074455-3929344657-332572836-2933770506",
+          "profile": "guardian.local-file.v02",
+          "request": {
+            "action": "replace_utf8",
+            "actor": "S-1-15-2-320340556-3669930549-1355446899-4246074455-3929344657-332572836-2933770506",
+            "content": "approved:positive",
+            "evidence": {
+              "before_sha256": "da68f54607d5f5644954096ce1597c006c5bb9f2497e07441bf064b81003ef8a"
+            },
+            "expires_at": 1030,
+            "nonce": "positive",
+            "policy_version": "guardian.local-file.v0",
+            "resource": "sample",
+            "schema": "guardian.action.v0",
+            "scope": "whole-file-laboratory"
+          },
+          "request_sha256": "e6e666761253c19a34602e7bceaeef9908447e09f92908377bc6e1c5538d61d9",
+          "resource_identity": [
+            2830515730,
+            65536,
+            3122072
+          ],
+          "used_nonces": [],
+          "verification_time": 1000
+        },
+        "previous": "0000000000000000000000000000000000000000000000000000000000000000",
+        "schema": "guardian.evidence.v0",
+        "sha256": "af4cd3dde026127f93afa435359f1261e3492a00c5273bd9e977020b75833a00"
+      },
+      "state": "COMMITTED"
+    },
+    {
+      "nonce": "negative",
+      "receipt": {
+        "body": {
+          "after_base64": "YXBwcm92ZWQ6bmVnYXRpdmU=",
+          "after_sha256": "b8f3141dc34058ffdc62c60a63b8947accb8f36b080088306ce5fd8d892a5ec9",
+          "before_base64": "YXBwcm92ZWQ6cG9zaXRpdmU=",
+          "before_sha256": "e79a792393c71088b51660d4d2b9fde4b0070f6c0c84e3e3839b64995f113ca5",
+          "decision": {
+            "decision": "ALLOW",
+            "reason": "EXACT_POLICY_MATCH",
+            "scope": {
+              "action": "replace_utf8",
+              "actor": "S-1-15-2-320340556-3669930549-1355446899-4246074455-3929344657-332572836-2933770506",
+              "content_sha256": "b8f3141dc34058ffdc62c60a63b8947accb8f36b080088306ce5fd8d892a5ec9",
+              "expires_at": 1030,
+              "nonce": "negative",
+              "policy_version": "guardian.local-file.v0",
+              "resource": "sample",
+              "scope": "whole-file-laboratory"
+            },
+            "status": "VERIFIED"
+          },
+          "execution": "LOCAL_WRITE_OBSERVED",
+          "external_execution": "UNVERIFIABLE",
+          "policy": {
+            "action": "replace_utf8",
+            "actors": [
+              "S-1-15-2-320340556-3669930549-1355446899-4246074455-3929344657-332572836-2933770506"
+            ],
+            "content_prefix": "approved:",
+            "max_bytes": 128,
+            "max_ttl": 60,
+            "resource": "sample",
+            "schema": "guardian.policy.v0",
+            "scope": "whole-file-laboratory",
+            "version": "guardian.local-file.v0"
+          },
+          "policy_sha256": "6048318c4cf723efe64928a2d050a4dd16f45fcae3e5d196b029bf9c931cc690",
+          "principal": "S-1-15-2-320340556-3669930549-1355446899-4246074455-3929344657-332572836-2933770506",
+          "profile": "guardian.local-file.v02",
+          "request": {
+            "action": "replace_utf8",
+            "actor": "S-1-15-2-320340556-3669930549-1355446899-4246074455-3929344657-332572836-2933770506",
+            "content": "approved:negative",
+            "evidence": {
+              "before_sha256": "e79a792393c71088b51660d4d2b9fde4b0070f6c0c84e3e3839b64995f113ca5"
+            },
+            "expires_at": 1030,
+            "nonce": "negative",
+            "policy_version": "guardian.local-file.v0",
+            "resource": "sample",
+            "schema": "guardian.action.v0",
+            "scope": "whole-file-laboratory"
+          },
+          "request_sha256": "d05b38626cea4ad6e7000e54d407914f2c41bd528d4a0543cc5a6589ce607208",
+          "resource_identity": [
+            2830515730,
+            65536,
+            3122072
+          ],
+          "used_nonces": [
+            "positive"
+          ],
+          "verification_time": 1000
+        },
+        "previous": "0000000000000000000000000000000000000000000000000000000000000000",
+        "schema": "guardian.evidence.v0",
+        "sha256": "ee140c0be6805950f93ff95f4dcd961aaa3b33f8e8ffa7ce1d001ee082b0b8b0"
+      },
+      "state": "COMMITTED"
+    }
+  ],
+  "journal_before_restart": [
+    {
+      "nonce": "positive",
+      "receipt": {
+        "body": {
+          "after_base64": "YXBwcm92ZWQ6cG9zaXRpdmU=",
+          "after_sha256": "e79a792393c71088b51660d4d2b9fde4b0070f6c0c84e3e3839b64995f113ca5",
+          "before_base64": "aW5pdGlhbAo=",
+          "before_sha256": "da68f54607d5f5644954096ce1597c006c5bb9f2497e07441bf064b81003ef8a",
+          "decision": {
+            "decision": "ALLOW",
+            "reason": "EXACT_POLICY_MATCH",
+            "scope": {
+              "action": "replace_utf8",
+              "actor": "S-1-15-2-320340556-3669930549-1355446899-4246074455-3929344657-332572836-2933770506",
+              "content_sha256": "e79a792393c71088b51660d4d2b9fde4b0070f6c0c84e3e3839b64995f113ca5",
+              "expires_at": 1030,
+              "nonce": "positive",
+              "policy_version": "guardian.local-file.v0",
+              "resource": "sample",
+              "scope": "whole-file-laboratory"
+            },
+            "status": "VERIFIED"
+          },
+          "execution": "LOCAL_WRITE_OBSERVED",
+          "external_execution": "UNVERIFIABLE",
+          "policy": {
+            "action": "replace_utf8",
+            "actors": [
+              "S-1-15-2-320340556-3669930549-1355446899-4246074455-3929344657-332572836-2933770506"
+            ],
+            "content_prefix": "approved:",
+            "max_bytes": 128,
+            "max_ttl": 60,
+            "resource": "sample",
+            "schema": "guardian.policy.v0",
+            "scope": "whole-file-laboratory",
+            "version": "guardian.local-file.v0"
+          },
+          "policy_sha256": "6048318c4cf723efe64928a2d050a4dd16f45fcae3e5d196b029bf9c931cc690",
+          "principal": "S-1-15-2-320340556-3669930549-1355446899-4246074455-3929344657-332572836-2933770506",
+          "profile": "guardian.local-file.v02",
+          "request": {
+            "action": "replace_utf8",
+            "actor": "S-1-15-2-320340556-3669930549-1355446899-4246074455-3929344657-332572836-2933770506",
+            "content": "approved:positive",
+            "evidence": {
+              "before_sha256": "da68f54607d5f5644954096ce1597c006c5bb9f2497e07441bf064b81003ef8a"
+            },
+            "expires_at": 1030,
+            "nonce": "positive",
+            "policy_version": "guardian.local-file.v0",
+            "resource": "sample",
+            "schema": "guardian.action.v0",
+            "scope": "whole-file-laboratory"
+          },
+          "request_sha256": "e6e666761253c19a34602e7bceaeef9908447e09f92908377bc6e1c5538d61d9",
+          "resource_identity": [
+            2830515730,
+            65536,
+            3122072
+          ],
+          "used_nonces": [],
+          "verification_time": 1000
+        },
+        "previous": "0000000000000000000000000000000000000000000000000000000000000000",
+        "schema": "guardian.evidence.v0",
+        "sha256": "af4cd3dde026127f93afa435359f1261e3492a00c5273bd9e977020b75833a00"
+      },
+      "state": "COMMITTED"
+    },
+    {
+      "nonce": "negative",
+      "receipt": {
+        "body": {
+          "after_base64": "YXBwcm92ZWQ6bmVnYXRpdmU=",
+          "after_sha256": "b8f3141dc34058ffdc62c60a63b8947accb8f36b080088306ce5fd8d892a5ec9",
+          "before_base64": "YXBwcm92ZWQ6cG9zaXRpdmU=",
+          "before_sha256": "e79a792393c71088b51660d4d2b9fde4b0070f6c0c84e3e3839b64995f113ca5",
+          "decision": {
+            "decision": "ALLOW",
+            "reason": "EXACT_POLICY_MATCH",
+            "scope": {
+              "action": "replace_utf8",
+              "actor": "S-1-15-2-320340556-3669930549-1355446899-4246074455-3929344657-332572836-2933770506",
+              "content_sha256": "b8f3141dc34058ffdc62c60a63b8947accb8f36b080088306ce5fd8d892a5ec9",
+              "expires_at": 1030,
+              "nonce": "negative",
+              "policy_version": "guardian.local-file.v0",
+              "resource": "sample",
+              "scope": "whole-file-laboratory"
+            },
+            "status": "VERIFIED"
+          },
+          "execution": "LOCAL_WRITE_OBSERVED",
+          "external_execution": "UNVERIFIABLE",
+          "policy": {
+            "action": "replace_utf8",
+            "actors": [
+              "S-1-15-2-320340556-3669930549-1355446899-4246074455-3929344657-332572836-2933770506"
+            ],
+            "content_prefix": "approved:",
+            "max_bytes": 128,
+            "max_ttl": 60,
+            "resource": "sample",
+            "schema": "guardian.policy.v0",
+            "scope": "whole-file-laboratory",
+            "version": "guardian.local-file.v0"
+          },
+          "policy_sha256": "6048318c4cf723efe64928a2d050a4dd16f45fcae3e5d196b029bf9c931cc690",
+          "principal": "S-1-15-2-320340556-3669930549-1355446899-4246074455-3929344657-332572836-2933770506",
+          "profile": "guardian.local-file.v02",
+          "request": {
+            "action": "replace_utf8",
+            "actor": "S-1-15-2-320340556-3669930549-1355446899-4246074455-3929344657-332572836-2933770506",
+            "content": "approved:negative",
+            "evidence": {
+              "before_sha256": "e79a792393c71088b51660d4d2b9fde4b0070f6c0c84e3e3839b64995f113ca5"
+            },
+            "expires_at": 1030,
+            "nonce": "negative",
+            "policy_version": "guardian.local-file.v0",
+            "resource": "sample",
+            "schema": "guardian.action.v0",
+            "scope": "whole-file-laboratory"
+          },
+          "request_sha256": "d05b38626cea4ad6e7000e54d407914f2c41bd528d4a0543cc5a6589ce607208",
+          "resource_identity": [
+            2830515730,
+            65536,
+            3122072
+          ],
+          "used_nonces": [
+            "positive"
+          ],
+          "verification_time": 1000
+        },
+        "previous": "0000000000000000000000000000000000000000000000000000000000000000",
+        "schema": "guardian.evidence.v0",
+        "sha256": "ee140c0be6805950f93ff95f4dcd961aaa3b33f8e8ffa7ce1d001ee082b0b8b0"
+      },
+      "state": "COMMITTED"
+    }
+  ],
+  "negative": {
+    "after_hex": "617070726f7665643a6e65676174697665",
+    "after_sha256": "b8f3141dc34058ffdc62c60a63b8947accb8f36b080088306ce5fd8d892a5ec9",
+    "before_sha256": "e79a792393c71088b51660d4d2b9fde4b0070f6c0c84e3e3839b64995f113ca5",
+    "name": "negative",
+    "response": {
+      "completed": true,
+      "error": "TimeoutError: IPC_TIMEOUT_CANCELLED",
+      "winerror": null
+    },
+    "server_exit": 0,
+    "unchanged": false
+  },
+  "negative_ok": false,
+  "positive_ok": true,
+  "restart": {
+    "after_hex": "617070726f7665643a6e65676174697665",
+    "after_sha256": "b8f3141dc34058ffdc62c60a63b8947accb8f36b080088306ce5fd8d892a5ec9",
+    "before_sha256": "b8f3141dc34058ffdc62c60a63b8947accb8f36b080088306ce5fd8d892a5ec9",
+    "name": "restart",
+    "response": {
+      "completed": true,
+      "response": {
+        "decision": "DENY",
+        "execution": "NOT_EXECUTED",
+        "reason": "REPLAY",
+        "scope": null,
+        "status": "REFUTED"
+      }
+    },
+    "server_exit": 0,
+    "unchanged": true
+  }
+}
