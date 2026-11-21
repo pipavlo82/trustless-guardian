@@ -4,10 +4,12 @@ Historical manifests, guards, reports and research sources are unchanged.
 The unchanged full-tree checker runs at exact PR1, while the new pinned checker
 verifies current files plus explicit README/workflow transitions and research additions.
 The Windows launcher helpers are byte-identical backports from PR4 e772eebd3ae3fee91237fa62b2caa3be0517684f.
-Full historical Windows v04 validation still runs, including surviving/failed mutations.
-PR1 additionally runs a versioned availability-synchronized replacement for the flaky
-`unauthorized_pipe_client` observation. The old WinError2 remains a failed historical
-control and is never mapped to an ACL pass. Current PASS requires a preinitialized client
+Full historical Windows v04 validation still runs, including surviving/failed mutations,
+in a derived worktree whose only test-harness change extends the
+`unauthorized_pipe_client` server window from 500ms to 5000ms. The original frozen
+checkout stays clean; the derived diff and hashes are evidence. The idle-client timeout
+remains 500ms. PR1 additionally runs a versioned availability-synchronized replacement.
+The old WinError2 remains failed evidence and is never mapped to an ACL pass. Current PASS requires a preinitialized client
 released while the broker process and host supervisor are both live, WinError5, unchanged
 protected bytes, and a separately exercised pipe-ACL-removal control that must be killed in
 normal/repeat/-O. Elevated startup and ordinary local startup are separate paths.

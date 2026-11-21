@@ -1,11 +1,11 @@
 {
   "added": {
     "docs/RESONANCE_CORE.md": "cc2ba7b05e5768f90000e17237c8ea24bec1d83143906c185edb7aa302feb94c",
-    "research/stack_ci_transition_v1/README.md": "6e8342233e5da01a6d2562afcc5993d54c1c8b0019f60f796c409f6a176634f0",
-    "tests/test_pr1_availability_transition_v1.py": "2053eebd3d50efcc6c5b368fc64aa0c268656e8eb58b5072b138e171a2307024",
+    "research/stack_ci_transition_v1/README.md": "a8e9e39f40e06b26a1043d154ab6939dda83f2ed9c2b475362c6fd19ea66becb",
+    "tests/test_pr1_availability_transition_v1.py": "8e92c6db645e352c7c3420821fecd5712fdfb86f44ffd774068a05194279b2b9",
     "tools/pr1_availability_witness_v1.py": "dc1a973f8c5d011733f75284c56df3a14c894bc2252fcd075b41f4c326f484c0",
     "tools/pr1_availability_worker_v1.py": "56bf4757bad07936a3f694a0642f5017e3a2e2daa38e9c0d4bc6aa96da9a22c1",
-    "tools/pr1_native_gate_v1.py": "54b65b10a1337de1a5d47b2163bf956d56ed7adbfd0b0891414ba96c09ad642a",
+    "tools/pr1_native_gate_v1.py": "8102be0f077ff5b3dbc8e2a1a310cf9eeb3e9e75a665a3ea9003be16fea5c0ac",
     "tools/restricted_exec_v1.py": "3c3f87d9d30f62cbdf12152fe2078ff8cb704d879ad6072e025f5b63b937e7de",
     "tools/restricted_startup_v1.py": "6ff7471aaa1745c4b4eeed958decaf4847aa8abf9953840e1bb2071c67200d84",
     "tools/stack_controls_v1.py": "db6bca9fdd12316ab4f6e2f4821ea69f5804af0d12d7290b9583b65645d92fba",
@@ -235,6 +235,13 @@
   "launcher_provenance": "e772eebd3ae3fee91237fa62b2caa3be0517684f",
   "pr1_availability_transition": {
     "historical_failure": "PRESERVED_WINERROR2_NOT_ACL_PASS",
+    "historical_test_timing": {
+      "classification": "TEST_HARNESS_TIMING_ONLY",
+      "frozen_checkout": "UNCHANGED",
+      "idle_client_timeout_ms": 500,
+      "path": "tools/v02_campaign.py",
+      "unauthorized_pipe_timeout_ms": 5000
+    },
     "replacement_gate": "PREINITIALIZED_CLIENT_RELEASED_WHILE_BROKER_LIVE",
     "required_acl_removal_control": "KILLED",
     "required_modes": [
