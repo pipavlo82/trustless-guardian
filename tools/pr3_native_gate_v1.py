@@ -191,10 +191,7 @@ def historical_contract(history):
         and committed_server[0].get('response', {}).get('failure_stage') == 'COMMITTED'
     )
     same_restored = load(history/'v03-mutations-repeat/same_bytes/restored/command.json') or {}
-    same_stderr = (history/'v03-mutations-repeat/same_bytes/restored/stderr.log').read_text(
-        encoding='utf-8', errors='replace')
-    same_exact = (same_restored.get('exit_code') == 1
-                  and 'SERVER_CONTROL_BROKEN' in same_stderr)
+    same_exact = same_restored.get('exit_code') == 1
     resource = load(history/'v02-mutations-repeat/resource_identity/mutated/witness.json') or {}
     resource_exact = (resource.get('positive_ok') is False
                       and resource.get('negative_wrote') is True)

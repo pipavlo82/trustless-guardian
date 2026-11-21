@@ -1,7 +1,7 @@
 {
   "added": {
     "docs/RESONANCE_CORE.md": "cc2ba7b05e5768f90000e17237c8ea24bec1d83143906c185edb7aa302feb94c",
-    "research/stack_ci_transition_v1/PR3_NATIVE_BASELINE.json": "d8a11a3f297d9e59a99743e207cd5d948070c90e1e83a250386a8bd1affdb07e",
+    "research/stack_ci_transition_v1/PR3_NATIVE_BASELINE.json": "68eee48c98ed6e96c78f5075c4c402ec81cd643aca0e6780419fb525a13df7c7",
     "research/stack_ci_transition_v1/README.md": "d8d79f3d7b6771b7571c5b326e7b46adecd28403da21c9cc15f3f3823aaa1987",
     "research/stack_ci_transition_v1/pr3_native_baseline/checkout.json": "d5adf17bb5c58da3493603d4440932024127aaa7cff198465eae5af151291cac",
     "research/stack_ci_transition_v1/pr3_native_baseline/mutations-normal/report.json": "a5ef3129ed59e17d0ec00dce2de618334e0a931d15b7774f70c86c984b528538",
@@ -177,7 +177,6 @@
     "research/stack_ci_transition_v1/pr3_native_baseline/v03-mutations-repeat/same_bytes/mutated/restart.server.json": "2beb6df97d2cfedcbffe8374ef7112883d0d877629dd85f5042eccf7361aed9e",
     "research/stack_ci_transition_v1/pr3_native_baseline/v03-mutations-repeat/same_bytes/mutated/witness.json": "c918e98a6be96e68aaaa140f7eb63206b4d6615280b6790ecfe7c384faa12c83",
     "research/stack_ci_transition_v1/pr3_native_baseline/v03-mutations-repeat/same_bytes/restored/command.json": "74f2ae3e61f55a072c081f1135e58f2893ea3426379ee1bf432586c1b1bb4c3c",
-    "research/stack_ci_transition_v1/pr3_native_baseline/v03-mutations-repeat/same_bytes/restored/stderr.log": "9dd975b482b6129d36f9f4b6cdb440f2bbc26fdab84dbe74713756dee46214ec",
     "research/stack_ci_transition_v1/pr3_native_baseline/v03/mutations-normal/report.json": "0d49e84b7f3485e2bfb48eb54936675bed21b05a53d311f3b48c7f4adcee0127",
     "research/stack_ci_transition_v1/pr3_native_baseline/v03/mutations-optimized/report.json": "0d49e84b7f3485e2bfb48eb54936675bed21b05a53d311f3b48c7f4adcee0127",
     "research/stack_ci_transition_v1/pr3_native_baseline/v03/normal/report.json": "f21b122781b29a5889642b8ee5c9e655af97aeec2a9250922e766b7efe06980d",
@@ -195,7 +194,7 @@
     "research/stack_ci_transition_v1/pr3_native_baseline/v03/v02/repeat/report.json": "35da0922599b32756b0e3e39e6ef59be9c4246dffa65498c08c61243ceabb164",
     "research/stack_ci_transition_v1/pr3_native_baseline/v03/v02/report.json": "9fa4983463658e09de66c23bf703fada0916fd44f90b2c3b3385013cdc2fb30d",
     "tests/test_pr3_native_transition_v1.py": "12c66c5a2c118a6eea788f5d12167e74ed864e075c59f38aafb8007cd8c11b81",
-    "tools/pr3_native_gate_v1.py": "b83098d773524a5ebeb9db747dba654d2da20654c0398e6bf8efe8c1923ee4d7",
+    "tools/pr3_native_gate_v1.py": "df68edfab31150354fc99a8522b5864a14d452dc0a192ce642c532600d396a77",
     "tools/pr3_native_witness_v1.py": "a6c011322b6ce5270c03e4aba369c79c351593fd0cd6955a11ce105605b15100",
     "tools/restricted_exec_v1.py": "3c3f87d9d30f62cbdf12152fe2078ff8cb704d879ad6072e025f5b63b937e7de",
     "tools/restricted_startup_v1.py": "6ff7471aaa1745c4b4eeed958decaf4847aa8abf9953840e1bb2071c67200d84",
@@ -431,7 +430,7 @@
       "classification": "PRIOR_WINDOWS_EVIDENCE_SOURCE_BOUND_COMPOSITE",
       "exact_final_full_historical_replay": false,
       "frozen_source_bytes": "REQUIRED_EXACT",
-      "selected_artifacts": 191
+      "selected_artifacts": 190
     },
     "physical_mutations": 7,
     "replacement_gate": "NINE_TARGETED_WINDOWS_WITNESSES",

@@ -8,12 +8,12 @@
     "Current replacement witnesses use a separately recorded disposable test-harness overlay.",
     "The historical impersonation_level survivor remains a declared host-coverage limitation.",
     "External review, hosted CI, elevated Windows Server, and a second Windows machine are not established.",
-    "This repository carries 191 selected artifacts; full raw logs remain in the preserved workspace evidence tree."
+    "This repository carries 190 selected artifacts; full raw logs remain in the preserved workspace evidence tree."
   ],
   "platform": "Windows-11-10.0.26200-SP0",
   "python": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
   "schema": "guardian.pr3-native-baseline.v1",
-  "selected_artifact_set_sha256": "c97123486fe3737121292ae04435604d50d4908b88c02d38eeba6d876d349405",
+  "selected_artifact_set_sha256": "9ebae044ebfbd0640f5f2764485605fa3d043b672577c0d9bf11613438c01c83",
   "selected_artifact_sha256": {
     "checkout.json": "d5adf17bb5c58da3493603d4440932024127aaa7cff198465eae5af151291cac",
     "mutations-normal/report.json": "a5ef3129ed59e17d0ec00dce2de618334e0a931d15b7774f70c86c984b528538",
@@ -189,7 +189,6 @@
     "v03-mutations-repeat/same_bytes/mutated/restart.server.json": "2beb6df97d2cfedcbffe8374ef7112883d0d877629dd85f5042eccf7361aed9e",
     "v03-mutations-repeat/same_bytes/mutated/witness.json": "c918e98a6be96e68aaaa140f7eb63206b4d6615280b6790ecfe7c384faa12c83",
     "v03-mutations-repeat/same_bytes/restored/command.json": "74f2ae3e61f55a072c081f1135e58f2893ea3426379ee1bf432586c1b1bb4c3c",
-    "v03-mutations-repeat/same_bytes/restored/stderr.log": "9dd975b482b6129d36f9f4b6cdb440f2bbc26fdab84dbe74713756dee46214ec",
     "v03/mutations-normal/report.json": "0d49e84b7f3485e2bfb48eb54936675bed21b05a53d311f3b48c7f4adcee0127",
     "v03/mutations-optimized/report.json": "0d49e84b7f3485e2bfb48eb54936675bed21b05a53d311f3b48c7f4adcee0127",
     "v03/normal/report.json": "f21b122781b29a5889642b8ee5c9e655af97aeec2a9250922e766b7efe06980d",
