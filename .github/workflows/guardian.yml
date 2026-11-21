@@ -3,7 +3,7 @@ on: [push, pull_request, workflow_dispatch]
 permissions:
   contents: read
 env:
-  GUARDIAN_TRANSITION_PIN: 823fb229d40763adf18d274795128cdd06247e999c80dcdc59fe5f6671557042
+  GUARDIAN_TRANSITION_PIN: cb5bbe2089e37211b0b222bd8c79dc9d986b1d69a9e6dd915c253b386f14d324
 jobs:
   portable:
     runs-on: ubuntu-24.04
@@ -43,7 +43,7 @@ jobs:
         run: |
           python -B tools/v04_ci_probe.py --out build/v04-ci-probe.json
           python -B tools/v04_startup_probe.py --out build/v04-startup-probe.json
-      - name: Full original Windows gates through verified child startup
+      - name: Source-bound PR2 Windows gate through verified child startup
         run: python -B tools/stack_replay_v1.py --pin "$env:GUARDIAN_TRANSITION_PIN" --native --out build/stack-windows
       - name: Transition and negative controls
         run: python -B tools/stack_controls_v1.py --pin "$env:GUARDIAN_TRANSITION_PIN" --out build/stack-controls
