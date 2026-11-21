@@ -1,16 +1,20 @@
 {
   "added": {
     "docs/RESONANCE_CORE.md": "cc2ba7b05e5768f90000e17237c8ea24bec1d83143906c185edb7aa302feb94c",
-    "research/stack_ci_transition_v1/README.md": "b6e2438cb31cd6f4fef2e9a4314f47f5f1599f2cb5181c0ec83e753be7470aa6",
+    "research/stack_ci_transition_v1/README.md": "6e8342233e5da01a6d2562afcc5993d54c1c8b0019f60f796c409f6a176634f0",
+    "tests/test_pr1_availability_transition_v1.py": "2053eebd3d50efcc6c5b368fc64aa0c268656e8eb58b5072b138e171a2307024",
+    "tools/pr1_availability_witness_v1.py": "dc1a973f8c5d011733f75284c56df3a14c894bc2252fcd075b41f4c326f484c0",
+    "tools/pr1_availability_worker_v1.py": "56bf4757bad07936a3f694a0642f5017e3a2e2daa38e9c0d4bc6aa96da9a22c1",
+    "tools/pr1_native_gate_v1.py": "54b65b10a1337de1a5d47b2163bf956d56ed7adbfd0b0891414ba96c09ad642a",
     "tools/restricted_exec_v1.py": "3c3f87d9d30f62cbdf12152fe2078ff8cb704d879ad6072e025f5b63b937e7de",
     "tools/restricted_startup_v1.py": "6ff7471aaa1745c4b4eeed958decaf4847aa8abf9953840e1bb2071c67200d84",
     "tools/stack_controls_v1.py": "db6bca9fdd12316ab4f6e2f4821ea69f5804af0d12d7290b9583b65645d92fba",
     "tools/stack_integrity_v1.py": "8f080df3ecc52e581e0fd3c6ecf52f03f3bd6bba3aeba0a5af3e51fd9cfc6a7b",
     "tools/stack_replay_v1.py": "6b4a210d81d7ff9742c25f67dfeba0cd5e4767c85c0fc5b0a01e73dc00d01ccc",
-    "tools/stack_windows_v1.py": "196410f398d59314d90a30ea6d941b27873988e58268b8219e8ba281cc30b777"
+    "tools/stack_windows_v1.py": "71e9fcbb9c592582669a9cb2d134acbd48aa7547f1287aed8fabc0ef96a5a761"
   },
   "changed": {
-    ".github/workflows/guardian.yml": "fc0fe127010a0144db049904808f8d1f57e825e411ea20bb0dd09994b8e6b440",
+    ".github/workflows/guardian.yml": "a8d2cbffb33423da437b83dbdbf5cc63e3f87c090647181d9117475e86af86a8",
     "README.md": "b9d9c441d9571b8e6e229b681876be3a839b9b00117bca946a6484b130505742"
   },
   "frozen_files": {
@@ -229,6 +233,17 @@
   "frozen_sha": "03f6ffc6f4b983cfcc39f401f47165021e67e673",
   "historical_replay": "UNCHANGED_EXACT_PR1_FULL_V04",
   "launcher_provenance": "e772eebd3ae3fee91237fa62b2caa3be0517684f",
+  "pr1_availability_transition": {
+    "historical_failure": "PRESERVED_WINERROR2_NOT_ACL_PASS",
+    "replacement_gate": "PREINITIALIZED_CLIENT_RELEASED_WHILE_BROKER_LIVE",
+    "required_acl_removal_control": "KILLED",
+    "required_modes": [
+      "normal",
+      "repeat",
+      "optimized"
+    ],
+    "schema": "guardian.pr1-availability-witness.v1"
+  },
   "research_addition_count": 0,
   "research_additions": {},
   "schema": "guardian.stack-ci-transition.v1",
