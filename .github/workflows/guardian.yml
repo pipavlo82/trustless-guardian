@@ -3,7 +3,7 @@ on: [push, pull_request, workflow_dispatch]
 permissions:
   contents: read
 env:
-  GUARDIAN_TRANSITION_PIN: 7dcf2f03fdc5c4b7aed560d4e6ac5ca4cb82a45ec83ac33aeb7764b9cb79a7c4
+  GUARDIAN_TRANSITION_PIN: 0b5bf7058368cf7610c60014f0c1ec5051bddd6afce6cadfdedf69b8cb4ff58f
 jobs:
   portable:
     runs-on: ubuntu-24.04
