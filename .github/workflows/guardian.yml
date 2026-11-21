@@ -3,7 +3,7 @@ on: [push, pull_request, workflow_dispatch]
 permissions:
   contents: read
 env:
-  GUARDIAN_TRANSITION_PIN: 129b19e7ffc287f3bfb960aac208b75660b1698a736af333eab42eca6628460f
+  GUARDIAN_TRANSITION_PIN: b2bc6b505fc5887a245d6643fcc8bacf92760c4f5092e4939d729641b3ed0210
 jobs:
   portable:
     runs-on: ubuntu-24.04
@@ -43,7 +43,7 @@ jobs:
         run: |
           python -B tools/v04_ci_probe.py --out build/v04-ci-probe.json
           python -B tools/v04_startup_probe.py --out build/v04-startup-probe.json
-      - name: Historical Windows evidence plus synchronized PR1 availability gate
+      - name: Source-bound Windows baseline plus synchronized PR1 availability gate
         run: python -B tools/stack_replay_v1.py --pin "$env:GUARDIAN_TRANSITION_PIN" --native --out build/stack-windows
       - name: Transition and negative controls
         run: python -B tools/stack_controls_v1.py --pin "$env:GUARDIAN_TRANSITION_PIN" --out build/stack-controls

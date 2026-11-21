@@ -1,11 +1,37 @@
 {
   "added": {
     "docs/RESONANCE_CORE.md": "cc2ba7b05e5768f90000e17237c8ea24bec1d83143906c185edb7aa302feb94c",
-    "research/stack_ci_transition_v1/README.md": "a8e9e39f40e06b26a1043d154ab6939dda83f2ed9c2b475362c6fd19ea66becb",
-    "tests/test_pr1_availability_transition_v1.py": "8e92c6db645e352c7c3420821fecd5712fdfb86f44ffd774068a05194279b2b9",
-    "tools/pr1_availability_witness_v1.py": "dc1a973f8c5d011733f75284c56df3a14c894bc2252fcd075b41f4c326f484c0",
-    "tools/pr1_availability_worker_v1.py": "56bf4757bad07936a3f694a0642f5017e3a2e2daa38e9c0d4bc6aa96da9a22c1",
-    "tools/pr1_native_gate_v1.py": "8102be0f077ff5b3dbc8e2a1a310cf9eeb3e9e75a665a3ea9003be16fea5c0ac",
+    "research/stack_ci_transition_v1/PR1_NATIVE_BASELINE.json": "98c625a326cabe1022e128970db7f144b5ed1ecdd8c4c3124a60087ddf8772a9",
+    "research/stack_ci_transition_v1/README.md": "d54c3c752d251b8bbc32b6806cf644b223fb0a08a76ecbf00318221e89a5fc10",
+    "research/stack_ci_transition_v1/pr1_native_baseline/checkout.json": "d5adf17bb5c58da3493603d4440932024127aaa7cff198465eae5af151291cac",
+    "research/stack_ci_transition_v1/pr1_native_baseline/mutations-normal/report.json": "a5ef3129ed59e17d0ec00dce2de618334e0a931d15b7774f70c86c984b528538",
+    "research/stack_ci_transition_v1/pr1_native_baseline/mutations-optimized/report.json": "a5ef3129ed59e17d0ec00dce2de618334e0a931d15b7774f70c86c984b528538",
+    "research/stack_ci_transition_v1/pr1_native_baseline/mutations-repeat/report.json": "a5ef3129ed59e17d0ec00dce2de618334e0a931d15b7774f70c86c984b528538",
+    "research/stack_ci_transition_v1/pr1_native_baseline/normal/report.json": "5a80d68aad9c87201bb4274fd7e5082806e2809fb92a665f3c376153b25eff14",
+    "research/stack_ci_transition_v1/pr1_native_baseline/optimized/report.json": "5a80d68aad9c87201bb4274fd7e5082806e2809fb92a665f3c376153b25eff14",
+    "research/stack_ci_transition_v1/pr1_native_baseline/repeat/report.json": "5a80d68aad9c87201bb4274fd7e5082806e2809fb92a665f3c376153b25eff14",
+    "research/stack_ci_transition_v1/pr1_native_baseline/report.json": "0b96dec36eb16c39e77547d63105b751ca3d2aa8db28ee39b95ec69d3d355e43",
+    "research/stack_ci_transition_v1/pr1_native_baseline/v0-mutations-optimized/report.json": "4d37b87fd9a7c992e58d26dc3b2905b20540aa3938c5d510a669b06b55105e47",
+    "research/stack_ci_transition_v1/pr1_native_baseline/v0-mutations-repeat/report.json": "1fa517cbe6f52131834e861be2b81a662df5139da53a6775f5b607bd56c38948",
+    "research/stack_ci_transition_v1/pr1_native_baseline/v02-mutations-optimized/report.json": "6cbb0fd876558323351ac2bf993c2274de904a1ed28fc090c3b6df37e582df0e",
+    "research/stack_ci_transition_v1/pr1_native_baseline/v02-mutations-repeat/report.json": "350073a92ba1ff23720ea6bd40b6d41c778b8e0e1245df1d1ce6504cd4edd5bd",
+    "research/stack_ci_transition_v1/pr1_native_baseline/v03-mutations-optimized/report.json": "0d49e84b7f3485e2bfb48eb54936675bed21b05a53d311f3b48c7f4adcee0127",
+    "research/stack_ci_transition_v1/pr1_native_baseline/v03-mutations-repeat/report.json": "0d49e84b7f3485e2bfb48eb54936675bed21b05a53d311f3b48c7f4adcee0127",
+    "research/stack_ci_transition_v1/pr1_native_baseline/v03/mutations-normal/report.json": "0d49e84b7f3485e2bfb48eb54936675bed21b05a53d311f3b48c7f4adcee0127",
+    "research/stack_ci_transition_v1/pr1_native_baseline/v03/mutations-optimized/report.json": "0d49e84b7f3485e2bfb48eb54936675bed21b05a53d311f3b48c7f4adcee0127",
+    "research/stack_ci_transition_v1/pr1_native_baseline/v03/normal/report.json": "f21b122781b29a5889642b8ee5c9e655af97aeec2a9250922e766b7efe06980d",
+    "research/stack_ci_transition_v1/pr1_native_baseline/v03/optimized/report.json": "f21b122781b29a5889642b8ee5c9e655af97aeec2a9250922e766b7efe06980d",
+    "research/stack_ci_transition_v1/pr1_native_baseline/v03/repeat/report.json": "f21b122781b29a5889642b8ee5c9e655af97aeec2a9250922e766b7efe06980d",
+    "research/stack_ci_transition_v1/pr1_native_baseline/v03/report.json": "de30350d73a9e195403ae8b5d30812ac5939ff4ca23d1534506971db5ae8ae38",
+    "research/stack_ci_transition_v1/pr1_native_baseline/v03/v02/mutations/report.json": "b2aca9cfe6668293d0633ad818b2efd8bd6f9cc4e2198e1db64a2144c2396cf7",
+    "research/stack_ci_transition_v1/pr1_native_baseline/v03/v02/normal/report.json": "57de38120f283571a6664ecd899af1f55e10923a8adba5be46cf1fa0c5175d4a",
+    "research/stack_ci_transition_v1/pr1_native_baseline/v03/v02/optimized/report.json": "c35cd093ae0bbe74a1598bcfcf9889c5bd837aa0c0b8aafc5f816238cd2649a4",
+    "research/stack_ci_transition_v1/pr1_native_baseline/v03/v02/repeat/report.json": "db228e51d547dd441445d11b49cacd603e82764d603f76040f4c32e0c6f98747",
+    "research/stack_ci_transition_v1/pr1_native_baseline/v03/v02/report.json": "bcbb572b66703938ab5c229b2262885752c4c82124584b51694e3da2f5152f2e",
+    "tests/test_pr1_availability_transition_v1.py": "97c530fcc072cde00f08b07cf51c4c1fe71c70e2ee3b209a53ee71bcee98cfcf",
+    "tools/pr1_availability_witness_v1.py": "3b3a69b98286911f8d7f9892a16ee98dadfc46557c510a455838867a67d0e989",
+    "tools/pr1_availability_worker_v1.py": "603f902aca38011c09798f461a718331773eb991cecf7b82394fce1950359a7d",
+    "tools/pr1_native_gate_v1.py": "562d8a14d1424fe192dd74fc29690d66e967014fafa05bcdc20097e17e779660",
     "tools/restricted_exec_v1.py": "3c3f87d9d30f62cbdf12152fe2078ff8cb704d879ad6072e025f5b63b937e7de",
     "tools/restricted_startup_v1.py": "6ff7471aaa1745c4b4eeed958decaf4847aa8abf9953840e1bb2071c67200d84",
     "tools/stack_controls_v1.py": "db6bca9fdd12316ab4f6e2f4821ea69f5804af0d12d7290b9583b65645d92fba",
@@ -14,7 +40,7 @@
     "tools/stack_windows_v1.py": "71e9fcbb9c592582669a9cb2d134acbd48aa7547f1287aed8fabc0ef96a5a761"
   },
   "changed": {
-    ".github/workflows/guardian.yml": "a8d2cbffb33423da437b83dbdbf5cc63e3f87c090647181d9117475e86af86a8",
+    ".github/workflows/guardian.yml": "86e64684a8d6d133148700c589714154d6d27b8468bd1d3b7e5184be7ee5a147",
     "README.md": "b9d9c441d9571b8e6e229b681876be3a839b9b00117bca946a6484b130505742"
   },
   "frozen_files": {
@@ -235,12 +261,11 @@
   "launcher_provenance": "e772eebd3ae3fee91237fa62b2caa3be0517684f",
   "pr1_availability_transition": {
     "historical_failure": "PRESERVED_WINERROR2_NOT_ACL_PASS",
-    "historical_test_timing": {
-      "classification": "TEST_HARNESS_TIMING_ONLY",
-      "frozen_checkout": "UNCHANGED",
-      "idle_client_timeout_ms": 500,
-      "path": "tools/v02_campaign.py",
-      "unauthorized_pipe_timeout_ms": 5000
+    "historical_native_baseline": {
+      "classification": "PRIOR_WINDOWS_EVIDENCE_SOURCE_BOUND_COMPOSITE",
+      "exact_final_full_historical_replay": false,
+      "frozen_source_bytes": "REQUIRED_EXACT",
+      "selected_reports": 25
     },
     "replacement_gate": "PREINITIALIZED_CLIENT_RELEASED_WHILE_BROKER_LIVE",
     "required_acl_removal_control": "KILLED",

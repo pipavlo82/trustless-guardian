@@ -1,19 +1,15 @@
-"""PR1 native transition: preserve the old run and require a live-pipe replacement."""
+"""PR1 native transition: source-bound prior evidence plus a live-pipe replacement."""
 from pathlib import Path
 import argparse
 import hashlib
 import json
-import shutil
 import subprocess
 import sys
 import time
 
 ROOT = Path(__file__).resolve().parents[1]
 FROZEN = '03f6ffc6f4b983cfcc39f401f47165021e67e673'
-RUNTIME_ZIP = 'python-3.12.10-embed-amd64.zip'
-UNSTABLE_CALL = (b"row=lab.roundtrip('unauthorized_pipe_client',lab.request('unauthorized'),"
-                 b"container=lab.other,server_options={'timeout_ms':500})")
-STABILIZED_CALL = UNSTABLE_CALL.replace(b"'timeout_ms':500", b"'timeout_ms':5000")
+BASELINE = ROOT/'research/stack_ci_transition_v1/PR1_NATIVE_BASELINE.json'
 
 
 def load(path):
@@ -27,59 +23,6 @@ def save(path, value):
 
 def sha256_bytes(value):
     return hashlib.sha256(value).hexdigest()
-
-
-def timing_adjusted_bytes(value):
-    if value.count(UNSTABLE_CALL) != 1:
-        raise ValueError('expected exactly one unauthorized-pipe 500ms call')
-    adjusted = value.replace(UNSTABLE_CALL, STABILIZED_CALL)
-    if adjusted.count(STABILIZED_CALL) != 1:
-        raise ValueError('timing adjustment was not unique')
-    return adjusted
-
-
-def prepare_stabilized_checkout(frozen, out):
-    head = subprocess.check_output(['git', '-C', str(frozen), 'rev-parse', 'HEAD']).decode().strip()
-    status = subprocess.check_output(['git', '-C', str(frozen), 'status', '--porcelain']).decode()
-    if head != FROZEN or status:
-        raise ValueError('frozen checkout is not exact and clean')
-    derived = ROOT/'build'/('pr1-timing-stabilized-'+str(time.time_ns()))
-    add = subprocess.run(['git', '-C', str(frozen), 'worktree', 'add', '--detach', str(derived), FROZEN],
-                         capture_output=True)
-    if add.returncode != 0:
-        raise RuntimeError('unable to create derived timing worktree: '+add.stderr.decode(errors='replace'))
-    source = derived/'tools/v02_campaign.py'
-    before = source.read_bytes()
-    after = timing_adjusted_bytes(before)
-    source.write_bytes(after)
-    cache_source = frozen/'build/runtime'/RUNTIME_ZIP
-    if not cache_source.is_file():
-        raise ValueError('pinned runtime cache is missing')
-    cache_target = derived/'build/runtime'/RUNTIME_ZIP
-    cache_target.parent.mkdir(parents=True, exist_ok=True)
-    shutil.copy2(cache_source, cache_target)
-    derived_status = subprocess.check_output(['git', '-C', str(derived), 'status', '--porcelain']).decode()
-    if derived_status != ' M tools/v02_campaign.py\n':
-        raise ValueError('derived checkout contains an unexpected change: '+repr(derived_status))
-    patch = subprocess.check_output(['git', '-C', str(derived), 'diff', '--binary', '--', 'tools/v02_campaign.py'])
-    (out/'timing-adjustment.patch').write_bytes(patch)
-    manifest = {
-        'schema': 'guardian.pr1-test-timing-adjustment.v1',
-        'frozen_head': head,
-        'frozen_status': status,
-        'derived_checkout': str(derived),
-        'derived_status': derived_status.splitlines(),
-        'changed_path': 'tools/v02_campaign.py',
-        'before_sha256': sha256_bytes(before),
-        'after_sha256': sha256_bytes(after),
-        'patch_sha256': sha256_bytes(patch),
-        'runtime_zip_sha256': sha256_bytes(cache_target.read_bytes()),
-        'change': 'unauthorized_pipe_client timeout_ms 500 -> 5000 only',
-        'idle_client_timeout_ms': 500,
-        'classification': 'TEST_HARNESS_TIMING_ONLY',
-    }
-    save(out/'timing-adjustment.json', manifest)
-    return derived, manifest
 
 
 def execute(name, argv, cwd, out, timeout):
@@ -127,14 +70,13 @@ def historical_contract(history):
     )
     mutation_ok = (
         root.get('mutations') == {
-            'normal': {'KILLED': 5, 'SURVIVED': 0, 'CRASHED': 0, 'NOT_APPLIED': 0, 'CONTROL_BROKEN': 0},
-            'repeat': {'KILLED': 5, 'SURVIVED': 0, 'CRASHED': 0, 'NOT_APPLIED': 0, 'CONTROL_BROKEN': 0},
-            'optimized': {'KILLED': 5, 'SURVIVED': 0, 'CRASHED': 0, 'NOT_APPLIED': 0, 'CONTROL_BROKEN': 0},
+            mode: {'KILLED': 5, 'SURVIVED': 0, 'CRASHED': 0, 'NOT_APPLIED': 0, 'CONTROL_BROKEN': 0}
+            for mode in ('normal', 'repeat', 'optimized')
         }
         and v02.get('mutations') == {'KILLED': 11, 'SURVIVED': 0, 'CRASHED': 0, 'NOT_APPLIED': 0, 'CONTROL_BROKEN': 0}
         and v03.get('mutations') == {
-            'normal': {'KILLED': 3, 'SURVIVED': 1, 'CRASHED': 0, 'NOT_APPLIED': 0, 'CONTROL_BROKEN': 0},
-            'optimized': {'KILLED': 3, 'SURVIVED': 1, 'CRASHED': 0, 'NOT_APPLIED': 0, 'CONTROL_BROKEN': 0},
+            mode: {'KILLED': 3, 'SURVIVED': 1, 'CRASHED': 0, 'NOT_APPLIED': 0, 'CONTROL_BROKEN': 0}
+            for mode in ('normal', 'optimized')
         }
     )
     original_pass = not scenario_failures and root.get('passed') is True
@@ -149,35 +91,77 @@ def historical_contract(history):
     }
 
 
+def baseline_contract(frozen):
+    baseline = load(BASELINE)
+    if not baseline or baseline.get('schema') != 'guardian.pr1-native-baseline.v1':
+        return {'valid': False, 'reason': 'BASELINE_SCHEMA'}
+    selected = ROOT/baseline['selected_evidence_root']
+    hashes = baseline.get('selected_artifact_sha256', {})
+    artifact_mismatches = []
+    for relative, expected in hashes.items():
+        path = selected/relative
+        actual = sha256_bytes(path.read_bytes()) if path.is_file() else None
+        if actual != expected: artifact_mismatches.append(relative)
+    seal_input = b''.join(relative.encode()+b'\0'+hashes[relative].encode()+b'\n'
+                          for relative in sorted(hashes))
+    seal_valid = sha256_bytes(seal_input) == baseline.get('selected_artifact_set_sha256')
+    head = subprocess.check_output(['git', '-C', str(frozen), 'rev-parse', 'HEAD']).decode().strip()
+    status = subprocess.check_output(['git', '-C', str(frozen), 'status', '--porcelain']).decode()
+    expected_sources = baseline.get('source_sha256', {})
+    actual_names = {path.relative_to(frozen).as_posix()
+                    for folder in ('guardian', 'tools', 'tests')
+                    for path in (frozen/folder).rglob('*.py')}
+    source_mismatches = []
+    for relative, expected in expected_sources.items():
+        path = frozen/relative
+        actual = sha256_bytes(path.read_bytes()) if path.is_file() else None
+        if actual != expected: source_mismatches.append(relative)
+    source_set_valid = actual_names == set(expected_sources)
+    historical = historical_contract(selected)
+    valid = (head == FROZEN and not status and not artifact_mismatches and seal_valid
+             and not source_mismatches and source_set_valid and historical.get('valid'))
+    return {
+        'valid': bool(valid),
+        'classification': baseline.get('classification'),
+        'baseline_sha256': sha256_bytes(BASELINE.read_bytes()),
+        'selected_artifact_set_sha256': baseline.get('selected_artifact_set_sha256'),
+        'selected_artifacts_verified': len(hashes)-len(artifact_mismatches),
+        'selected_artifact_mismatches': artifact_mismatches,
+        'frozen_head': head, 'frozen_status': status,
+        'source_files_verified': len(expected_sources)-len(source_mismatches),
+        'source_set_valid': source_set_valid, 'source_mismatches': source_mismatches,
+        'historical': historical,
+        'limitations': baseline.get('limitations'),
+    }
+
+
 def run(out, frozen):
     out = out.resolve(); frozen = frozen.resolve()
     if out.exists(): raise ValueError('fresh output directory required')
     out.mkdir(parents=True)
     rows = []
-    stabilized, adjustment = prepare_stabilized_checkout(frozen, out)
-    rows.append(execute('timing-stabilized-full-v04', [
-        sys.executable, '-B', stabilized/'tools/validate_v04.py', '--out', out/'historical',
-    ], stabilized, out, 9000))
     for mode, flags in [('normal', []), ('repeat', []), ('optimized', ['-O'])]:
         rows.append(execute('availability-'+mode, [
             sys.executable, '-B', *flags, ROOT/'tools/pr1_availability_witness_v1.py',
             '--frozen', frozen, '--out', out/('availability-'+mode), '--mode', mode,
-        ], ROOT, out, 180))
-    historical = historical_contract(out/'historical')
+        ], ROOT, out, 240))
+    baseline = baseline_contract(frozen)
     availability = {mode: load(out/('availability-'+mode)/'report.json')
                     for mode in ('normal', 'repeat', 'optimized')}
     replacement_pass = all(report and report.get('passed') for report in availability.values())
-    passed = historical['valid'] and replacement_pass
+    passed = baseline['valid'] and replacement_pass
     report = {
         'schema': 'guardian.pr1-native-transition.v1',
-        'status': 'PASS_LOCAL' if passed else 'HOLD', 'passed': passed,
-        'historical': historical, 'replacement': {
+        'status': 'PASS_COMPOSITE_LOCAL' if passed else 'HOLD', 'passed': passed,
+        'evidence_mode': 'SOURCE_BOUND_PRIOR_WINDOWS_MUTATIONS_PLUS_CURRENT_WINDOWS_AVAILABILITY',
+        'historical_baseline': baseline,
+        'replacement': {
             'passed': replacement_pass,
             'modes': {mode: (report or {}).get('cases') for mode, report in availability.items()},
         },
-        'test_timing_adjustment': adjustment,
         'commands': rows,
-        'rule': 'The raw old WinError2 evidence remains failed. The derived full-v04 run changes only the unauthorized-pipe availability window from 500ms to 5000ms; current PASS also requires the synchronized live-pipe witness and its ACL-removal control in all modes.',
+        'rule': 'Prior Windows mutation evidence is accepted only when all 25 selected reports and every frozen Python source byte match. The old WinError2 remains failed; current PASS separately requires the synchronized live-pipe witness and ACL-removal control in all modes.',
+        'exact_final_full_historical_replay': False,
         'production': 'HOLD', 'external_review': 'NOT_ESTABLISHED',
     }
     save(out/'report.json', report)

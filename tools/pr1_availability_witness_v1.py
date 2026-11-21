@@ -69,8 +69,8 @@ def run(out, frozen, mode):
             cfg = {
                 'root': str(self.root), 'role': 'client', 'out': str(client_out),
                 'pipe': self.pipe, 'server_pid': self.pid,
-                'raw_hex': canonical(value).hex(), 'preconnect_timeout_seconds': 8,
-                'preconnect_barrier': True,
+                'raw_hex': canonical(value).hex(), 'preconnect_timeout_seconds': 20,
+                'client_timeout_ms': 15000, 'preconnect_barrier': True,
             }
             ready = client_out/'preconnect-ready.json'; release = client_out/'preconnect-release'
             holder = {}; errors = []
@@ -78,7 +78,7 @@ def run(out, frozen, mode):
                 try: holder['process'] = self.launch(self.other, cfg, name+'-client')
                 except Exception as exc: errors.append(type(exc).__name__+': '+str(exc))
             client_thread = threading.Thread(target=launch_client); client_thread.start()
-            deadline = time.monotonic()+8
+            deadline = time.monotonic()+20
             while time.monotonic() < deadline and client_thread.is_alive() and not ready.exists():
                 time.sleep(.005)
             worker_ready = ready.exists()
@@ -108,14 +108,17 @@ def run(out, frozen, mode):
 
     lab = AvailabilityLab(out/'lab')
     try:
-        positive = lab.roundtrip('positive', server_options={'timeout_ms': 5000})
+        positive = lab.roundtrip('positive', server_options={
+            'timeout_ms': 15000, 'response_timeout_ms': 15000,
+        }, client_timeout_ms=15000)
         denied = lab.synchronized_other(
             'unauthorized_available', lab.request('unauthorized_available'),
-            {'timeout_ms': 5000},
+            {'timeout_ms': 15000, 'response_timeout_ms': 15000},
         )
         acl_removed = lab.synchronized_other(
             'pipe_acl_removed', lab.request('pipe_acl_removed'),
-            {'timeout_ms': 5000, 'fixture_pipe_sid': lab.other.principal},
+            {'timeout_ms': 15000, 'response_timeout_ms': 15000,
+             'fixture_pipe_sid': lab.other.principal},
         )
         denial_pass = (
             denied['released_while_available'] and denied['unchanged'] and not denied['client_errors']

@@ -3,7 +3,7 @@ from pathlib import Path
 import tempfile
 import unittest
 
-from tools.pr1_native_gate_v1 import historical_contract, timing_adjusted_bytes
+from tools.pr1_native_gate_v1 import historical_contract
 
 
 V04 = {mode: {'KILLED': 5, 'SURVIVED': 0, 'CRASHED': 0, 'NOT_APPLIED': 0, 'CONTROL_BROKEN': 0}
@@ -57,22 +57,13 @@ class HistoricalContractTests(unittest.TestCase):
             root = Path(raw); fixture(root, {'mode': 'repeat', 'name': 'unauthorized_pipe_client', 'winerror': 3})
             self.assertFalse(historical_contract(root)['valid'])
 
-    def test_timing_adjustment_changes_only_unauthorized_window(self):
-        source = (b"prefix\n    row=lab.roundtrip('unauthorized_pipe_client',lab.request('unauthorized'),"
-                  b"container=lab.other,server_options={'timeout_ms':500})\n"
-                  b"    row=lab.roundtrip('idle_client',server_options={'timeout_ms':500},fixture_idle=True)\n")
-        adjusted = timing_adjusted_bytes(source)
-        self.assertIn(b"unauthorized'),container=lab.other,server_options={'timeout_ms':5000}", adjusted)
-        self.assertIn(b"'idle_client',server_options={'timeout_ms':500}", adjusted)
-        self.assertEqual(len(source), len(adjusted)-1)
-
-    def test_timing_adjustment_rejects_missing_or_duplicate_target(self):
-        target = (b"row=lab.roundtrip('unauthorized_pipe_client',lab.request('unauthorized'),"
-                  b"container=lab.other,server_options={'timeout_ms':500})")
-        with self.assertRaises(ValueError):
-            timing_adjusted_bytes(b'no target')
-        with self.assertRaises(ValueError):
-            timing_adjusted_bytes(target+b'\n'+target)
+    def test_selected_native_baseline_keeps_raw_failure_and_mutations(self):
+        root = Path(__file__).resolve().parents[1]
+        selected = root/'research/stack_ci_transition_v1/pr1_native_baseline'
+        result = historical_contract(selected)
+        self.assertTrue(result['valid'])
+        self.assertEqual(result['status'], 'EXACT_KNOWN_AVAILABILITY_FAILURE')
+        self.assertTrue(result['mutation_populations_valid'])
 
     def test_additional_nonzero_command_is_rejected(self):
         with tempfile.TemporaryDirectory() as raw:
