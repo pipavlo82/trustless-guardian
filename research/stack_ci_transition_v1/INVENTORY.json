@@ -1,7 +1,7 @@
 {
   "added": {
     "docs/RESONANCE_CORE.md": "cc2ba7b05e5768f90000e17237c8ea24bec1d83143906c185edb7aa302feb94c",
-    "research/stack_ci_transition_v1/README.md": "067c889252b6b04d4239d7f658ad2c4c3719f1381a0f7f539465f7669dc1156e",
+    "research/stack_ci_transition_v1/README.md": "b6e2438cb31cd6f4fef2e9a4314f47f5f1599f2cb5181c0ec83e753be7470aa6",
     "tools/restricted_exec_v1.py": "3c3f87d9d30f62cbdf12152fe2078ff8cb704d879ad6072e025f5b63b937e7de",
     "tools/restricted_startup_v1.py": "6ff7471aaa1745c4b4eeed958decaf4847aa8abf9953840e1bb2071c67200d84",
     "tools/stack_controls_v1.py": "db6bca9fdd12316ab4f6e2f4821ea69f5804af0d12d7290b9583b65645d92fba",
@@ -11,7 +11,7 @@
   },
   "changed": {
     ".github/workflows/guardian.yml": "fc0fe127010a0144db049904808f8d1f57e825e411ea20bb0dd09994b8e6b440",
-    "README.md": "dd8accaf6c4d29ce33a8970eb53c958531b425d1c11cbf9569d204ac8ec47179"
+    "README.md": "b9d9c441d9571b8e6e229b681876be3a839b9b00117bca946a6484b130505742"
   },
   "frozen_files": {
     ".gitattributes": "48b000299ba1cc4eb8571a3d43163d6b05f43b7c53ad06056c897c1353cd92b4",

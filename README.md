@@ -183,9 +183,3 @@ Original code is licensed under [Apache-2.0](LICENSE). Third-party components re
 [Browse Draft PRs](https://github.com/pipavlo82/trustless-guardian/pulls) · [Security boundaries](docs/SECURITY_BOUNDARIES.md)
 
 </div>
-
-## Historical PR #1 replay boundary
-
-The original [PR #1 README at its reviewed commit](https://github.com/pipavlo82/trustless-guardian/blob/03f6ffc6f4b983cfcc39f401f47165021e67e673/README.md) remains the versioned entry point for the v0 through v0.7 laboratory results, commands, failures and limitations.
-
-This documentation reconciliation preserves the current project overview and the original research history. It does not reclassify historical CI failures or mutation survivors. PR #1 through #8 remain separate review units; later passing checks do not validate earlier heads or a new integration composition. The scoped execution candidate requires third-party replay before any integration decision. Production remains **HOLD**.
