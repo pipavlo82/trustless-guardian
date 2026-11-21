@@ -1,147 +1,191 @@
-> **v0.7 developer preview:** [quickstart](docs/DEVELOPER_PREVIEW.md), [v1 protocol](docs/AGENT_TOOL_PROTOCOL_V1.md), [Hermes compatibility](docs/HERMES_COMPATIBILITY.md). Live-model integration and deterministic OS tests are separate evidence populations. Hosted Windows CI remains blocked. This is not a production release. [Live results](research/V07_LIVE_AGENT_RESULTS.md), [deterministic mutations](research/V07_DETERMINISTIC_MUTATIONS.md), [complete replay](research/V07_INDEPENDENT_REPLAY.md), [machine summary](research/V07_SUMMARY.json), [limitations](research/V07_LIMITATIONS.md).
+<div align="center">
 
-> **v0.6 — real Hermes laboratory integration:** [demo and commands](demo/real-agent/README.md), [results](research/V06_REAL_AGENT_RESULTS.md), [machine summary](research/V06_SUMMARY.json), [mutation report](research/V06_MUTATION_REPORT.md), [tool protocol](docs/REAL_AGENT_TOOL_PROTOCOL.md), [security report](research/V06_SECURITY_REPORT.md), [limitations](research/V06_LIMITATIONS.md).
->
-> A genuine model selects a tool; the native Hermes agent loop executes it inside a measured AppContainer. Guardian independently authorizes the request, and a separate observer checks real resource bytes. This is a narrow local experiment through an explicit Codex CLI inference relay. It is not native Nous authentication, arbitrary agent containment or production authorization. Hosted Windows enforcement remains CI_BLOCKED; the full report preserves historical and development failures.
+# 🛡️ Trustless Guardian
 
-> **Historical v0.5 — HOLD:** [demo and commands](demo/README.md), [executed results](research/V05_SECURITY_RESULTS.md), [machine summary](research/V05_SUMMARY.json), [limitations](research/V05_LIMITATIONS.md).
->
-> The genuine Codex CLI starts inside a measured AppContainer. No model-backed task or native agent tool action ran: real-agent integration is **NOT_COVERED**. The separate scripted Windows demo passed five scenario groups, six native access denials and four physical mutations in normal/repeat/optimized cold replay. Hosted enforcement remains CI_BLOCKED. Historical repeated mutation controls also retain failures; the report preserves them rather than treating all checks as green. Reports below describe their own historical runs.
+### AI agents can propose actions. They should not grant themselves permission to execute them.
 
-# v0.4 audit update
+**Authenticate → Authorize → Isolate → Record → Recompute**
 
-Experimental execution-outcome repairs and a controlled real Windows
-impersonation witness are on the research branch. Start with the
-[gap audit](research/V04_SECURITY_GAP_AUDIT.md),
-[results](research/V04_CONFORMANCE_RESULTS.md),
-[mutations](research/V04_MUTATION_REPORT.md),
-[exact replay instructions](research/V04_INDEPENDENT_REPLAY.md), and
-[independent Windows protocol](docs/WINDOWS_REPLAY_PROTOCOL.md).
-Hosted enforcement remains CI_BLOCKED until actual execution is established.
-The completed cold replay has25 unit tests and17/41/21/15 versioned scenarios in
-normal/repeat/-O. New mutations:5 KILLED/0 SURVIVED; historical v03 remains3/1.
-The hosted token-handle defect is isolated and repaired, but child startup still
-blocks before enforcement. Release/merge recommendation: **HOLD**.
-[Machine-readable v04 summary](research/V04_SUMMARY.json).
-No production or universal containment claim. Prior reports below remain historical.
+[![Research](https://img.shields.io/badge/STATUS-ACTIVE_RESEARCH-7950F2?style=for-the-badge)](https://github.com/pipavlo82/trustless-guardian/pulls)
+[![Production](https://img.shields.io/badge/PRODUCTION-HOLD-E8590C?style=for-the-badge)](https://github.com/pipavlo82/trustless-guardian/pull/8)
+[![Draft PR8](https://img.shields.io/badge/LATEST-DRAFT_PR_%238-228BE6?style=for-the-badge)](https://github.com/pipavlo82/trustless-guardian/pull/8)
+[![License](https://img.shields.io/badge/LICENSE-Apache--2.0-12B886?style=for-the-badge)](LICENSE)
 
-# Trustless Guardian
+**Gates, not scores.** · **Don't trust. Recompute.**
 
-An experimental enforcement layer for AI-agent actions, with a reproducible
-Windows filesystem pilot.
+[Architecture](#-how-guardian-works) · [Resonance Core](#-what-is-resonance-core) · [Roadmap](#-research-roadmap) · [Draft PR #8](https://github.com/pipavlo82/trustless-guardian/pull/8)
 
-The implementation is on [the research branch](https://github.com/pipavlo82/trustless-guardian/tree/research/guardian-enforcement-v0),
-with [Draft PR #1](https://github.com/pipavlo82/trustless-guardian/pull/1). `main` remains the foundation.
+</div>
 
-**Verification != Authorization != Enforcement != Evidence of Execution**
+---
 
-**v0.3:** [security audit](research/V03_SECURITY_AUDIT.md),
-[executed results](research/V03_CONFORMANCE_RESULTS.md),
-[mutation report](research/V03_MUTATION_REPORT.md),
-[clean replay](research/V03_INDEPENDENT_REPLAY.md), and
-[hosted CI blocker](research/V03_CI_ROOT_CAUSE.md).
-The repair preserves uncertain post-write outcomes instead of claiming
-NOT_EXECUTED. Hosted Windows enforcement remains **CI_BLOCKED**; the new
-impersonation-level mutation **SURVIVES** because its adverse token level was
-not reached. This remains a bounded laboratory prototype, not production security.
+## ⚡ Why Guardian exists
 
-Full v0/v02/v03 replay from a non-elevated Windows Python 3.12+ process:
-`python -B tools/validate_v03.py --out build/v03-replay`.
-Use a new output directory. Portable checks:
-`python -B tools/validate_v03.py --portable --out build/v03-portable`.
-Portable success cannot certify OS enforcement.
+An AI agent can request a tool call, receive a policy response, and claim that an action happened. Those are **different claims**.
 
-A policy refusal is useful only if the confined agent also cannot write around
-the broker. This pilot runs a separate, non-elevated AppContainer process against
-a disposable NTFS resource and checks the actual bytes from the trusted host.
-The v02 path also confines the broker under a different AppContainer principal,
-authenticates named-pipe callers, and preserves explicit crash-recovery states.
+Trustless Guardian investigates a stricter boundary: an agent proposes an action; separately controlled policy and operating-system mechanisms enforce permissions; independent evidence checks establish what can actually be proven.
 
-## Current claim
+> **Verification ≠ Authorization ≠ Enforcement ≠ Evidence of Execution.** A valid signature is not evidence that an external action occurred. A policy decision alone is not an OS block. Green CI is not production security approval.
 
-**LABORATORY_VERIFIED:** the tested AppContainer principal cannot modify the
-protected sample file through the exercised direct access paths. An allowed
-request causes the broker to write exactly the approved bytes. Weakening the ACL
-causes a real unauthorized write, which the mutation control detects.
+### 🧩 Research components
 
-This is a finite local experiment. It does not establish production readiness,
-arbitrary execution authorization, resistance to a compromised broker, a complete
-external evidence chain, or control over arbitrary remote AI systems.
+| Layer | What it does | Where to review |
+| :--- | :--- | :--- |
+| 🔑 **Identity** | JWT / EIP-4361 SIWE / scoped MCP bearer authentication | [Draft #5](https://github.com/pipavlo82/trustless-guardian/pull/5) |
+| 🛂 **Authorization** | Binds request, tool, resource, time and signed grants | [Drafts #5–6](https://github.com/pipavlo82/trustless-guardian/pull/6) |
+| 🧱 **Containment** | Windows AppContainer and constrained Linux research pilots | [Drafts #4–7](https://github.com/pipavlo82/trustless-guardian/pull/7) |
+| 🧾 **Evidence** | Preserves lifecycle decisions, observations and receipt evidence | [Draft #6](https://github.com/pipavlo82/trustless-guardian/pull/6) |
+| 🔍 **Recompute** | Independent verification paths and mutation-based negative controls | [Drafts #6–8](https://github.com/pipavlo82/trustless-guardian/pull/8) |
+| 🧠 **Resonance Core** | Deterministic state changes and proposal-only decision research | [Draft #7](https://github.com/pipavlo82/trustless-guardian/pull/7) |
 
-| Component | Status |
-| --- | --- |
-| Gateway, versioned policy, fixed-resource broker, evidence recorder | IMPLEMENTED for the local file profile |
-| AppContainer + NTFS denial and broker ALLOW | EXPERIMENTALLY VERIFIED on the recorded Windows host |
-| Independent record recomputation and host byte observation | IMPLEMENTED; relies on trusted observation context |
-| ReceiptOS / VECA native-result envelopes | Research interfaces only; native integration NOT IMPLEMENTED |
-| Separate AppContainer broker, authenticated IPC, bounded recovery | IMPLEMENTED in v02; see measured scope |
-| Dedicated Windows account and production service | NOT_COVERED |
-| Administrator/kernel resistance, universal agent containment | UNSUPPORTED |
+**These components live across separate, stacked Draft PRs. They are not a production-integrated platform.**
 
-Historical v0 results: 14 unit tests; 17 policy/resource scenarios; 9 direct OS-denial
-operations with a writable-scratch positive control; unavailable-gateway/broker
-controls; evidence-tampering rejection. The executed physical mutation campaign
-contains **15 KILLED / 0 SURVIVED / 0 CRASHED / 0 NOT_APPLIED / 0 CONTROL_BROKEN**.
-Normal, repeat and optimized semantic outputs match. See the
-[measured results](research/CONFORMANCE_RESULTS.md) and
-[mutation boundaries](research/MUTATION_REPORT.md), including untested boundaries.
+## 🗺️ How Guardian works
 
-**v02 measured results:** 20 unit tests per mode; 41/41 adversarial cases in
-normal/repeat/optimized runs; 11/11 new physical mutations killed, with no survivors
-or crashes. This is separate from the historical 15-mutation population. See
-[current measured results](research/CONFORMANCE_RESULTS.md),
-[independent-oracle review](research/INDEPENDENT_SECURITY_REVIEW.md),
-[IPC](docs/IPC_SECURITY.md) and [crash recovery](docs/CRASH_RECOVERY.md).
+Conceptual security architecture, drawing on **bounded research paths**, not an end-to-end production claim:
 
-**CI_BLOCKED:** historical v0 Windows runs failed with WinError 1312. v02 creates
-and verifies an ephemeral reduced token, but hosted process creation fails with
-WinError 5 before OS tests. Portable CI passes. No accounts or token predicates
-were changed to bypass the blocker. Consult [exact-run status](research/CI_PORTABILITY.md);
-local success never substitutes for hosted execution.
+~~~mermaid
+flowchart TD
+    A["🤖 Agent proposes an action"] --> B["🔑 Identity and request binding"]
+    B --> C{"🛂 Policy permits it?"}
+    C -->|"No / unknown"| H["🛑 DENY or HOLD"]
+    C -->|"Scoped admission in research pilots"| E["🧱 Constrained execution boundary"]
+    E --> F["🧾 Observations and receipt evidence"]
+    F --> G["🔍 Independent verifier"]
+    H --> G
+    G --> I{"Evidence sufficient?"}
+    I -->|"Under stated assumptions"| J["Bounded verified claim"]
+    I -->|"Missing / contradictory"| K["NOT_ESTABLISHED or REFUTED"]
+    classDef stopped fill:#fff4e6,stroke:#e8590c,color:#8f2500;
+    classDef checked fill:#e7f5ff,stroke:#1c7ed6,color:#0b4d80;
+    class H,K stopped;
+    class G,I,J checked;
+~~~
 
-## Reproduce
+The current Resonance/Guardian IPC experiment is **HOLD-only**. It does **not** issue execution grants or launch workers.
 
-Use 64-bit Windows on NTFS and Python 3.12+ from a normal non-elevated terminal.
-The agent runtime is pinned to CPython 3.12.10. No pip dependencies are needed.
-Do not elevate to work around a failed isolation setup: report it as NOT_COVERED.
+## 🧠 What is Resonance Core?
 
-```powershell
+**Resonance Core is an experimental deterministic state-and-decision engine — not a chatbot and not a new LLM.**
+
+The original Python core tracks a small evolving internal state, accepts seven normalized observations, measures change and load, and returns one of four bounded decisions. The original file is preserved **byte-for-byte** in [Draft PR #7](https://github.com/pipavlo82/trustless-guardian/pull/7).
+
+| Signal / state | What it means |
+| :--- | :--- |
+| <code>cpu</code>, <code>memory</code>, <code>disk</code> | Normalized load-related signals |
+| <code>hour_sin</code>, <code>hour_cos</code> | Mathematical time-of-day features |
+| <code>solar_proxy</code>, <code>lunar_proxy</code> | **Illustrative time-phase proxies**, not real astronomy or sensor readings |
+| <code>attention</code>, <code>energy</code>, <code>phase</code> | Numeric state; **not** consciousness, emotions or biological fatigue |
+| <code>novelty</code>, <code>pressure</code> | Computed change and load indicators |
+
+Its four possible outputs are **<code>OBSERVE</code>**, **<code>INVESTIGATE_CHANGE</code>**, **<code>REVIEW</code>** and **<code>DEFER</code>**.
+
+### 🔒 Resonance inside the Guardian experiment
+
+~~~mermaid
+flowchart LR
+    S["Synthetic observations"] --> R["🧠 Original Resonance State/decide"]
+    R --> P["Bound proposal-only IPC request"]
+    P --> B["🛡️ Guardian broker: SID and signed replies"]
+    B --> H["HOLD_GUARDIAN_GRANT_REQUIRED"]
+    classDef hold fill:#fff4e6,stroke:#f08c00,color:#8c4200;
+    class H hold;
+~~~
+
+The confined Windows AppContainer pilot **disables real sensor imports** and runs three steps of the original core over synthetic signals. [Draft PR #8](https://github.com/pipavlo82/trustless-guardian/pull/8) adds pinned Ed25519 broker-reply authentication, bounded cancellable pipe I/O and offline evidence verification around this path.
+
+It does **not** contain live LLM inference, continuous autonomous operation, conversational memory, tool execution, or verified human-intent detection. The original core has a SHA-256-chained log format in its standalone mode; that alone does not prove real-world action or authenticated process origin.
+
+**Learn more:** [Resonance Core explained](docs/RESONANCE_CORE.md) · [Pinned source](https://github.com/pipavlo82/trustless-guardian/blob/2a40075a7f217e9c385cdfaf27c0267fa788d574/research/resonance_guardian_v1/reference_core/agent.py) · [Windows pilot README](https://github.com/pipavlo82/trustless-guardian/blob/2a40075a7f217e9c385cdfaf27c0267fa788d574/research/resonance_guardian_v1/README.md)
+
+## 🚀 Research roadmap
+
+**Repository topology:** <code>main</code> holds the original foundation. These **eight open Draft PRs** are stacked on one another and **have not been merged into main**.
+
+| Draft | Milestone | Research focus |
+| :---: | :--- | :--- |
+| [#1](https://github.com/pipavlo82/trustless-guardian/pull/1) | Agent preview | Experimental Hermes/Codex tool boundary and OS controls |
+| [#2](https://github.com/pipavlo82/trustless-guardian/pull/2) | Rare-event evidence | Synthetic anomaly triage, never an authorization grant |
+| [#3](https://github.com/pipavlo82/trustless-guardian/pull/3) | Gateway abuse replay | Synthetic policy simulation and recomputed findings |
+| [#4](https://github.com/pipavlo82/trustless-guardian/pull/4) | Security repair | Windows enforcement, integrity checks and negative tests |
+| [#5](https://github.com/pipavlo82/trustless-guardian/pull/5) | Authentication | JWT / SIWE / MCP scopes, grants and Linux isolation pilot |
+| [#6](https://github.com/pipavlo82/trustless-guardian/pull/6) | Durable replay | One-use challenges, lifecycle states and receipt evidence |
+| [#7](https://github.com/pipavlo82/trustless-guardian/pull/7) | Resonance + IPC | Original core in an AppContainer; proposal-only HOLD |
+| **[#8](https://github.com/pipavlo82/trustless-guardian/pull/8)** | **Mutual IPC** | **Signed broker replies, bounded I/O, parity checks, integrity v8** |
+
+Reviewing a later PR **does not approve earlier stages**.
+
+## 🧪 Evidence, not marketing
+
+<div align="center">
+
+[![PR8 CI](https://img.shields.io/badge/PR_%238_CI-4%2F4_WORKFLOWS_GREEN-2F9E44?style=flat-square)](https://github.com/pipavlo82/trustless-guardian/pull/8/checks)
+![Offline fix](https://img.shields.io/badge/OFFLINE_FIX-BOUNDED_VALIDATION-228BE6?style=flat-square)
+![Human review](https://img.shields.io/badge/SECURITY_REVIEW-PENDING-F59F00?style=flat-square)
+
+</div>
+
+At [Draft PR #8 head <code>299487d</code>](https://github.com/pipavlo82/trustless-guardian/commit/299487d7d7884b2cb2adc7df86b6485ee18daba7), **four GitHub Actions workflows completed successfully on 15 November 2026**. The separately recorded local evidence includes:
+
+- **48/48** mutual-IPC unit tests per normal, repeat and optimized run.
+- **28/28** native Windows AppContainer scenarios at frozen IPC source <code>be31c67</code>; **28/28** historical offline evidence classifications recomputed. **Not remote OS attestation.**
+- **7/7** offline evidence source mutants killed with discriminating witnesses; **7/7** v8 integrity negative controls killed in disposable copies.
+- **386 protected paths** under integrity v8, with historical policies preserved.
+
+A historical, operator-selected review policy is **not current production trust-root authorization**. CI success is not universal isolation proof, independent human approval or complete grant → worker → terminal receipt integration.
+
+## 🔎 Explore the project
+
+| Resource | What you will find |
+| :--- | :--- |
+| [Architecture](docs/ARCHITECTURE.md) | Foundation: policy, broker, OS boundary and evidence |
+| [Security scope](docs/SECURITY_BOUNDARIES.md) | Threat model, assumptions and exclusions |
+| [Resonance Core guide](docs/RESONANCE_CORE.md) | Inputs, deterministic decisions and IPC research boundary |
+| [Draft PR #8](https://github.com/pipavlo82/trustless-guardian/pull/8) | Latest source, evidence classification and reproduction steps |
+| [Draft PR #7](https://github.com/pipavlo82/trustless-guardian/pull/7) | Original Resonance Core and AppContainer experiment |
+
+To **inspect** the latest Draft branch instead of the foundation:
+
+~~~bash
 git clone https://github.com/pipavlo82/trustless-guardian.git
 cd trustless-guardian
-git switch research/guardian-enforcement-v0
-python -B tools/integrity.py
-python -B tools/validate_v02.py --out build/replay-v02-1
-```
+git fetch origin pull/8/head:guardian-pr8-review
+git switch guardian-pr8-review
+# Follow the pinned dependencies and review instructions in PR #8.
+~~~
 
-For a published result, detach at its full commit before running. `validate_v02.py` retains the original regression suite and
-runs normal/repeat/`-O` unit and OS tests, physical mutations, semantic comparison,
-and inventory verification. Use a new output directory for every invocation.
+**Use disposable laboratory inputs only. Do not run these experiments against production keys, wallets, customer records or external services.**
 
-```powershell
-python -B tools/prepare.py
-python -B tools/v02_campaign.py --out build/individual-v02-lab
-python -B tools/v02_mutations.py --out build/individual-v02-mutations
-python -B -O tools/v02_mutations.py --out build/optimized-v02-mutations
-python -B tools/validate_v02.py --portable --out build/portable
-```
+## 🧱 Explicit non-claims
 
-The portable command tests policy and record logic only: OS enforcement is
-NOT_COVERED. Windows commands create new per-user AppContainer profiles and
-`build/guardian-lab-*` directories; ACL changes are confined to those disposable
-directories. Profiles are removed on successful harness teardown. Lab files and
-logs remain for inspection. Never point the broker at existing user resources.
+- ❌ Not a production-ready security appliance or an AI capable of reading human intentions.
+- ❌ Not blanket permission for agents to use arbitrary tools.
+- ❌ Not proof of actual execution merely because a receipt is signed.
+- ❌ Not established production key custody, root distribution, revocation or anti-rollback.
+- ❌ Not a fully integrated execution-grant → isolated-worker → terminal-receipt pipeline.
+- ❌ Not a universal Windows/Linux confinement guarantee beyond the tested laboratory scope.
 
-## Review
+**Release decision: RESEARCH / DRAFT · independent human security review required · PRODUCTION HOLD.**
 
-- [Architecture and diagram](docs/ARCHITECTURE.md)
-- [Threat model](docs/THREAT_MODEL.md) and [security boundaries](docs/SECURITY_BOUNDARIES.md)
-- [Source audit and exact pins](research/SOURCE_AUDIT.md)
-- [Integration plan](docs/INTEGRATION_PLAN.md)
-- [Evidence and replay](evidence/README.md)
-- [Hosted CI portability and preserved failures](research/CI_PORTABILITY.md)
-- [Limitations](research/LIMITATIONS.md) and [independent review checklist](docs/REVIEW_CHECKLIST.md)
+## 🤝 Principles and license
 
-`main` contains the foundation. Experimental implementation stays on
-`research/guardian-enforcement-v0` pending independent review. Original code is
-[Apache-2.0](LICENSE); [third-party notices](THIRD_PARTY_NOTICES.md) preserve
-separate licensing. No upstream source code is vendored.
+- **Gates, not scores.** Keep authorization, enforcement, observation and recomputation separate.
+- **Don't trust. Recompute.** Build independently checkable evidence, not self-reported PASS.
+- **A failed test is a result.** Never reclassify <code>SURVIVED</code>, <code>CRASHED</code>, <code>NOT_COVERED</code> or <code>NOT_ESTABLISHED</code> as verified.
+- **Preserve provenance.** Pin source, retain failed controls and version integrity transitions.
+
+Original code is licensed under [Apache-2.0](LICENSE). Third-party components retain their own licenses. Open source is **not** security certification.
+
+<div align="center">
+
+**Verifiable AI-agent security research. No trust-by-marketing.**
+
+[Browse Draft PRs](https://github.com/pipavlo82/trustless-guardian/pulls) · [Security boundaries](docs/SECURITY_BOUNDARIES.md)
+
+</div>
+
+## Historical PR #1 replay boundary
+
+The original [PR #1 README at its reviewed commit](https://github.com/pipavlo82/trustless-guardian/blob/03f6ffc6f4b983cfcc39f401f47165021e67e673/README.md) remains the versioned entry point for the v0 through v0.7 laboratory results, commands, failures and limitations.
+
+This documentation reconciliation preserves the current project overview and the original research history. It does not reclassify historical CI failures or mutation survivors. PR #1 through #8 remain separate review units; later passing checks do not validate earlier heads or a new integration composition. The scoped execution candidate requires third-party replay before any integration decision. Production remains **HOLD**.
