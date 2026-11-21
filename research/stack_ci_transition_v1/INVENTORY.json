@@ -45,7 +45,7 @@
     "research/stack_ci_transition_v1/pr2_native_baseline/v03/v02/report.json": "83f4b7916c51987b2025331d2d813c584a24552b8e423c10e1df2630a14afe37",
     "tests/test_pr2_native_transition_v1.py": "e206ef13e73a965ac5269fc04167ec07e0de9ee5f2580da286446ade6bac1bd4",
     "tools/pr2_native_gate_v1.py": "43756d5747eaa66bc8ed5ae36beac7252fc7a5d5e566f32527620523d0c076e5",
-    "tools/pr2_ordinary_exception_witness_v1.py": "da76a7578ab72bb0f535749b87cbb3672552c7dc8d1d2c9ff78e7f2638dc4f80",
+    "tools/pr2_ordinary_exception_witness_v1.py": "c8e64dae95fb37f257762968472f14a39bb0b11c4e43e71c2da428a853242975",
     "tools/pr2_ordinary_exception_worker_v1.py": "c1edbfebc1488852b45c86351490a96790498897269c4e341b25194fdcfda3cc",
     "tools/restricted_exec_v1.py": "3c3f87d9d30f62cbdf12152fe2078ff8cb704d879ad6072e025f5b63b937e7de",
     "tools/restricted_startup_v1.py": "6ff7471aaa1745c4b4eeed958decaf4847aa8abf9953840e1bb2071c67200d84",

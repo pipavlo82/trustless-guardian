@@ -135,8 +135,15 @@ def run(out, frozen, mode):
     if not runtime.is_file():
         raise ValueError('PINNED_RUNTIME_MISSING')
 
-    temp_root = Path(tempfile.mkdtemp(prefix='pr2-ordinary-', dir=out.parent))
+    # The frozen laboratory adds build/container/client segments. Keep its disposable
+    # checkout out of the (potentially long) evidence path so Win32 MAX_PATH cannot
+    # turn a semantic witness into a startup control failure.
+    temp_root = Path(tempfile.mkdtemp(prefix='guardian-pr2-'))
     checkout = temp_root/'checkout'
+    checkout_path_length = len(str(checkout))
+    if sys.platform == 'win32' and checkout_path_length > 140:
+        shutil.rmtree(temp_root, ignore_errors=True)
+        raise ValueError('SHORT_TEMP_ROOT_REQUIRED')
     try:
         for folder in ('guardian', 'tools'):
             shutil.copytree(frozen/folder, checkout/folder,
@@ -174,6 +181,7 @@ def run(out, frozen, mode):
                 'restored': {'passed': restored_ok, 'witness': restored},
             },
             'timeouts_ms': {'server': 15000, 'response': 15000, 'client': 15000},
+            'temporary_checkout_path_length': checkout_path_length,
             'meaning': 'The broad ordinary exception boundary returns RECOVERY_REQUIRED after a write; physically removing RuntimeError handling falsely reports NOT_EXECUTED. Baseline and byte-exact restoration must both pass.',
             'historical_raw_classification': 'CONTROL_BROKEN_PRESERVED_SEPARATELY',
             'production': 'HOLD', 'external_review': 'NOT_ESTABLISHED',
