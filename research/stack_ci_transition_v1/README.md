@@ -11,3 +11,6 @@ Pass the independently recorded INVENTORY.json SHA256 to every entry point.
 The workflow contains that pin once; its recorded hash normalizes that single self-reference
 to __POLICY_SHA256__. All other bytes must match. Changing policy and workflow together
 requires a new external source/policy review; this is not protection against a trusted author.
+
+Historical README and limitations: https://github.com/pipavlo82/trustless-guardian/blob/03f6ffc6f4b983cfcc39f401f47165021e67e673/README.md
+The root README is byte-identical to main76a76ad6f6f6d661e0a00b49236e2ad247429271, avoiding overlapping replacement conflicts. This does not merge main or approve the stack.
