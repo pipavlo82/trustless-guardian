@@ -1,0 +1,218 @@
+{
+  "cases": [
+    {
+      "name": "allow",
+      "passed": true
+    },
+    {
+      "name": "actor_substitution",
+      "passed": true,
+      "reason": "ACTOR",
+      "status": "REFUTED"
+    },
+    {
+      "name": "wrong_action",
+      "passed": true,
+      "reason": "ACTION",
+      "status": "REFUTED"
+    },
+    {
+      "name": "wrong_resource",
+      "passed": true,
+      "reason": "RESOURCE",
+      "status": "REFUTED"
+    },
+    {
+      "name": "wrong_scope",
+      "passed": true,
+      "reason": "SCOPE",
+      "status": "REFUTED"
+    },
+    {
+      "name": "expired",
+      "passed": true,
+      "reason": "EXPIRY",
+      "status": "REFUTED"
+    },
+    {
+      "name": "version",
+      "passed": true,
+      "reason": "POLICY_VERSION",
+      "status": "REFUTED"
+    },
+    {
+      "name": "missing_evidence",
+      "passed": true,
+      "reason": "EVIDENCE_MISSING",
+      "status": "UNVERIFIABLE"
+    },
+    {
+      "name": "precondition",
+      "passed": true,
+      "reason": "PRECONDITION",
+      "status": "REFUTED"
+    },
+    {
+      "name": "untrusted_flag",
+      "passed": true,
+      "reason": "REQUEST_SHAPE",
+      "status": "REFUTED"
+    },
+    {
+      "name": "invalid_type",
+      "passed": true,
+      "reason": "REPLAY",
+      "status": "REFUTED"
+    },
+    {
+      "name": "malformed",
+      "passed": true,
+      "reason": "IPC_SCHEMA"
+    },
+    {
+      "name": "duplicate_field",
+      "passed": true,
+      "reason": "IPC_SCHEMA"
+    },
+    {
+      "name": "oversize",
+      "passed": true,
+      "reason": null
+    },
+    {
+      "name": "replay_after_restart",
+      "passed": true
+    },
+    {
+      "name": "unauthorized_pipe_client",
+      "passed": true,
+      "winerror": 5
+    },
+    {
+      "name": "timeout_cancellation",
+      "passed": true
+    },
+    {
+      "decisions": [
+        "EXACT_POLICY_MATCH",
+        "REPLAY"
+      ],
+      "errors": [],
+      "name": "concurrent_nonce",
+      "passed": true
+    },
+    {
+      "name": "receipt_valid",
+      "passed": true
+    },
+    {
+      "name": "receipt_tampered",
+      "passed": true
+    },
+    {
+      "name": "agent_os_bypass",
+      "operations": 9,
+      "passed": true
+    },
+    {
+      "name": "broker_os_scope",
+      "operations": 5,
+      "passed": true
+    },
+    {
+      "name": "acl_weakening_detected",
+      "passed": true
+    },
+    {
+      "name": "envelope_pin",
+      "passed": true
+    },
+    {
+      "name": "caller_identity",
+      "passed": true
+    },
+    {
+      "name": "server_identity",
+      "passed": true
+    },
+    {
+      "name": "policy_pin",
+      "passed": true
+    },
+    {
+      "name": "resource_identity",
+      "passed": true
+    },
+    {
+      "name": "directory_identity",
+      "passed": true
+    },
+    {
+      "name": "enforcement",
+      "passed": true
+    },
+    {
+      "name": "recovery_gate",
+      "passed": true
+    },
+    {
+      "name": "filetype",
+      "passed": true
+    },
+    {
+      "name": "nonce_memory",
+      "passed": true
+    },
+    {
+      "bytes_sha256": "da68f54607d5f5644954096ce1597c006c5bb9f2497e07441bf064b81003ef8a",
+      "name": "crash_PREPARED",
+      "passed": true,
+      "restart_reason": "REPLAY",
+      "state": "ABORTED"
+    },
+    {
+      "bytes_sha256": "74e21680eac7385ca408cb01878465fd693b37e58eb0c0c32663a2d8f15d8136",
+      "name": "crash_PARTIAL",
+      "passed": true,
+      "restart_reason": "RECOVERY_REQUIRED",
+      "state": "RECOVERY_REQUIRED"
+    },
+    {
+      "bytes_sha256": "a109082bb2f27a5efe1928ff99d7f67bc827f23a882a891557cd2792a36160dd",
+      "name": "crash_WRITTEN",
+      "passed": true,
+      "restart_reason": "RECOVERY_REQUIRED",
+      "state": "RECOVERY_REQUIRED"
+    },
+    {
+      "bytes_sha256": "a109082bb2f27a5efe1928ff99d7f67bc827f23a882a891557cd2792a36160dd",
+      "name": "crash_COMMITTED",
+      "passed": true,
+      "restart_reason": "REPLAY",
+      "state": "COMMITTED"
+    },
+    {
+      "name": "locked_toctou",
+      "operations": 4,
+      "passed": true
+    },
+    {
+      "name": "missing_journal",
+      "passed": true
+    },
+    {
+      "name": "unknown_journal",
+      "passed": true
+    },
+    {
+      "name": "file_symlink",
+      "passed": true
+    }
+  ],
+  "external_execution": "UNVERIFIABLE",
+  "not_covered": [],
+  "os_scope": "finite Windows laboratory only",
+  "passed": true,
+  "schema": "guardian.conformance.v02",
+  "seconds": 77.43259629991371
+}

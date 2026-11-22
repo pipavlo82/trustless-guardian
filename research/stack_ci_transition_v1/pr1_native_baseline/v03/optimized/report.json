@@ -1,0 +1,97 @@
+{
+  "count": 21,
+  "external_reviewer": "NOT_COVERED",
+  "passed": true,
+  "scenarios": [
+    {
+      "name": "post_write_failure",
+      "passed": true
+    },
+    {
+      "name": "prepared_failure",
+      "passed": true
+    },
+    {
+      "name": "committed_failure",
+      "passed": true
+    },
+    {
+      "name": "impersonation_level",
+      "passed": true
+    },
+    {
+      "name": "same_bytes",
+      "passed": true
+    },
+    {
+      "name": "base_user",
+      "passed": true
+    },
+    {
+      "name": "identification_allow",
+      "passed": true
+    },
+    {
+      "name": "revert_to_self",
+      "passed": true
+    },
+    {
+      "name": "actual_token",
+      "passed": true
+    },
+    {
+      "name": "anonymous_sqos",
+      "passed": true,
+      "winerror": null
+    },
+    {
+      "name": "pipe_instance_creation",
+      "passed": true,
+      "winerror": 5
+    },
+    {
+      "name": "write_dac_access",
+      "passed": true,
+      "winerror": 5
+    },
+    {
+      "name": "fragmented_message",
+      "passed": true,
+      "winerror": null
+    },
+    {
+      "name": "two_messages_one_frame",
+      "passed": true
+    },
+    {
+      "name": "wrong_base_user",
+      "passed": true
+    },
+    {
+      "name": "lost_reply_committed",
+      "passed": true
+    },
+    {
+      "name": "bypass",
+      "passed": true
+    },
+    {
+      "name": "journal_missing",
+      "passed": true
+    },
+    {
+      "name": "journal_corrupt",
+      "passed": true
+    },
+    {
+      "name": "journal_busy",
+      "passed": true
+    },
+    {
+      "name": "two_brokers_one_nonce",
+      "passed": true
+    }
+  ],
+  "schema": "guardian.conformance.v03",
+  "second_machine": "NOT_COVERED"
+}
