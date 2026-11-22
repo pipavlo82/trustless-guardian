@@ -1,0 +1,26 @@
+# Stack CI transition v1 (local candidate)
+
+Historical manifests, guards, reports and research sources are unchanged.
+The unchanged full-tree checker runs at exact PR1, while the new pinned checker
+verifies current files plus explicit README/workflow transitions and research additions.
+The Windows launcher helpers are byte-identical backports from PR4 e772eebd3ae3fee91237fa62b2caa3be0517684f.
+PR1 uses a source-bound composite because the original 500ms availability harness is
+flaky and contaminates mutation positive controls. Twenty-five selected reports from the
+preserved Windows run are pinned in `PR1_NATIVE_BASELINE.json`; every selected report and
+every Python source byte under the exact frozen `03f6ffc6...` checkout must match. Those
+reports retain the historical `impersonation_level` survivor and the raw WinError2 failure.
+They are prior Windows evidence, not an exact-final replay of the outer transition commit.
+PR1 separately runs a versioned availability-synchronized replacement on current Windows.
+The old WinError2 remains failed evidence and is never mapped to an ACL pass. Current
+composite PASS requires a preinitialized client
+released while the broker process and host supervisor are both live, WinError5, unchanged
+protected bytes, and a separately exercised pipe-ACL-removal control that must be killed in
+normal/repeat/-O. Elevated startup and ordinary local startup are separate paths.
+External review and production remain HOLD. New CI has not run on GitHub (no push).
+Pass the independently recorded INVENTORY.json SHA256 to every entry point.
+The workflow contains that pin once; its recorded hash normalizes that single self-reference
+to __POLICY_SHA256__. All other bytes must match. Changing policy and workflow together
+requires a new external source/policy review; this is not protection against a trusted author.
+
+Historical README and limitations: https://github.com/pipavlo82/trustless-guardian/blob/03f6ffc6f4b983cfcc39f401f47165021e67e673/README.md
+The root README is byte-identical to main76a76ad6f6f6d661e0a00b49236e2ad247429271, avoiding overlapping replacement conflicts. This does not merge main or approve the stack.
