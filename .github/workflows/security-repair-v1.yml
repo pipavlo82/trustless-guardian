@@ -1,4 +1,4 @@
-name: Security repair v1
+name: Security repair v1 + source-bound RC3 transition
 
 on:
   push:
@@ -8,6 +8,10 @@ on:
 
 permissions:
   contents: read
+
+env:
+  RC3_POLICY_SHA256: 16c516a4d0f4d14df618ec8bfd7be549643ca3c2df270915043f24451e50140c
+  RC3_VERIFIER_SHA256: 847950febb8d07cbf76eb9c58a70d105ad0de34bf4f5ae3c98737458631cd164
 
 jobs:
   portable-recompute:
@@ -40,10 +44,25 @@ jobs:
           python -B tools/audit_v0_bindings.py --out build/gateway-v1/v0-binding-audit.json
       - name: Physical source mutations
         run: python -B tools/source_mutations_v1.py --out build/source-mutations-v1/report.json
-      - name: Layered integrity and physical mutations
+      - name: Historical V1 integrity and mutations at exact frozen PR4
+        shell: bash
         run: |
-          python -B tools/integrity_v1.py --policy-sha256 e22a3d8f9c2de4b12ba03e9d95877ec9da846f46b3e62b1309875c64cbb2ad6d --out build/integrity-v1/report.json
-          python -B tools/integrity_mutations_v1.py --policy-sha256 e22a3d8f9c2de4b12ba03e9d95877ec9da846f46b3e62b1309875c64cbb2ad6d --out build/integrity-v1/mutations.json
+          set -euo pipefail
+          git worktree add --detach "$RUNNER_TEMP/guardian-frozen-pr4" e772eebd3ae3fee91237fa62b2caa3be0517684f
+          python -B "$RUNNER_TEMP/guardian-frozen-pr4/tools/integrity_v1.py" --policy-sha256 e22a3d8f9c2de4b12ba03e9d95877ec9da846f46b3e62b1309875c64cbb2ad6d --out "$RUNNER_TEMP/guardian-frozen-pr4/build/integrity-v1/report.json"
+          python -B "$RUNNER_TEMP/guardian-frozen-pr4/tools/integrity_mutations_v1.py" --policy-sha256 e22a3d8f9c2de4b12ba03e9d95877ec9da846f46b3e62b1309875c64cbb2ad6d --out "$RUNNER_TEMP/guardian-frozen-pr4/build/integrity-v1/mutations.json"
+      - name: Historical V8 integrity at exact frozen PR8
+        shell: bash
+        run: |
+          set -euo pipefail
+          git worktree add --detach "$RUNNER_TEMP/guardian-frozen-pr8" 299487d7d7884b2cb2adc7df86b6485ee18daba7
+          python -B "$RUNNER_TEMP/guardian-frozen-pr8/tools/integrity_v8.py" --policy-sha256 44db7457272224e56603239cc3d64375d1fbcb5de620a7e2ce7253801a9c066d --out "$RUNNER_TEMP/guardian-frozen-pr8/build/integrity-v8/report.json"
+      - name: RC3 independently pinned source inventory and mutation controls
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -B tools/integrity_rc3.py --policy-sha256 "$RC3_POLICY_SHA256" --verifier-sha256 "$RC3_VERIFIER_SHA256" --out build/integrity-rc3/report.json
+          python -B tools/integrity_rc3.py --policy-sha256 "$RC3_POLICY_SHA256" --verifier-sha256 "$RC3_VERIFIER_SHA256" --self-test --out build/integrity-rc3/mutations.json
       - name: Replay frozen PR 1 portable invariants
         shell: bash
         run: |
@@ -79,8 +98,22 @@ jobs:
           python -B -m unittest discover -s tests -q
           python -B -m unittest discover -s tests -q
           python -B -O -m unittest discover -s tests -q
-      - name: Layered integrity
-        run: python -B tools/integrity_v1.py --policy-sha256 e22a3d8f9c2de4b12ba03e9d95877ec9da846f46b3e62b1309875c64cbb2ad6d --out build/integrity-v1/report.json
+      - name: Historical V1 integrity at exact frozen PR4
+        shell: pwsh
+        run: |
+          $frozen = Join-Path $env:RUNNER_TEMP 'guardian-frozen-pr4'
+          git worktree add --detach $frozen e772eebd3ae3fee91237fa62b2caa3be0517684f
+          python -B (Join-Path $frozen 'tools/integrity_v1.py') --policy-sha256 e22a3d8f9c2de4b12ba03e9d95877ec9da846f46b3e62b1309875c64cbb2ad6d --out (Join-Path $frozen 'build/integrity-v1/report.json')
+      - name: Historical V8 integrity at exact frozen PR8
+        shell: pwsh
+        run: |
+          $frozen = Join-Path $env:RUNNER_TEMP 'guardian-frozen-pr8'
+          git worktree add --detach $frozen 299487d7d7884b2cb2adc7df86b6485ee18daba7
+          python -B (Join-Path $frozen 'tools/integrity_v8.py') --policy-sha256 44db7457272224e56603239cc3d64375d1fbcb5de620a7e2ce7253801a9c066d --out (Join-Path $frozen 'build/integrity-v8/report.json')
+      - name: RC3 independently pinned source integrity
+        shell: pwsh
+        run: |
+          python -B tools/integrity_rc3.py --policy-sha256 $env:RC3_POLICY_SHA256 --verifier-sha256 $env:RC3_VERIFIER_SHA256 --out build/integrity-rc3/report.json
       - name: Fetch and verify pinned Windows test runtime
         run: python -B tools/prepare.py
       - name: Execute native Windows assessment
@@ -92,7 +125,7 @@ jobs:
         with:
           name: security-repair-v1-windows
           path: |
-            build/integrity-v1/*.json
+            build/integrity-rc3/*.json
             build/windows-assessment-v1/**/*.json
             build/windows-assessment-v1/**/*.stdout
             build/windows-assessment-v1/**/*.stderr
