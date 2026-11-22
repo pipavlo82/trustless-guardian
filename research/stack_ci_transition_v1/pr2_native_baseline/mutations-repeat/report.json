@@ -1,0 +1,70 @@
+{
+  "counts": {
+    "CONTROL_BROKEN": 1,
+    "CRASHED": 0,
+    "KILLED": 4,
+    "NOT_APPLIED": 0,
+    "SURVIVED": 0
+  },
+  "full_profile_level_gt1_reachability": "NOT_COVERED",
+  "historical_populations_unchanged": true,
+  "mutants": [
+    {
+      "applied": true,
+      "case": "runtime_after_write",
+      "classification": "CONTROL_BROKEN",
+      "id": "ordinary_exception_legacy",
+      "legacy_dispatch": true,
+      "mutated_sha256": "9248ac75e5a6ea468f101b61380be8253d4ba4cb1bd9d0c4389825b246457cf9",
+      "original_sha256": "e2084614efe452c35533815de52de1508b6ab119b5e3395a47e29789c43f75c0",
+      "restored_byte_exact": true,
+      "source": "guardian/hardened.py"
+    },
+    {
+      "applied": true,
+      "case": "crash_written",
+      "classification": "KILLED",
+      "id": "recovery_response",
+      "legacy_dispatch": false,
+      "mutated_sha256": "9fe6f2272d6b3ae9039656a2b58ee10732a25a9ea61434b20ebe3d617f7f9f95",
+      "original_sha256": "e2084614efe452c35533815de52de1508b6ab119b5e3395a47e29789c43f75c0",
+      "restored_byte_exact": true,
+      "source": "guardian/hardened.py"
+    },
+    {
+      "applied": true,
+      "case": "dispatch_return_failure",
+      "classification": "KILLED",
+      "id": "dispatch_outcome",
+      "legacy_dispatch": false,
+      "mutated_sha256": "e67db6bb9dfec819aebe5441efbf2e07497ab579faa9cb49d97b997020570361",
+      "original_sha256": "3be3fdaf5a3eba38dec8a2c7c0e3b39047af10a6e30cd494e1f6218b704e06e5",
+      "restored_byte_exact": true,
+      "source": "guardian/dispatch.py"
+    },
+    {
+      "applied": true,
+      "case": "readback_mismatch",
+      "classification": "KILLED",
+      "id": "readback_consistency",
+      "legacy_dispatch": false,
+      "mutated_sha256": "af0785292099699f0a58ec5138358b6efd088f630f031e948d04442e572cb20a",
+      "original_sha256": "e2084614efe452c35533815de52de1508b6ab119b5e3395a47e29789c43f75c0",
+      "restored_byte_exact": true,
+      "source": "guardian/hardened.py"
+    },
+    {
+      "applied": true,
+      "case": "token",
+      "classification": "KILLED",
+      "id": "same_identity_pipe_level",
+      "legacy_dispatch": false,
+      "mutated_sha256": "207b8c057b6719c49876685ab25cc75e9136638fe87773683bbf41632368351b",
+      "original_sha256": "e39750cb85b8fc02313b57e611c0b90ea1eba3b3c6d23caf506712de42c88757",
+      "restored_byte_exact": true,
+      "source": "guardian/ipc.py"
+    }
+  ],
+  "passed": false,
+  "schema": "guardian.mutations.v04"
+}

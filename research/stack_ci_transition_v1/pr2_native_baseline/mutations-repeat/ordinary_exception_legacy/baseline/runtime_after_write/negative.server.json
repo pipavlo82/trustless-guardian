@@ -1,0 +1,27 @@
+[
+  {
+    "identity": {
+      "appcontainer": true,
+      "appcontainer_sid": "S-1-15-2-2771472472-3283433032-1539619298-3458204566-2346857647-1047876524-1170965589",
+      "capability_count": 0,
+      "elevated": false,
+      "impersonation_level": 1,
+      "integrity_sid": "S-1-16-4096",
+      "user_sha256": "2fe1ac64678a911a232a386c32c34a250891a53a3fdbff7ca63882cf9ef06f41"
+    },
+    "request_sha256": "a5d2355df044bf5f77ac8dfa24e076ca81f38bf7c8bda1e3d64b2d9cb6a97ee1",
+    "response": {
+      "decision": "DENY",
+      "execution": "RECOVERY_REQUIRED",
+      "failure_stage": "WRITTEN",
+      "reason": "EXECUTION_OUTCOME_UNCERTAIN",
+      "retry_permitted": false,
+      "scope": null,
+      "status": "UNVERIFIABLE"
+    },
+    "thread_after_auth": {
+      "present": false,
+      "winerror": 1008
+    }
+  }
+]

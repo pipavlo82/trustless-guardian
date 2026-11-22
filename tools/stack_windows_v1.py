@@ -31,8 +31,8 @@ def child(out,frozen,smoke):
     save(out/'child-started.json',{'token':observed,'pid':os.getpid(),'parent_pid':os.getppid(),'frozen_sha':FROZEN,'status':'TOKEN_AND_SOURCE_VERIFIED'})
     if smoke:return 0
     from tools.stack_replay_v1 import execute
-    row=execute([sys.executable,'-B','tools/pr1_native_gate_v1.py','--frozen',frozen,
-                 '--out',out/'pr1-native-transition'],ROOT,out,'pr1-native-transition',timeout=10800)
+    row=execute([sys.executable,'-B','tools/pr2_native_gate_v1.py','--frozen',frozen,
+                 '--out',out/'pr2-native-transition'],ROOT,out,'pr2-native-transition',timeout=10800)
     save(out/'child-result.json',row)
     return row['exit_code']
 

@@ -43,8 +43,8 @@ def run(out,pin,native=False):
             rows.append(execute([sys.executable,'-B',*flags,'-m','research.gateway_abuse_replay_v0.cli','mutations','--out',out/('mutations-'+mode+'.json')],ROOT,out,'mutations-'+mode))
     if native:
         if os.name!='nt':return finish(out,rows,'NOT_COVERED_WINDOWS')
-        # Execute every original Windows v04 gate including historical physical mutations.
-        # Updated launcher only changes child startup, not the validator or expected verdicts.
+        # Execute the source-bound PR2 transition gate through the verified Windows child.
+        # Raw prior failures remain evidence; current physical mutation evidence is separate.
         rows.append(execute([sys.executable,'-B','tools/stack_windows_v1.py','--out',out/'windows','--frozen',frozen],ROOT,out,'windows',timeout=10800))
     after=verify(ROOT,pin)
     (out/'integrity-after.json').write_text(json.dumps(after,sort_keys=True)+'\n',newline='\n')
