@@ -1,0 +1,23 @@
+{
+  "case": "runtime_after_write",
+  "events": [
+    {
+      "boundary": "after_actual_write"
+    }
+  ],
+  "process": {
+    "appcontainer": true,
+    "appcontainer_sid": "S-1-15-2-1909326887-1800785992-2564096607-3420495176-3269532504-1099913896-903392137",
+    "capability_count": 0,
+    "elevated": false,
+    "integrity_sid": "S-1-16-4096",
+    "level": null,
+    "session_id": 1,
+    "token_type": 1,
+    "user_sha256": "2fe1ac64678a911a232a386c32c34a250891a53a3fdbff7ca63882cf9ef06f41"
+  },
+  "thread": {
+    "present": false,
+    "winerror": 1008
+  }
+}
