@@ -1,0 +1,22 @@
+{
+  "scenarios": [
+    {
+      "case": "runtime_after_write",
+      "checks": {
+        "actual_bytes": true,
+        "controlled_process": true,
+        "durable_state": true,
+        "fault_reached": true,
+        "host_digest": true,
+        "independent_broker_token": true,
+        "independent_host_bytes": true,
+        "no_false_nonexecution": true,
+        "positive": false,
+        "restart_control": true,
+        "restart_preserves_ambiguity": true
+      },
+      "external_execution": "UNVERIFIABLE",
+      "passed": false
+    }
+  ]
+}

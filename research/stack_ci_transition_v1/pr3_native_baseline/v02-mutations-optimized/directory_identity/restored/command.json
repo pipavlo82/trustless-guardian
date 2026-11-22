@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "C:\\Users\\msi\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+    "-B",
+    "-O",
+    "D:\\PAVLO HQ\\Workspaces\\guardian-stack-ci-repair-v1-20261120\\evidence\\pr3-native\\windows\\full-v04\\v02-mutations-optimized\\directory_identity\\checkout\\tools\\v02_campaign.py",
+    "--witness",
+    "directory_identity",
+    "--out",
+    "D:\\PAVLO HQ\\Workspaces\\guardian-stack-ci-repair-v1-20261120\\evidence\\pr3-native\\windows\\full-v04\\v02-mutations-optimized\\directory_identity\\restored"
+  ],
+  "exit_code": 0
+}

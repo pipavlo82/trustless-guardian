@@ -4,13 +4,18 @@ Historical manifests, guards, reports and research sources are unchanged.
 The unchanged full-tree checker runs at exact PR1, while the new pinned checker
 verifies current files plus explicit README/workflow transitions and research additions.
 The Windows launcher helpers originated as byte-identical backports from PR4
-e772eebd3ae3fee91237fa62b2caa3be0517684f. The PR2 successor changes only the
-child target to a source-bound composite gate. It verifies 40 selected artifacts,
-all frozen Python source bytes, and the raw repeat `ordinary_exception_legacy`
-`CONTROL_BROKEN` before running a current physical baseline/mutant/restored witness.
-The old raw classification is not rewritten. Current PASS requires the same mutant
-to be killed and the byte-exact restored control to pass on real Windows in normal,
-repeat, and optimized modes with a bounded 15-second IPC budget.
+e772eebd3ae3fee91237fa62b2caa3be0517684f. The PR3 successor changes only the
+child target to a source-bound composite gate. It verifies selected historical
+artifacts and every frozen Python source byte before running nine current targeted
+Windows witnesses under one recorded disposable test-harness overlay. The overlay
+uses bounded 15-second IPC operations, longer process budgets and JSON-complete
+readiness consumption; it does not change Guardian security sources.
+
+Historical `runtime_after_commit`, `committed_failure`, four optimized v04
+`CONTROL_BROKEN` mutations, repeat `same_bytes`, repeat `resource_identity`, and
+optimized `directory_identity` results remain unchanged. Current physical mutations
+must be killed with byte-exact restoration. The historical `impersonation_level`
+survivor remains a declared host-coverage limitation and is not reclassified.
 This is not an exact-final replay of the old full native harness. Elevated startup
 and ordinary local startup remain separate paths.
 External review and production remain HOLD. New CI has not run on GitHub (no push).

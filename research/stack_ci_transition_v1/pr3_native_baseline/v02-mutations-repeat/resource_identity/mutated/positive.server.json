@@ -1,0 +1,96 @@
+[
+  {
+    "identity": {
+      "appcontainer": true,
+      "appcontainer_sid": "S-1-15-2-4070093721-2009901184-1934009066-743902391-3984607739-1518411161-18988481",
+      "capability_count": 0,
+      "elevated": false,
+      "impersonation_level": 1,
+      "integrity_sid": "S-1-16-4096",
+      "user_sha256": "2fe1ac64678a911a232a386c32c34a250891a53a3fdbff7ca63882cf9ef06f41"
+    },
+    "request_sha256": "77135c5c588e4d3f0a199c1610579cd43656f2446f5e1365a6ea8abd876d7d1d",
+    "response": {
+      "decision": "ALLOW",
+      "execution": "COMMITTED",
+      "reason": "EXACT_POLICY_MATCH",
+      "receipt": {
+        "body": {
+          "after_base64": "YXBwcm92ZWQ6cG9zaXRpdmU=",
+          "after_sha256": "e79a792393c71088b51660d4d2b9fde4b0070f6c0c84e3e3839b64995f113ca5",
+          "before_base64": "aW5pdGlhbAo=",
+          "before_sha256": "da68f54607d5f5644954096ce1597c006c5bb9f2497e07441bf064b81003ef8a",
+          "decision": {
+            "decision": "ALLOW",
+            "reason": "EXACT_POLICY_MATCH",
+            "scope": {
+              "action": "replace_utf8",
+              "actor": "S-1-15-2-4070093721-2009901184-1934009066-743902391-3984607739-1518411161-18988481",
+              "content_sha256": "e79a792393c71088b51660d4d2b9fde4b0070f6c0c84e3e3839b64995f113ca5",
+              "expires_at": 1030,
+              "nonce": "positive",
+              "policy_version": "guardian.local-file.v0",
+              "resource": "sample",
+              "scope": "whole-file-laboratory"
+            },
+            "status": "VERIFIED"
+          },
+          "execution": "LOCAL_WRITE_OBSERVED",
+          "external_execution": "UNVERIFIABLE",
+          "policy": {
+            "action": "replace_utf8",
+            "actors": [
+              "S-1-15-2-4070093721-2009901184-1934009066-743902391-3984607739-1518411161-18988481"
+            ],
+            "content_prefix": "approved:",
+            "max_bytes": 128,
+            "max_ttl": 60,
+            "resource": "sample",
+            "schema": "guardian.policy.v0",
+            "scope": "whole-file-laboratory",
+            "version": "guardian.local-file.v0"
+          },
+          "policy_sha256": "c909a8b0415884c001cf634c5b013a7f173b57b4f2c9c25bb8d62cba40697cf3",
+          "principal": "S-1-15-2-4070093721-2009901184-1934009066-743902391-3984607739-1518411161-18988481",
+          "profile": "guardian.local-file.v02",
+          "request": {
+            "action": "replace_utf8",
+            "actor": "S-1-15-2-4070093721-2009901184-1934009066-743902391-3984607739-1518411161-18988481",
+            "content": "approved:positive",
+            "evidence": {
+              "before_sha256": "da68f54607d5f5644954096ce1597c006c5bb9f2497e07441bf064b81003ef8a"
+            },
+            "expires_at": 1030,
+            "nonce": "positive",
+            "policy_version": "guardian.local-file.v0",
+            "resource": "sample",
+            "schema": "guardian.action.v0",
+            "scope": "whole-file-laboratory"
+          },
+          "request_sha256": "6e8e3ccaa796e9bd13849f9ecbe9a601bd44dbe45df0ca7efe9f641983ae3813",
+          "resource_identity": [
+            2830515730,
+            65536,
+            3142240
+          ],
+          "used_nonces": [],
+          "verification_time": 1000
+        },
+        "previous": "0000000000000000000000000000000000000000000000000000000000000000",
+        "schema": "guardian.evidence.v0",
+        "sha256": "14d91b3f409207de1397df329b16f519c1e9d2ba0d60f85402eaf721d88c6782"
+      },
+      "scope": {
+        "action": "replace_utf8",
+        "actor": "S-1-15-2-4070093721-2009901184-1934009066-743902391-3984607739-1518411161-18988481",
+        "content_sha256": "e79a792393c71088b51660d4d2b9fde4b0070f6c0c84e3e3839b64995f113ca5",
+        "expires_at": 1030,
+        "nonce": "positive",
+        "policy_version": "guardian.local-file.v0",
+        "resource": "sample",
+        "scope": "whole-file-laboratory"
+      },
+      "status": "VERIFIED"
+    }
+  }
+]

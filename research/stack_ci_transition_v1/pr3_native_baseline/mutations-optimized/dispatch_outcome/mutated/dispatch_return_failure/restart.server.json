@@ -1,0 +1,16 @@
+[
+  {
+    "response": {
+      "decision": "DENY",
+      "execution": "NOT_EXECUTED",
+      "reason": "TimeoutError: IPC_TIMEOUT_CANCELLED",
+      "scope": null,
+      "status": "UNVERIFIABLE"
+    },
+    "thread_after_auth": {
+      "present": false,
+      "winerror": 1008
+    },
+    "transport_error": true
+  }
+]

@@ -1,0 +1,102 @@
+[
+  {
+    "identity": {
+      "appcontainer": true,
+      "appcontainer_sid": "S-1-15-2-2156991835-1660542066-3838189371-1154646448-3124610332-1936531500-2621492984",
+      "capability_count": 0,
+      "elevated": false,
+      "impersonation_level": 1,
+      "integrity_sid": "S-1-16-4096",
+      "user_sha256": "2fe1ac64678a911a232a386c32c34a250891a53a3fdbff7ca63882cf9ef06f41"
+    },
+    "request_sha256": "b859beb77c209ffcf6019a86633a9172f494cb03322a2a72e2759666590b3664",
+    "response": {
+      "decision": "ALLOW",
+      "execution": "COMMITTED",
+      "reason": "EXACT_POLICY_MATCH",
+      "receipt": {
+        "body": {
+          "after_base64": "YWN0dWFsLXdyb25nLWJ5dGVz",
+          "after_sha256": "b8f3141dc34058ffdc62c60a63b8947accb8f36b080088306ce5fd8d892a5ec9",
+          "before_base64": "YXBwcm92ZWQ6cG9zaXRpdmU=",
+          "before_sha256": "e79a792393c71088b51660d4d2b9fde4b0070f6c0c84e3e3839b64995f113ca5",
+          "decision": {
+            "decision": "ALLOW",
+            "reason": "EXACT_POLICY_MATCH",
+            "scope": {
+              "action": "replace_utf8",
+              "actor": "S-1-15-2-2156991835-1660542066-3838189371-1154646448-3124610332-1936531500-2621492984",
+              "content_sha256": "b8f3141dc34058ffdc62c60a63b8947accb8f36b080088306ce5fd8d892a5ec9",
+              "expires_at": 1030,
+              "nonce": "negative",
+              "policy_version": "guardian.local-file.v0",
+              "resource": "sample",
+              "scope": "whole-file-laboratory"
+            },
+            "status": "VERIFIED"
+          },
+          "execution": "LOCAL_WRITE_OBSERVED",
+          "external_execution": "UNVERIFIABLE",
+          "policy": {
+            "action": "replace_utf8",
+            "actors": [
+              "S-1-15-2-2156991835-1660542066-3838189371-1154646448-3124610332-1936531500-2621492984"
+            ],
+            "content_prefix": "approved:",
+            "max_bytes": 128,
+            "max_ttl": 60,
+            "resource": "sample",
+            "schema": "guardian.policy.v0",
+            "scope": "whole-file-laboratory",
+            "version": "guardian.local-file.v0"
+          },
+          "policy_sha256": "1fb0dee0019c862216ce4b8411ce844357784cee18c1cf1e19de27d4f5bee3ee",
+          "principal": "S-1-15-2-2156991835-1660542066-3838189371-1154646448-3124610332-1936531500-2621492984",
+          "profile": "guardian.local-file.v02",
+          "request": {
+            "action": "replace_utf8",
+            "actor": "S-1-15-2-2156991835-1660542066-3838189371-1154646448-3124610332-1936531500-2621492984",
+            "content": "approved:negative",
+            "evidence": {
+              "before_sha256": "e79a792393c71088b51660d4d2b9fde4b0070f6c0c84e3e3839b64995f113ca5"
+            },
+            "expires_at": 1030,
+            "nonce": "negative",
+            "policy_version": "guardian.local-file.v0",
+            "resource": "sample",
+            "schema": "guardian.action.v0",
+            "scope": "whole-file-laboratory"
+          },
+          "request_sha256": "b70531d911fc1fc73d080ba95b5ea0f53f8601f9d4438de73af3dec31d005c8a",
+          "resource_identity": [
+            2830515730,
+            65536,
+            3157310
+          ],
+          "used_nonces": [
+            "positive"
+          ],
+          "verification_time": 1000
+        },
+        "previous": "0000000000000000000000000000000000000000000000000000000000000000",
+        "schema": "guardian.evidence.v0",
+        "sha256": "bb642eccece93cb6c81af06e14b4b182cfee3d0149c405f32fa176dbf812e2ee"
+      },
+      "scope": {
+        "action": "replace_utf8",
+        "actor": "S-1-15-2-2156991835-1660542066-3838189371-1154646448-3124610332-1936531500-2621492984",
+        "content_sha256": "b8f3141dc34058ffdc62c60a63b8947accb8f36b080088306ce5fd8d892a5ec9",
+        "expires_at": 1030,
+        "nonce": "negative",
+        "policy_version": "guardian.local-file.v0",
+        "resource": "sample",
+        "scope": "whole-file-laboratory"
+      },
+      "status": "VERIFIED"
+    },
+    "thread_after_auth": {
+      "present": false,
+      "winerror": 1008
+    }
+  }
+]

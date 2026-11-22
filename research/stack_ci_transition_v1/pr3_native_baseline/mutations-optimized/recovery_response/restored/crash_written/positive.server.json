@@ -1,0 +1,100 @@
+[
+  {
+    "identity": {
+      "appcontainer": true,
+      "appcontainer_sid": "S-1-15-2-3250365171-3926535983-1547485248-1697409317-3091468067-2003714873-2857521633",
+      "capability_count": 0,
+      "elevated": false,
+      "impersonation_level": 1,
+      "integrity_sid": "S-1-16-4096",
+      "user_sha256": "2fe1ac64678a911a232a386c32c34a250891a53a3fdbff7ca63882cf9ef06f41"
+    },
+    "request_sha256": "e4e12df384bef8d28f8b4fb5e6cc05ebcb8afa202aa4c6db1322360bab932960",
+    "response": {
+      "decision": "ALLOW",
+      "execution": "COMMITTED",
+      "reason": "EXACT_POLICY_MATCH",
+      "receipt": {
+        "body": {
+          "after_base64": "YXBwcm92ZWQ6cG9zaXRpdmU=",
+          "after_sha256": "e79a792393c71088b51660d4d2b9fde4b0070f6c0c84e3e3839b64995f113ca5",
+          "before_base64": "aW5pdGlhbAo=",
+          "before_sha256": "da68f54607d5f5644954096ce1597c006c5bb9f2497e07441bf064b81003ef8a",
+          "decision": {
+            "decision": "ALLOW",
+            "reason": "EXACT_POLICY_MATCH",
+            "scope": {
+              "action": "replace_utf8",
+              "actor": "S-1-15-2-3250365171-3926535983-1547485248-1697409317-3091468067-2003714873-2857521633",
+              "content_sha256": "e79a792393c71088b51660d4d2b9fde4b0070f6c0c84e3e3839b64995f113ca5",
+              "expires_at": 1030,
+              "nonce": "positive",
+              "policy_version": "guardian.local-file.v0",
+              "resource": "sample",
+              "scope": "whole-file-laboratory"
+            },
+            "status": "VERIFIED"
+          },
+          "execution": "LOCAL_WRITE_OBSERVED",
+          "external_execution": "UNVERIFIABLE",
+          "policy": {
+            "action": "replace_utf8",
+            "actors": [
+              "S-1-15-2-3250365171-3926535983-1547485248-1697409317-3091468067-2003714873-2857521633"
+            ],
+            "content_prefix": "approved:",
+            "max_bytes": 128,
+            "max_ttl": 60,
+            "resource": "sample",
+            "schema": "guardian.policy.v0",
+            "scope": "whole-file-laboratory",
+            "version": "guardian.local-file.v0"
+          },
+          "policy_sha256": "33beef699fb2717c789fd9e4382d40e869197d5972fec7d1a1098330fb216505",
+          "principal": "S-1-15-2-3250365171-3926535983-1547485248-1697409317-3091468067-2003714873-2857521633",
+          "profile": "guardian.local-file.v02",
+          "request": {
+            "action": "replace_utf8",
+            "actor": "S-1-15-2-3250365171-3926535983-1547485248-1697409317-3091468067-2003714873-2857521633",
+            "content": "approved:positive",
+            "evidence": {
+              "before_sha256": "da68f54607d5f5644954096ce1597c006c5bb9f2497e07441bf064b81003ef8a"
+            },
+            "expires_at": 1030,
+            "nonce": "positive",
+            "policy_version": "guardian.local-file.v0",
+            "resource": "sample",
+            "schema": "guardian.action.v0",
+            "scope": "whole-file-laboratory"
+          },
+          "request_sha256": "96ad831ed4809ef10096043a5d2a70b49467ea16163ab0578180a0e6bbb822ed",
+          "resource_identity": [
+            2830515730,
+            65536,
+            3156434
+          ],
+          "used_nonces": [],
+          "verification_time": 1000
+        },
+        "previous": "0000000000000000000000000000000000000000000000000000000000000000",
+        "schema": "guardian.evidence.v0",
+        "sha256": "b09e90afd0704ed2773fef219cafeb5d39f987b0006b238e1a7c676dc523029a"
+      },
+      "scope": {
+        "action": "replace_utf8",
+        "actor": "S-1-15-2-3250365171-3926535983-1547485248-1697409317-3091468067-2003714873-2857521633",
+        "content_sha256": "e79a792393c71088b51660d4d2b9fde4b0070f6c0c84e3e3839b64995f113ca5",
+        "expires_at": 1030,
+        "nonce": "positive",
+        "policy_version": "guardian.local-file.v0",
+        "resource": "sample",
+        "scope": "whole-file-laboratory"
+      },
+      "status": "VERIFIED"
+    },
+    "thread_after_auth": {
+      "present": false,
+      "winerror": 1008
+    }
+  }
+]

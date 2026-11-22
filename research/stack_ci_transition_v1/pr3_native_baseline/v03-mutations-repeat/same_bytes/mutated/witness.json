@@ -1,0 +1,190 @@
+{
+  "boundary": "same_bytes",
+  "journal_after_restart": [
+    {
+      "nonce": "positive",
+      "receipt": {
+        "body": {
+          "after_base64": "YXBwcm92ZWQ6cG9zaXRpdmU=",
+          "after_sha256": "e79a792393c71088b51660d4d2b9fde4b0070f6c0c84e3e3839b64995f113ca5",
+          "before_base64": "aW5pdGlhbAo=",
+          "before_sha256": "da68f54607d5f5644954096ce1597c006c5bb9f2497e07441bf064b81003ef8a",
+          "decision": {
+            "decision": "ALLOW",
+            "reason": "EXACT_POLICY_MATCH",
+            "scope": {
+              "action": "replace_utf8",
+              "actor": "S-1-15-2-3570676158-271185748-3292516385-3403454426-2451556795-3924904860-690650330",
+              "content_sha256": "e79a792393c71088b51660d4d2b9fde4b0070f6c0c84e3e3839b64995f113ca5",
+              "expires_at": 1030,
+              "nonce": "positive",
+              "policy_version": "guardian.local-file.v0",
+              "resource": "sample",
+              "scope": "whole-file-laboratory"
+            },
+            "status": "VERIFIED"
+          },
+          "execution": "LOCAL_WRITE_OBSERVED",
+          "external_execution": "UNVERIFIABLE",
+          "policy": {
+            "action": "replace_utf8",
+            "actors": [
+              "S-1-15-2-3570676158-271185748-3292516385-3403454426-2451556795-3924904860-690650330"
+            ],
+            "content_prefix": "approved:",
+            "max_bytes": 128,
+            "max_ttl": 60,
+            "resource": "sample",
+            "schema": "guardian.policy.v0",
+            "scope": "whole-file-laboratory",
+            "version": "guardian.local-file.v0"
+          },
+          "policy_sha256": "3506657e6b2426b5695c516fb6ac72fbaf18277dd908395e3994fbc6c90e8d63",
+          "principal": "S-1-15-2-3570676158-271185748-3292516385-3403454426-2451556795-3924904860-690650330",
+          "profile": "guardian.local-file.v02",
+          "request": {
+            "action": "replace_utf8",
+            "actor": "S-1-15-2-3570676158-271185748-3292516385-3403454426-2451556795-3924904860-690650330",
+            "content": "approved:positive",
+            "evidence": {
+              "before_sha256": "da68f54607d5f5644954096ce1597c006c5bb9f2497e07441bf064b81003ef8a"
+            },
+            "expires_at": 1030,
+            "nonce": "positive",
+            "policy_version": "guardian.local-file.v0",
+            "resource": "sample",
+            "schema": "guardian.action.v0",
+            "scope": "whole-file-laboratory"
+          },
+          "request_sha256": "e6f4191c4ba98d48e0e54660a16eb3fb565e43a5f2fd99ad5a5a5621aa5f73ff",
+          "resource_identity": [
+            2830515730,
+            65536,
+            3148471
+          ],
+          "used_nonces": [],
+          "verification_time": 1000
+        },
+        "previous": "0000000000000000000000000000000000000000000000000000000000000000",
+        "schema": "guardian.evidence.v0",
+        "sha256": "ff5edaba80ef13f8ccee7a041e1b95990983cb4b6b0ed17801f20e76fe4bca13"
+      },
+      "state": "COMMITTED"
+    },
+    {
+      "nonce": "negative",
+      "receipt": null,
+      "state": "ABORTED"
+    }
+  ],
+  "journal_before_restart": [
+    {
+      "nonce": "positive",
+      "receipt": {
+        "body": {
+          "after_base64": "YXBwcm92ZWQ6cG9zaXRpdmU=",
+          "after_sha256": "e79a792393c71088b51660d4d2b9fde4b0070f6c0c84e3e3839b64995f113ca5",
+          "before_base64": "aW5pdGlhbAo=",
+          "before_sha256": "da68f54607d5f5644954096ce1597c006c5bb9f2497e07441bf064b81003ef8a",
+          "decision": {
+            "decision": "ALLOW",
+            "reason": "EXACT_POLICY_MATCH",
+            "scope": {
+              "action": "replace_utf8",
+              "actor": "S-1-15-2-3570676158-271185748-3292516385-3403454426-2451556795-3924904860-690650330",
+              "content_sha256": "e79a792393c71088b51660d4d2b9fde4b0070f6c0c84e3e3839b64995f113ca5",
+              "expires_at": 1030,
+              "nonce": "positive",
+              "policy_version": "guardian.local-file.v0",
+              "resource": "sample",
+              "scope": "whole-file-laboratory"
+            },
+            "status": "VERIFIED"
+          },
+          "execution": "LOCAL_WRITE_OBSERVED",
+          "external_execution": "UNVERIFIABLE",
+          "policy": {
+            "action": "replace_utf8",
+            "actors": [
+              "S-1-15-2-3570676158-271185748-3292516385-3403454426-2451556795-3924904860-690650330"
+            ],
+            "content_prefix": "approved:",
+            "max_bytes": 128,
+            "max_ttl": 60,
+            "resource": "sample",
+            "schema": "guardian.policy.v0",
+            "scope": "whole-file-laboratory",
+            "version": "guardian.local-file.v0"
+          },
+          "policy_sha256": "3506657e6b2426b5695c516fb6ac72fbaf18277dd908395e3994fbc6c90e8d63",
+          "principal": "S-1-15-2-3570676158-271185748-3292516385-3403454426-2451556795-3924904860-690650330",
+          "profile": "guardian.local-file.v02",
+          "request": {
+            "action": "replace_utf8",
+            "actor": "S-1-15-2-3570676158-271185748-3292516385-3403454426-2451556795-3924904860-690650330",
+            "content": "approved:positive",
+            "evidence": {
+              "before_sha256": "da68f54607d5f5644954096ce1597c006c5bb9f2497e07441bf064b81003ef8a"
+            },
+            "expires_at": 1030,
+            "nonce": "positive",
+            "policy_version": "guardian.local-file.v0",
+            "resource": "sample",
+            "schema": "guardian.action.v0",
+            "scope": "whole-file-laboratory"
+          },
+          "request_sha256": "e6f4191c4ba98d48e0e54660a16eb3fb565e43a5f2fd99ad5a5a5621aa5f73ff",
+          "resource_identity": [
+            2830515730,
+            65536,
+            3148471
+          ],
+          "used_nonces": [],
+          "verification_time": 1000
+        },
+        "previous": "0000000000000000000000000000000000000000000000000000000000000000",
+        "schema": "guardian.evidence.v0",
+        "sha256": "ff5edaba80ef13f8ccee7a041e1b95990983cb4b6b0ed17801f20e76fe4bca13"
+      },
+      "state": "COMMITTED"
+    },
+    {
+      "nonce": "negative",
+      "receipt": null,
+      "state": "PREPARED"
+    }
+  ],
+  "negative": {
+    "after_hex": "617070726f7665643a706f736974697665",
+    "after_sha256": "e79a792393c71088b51660d4d2b9fde4b0070f6c0c84e3e3839b64995f113ca5",
+    "before_sha256": "e79a792393c71088b51660d4d2b9fde4b0070f6c0c84e3e3839b64995f113ca5",
+    "name": "negative",
+    "response": {
+      "completed": true,
+      "error": "BrokenPipeError: [WinError 109] The pipe has been ended.",
+      "winerror": 109
+    },
+    "server_exit": 73,
+    "unchanged": true
+  },
+  "negative_ok": false,
+  "positive_ok": true,
+  "restart": {
+    "after_hex": "617070726f7665643a706f736974697665",
+    "after_sha256": "e79a792393c71088b51660d4d2b9fde4b0070f6c0c84e3e3839b64995f113ca5",
+    "before_sha256": "e79a792393c71088b51660d4d2b9fde4b0070f6c0c84e3e3839b64995f113ca5",
+    "name": "restart",
+    "response": {
+      "completed": true,
+      "response": {
+        "decision": "DENY",
+        "execution": "NOT_EXECUTED",
+        "reason": "REPLAY",
+        "scope": null,
+        "status": "REFUTED"
+      }
+    },
+    "server_exit": 0,
+    "unchanged": true
+  }
+}

@@ -1,0 +1,16 @@
+[
+  {
+    "response": {
+      "decision": "DENY",
+      "execution": "NOT_EXECUTED",
+      "reason": "RuntimeError: V04_RUNTIME",
+      "scope": null,
+      "status": "REFUTED"
+    },
+    "thread_after_auth": {
+      "present": false,
+      "winerror": 1008
+    },
+    "transport_error": true
+  }
+]

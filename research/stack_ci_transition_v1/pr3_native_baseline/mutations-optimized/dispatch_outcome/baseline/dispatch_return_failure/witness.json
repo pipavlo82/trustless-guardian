@@ -1,0 +1,16 @@
+{
+  "checks": {
+    "actual_bytes": true,
+    "controlled_process": true,
+    "durable_state": true,
+    "fault_reached": true,
+    "host_digest": true,
+    "independent_broker_token": true,
+    "independent_host_bytes": true,
+    "no_false_nonexecution": true,
+    "positive": true,
+    "restart_control": true
+  },
+  "external_execution": "UNVERIFIABLE",
+  "passed": true
+}
