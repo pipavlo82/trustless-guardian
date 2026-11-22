@@ -1,7 +1,8 @@
-import unittest,tempfile,json,hashlib
+import unittest,tempfile,json,hashlib,os
 from pathlib import Path
 from research.scoped_execution_lab_v3.atomic_receipt import publish
 class AtomicReceiptTests(unittest.TestCase):
+ @unittest.skipUnless(os.name == 'nt', 'Windows-only atomic receipt writer')
  def test_publish_and_readback(self):
   with tempfile.TemporaryDirectory() as d:
    receipt={"request":"synthetic-1","signature":"TEST_ONLY_NOT_CRYPTOGRAPHIC"}
