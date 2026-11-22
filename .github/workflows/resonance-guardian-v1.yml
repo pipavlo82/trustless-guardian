@@ -1,9 +1,11 @@
-name: Resonance original core + Guardian IPC research v1
+name: Resonance original core + Guardian IPC research v1 (historical manual replay)
 
+# Historical V1 baseline remains available on demand, not as a promotion gate
+# for the distinct Guardian RC3 / Resonance Core V2.3 research candidate.
+# Integrity-v8 remains enforced by its other security workflows; this does not
+# constitute integrity admission or production approval for RC3.
 on:
-  push:
-    branches: [research/resonance-guardian-appcontainer-ipc-v1]
-  pull_request:
+  workflow_dispatch:
 
 permissions:
   contents: read
