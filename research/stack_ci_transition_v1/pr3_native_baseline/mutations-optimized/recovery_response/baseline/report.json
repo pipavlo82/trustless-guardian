@@ -1,0 +1,25 @@
+{
+  "legacy_dispatch": false,
+  "passed": true,
+  "scenarios": [
+    {
+      "case": "crash_written",
+      "checks": {
+        "actual_bytes": true,
+        "controlled_process": true,
+        "durable_state": true,
+        "host_digest": true,
+        "independent_broker_token": true,
+        "independent_host_bytes": true,
+        "no_fabricated_crash_reply": true,
+        "positive": true,
+        "restart_control": true,
+        "restart_preserves_ambiguity": true
+      },
+      "external_execution": "UNVERIFIABLE",
+      "passed": true
+    }
+  ],
+  "schema": "guardian.conformance.v04",
+  "second_machine": "NOT_COVERED"
+}

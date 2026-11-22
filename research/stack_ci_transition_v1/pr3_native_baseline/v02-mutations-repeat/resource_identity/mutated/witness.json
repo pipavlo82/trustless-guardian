@@ -1,0 +1,101 @@
+{
+  "boundary": "resource_identity",
+  "expected": "DENY_AND_UNCHANGED",
+  "negative": {
+    "after_hex": "617070726f7665643a6e65676174697665",
+    "after_sha256": "b8f3141dc34058ffdc62c60a63b8947accb8f36b080088306ce5fd8d892a5ec9",
+    "before_sha256": "e79a792393c71088b51660d4d2b9fde4b0070f6c0c84e3e3839b64995f113ca5",
+    "name": "negative",
+    "response": {
+      "completed": true,
+      "response": {
+        "decision": "ALLOW",
+        "execution": "COMMITTED",
+        "reason": "EXACT_POLICY_MATCH",
+        "receipt": {
+          "body": {
+            "after_base64": "YXBwcm92ZWQ6bmVnYXRpdmU=",
+            "after_sha256": "b8f3141dc34058ffdc62c60a63b8947accb8f36b080088306ce5fd8d892a5ec9",
+            "before_base64": "YXBwcm92ZWQ6cG9zaXRpdmU=",
+            "before_sha256": "e79a792393c71088b51660d4d2b9fde4b0070f6c0c84e3e3839b64995f113ca5",
+            "decision": {
+              "decision": "ALLOW",
+              "reason": "EXACT_POLICY_MATCH",
+              "scope": {
+                "action": "replace_utf8",
+                "actor": "S-1-15-2-4070093721-2009901184-1934009066-743902391-3984607739-1518411161-18988481",
+                "content_sha256": "b8f3141dc34058ffdc62c60a63b8947accb8f36b080088306ce5fd8d892a5ec9",
+                "expires_at": 1030,
+                "nonce": "negative",
+                "policy_version": "guardian.local-file.v0",
+                "resource": "sample",
+                "scope": "whole-file-laboratory"
+              },
+              "status": "VERIFIED"
+            },
+            "execution": "LOCAL_WRITE_OBSERVED",
+            "external_execution": "UNVERIFIABLE",
+            "policy": {
+              "action": "replace_utf8",
+              "actors": [
+                "S-1-15-2-4070093721-2009901184-1934009066-743902391-3984607739-1518411161-18988481"
+              ],
+              "content_prefix": "approved:",
+              "max_bytes": 128,
+              "max_ttl": 60,
+              "resource": "sample",
+              "schema": "guardian.policy.v0",
+              "scope": "whole-file-laboratory",
+              "version": "guardian.local-file.v0"
+            },
+            "policy_sha256": "c909a8b0415884c001cf634c5b013a7f173b57b4f2c9c25bb8d62cba40697cf3",
+            "principal": "S-1-15-2-4070093721-2009901184-1934009066-743902391-3984607739-1518411161-18988481",
+            "profile": "guardian.local-file.v02",
+            "request": {
+              "action": "replace_utf8",
+              "actor": "S-1-15-2-4070093721-2009901184-1934009066-743902391-3984607739-1518411161-18988481",
+              "content": "approved:negative",
+              "evidence": {
+                "before_sha256": "e79a792393c71088b51660d4d2b9fde4b0070f6c0c84e3e3839b64995f113ca5"
+              },
+              "expires_at": 1030,
+              "nonce": "negative",
+              "policy_version": "guardian.local-file.v0",
+              "resource": "sample",
+              "schema": "guardian.action.v0",
+              "scope": "whole-file-laboratory"
+            },
+            "request_sha256": "daee3ee598640e22bfdcf2e23211d7268080b531749a660c10f1e580b629dc2e",
+            "resource_identity": [
+              2830515730,
+              65536,
+              3142282
+            ],
+            "used_nonces": [
+              "positive"
+            ],
+            "verification_time": 1000
+          },
+          "previous": "0000000000000000000000000000000000000000000000000000000000000000",
+          "schema": "guardian.evidence.v0",
+          "sha256": "12c83791ea9a4d66dc17151f1fc3c595a3da05dec4047dce8f9867d380c5fd80"
+        },
+        "scope": {
+          "action": "replace_utf8",
+          "actor": "S-1-15-2-4070093721-2009901184-1934009066-743902391-3984607739-1518411161-18988481",
+          "content_sha256": "b8f3141dc34058ffdc62c60a63b8947accb8f36b080088306ce5fd8d892a5ec9",
+          "expires_at": 1030,
+          "nonce": "negative",
+          "policy_version": "guardian.local-file.v0",
+          "resource": "sample",
+          "scope": "whole-file-laboratory"
+        },
+        "status": "VERIFIED"
+      }
+    },
+    "server_exit": 0,
+    "unchanged": false
+  },
+  "negative_wrote": true,
+  "positive_ok": false
+}

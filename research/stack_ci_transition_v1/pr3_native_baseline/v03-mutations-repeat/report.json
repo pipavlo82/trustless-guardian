@@ -1,0 +1,61 @@
+{
+  "counts": {
+    "CONTROL_BROKEN": 1,
+    "CRASHED": 0,
+    "KILLED": 2,
+    "NOT_APPLIED": 0,
+    "SURVIVED": 1
+  },
+  "coverage_complete": false,
+  "expected": {
+    "ambiguous_failure": "KILLED",
+    "base_user": "KILLED",
+    "impersonation_level": "SURVIVED",
+    "same_bytes": "KILLED"
+  },
+  "mutants": [
+    {
+      "applied": true,
+      "boundary_exercised": true,
+      "classification": "KILLED",
+      "id": "ambiguous_failure",
+      "mutated_sha256": "97dfd0aff5b672789c000616a3433a371ec8ed3b18423f6aceb1c943f1a15fe2",
+      "original_sha256": "e2084614efe452c35533815de52de1508b6ab119b5e3395a47e29789c43f75c0",
+      "restored_byte_exact": true,
+      "source": "guardian/hardened.py"
+    },
+    {
+      "applied": true,
+      "boundary_exercised": true,
+      "classification": "CONTROL_BROKEN",
+      "id": "same_bytes",
+      "mutated_sha256": "89b55677e6ad935877b11b88c47a487fe77ac989ac1ca6633a8463e47990271c",
+      "original_sha256": "473a0b58079e88513527521119b149571010955a75a4211dac3a222c5619aaf6",
+      "restored_byte_exact": true,
+      "source": "guardian/recovery.py"
+    },
+    {
+      "applied": true,
+      "boundary_exercised": true,
+      "classification": "KILLED",
+      "id": "base_user",
+      "mutated_sha256": "9cf7b3dfcc09daabad1cf161a2ff1c0225e509509d386dd594477338a95029fd",
+      "original_sha256": "e39750cb85b8fc02313b57e611c0b90ea1eba3b3c6d23caf506712de42c88757",
+      "restored_byte_exact": true,
+      "source": "guardian/ipc.py"
+    },
+    {
+      "applied": true,
+      "boundary_exercised": false,
+      "classification": "SURVIVED",
+      "id": "impersonation_level",
+      "mutated_sha256": "207b8c057b6719c49876685ab25cc75e9136638fe87773683bbf41632368351b",
+      "original_sha256": "e39750cb85b8fc02313b57e611c0b90ea1eba3b3c6d23caf506712de42c88757",
+      "restored_byte_exact": true,
+      "source": "guardian/ipc.py"
+    }
+  ],
+  "passed": false,
+  "schema": "guardian.mutations.v03",
+  "survivor_limitation": "Effective token level remains identification on this host; no level>1 negative OS witness was obtained."
+}

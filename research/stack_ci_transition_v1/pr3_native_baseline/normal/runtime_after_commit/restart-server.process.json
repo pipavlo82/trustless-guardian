@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "D:\\PAVLO HQ\\Workspaces\\guardian-stack-ci-repair-v1-20261120\\repo\\build\\stack-frozen-1795234925050200300\\build\\guardian-lab-3091bbcf03a6413fbb9cdcb6ebf2791a\\runtime\\python.exe",
+    "-B",
+    "D:\\PAVLO HQ\\Workspaces\\guardian-stack-ci-repair-v1-20261120\\repo\\build\\stack-frozen-1795234925050200300\\build\\guardian-lab-3091bbcf03a6413fbb9cdcb6ebf2791a\\runtime\\v04_worker.py",
+    "D:\\PAVLO HQ\\Workspaces\\guardian-stack-ci-repair-v1-20261120\\repo\\build\\stack-frozen-1795234925050200300\\build\\guardian-lab-3091bbcf03a6413fbb9cdcb6ebf2791a\\runtime\\restart-server.json"
+  ],
+  "exit_code": 0,
+  "pid": 26656,
+  "token": {
+    "appcontainer": true,
+    "appcontainer_sid": "S-1-15-2-3577344276-2158595279-157522312-299105020-2464003462-2979072484-3910265684",
+    "capability_count": 0,
+    "elevated": false,
+    "integrity_sid": "S-1-16-4096",
+    "user_sid_sha256": "2fe1ac64678a911a232a386c32c34a250891a53a3fdbff7ca63882cf9ef06f41"
+  }
+}
