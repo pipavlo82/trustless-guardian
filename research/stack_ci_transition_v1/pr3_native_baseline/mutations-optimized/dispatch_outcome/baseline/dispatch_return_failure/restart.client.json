@@ -1,0 +1,10 @@
+{
+  "completed": true,
+  "response": {
+    "decision": "DENY",
+    "execution": "NOT_EXECUTED",
+    "reason": "REPLAY",
+    "scope": null,
+    "status": "REFUTED"
+  }
+}

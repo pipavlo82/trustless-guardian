@@ -1,0 +1,11 @@
+{
+  "completed": true,
+  "response": {
+    "decision": "DENY",
+    "execution": "RECOVERY_REQUIRED",
+    "reason": "RECOVERY_REQUIRED",
+    "retry_permitted": false,
+    "scope": null,
+    "status": "UNVERIFIABLE"
+  }
+}

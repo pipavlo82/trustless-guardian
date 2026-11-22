@@ -1,0 +1,70 @@
+name: Guardian conformance
+
+on: [push, pull_request, workflow_dispatch]
+
+permissions:
+  contents: read
+
+jobs:
+  portable:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - name: Checkout exact candidate
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
+        with:
+          python-version: '3.12'
+      - name: Current unit tests normal and optimized
+        run: |
+          python -B -m unittest discover -s tests -q
+          python -B -O -m unittest discover -s tests -q
+      - name: Replay frozen v0.7 portable invariants
+        shell: bash
+        run: |
+          git fetch --no-tags origin 03f6ffc6f4b983cfcc39f401f47165021e67e673
+          git worktree add --detach "$RUNNER_TEMP/guardian-pr1" 03f6ffc6f4b983cfcc39f401f47165021e67e673
+          python -B "$RUNNER_TEMP/guardian-pr1/tools/validate_v07.py" --portable --out "$RUNNER_TEMP/v07-portable"
+
+  windows-enforcement:
+    runs-on: windows-2022
+    timeout-minutes: 30
+    steps:
+      - name: Checkout exact candidate
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
+        with:
+          python-version: '3.12'
+      - name: Fetch and verify pinned Windows test runtime
+        run: python -B tools/prepare.py
+      - name: Execute current Windows assessment under verified token
+        continue-on-error: true
+        run: python -B tools/restricted_exec_v1.py --out build/guardian-windows-launch.json --proof build/guardian-windows-proof.json --timeout 1200 tools/windows_assessment_v1.py --out build/guardian-windows --startup-proof build/guardian-windows-proof.json
+      - name: Upload Windows evidence before gate
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: windows-enforcement-logs
+          path: |
+            build/guardian-windows/**/*.json
+            build/guardian-windows/**/*.stdout
+            build/guardian-windows/**/*.stderr
+            build/guardian-windows/**/*.log
+            build/guardian-windows-launch*
+            build/guardian-windows-proof.json
+          if-no-files-found: error
+      - name: Enforce current Windows security gate
+        shell: pwsh
+        run: |
+          $report = Get-Content build/guardian-windows/report.json -Raw | ConvertFrom-Json
+          if ($report.status -ne 'VERIFIED') {
+            Write-Error "Windows gate is $($report.status); production promotion remains blocked."
+          }

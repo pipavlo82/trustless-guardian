@@ -1,0 +1,41 @@
+{
+  "schema": "guardian.authorized-additions.v2",
+  "additions": {
+    "AUTH_DEFECT_REGISTER.md": "1414e85302b221df16114bc58fcc5e0cf1d334795957437518257d59fe1d49ce",
+    "AUTH_INDEPENDENT_REPLAY.md": "1342ff2e1322411daeca4c62e798577a41de0df3e1994ac4807056d359167baf",
+    "AUTH_LINUX_SECURITY_REPORT.md": "c2c1e0ff95df79fd87c2cbc5ef72532d517a062ada356862606380cec4dd20dc",
+    "AUTH_MUTATION_REPORT.md": "801b21cef844cd0a5cb7c3479bfb1949a7f0dcc66294555e01b902f614ecfb91",
+    "AUTH_REMAINING_LIMITATIONS.md": "ad232254b5d857311933d4db2093ce9cfae100c61fddcb480cdcfeaa88d3bade",
+    "requirements-auth-v1.in": "0fdb5233e6fdc1ef71245dc0896518880f2edbc8bc27376d07f3bfb75d21db14",
+    "requirements-auth-v1.txt": "8e8ef602eff67f90dd874b8e0980506497a58a7efa067d846c099a585b770b60",
+    "research/auth_gateway_v1/__init__.py": "dfdb400726eeec09a667cb6055c2cc4a9d4a1aaf785f4d316c71ddc55941d06a",
+    "research/auth_gateway_v1/canonical.py": "6b340d6d97f505948443661a8d8cd99b36b4807aaa40a86e80a71efc70dfe658",
+    "research/auth_gateway_v1/errors.py": "a1b49dfde62e2112b1c2e2fca8f0ac416213b87ca33080568d00fc6c4e2429ca",
+    "research/auth_gateway_v1/gateway.py": "868bbe2d4cb8d835ed958eada057067e4d5852d50f088cde8d8de3b095909e67",
+    "research/auth_gateway_v1/grant.py": "6a3b5e7300443d56f361da0bca55441c5dae9c05b92512024679212f203f89ad",
+    "research/auth_gateway_v1/jwt_auth.py": "339e5d1c3fe0b1b79872bb58d76ddecb7091c0ca5556a23db611934b33744ecb",
+    "research/auth_gateway_v1/mcp_auth.py": "61eea71a8735595ea0c2b3a9926ce53080e7e340c8c324e8603dccb2e785acb7",
+    "research/auth_gateway_v1/model.py": "daae9094cb7a11cd77831d73acceb9a1d0d3d897dadfc0a809154d2b6f5050a3",
+    "research/auth_gateway_v1/nonce.py": "73bf4d4c3193ed173d4406bdd73712160a651b6b7a342f5bb09a6525cd6e2118",
+    "research/auth_gateway_v1/policy.py": "2a3f671538b81085884122adf49adb0cd3b674dab55a465115209f7335970add",
+    "research/auth_gateway_v1/siwe_auth.py": "e410e7670fb9b37585d0d9fa49264aee225f3cefec7ef6602aa276a8b2d8779d",
+    "research/auth_gateway_v1/trust.py": "197c30007ca1fb875b7c40ecc4ed5993b09db4ec54bcc00de5ef6180fee6d200",
+    "research/linux_isolated_worker_v2/__init__.py": "1feee9e2d34634c52e18c95a1d9eb2732fceed5b68ad0aab7ba70bdc6cac36db",
+    "research/linux_isolated_worker_v2/pilot.py": "a2f3f21ee2e46b6e1762c397364e1fb94bbcb332e4c1ef95cd5651cdf34409b3",
+    "research/linux_isolated_worker_v2/worker.sh": "d4432893388fb13914672804e757c6f0c07ba9417721a88b6268c1c445dde3ad",
+    "tests_auth_v1/__init__.py": "1f5a1c019651b10a3550559c67d6c4e71137f836874391602b56ee3d2f2d60b7",
+    "tests_auth_v1/fixtures.py": "a7295a09c68d917466407efc6fe1d80b150e3c8e78d3df50cf8c1b2ae2188ef5",
+    "tests_auth_v1/test_auth_gateway_v1.py": "5cd016abfe0d5a70783f8921b782085ffca136da9942d583bfecc9d53a155d37",
+    "tools/auth_assessment_v1.py": "71ed42a3d1aee5d30dcd20e4c80800a94abce1805b78dd9970d29a35e2dac332",
+    "tools/auth_source_mutations_v1.py": "c00c4f93f935ac8e9d33c92e848000cfc6b044ee001c0b89bf587f239e5a2691",
+    "tools/integrity_mutations_v2.py": "f4d4dbc1f6e73b4e9dd874ffb11c68ea7965472beef7e4d560e93a80a2cd1462",
+    "tools/integrity_v2.py": "2e6abe32b2ff7cf3b44bb05d6995e1e1da88460d77a3b632e22368a25ce52242",
+    "verification/independent-auth-linux-v1.json": "a1ddc106dffbd13a68b7ec9759b1f21c540ee8b4b5d902cbaf76b2da21158cdd"
+  },
+  "replacements": {
+    ".github/workflows/security-repair-v1.yml": {
+      "previous_sha256": "96b06eca0183707f6f783cdfdbfcc2a027749eb80087a13d949215c5247451d5",
+      "sha256": "6569aec4d4ab7c3b53e0478172d8894d2bdad059992e490d51c188f03fad2f6f"
+    }
+  }
+}

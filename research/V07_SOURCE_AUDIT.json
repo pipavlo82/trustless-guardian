@@ -1,0 +1,50 @@
+{
+  "audit": "READ_ONLY_SOURCE_INSPECTION",
+  "native_integrations": "NOT_COVERED",
+  "sources": [
+    {
+      "files": {
+        "LICENSE": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+        "research/agent-action-browser-verify-v0/AGENT_ACTION_RECEIPT_PROFILE.md": "56cfa34aaf8fdeb846fc5efbb4bdf48abd1fd489b5bfc1f72e84b697ee04a6ed",
+        "src/core/claim-surface.mjs": "b5a0237d3c642a91a89c7b73666e3e0f6d33a319495ddae08a0f86e34476ae1e",
+        "src/core/verify-v2.mjs": "1c3b876fe7309b16075bd07f61cfdaf0437cf3e06ea6b28f3c369325cc8c5a3c"
+      },
+      "repository": "receiptos-verify",
+      "sha": "f39ac3b289be6baef1140c53976d525d8eb45c8c",
+      "status": ""
+    },
+    {
+      "files": {
+        "LICENSE": "650bc878c1af8e12d81ff387e7af547dad094836b1feb322654695447e0a618c",
+        "src/integration/engine.py": "81707638fa076486e71e18df981cc7daaf0e91870f53d457870c0af09fd8fc3c"
+      },
+      "repository": "verifiable-execution-claim-authorization",
+      "sha": "e2aca1a029203f1d5c73db2f8872b4240e793bfb",
+      "status": ""
+    },
+    {
+      "files": {
+        "LICENSE": "405d0af6743b62b00a440d519b85fd9c3f159ff85b3bcfcd8c683e6372b4a7aa",
+        "research/chain-neutral-receipt-anchor-proof-v0/adapter.mjs": "b3f4e8b3f5b551c06dc4592ba1415a1ee5ea2bbd56e57cf6788c8063a0d956e4",
+        "research/chain-neutral-receipt-anchor-proof-v0/subject.schema.json": "39099aaab04f5ff82f81e82e933d5bb39b679c7c8fe3e309115ac51e513bf414"
+      },
+      "repository": "recompute-kit",
+      "sha": "b4537d73bda4e4df73c4b105ee516a43c351ba02",
+      "status": ""
+    },
+    {
+      "files": {
+        "LICENSE": "e29dfaf6905a8d396a58ea4bd84ad27057756bbd9599b5bec0971ae34d2a2118",
+        "hermes_cli/plugins.py": "63cef01ae81a23c859170d36860c9ac257f320266a88640a8b9690952728bba6",
+        "run_agent.py": "5deb737cefa54548155b4a353c4f38ce0d4286652eb532ea3c522c684ad3d5b7",
+        "tools/registry.py": "f95d011cae75f0426dd77cb1e25df6bebb61a067d795312df297cb877dd616f5"
+      },
+      "official_docs": [
+        "https://hermes-agent.nousresearch.com/docs/developer-guide/plugins",
+        "https://hermes-agent.nousresearch.com/docs/developer-guide/tools-runtime"
+      ],
+      "repository": "NousResearch/hermes-agent",
+      "sha": "f7c79efbac19ae18e8dee7c79a4e4c0935299b5f"
+    }
+  ]
+}

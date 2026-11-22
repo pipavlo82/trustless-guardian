@@ -1,0 +1,98 @@
+{
+  "archives": {
+    "fresh-replay-v0.zip": {
+      "members": 2674,
+      "sha256": "12470bea792e7c732fc5c10492a4a6865bbd949d610e809da7c490a80c2013d5"
+    },
+    "hosted-ci-initial-failure.zip": {
+      "members": 420,
+      "sha256": "2b47ff570757319917aa22a693864603a0cfc7f269c914dd623052ab87033662"
+    },
+    "local-run-v0.zip": {
+      "members": 1345,
+      "sha256": "9aaac972c3c54f0bd784e801f7dc31f046bf6e7d417b8e8a6b959fd3f8ea0255"
+    },
+    "public-replay-v0.zip": {
+      "members": 1353,
+      "sha256": "ea2dcd9e99a87e1e4f1c0ef9942a23129dde2a634273d695f20a1fd53e53a51e"
+    }
+  },
+  "branch": "research/guardian-enforcement-v0",
+  "direct_dacl_takeover_refused": true,
+  "direct_os_denial_operations": 9,
+  "evidence_tamper_refused": true,
+  "external_execution": "UNVERIFIABLE",
+  "foundation_commit": "aaa941cf3566a6931cba539e4d8147d940459171",
+  "hosted_ci_initial": {
+    "detail": "research/CI_PORTABILITY.md",
+    "head": "3c2ae0d67be725858139ff4e164d07d21abbb5c1",
+    "mutation_counts": {
+      "CONTROL_BROKEN": 15,
+      "KILLED": 0
+    },
+    "portable": "PASS",
+    "windows": "NOT_COVERED"
+  },
+  "hosted_ci_latest_observed": {
+    "head": "1a8aa03bea916f62e26eb92b41374a10cf4c556b",
+    "note": "No suitable non-elevated linked-token execution context established; no system settings weakened.",
+    "os_enforcement": "NOT_COVERED",
+    "portable": "PASS",
+    "pr_run": 40153594033,
+    "push_run": 40153591967,
+    "windows": "CI_BLOCKED",
+    "winerror": 1312
+  },
+  "mutations": {
+    "normal": {
+      "CONTROL_BROKEN": 0,
+      "CRASHED": 0,
+      "KILLED": 15,
+      "NOT_APPLIED": 0,
+      "SURVIVED": 0
+    },
+    "optimized": {
+      "CONTROL_BROKEN": 0,
+      "CRASHED": 0,
+      "KILLED": 15,
+      "NOT_APPLIED": 0,
+      "SURVIVED": 0
+    },
+    "restoration": "BYTE_EXACT",
+    "unique_variants": 15
+  },
+  "native_adapters": "RESEARCH_ENVELOPES_ONLY_NOT_IMPLEMENTED",
+  "optimized_mutation_commit": "1a8aa03bea916f62e26eb92b41374a10cf4c556b",
+  "original_prototype": "4 preliminary policy tests; all 3 source files byte-identical",
+  "os_enforcement": "LABORATORY_VERIFIED",
+  "policy_cases_per_run": 17,
+  "policy_outcomes": {
+    "REFUTED_DENY": 15,
+    "UNVERIFIABLE_DENY": 1,
+    "VERIFIED_ALLOW": 1
+  },
+  "production_ready": false,
+  "recommendation": "ITERATE",
+  "remaining_obligations": [
+    "dedicated least-privilege broker identity",
+    "authenticated production IPC",
+    "atomic crash recovery",
+    "native ReceiptOS/VECA evidence-to-action binding",
+    "independent external review"
+  ],
+  "repository": "https://github.com/pipavlo82/trustless-guardian",
+  "schema": "guardian.research-summary.v0",
+  "scratch_positive": true,
+  "semantic_sha256": "d723638ac4ded84070d5d832c85fbfdd153f28bdafa965cf0142254cf6f5aac5",
+  "source_audit": "research/source-lock.json",
+  "tested_implementation_commit": "1a8aa03bea916f62e26eb92b41374a10cf4c556b",
+  "unavailable_component_cases": 2,
+  "unit_tests": {
+    "fresh_normal": 14,
+    "fresh_optimized": 14,
+    "fresh_repeat": 14,
+    "normal": 14,
+    "optimized": 14,
+    "repeat": 14
+  }
+}

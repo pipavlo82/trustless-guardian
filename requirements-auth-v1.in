@@ -1,0 +1,6 @@
+PyJWT==2.15.1
+cryptography==50.0.2
+siwe==4.4.0
+eth-account==0.13.7
+# siwe 4.4.0 allows abnf<3, but abnf 2.9.1 breaks its RFC5234 grammar import.
+abnf==2.4.0

@@ -1,0 +1,23 @@
+{
+  "schema": "guardian.layered-integrity.v2",
+  "base_commit": "e772eebd3ae3fee91237fa62b2caa3be0517684f",
+  "frozen": {
+    "manifest": "integrity/v2/pr4-base.sha256.json",
+    "manifest_sha256": "dde2362448914252991d5ad96e2f546b55522361a8e0280aa81f8bcbf1a75f4a",
+    "entries": 273
+  },
+  "authorized": {
+    "manifest": "integrity/v2/auth-linux-files.sha256.json",
+    "manifest_sha256": "31acee378353567f1d75d4f242ff9aef28144cee67f019ef6548e74d1e94db36",
+    "additions": 30,
+    "replacements": 1
+  },
+  "control_files": [
+    "integrity/v2/policy.json",
+    "integrity/v2/pr4-base.sha256.json",
+    "integrity/v2/auth-linux-files.sha256.json"
+  ],
+  "bootstrap_trust": [
+    ".github/workflows/auth-linux-v1.yml"
+  ]
+}

@@ -1,0 +1,675 @@
+{
+  "agent_sid": "S-1-15-2-2086663351-2464250026-3352983820-4027703349-657786476-1496489968-1751437155",
+  "broker_sid": "S-1-15-2-1515056069-437931916-805056530-684011414-2651664417-1637334004-815330886",
+  "changed_policy": {
+    "action": "replace_utf8",
+    "actors": [],
+    "content_prefix": "approved:",
+    "max_bytes": 128,
+    "max_ttl": 60,
+    "resource": "synthetic-source",
+    "schema": "guardian.policy.v0",
+    "scope": "whole-file-laboratory",
+    "version": "guardian.demo.v05"
+  },
+  "client_kind": "SCRIPTED_OS_CONTROL",
+  "controls": {
+    "ALLOW": {
+      "after": {
+        "config": {
+          "hex": "7b2273796e746865746963223a747275652c2270726f746563746564223a747275657d0a",
+          "identity": [
+            2830515730,
+            65536,
+            1232815
+          ],
+          "sha256": "860a4bfc3f5a657ae47a0520aa1c60ac649c7f711f0100e17097a93de1915f24"
+        },
+        "policy": {
+          "hex": "7b22616374696f6e223a227265706c6163655f75746638222c226163746f7273223a5b22532d312d31352d322d323038363636333335312d323436343235303032362d333335323938333832302d343032373730333334392d3635373738363437362d313439363438393936382d31373531343337313535225d2c22636f6e74656e745f707265666978223a22617070726f7665643a222c226d61785f6279746573223a3132382c226d61785f74746c223a36302c227265736f75726365223a2273796e7468657469632d736f75726365222c22736368656d61223a22677561726469616e2e706f6c6963792e7630222c2273636f7065223a2277686f6c652d66696c652d6c61626f7261746f7279222c2276657273696f6e223a22677561726469616e2e64656d6f2e763035227d",
+          "identity": [
+            2830515730,
+            65536,
+            1232769
+          ],
+          "sha256": "9f23d1d4d57229574f69ff9a526639df432b7c2a4e8760478c53efe9f87c17e1"
+        },
+        "secret": {
+          "hex": "5055424c49432d53594e5448455449432d4e4f542d412d43524544454e5449414c0a",
+          "identity": [
+            2830515730,
+            65536,
+            1232816
+          ],
+          "sha256": "ccef527f9e6e0e48f81dd2a23b076238e28315b73284bc04f96e043e47f6f9f2"
+        },
+        "source": {
+          "hex": "617070726f7665643a64656d6f2d736f75726365",
+          "identity": [
+            2830515730,
+            65536,
+            1232768
+          ],
+          "sha256": "b06d8a7841ac7bd5916bf8a92bad3117cfa5de3bbeab6238f00afc842ef62982"
+        }
+      },
+      "before": {
+        "config": {
+          "hex": "7b2273796e746865746963223a747275652c2270726f746563746564223a747275657d0a",
+          "identity": [
+            2830515730,
+            65536,
+            1232815
+          ],
+          "sha256": "860a4bfc3f5a657ae47a0520aa1c60ac649c7f711f0100e17097a93de1915f24"
+        },
+        "policy": {
+          "hex": "7b22616374696f6e223a227265706c6163655f75746638222c226163746f7273223a5b22532d312d31352d322d323038363636333335312d323436343235303032362d333335323938333832302d343032373730333334392d3635373738363437362d313439363438393936382d31373531343337313535225d2c22636f6e74656e745f707265666978223a22617070726f7665643a222c226d61785f6279746573223a3132382c226d61785f74746c223a36302c227265736f75726365223a2273796e7468657469632d736f75726365222c22736368656d61223a22677561726469616e2e706f6c6963792e7630222c2273636f7065223a2277686f6c652d66696c652d6c61626f7261746f7279222c2276657273696f6e223a22677561726469616e2e64656d6f2e763035227d",
+          "identity": [
+            2830515730,
+            65536,
+            1232769
+          ],
+          "sha256": "9f23d1d4d57229574f69ff9a526639df432b7c2a4e8760478c53efe9f87c17e1"
+        },
+        "secret": {
+          "hex": "5055424c49432d53594e5448455449432d4e4f542d412d43524544454e5449414c0a",
+          "identity": [
+            2830515730,
+            65536,
+            1232816
+          ],
+          "sha256": "ccef527f9e6e0e48f81dd2a23b076238e28315b73284bc04f96e043e47f6f9f2"
+        },
+        "source": {
+          "hex": "696e697469616c0a",
+          "identity": [
+            2830515730,
+            65536,
+            1232768
+          ],
+          "sha256": "da68f54607d5f5644954096ce1597c006c5bb9f2497e07441bf064b81003ef8a"
+        }
+      },
+      "ipc_identity": {
+        "appcontainer": true,
+        "appcontainer_sid": "S-1-15-2-2086663351-2464250026-3352983820-4027703349-657786476-1496489968-1751437155",
+        "capability_count": 0,
+        "elevated": false,
+        "impersonation_level": 1,
+        "integrity_sid": "S-1-16-4096",
+        "user_sha256": "2fe1ac64678a911a232a386c32c34a250891a53a3fdbff7ca63882cf9ef06f41"
+      },
+      "request": {
+        "policy_sha256": "9f23d1d4d57229574f69ff9a526639df432b7c2a4e8760478c53efe9f87c17e1",
+        "request": {
+          "action": "replace_utf8",
+          "actor": "S-1-15-2-2086663351-2464250026-3352983820-4027703349-657786476-1496489968-1751437155",
+          "content": "approved:demo-source",
+          "evidence": {
+            "before_sha256": "da68f54607d5f5644954096ce1597c006c5bb9f2497e07441bf064b81003ef8a"
+          },
+          "expires_at": 1030,
+          "nonce": "demo-allow",
+          "policy_version": "guardian.demo.v05",
+          "resource": "synthetic-source",
+          "schema": "guardian.action.v0",
+          "scope": "whole-file-laboratory"
+        },
+        "schema": "guardian.ipc.v02"
+      },
+      "response": {
+        "decision": "ALLOW",
+        "execution": "COMMITTED",
+        "reason": "EXACT_POLICY_MATCH",
+        "receipt": {
+          "body": {
+            "after_base64": "YXBwcm92ZWQ6ZGVtby1zb3VyY2U=",
+            "after_sha256": "b06d8a7841ac7bd5916bf8a92bad3117cfa5de3bbeab6238f00afc842ef62982",
+            "before_base64": "aW5pdGlhbAo=",
+            "before_sha256": "da68f54607d5f5644954096ce1597c006c5bb9f2497e07441bf064b81003ef8a",
+            "decision": {
+              "decision": "ALLOW",
+              "reason": "EXACT_POLICY_MATCH",
+              "scope": {
+                "action": "replace_utf8",
+                "actor": "S-1-15-2-2086663351-2464250026-3352983820-4027703349-657786476-1496489968-1751437155",
+                "content_sha256": "b06d8a7841ac7bd5916bf8a92bad3117cfa5de3bbeab6238f00afc842ef62982",
+                "expires_at": 1030,
+                "nonce": "demo-allow",
+                "policy_version": "guardian.demo.v05",
+                "resource": "synthetic-source",
+                "scope": "whole-file-laboratory"
+              },
+              "status": "VERIFIED"
+            },
+            "execution": "LOCAL_WRITE_OBSERVED",
+            "external_execution": "UNVERIFIABLE",
+            "policy": {
+              "action": "replace_utf8",
+              "actors": [
+                "S-1-15-2-2086663351-2464250026-3352983820-4027703349-657786476-1496489968-1751437155"
+              ],
+              "content_prefix": "approved:",
+              "max_bytes": 128,
+              "max_ttl": 60,
+              "resource": "synthetic-source",
+              "schema": "guardian.policy.v0",
+              "scope": "whole-file-laboratory",
+              "version": "guardian.demo.v05"
+            },
+            "policy_sha256": "9f23d1d4d57229574f69ff9a526639df432b7c2a4e8760478c53efe9f87c17e1",
+            "principal": "S-1-15-2-2086663351-2464250026-3352983820-4027703349-657786476-1496489968-1751437155",
+            "profile": "guardian.local-file.v02",
+            "request": {
+              "action": "replace_utf8",
+              "actor": "S-1-15-2-2086663351-2464250026-3352983820-4027703349-657786476-1496489968-1751437155",
+              "content": "approved:demo-source",
+              "evidence": {
+                "before_sha256": "da68f54607d5f5644954096ce1597c006c5bb9f2497e07441bf064b81003ef8a"
+              },
+              "expires_at": 1030,
+              "nonce": "demo-allow",
+              "policy_version": "guardian.demo.v05",
+              "resource": "synthetic-source",
+              "schema": "guardian.action.v0",
+              "scope": "whole-file-laboratory"
+            },
+            "request_sha256": "034a13aa05b29cc591b7e9dc1b3bc8b4096f42f28c19da42af1f074cd55d15dc",
+            "resource_identity": [
+              2830515730,
+              65536,
+              1232768
+            ],
+            "used_nonces": [],
+            "verification_time": 1000
+          },
+          "previous": "0000000000000000000000000000000000000000000000000000000000000000",
+          "schema": "guardian.evidence.v0",
+          "sha256": "063ae09d76301f0d5ea797b623632fbb3d8c3e3b67f9f99c13eb4e9e42e394f9"
+        },
+        "scope": {
+          "action": "replace_utf8",
+          "actor": "S-1-15-2-2086663351-2464250026-3352983820-4027703349-657786476-1496489968-1751437155",
+          "content_sha256": "b06d8a7841ac7bd5916bf8a92bad3117cfa5de3bbeab6238f00afc842ef62982",
+          "expires_at": 1030,
+          "nonce": "demo-allow",
+          "policy_version": "guardian.demo.v05",
+          "resource": "synthetic-source",
+          "scope": "whole-file-laboratory"
+        },
+        "status": "VERIFIED"
+      },
+      "server_exit": 0
+    },
+    "BYPASS": {
+      "after": {
+        "config": {
+          "hex": "7b2273796e746865746963223a747275652c2270726f746563746564223a747275657d0a",
+          "identity": [
+            2830515730,
+            65536,
+            1232815
+          ],
+          "sha256": "860a4bfc3f5a657ae47a0520aa1c60ac649c7f711f0100e17097a93de1915f24"
+        },
+        "policy": {
+          "hex": "7b22616374696f6e223a227265706c6163655f75746638222c226163746f7273223a5b22532d312d31352d322d323038363636333335312d323436343235303032362d333335323938333832302d343032373730333334392d3635373738363437362d313439363438393936382d31373531343337313535225d2c22636f6e74656e745f707265666978223a22617070726f7665643a222c226d61785f6279746573223a3132382c226d61785f74746c223a36302c227265736f75726365223a2273796e7468657469632d736f75726365222c22736368656d61223a22677561726469616e2e706f6c6963792e7630222c2273636f7065223a2277686f6c652d66696c652d6c61626f7261746f7279222c2276657273696f6e223a22677561726469616e2e64656d6f2e763035227d",
+          "identity": [
+            2830515730,
+            65536,
+            1232769
+          ],
+          "sha256": "9f23d1d4d57229574f69ff9a526639df432b7c2a4e8760478c53efe9f87c17e1"
+        },
+        "secret": {
+          "hex": "5055424c49432d53594e5448455449432d4e4f542d412d43524544454e5449414c0a",
+          "identity": [
+            2830515730,
+            65536,
+            1232816
+          ],
+          "sha256": "ccef527f9e6e0e48f81dd2a23b076238e28315b73284bc04f96e043e47f6f9f2"
+        },
+        "source": {
+          "hex": "617070726f7665643a64656d6f2d736f75726365",
+          "identity": [
+            2830515730,
+            65536,
+            1232768
+          ],
+          "sha256": "b06d8a7841ac7bd5916bf8a92bad3117cfa5de3bbeab6238f00afc842ef62982"
+        }
+      },
+      "attempts": [
+        {
+          "operation": "write",
+          "result": "OS_REJECTED",
+          "winerror": 5
+        },
+        {
+          "operation": "delete",
+          "result": "OS_REJECTED",
+          "winerror": 5
+        },
+        {
+          "operation": "rename",
+          "result": "OS_REJECTED",
+          "winerror": 5
+        },
+        {
+          "operation": "write",
+          "result": "OS_REJECTED",
+          "winerror": 5
+        },
+        {
+          "operation": "write",
+          "result": "OS_REJECTED",
+          "winerror": 5
+        },
+        {
+          "operation": "read",
+          "result": "OS_REJECTED",
+          "winerror": 5
+        }
+      ],
+      "before": {
+        "config": {
+          "hex": "7b2273796e746865746963223a747275652c2270726f746563746564223a747275657d0a",
+          "identity": [
+            2830515730,
+            65536,
+            1232815
+          ],
+          "sha256": "860a4bfc3f5a657ae47a0520aa1c60ac649c7f711f0100e17097a93de1915f24"
+        },
+        "policy": {
+          "hex": "7b22616374696f6e223a227265706c6163655f75746638222c226163746f7273223a5b22532d312d31352d322d323038363636333335312d323436343235303032362d333335323938333832302d343032373730333334392d3635373738363437362d313439363438393936382d31373531343337313535225d2c22636f6e74656e745f707265666978223a22617070726f7665643a222c226d61785f6279746573223a3132382c226d61785f74746c223a36302c227265736f75726365223a2273796e7468657469632d736f75726365222c22736368656d61223a22677561726469616e2e706f6c6963792e7630222c2273636f7065223a2277686f6c652d66696c652d6c61626f7261746f7279222c2276657273696f6e223a22677561726469616e2e64656d6f2e763035227d",
+          "identity": [
+            2830515730,
+            65536,
+            1232769
+          ],
+          "sha256": "9f23d1d4d57229574f69ff9a526639df432b7c2a4e8760478c53efe9f87c17e1"
+        },
+        "secret": {
+          "hex": "5055424c49432d53594e5448455449432d4e4f542d412d43524544454e5449414c0a",
+          "identity": [
+            2830515730,
+            65536,
+            1232816
+          ],
+          "sha256": "ccef527f9e6e0e48f81dd2a23b076238e28315b73284bc04f96e043e47f6f9f2"
+        },
+        "source": {
+          "hex": "617070726f7665643a64656d6f2d736f75726365",
+          "identity": [
+            2830515730,
+            65536,
+            1232768
+          ],
+          "sha256": "b06d8a7841ac7bd5916bf8a92bad3117cfa5de3bbeab6238f00afc842ef62982"
+        }
+      },
+      "scratch_positive": true
+    },
+    "DENY": {
+      "after": {
+        "config": {
+          "hex": "7b2273796e746865746963223a747275652c2270726f746563746564223a747275657d0a",
+          "identity": [
+            2830515730,
+            65536,
+            1232815
+          ],
+          "sha256": "860a4bfc3f5a657ae47a0520aa1c60ac649c7f711f0100e17097a93de1915f24"
+        },
+        "policy": {
+          "hex": "7b22616374696f6e223a227265706c6163655f75746638222c226163746f7273223a5b22532d312d31352d322d323038363636333335312d323436343235303032362d333335323938333832302d343032373730333334392d3635373738363437362d313439363438393936382d31373531343337313535225d2c22636f6e74656e745f707265666978223a22617070726f7665643a222c226d61785f6279746573223a3132382c226d61785f74746c223a36302c227265736f75726365223a2273796e7468657469632d736f75726365222c22736368656d61223a22677561726469616e2e706f6c6963792e7630222c2273636f7065223a2277686f6c652d66696c652d6c61626f7261746f7279222c2276657273696f6e223a22677561726469616e2e64656d6f2e763035227d",
+          "identity": [
+            2830515730,
+            65536,
+            1232769
+          ],
+          "sha256": "9f23d1d4d57229574f69ff9a526639df432b7c2a4e8760478c53efe9f87c17e1"
+        },
+        "secret": {
+          "hex": "5055424c49432d53594e5448455449432d4e4f542d412d43524544454e5449414c0a",
+          "identity": [
+            2830515730,
+            65536,
+            1232816
+          ],
+          "sha256": "ccef527f9e6e0e48f81dd2a23b076238e28315b73284bc04f96e043e47f6f9f2"
+        },
+        "source": {
+          "hex": "617070726f7665643a64656d6f2d736f75726365",
+          "identity": [
+            2830515730,
+            65536,
+            1232768
+          ],
+          "sha256": "b06d8a7841ac7bd5916bf8a92bad3117cfa5de3bbeab6238f00afc842ef62982"
+        }
+      },
+      "before": {
+        "config": {
+          "hex": "7b2273796e746865746963223a747275652c2270726f746563746564223a747275657d0a",
+          "identity": [
+            2830515730,
+            65536,
+            1232815
+          ],
+          "sha256": "860a4bfc3f5a657ae47a0520aa1c60ac649c7f711f0100e17097a93de1915f24"
+        },
+        "policy": {
+          "hex": "7b22616374696f6e223a227265706c6163655f75746638222c226163746f7273223a5b22532d312d31352d322d323038363636333335312d323436343235303032362d333335323938333832302d343032373730333334392d3635373738363437362d313439363438393936382d31373531343337313535225d2c22636f6e74656e745f707265666978223a22617070726f7665643a222c226d61785f6279746573223a3132382c226d61785f74746c223a36302c227265736f75726365223a2273796e7468657469632d736f75726365222c22736368656d61223a22677561726469616e2e706f6c6963792e7630222c2273636f7065223a2277686f6c652d66696c652d6c61626f7261746f7279222c2276657273696f6e223a22677561726469616e2e64656d6f2e763035227d",
+          "identity": [
+            2830515730,
+            65536,
+            1232769
+          ],
+          "sha256": "9f23d1d4d57229574f69ff9a526639df432b7c2a4e8760478c53efe9f87c17e1"
+        },
+        "secret": {
+          "hex": "5055424c49432d53594e5448455449432d4e4f542d412d43524544454e5449414c0a",
+          "identity": [
+            2830515730,
+            65536,
+            1232816
+          ],
+          "sha256": "ccef527f9e6e0e48f81dd2a23b076238e28315b73284bc04f96e043e47f6f9f2"
+        },
+        "source": {
+          "hex": "617070726f7665643a64656d6f2d736f75726365",
+          "identity": [
+            2830515730,
+            65536,
+            1232768
+          ],
+          "sha256": "b06d8a7841ac7bd5916bf8a92bad3117cfa5de3bbeab6238f00afc842ef62982"
+        }
+      },
+      "ipc_identity": {
+        "appcontainer": true,
+        "appcontainer_sid": "S-1-15-2-2086663351-2464250026-3352983820-4027703349-657786476-1496489968-1751437155",
+        "capability_count": 0,
+        "elevated": false,
+        "impersonation_level": 1,
+        "integrity_sid": "S-1-16-4096",
+        "user_sha256": "2fe1ac64678a911a232a386c32c34a250891a53a3fdbff7ca63882cf9ef06f41"
+      },
+      "request": {
+        "policy_sha256": "9f23d1d4d57229574f69ff9a526639df432b7c2a4e8760478c53efe9f87c17e1",
+        "request": {
+          "action": "replace_utf8",
+          "actor": "S-1-15-2-2086663351-2464250026-3352983820-4027703349-657786476-1496489968-1751437155",
+          "content": "approved:unauthorized",
+          "evidence": {
+            "before_sha256": "b06d8a7841ac7bd5916bf8a92bad3117cfa5de3bbeab6238f00afc842ef62982"
+          },
+          "expires_at": 1030,
+          "nonce": "demo-deny",
+          "policy_version": "guardian.demo.v05",
+          "resource": "protected-config",
+          "schema": "guardian.action.v0",
+          "scope": "whole-file-laboratory"
+        },
+        "schema": "guardian.ipc.v02"
+      },
+      "response": {
+        "decision": "DENY",
+        "execution": "NOT_EXECUTED",
+        "reason": "RESOURCE",
+        "scope": null,
+        "status": "REFUTED"
+      },
+      "server_exit": 0
+    },
+    "POLICY_CHANGE": {
+      "after": {
+        "config": {
+          "hex": "7b2273796e746865746963223a747275652c2270726f746563746564223a747275657d0a",
+          "identity": [
+            2830515730,
+            65536,
+            1232815
+          ],
+          "sha256": "860a4bfc3f5a657ae47a0520aa1c60ac649c7f711f0100e17097a93de1915f24"
+        },
+        "policy": {
+          "hex": "7b22616374696f6e223a227265706c6163655f75746638222c226163746f7273223a5b5d2c22636f6e74656e745f707265666978223a22617070726f7665643a222c226d61785f6279746573223a3132382c226d61785f74746c223a36302c227265736f75726365223a2273796e7468657469632d736f75726365222c22736368656d61223a22677561726469616e2e706f6c6963792e7630222c2273636f7065223a2277686f6c652d66696c652d6c61626f7261746f7279222c2276657273696f6e223a22677561726469616e2e64656d6f2e763035227d",
+          "identity": [
+            2830515730,
+            65536,
+            1232769
+          ],
+          "sha256": "123a05dd4c6f5eacab49f632bce57192139383189e6abbe360ca5bdff65f186a"
+        },
+        "secret": {
+          "hex": "5055424c49432d53594e5448455449432d4e4f542d412d43524544454e5449414c0a",
+          "identity": [
+            2830515730,
+            65536,
+            1232816
+          ],
+          "sha256": "ccef527f9e6e0e48f81dd2a23b076238e28315b73284bc04f96e043e47f6f9f2"
+        },
+        "source": {
+          "hex": "617070726f7665643a64656d6f2d736f75726365",
+          "identity": [
+            2830515730,
+            65536,
+            1232768
+          ],
+          "sha256": "b06d8a7841ac7bd5916bf8a92bad3117cfa5de3bbeab6238f00afc842ef62982"
+        }
+      },
+      "before": {
+        "config": {
+          "hex": "7b2273796e746865746963223a747275652c2270726f746563746564223a747275657d0a",
+          "identity": [
+            2830515730,
+            65536,
+            1232815
+          ],
+          "sha256": "860a4bfc3f5a657ae47a0520aa1c60ac649c7f711f0100e17097a93de1915f24"
+        },
+        "policy": {
+          "hex": "7b22616374696f6e223a227265706c6163655f75746638222c226163746f7273223a5b5d2c22636f6e74656e745f707265666978223a22617070726f7665643a222c226d61785f6279746573223a3132382c226d61785f74746c223a36302c227265736f75726365223a2273796e7468657469632d736f75726365222c22736368656d61223a22677561726469616e2e706f6c6963792e7630222c2273636f7065223a2277686f6c652d66696c652d6c61626f7261746f7279222c2276657273696f6e223a22677561726469616e2e64656d6f2e763035227d",
+          "identity": [
+            2830515730,
+            65536,
+            1232769
+          ],
+          "sha256": "123a05dd4c6f5eacab49f632bce57192139383189e6abbe360ca5bdff65f186a"
+        },
+        "secret": {
+          "hex": "5055424c49432d53594e5448455449432d4e4f542d412d43524544454e5449414c0a",
+          "identity": [
+            2830515730,
+            65536,
+            1232816
+          ],
+          "sha256": "ccef527f9e6e0e48f81dd2a23b076238e28315b73284bc04f96e043e47f6f9f2"
+        },
+        "source": {
+          "hex": "617070726f7665643a64656d6f2d736f75726365",
+          "identity": [
+            2830515730,
+            65536,
+            1232768
+          ],
+          "sha256": "b06d8a7841ac7bd5916bf8a92bad3117cfa5de3bbeab6238f00afc842ef62982"
+        }
+      },
+      "ipc_identity": {
+        "appcontainer": true,
+        "appcontainer_sid": "S-1-15-2-2086663351-2464250026-3352983820-4027703349-657786476-1496489968-1751437155",
+        "capability_count": 0,
+        "elevated": false,
+        "impersonation_level": 1,
+        "integrity_sid": "S-1-16-4096",
+        "user_sha256": "2fe1ac64678a911a232a386c32c34a250891a53a3fdbff7ca63882cf9ef06f41"
+      },
+      "request": {
+        "policy_sha256": "123a05dd4c6f5eacab49f632bce57192139383189e6abbe360ca5bdff65f186a",
+        "request": {
+          "action": "replace_utf8",
+          "actor": "S-1-15-2-2086663351-2464250026-3352983820-4027703349-657786476-1496489968-1751437155",
+          "content": "approved:revoked",
+          "evidence": {
+            "before_sha256": "b06d8a7841ac7bd5916bf8a92bad3117cfa5de3bbeab6238f00afc842ef62982"
+          },
+          "expires_at": 1030,
+          "nonce": "demo-policy-change",
+          "policy_version": "guardian.demo.v05",
+          "resource": "synthetic-source",
+          "schema": "guardian.action.v0",
+          "scope": "whole-file-laboratory"
+        },
+        "schema": "guardian.ipc.v02"
+      },
+      "response": {
+        "decision": "DENY",
+        "execution": "NOT_EXECUTED",
+        "reason": "ACTOR",
+        "scope": null,
+        "status": "REFUTED"
+      },
+      "server_exit": 0
+    },
+    "RECOVERY": {
+      "after": {
+        "config": {
+          "hex": "7b2273796e746865746963223a747275652c2270726f746563746564223a747275657d0a",
+          "identity": [
+            2830515730,
+            65536,
+            1232815
+          ],
+          "sha256": "860a4bfc3f5a657ae47a0520aa1c60ac649c7f711f0100e17097a93de1915f24"
+        },
+        "policy": {
+          "hex": "7b22616374696f6e223a227265706c6163655f75746638222c226163746f7273223a5b22532d312d31352d322d323038363636333335312d323436343235303032362d333335323938333832302d343032373730333334392d3635373738363437362d313439363438393936382d31373531343337313535225d2c22636f6e74656e745f707265666978223a22617070726f7665643a222c226d61785f6279746573223a3132382c226d61785f74746c223a36302c227265736f75726365223a2273796e7468657469632d736f75726365222c22736368656d61223a22677561726469616e2e706f6c6963792e7630222c2273636f7065223a2277686f6c652d66696c652d6c61626f7261746f7279222c2276657273696f6e223a22677561726469616e2e64656d6f2e763035227d",
+          "identity": [
+            2830515730,
+            65536,
+            1232769
+          ],
+          "sha256": "9f23d1d4d57229574f69ff9a526639df432b7c2a4e8760478c53efe9f87c17e1"
+        },
+        "secret": {
+          "hex": "5055424c49432d53594e5448455449432d4e4f542d412d43524544454e5449414c0a",
+          "identity": [
+            2830515730,
+            65536,
+            1232816
+          ],
+          "sha256": "ccef527f9e6e0e48f81dd2a23b076238e28315b73284bc04f96e043e47f6f9f2"
+        },
+        "source": {
+          "hex": "617070726f7665643a616d626967756f7573",
+          "identity": [
+            2830515730,
+            65536,
+            1232768
+          ],
+          "sha256": "210e53ef54e1eea9e28b0b5da21bacac408ea5163df5f5fac2339f698ca7d04a"
+        }
+      },
+      "before": {
+        "config": {
+          "hex": "7b2273796e746865746963223a747275652c2270726f746563746564223a747275657d0a",
+          "identity": [
+            2830515730,
+            65536,
+            1232815
+          ],
+          "sha256": "860a4bfc3f5a657ae47a0520aa1c60ac649c7f711f0100e17097a93de1915f24"
+        },
+        "policy": {
+          "hex": "7b22616374696f6e223a227265706c6163655f75746638222c226163746f7273223a5b22532d312d31352d322d323038363636333335312d323436343235303032362d333335323938333832302d343032373730333334392d3635373738363437362d313439363438393936382d31373531343337313535225d2c22636f6e74656e745f707265666978223a22617070726f7665643a222c226d61785f6279746573223a3132382c226d61785f74746c223a36302c227265736f75726365223a2273796e7468657469632d736f75726365222c22736368656d61223a22677561726469616e2e706f6c6963792e7630222c2273636f7065223a2277686f6c652d66696c652d6c61626f7261746f7279222c2276657273696f6e223a22677561726469616e2e64656d6f2e763035227d",
+          "identity": [
+            2830515730,
+            65536,
+            1232769
+          ],
+          "sha256": "9f23d1d4d57229574f69ff9a526639df432b7c2a4e8760478c53efe9f87c17e1"
+        },
+        "secret": {
+          "hex": "5055424c49432d53594e5448455449432d4e4f542d412d43524544454e5449414c0a",
+          "identity": [
+            2830515730,
+            65536,
+            1232816
+          ],
+          "sha256": "ccef527f9e6e0e48f81dd2a23b076238e28315b73284bc04f96e043e47f6f9f2"
+        },
+        "source": {
+          "hex": "617070726f7665643a64656d6f2d736f75726365",
+          "identity": [
+            2830515730,
+            65536,
+            1232768
+          ],
+          "sha256": "b06d8a7841ac7bd5916bf8a92bad3117cfa5de3bbeab6238f00afc842ef62982"
+        }
+      },
+      "ipc_identity": {
+        "appcontainer": true,
+        "appcontainer_sid": "S-1-15-2-2086663351-2464250026-3352983820-4027703349-657786476-1496489968-1751437155",
+        "capability_count": 0,
+        "elevated": false,
+        "impersonation_level": 1,
+        "integrity_sid": "S-1-16-4096",
+        "user_sha256": "2fe1ac64678a911a232a386c32c34a250891a53a3fdbff7ca63882cf9ef06f41"
+      },
+      "journal_state": "PREPARED",
+      "request": {
+        "policy_sha256": "9f23d1d4d57229574f69ff9a526639df432b7c2a4e8760478c53efe9f87c17e1",
+        "request": {
+          "action": "replace_utf8",
+          "actor": "S-1-15-2-2086663351-2464250026-3352983820-4027703349-657786476-1496489968-1751437155",
+          "content": "approved:ambiguous",
+          "evidence": {
+            "before_sha256": "b06d8a7841ac7bd5916bf8a92bad3117cfa5de3bbeab6238f00afc842ef62982"
+          },
+          "expires_at": 1030,
+          "nonce": "demo-recovery",
+          "policy_version": "guardian.demo.v05",
+          "resource": "synthetic-source",
+          "schema": "guardian.action.v0",
+          "scope": "whole-file-laboratory"
+        },
+        "schema": "guardian.ipc.v02"
+      },
+      "response": {
+        "decision": "DENY",
+        "execution": "RECOVERY_REQUIRED",
+        "failure_stage": "WRITTEN",
+        "reason": "EXECUTION_OUTCOME_UNCERTAIN",
+        "retry_permitted": false,
+        "scope": null,
+        "status": "UNVERIFIABLE"
+      },
+      "server_exit": 0
+    }
+  },
+  "policy": {
+    "action": "replace_utf8",
+    "actors": [
+      "S-1-15-2-2086663351-2464250026-3352983820-4027703349-657786476-1496489968-1751437155"
+    ],
+    "content_prefix": "approved:",
+    "max_bytes": 128,
+    "max_ttl": 60,
+    "resource": "synthetic-source",
+    "schema": "guardian.policy.v0",
+    "scope": "whole-file-laboratory",
+    "version": "guardian.demo.v05"
+  },
+  "policy_sha256": "9f23d1d4d57229574f69ff9a526639df432b7c2a4e8760478c53efe9f87c17e1",
+  "real_agent_status": "NOT_COVERED",
+  "schema": "guardian.demo-observations.v05"
+}

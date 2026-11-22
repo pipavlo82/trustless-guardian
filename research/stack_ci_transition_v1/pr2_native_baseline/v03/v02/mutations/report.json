@@ -1,0 +1,114 @@
+{
+  "counts": {
+    "CONTROL_BROKEN": 0,
+    "CRASHED": 0,
+    "KILLED": 11,
+    "NOT_APPLIED": 0,
+    "SURVIVED": 0
+  },
+  "meaning": "finite selected boundaries; historic v0 15 controls are a separate population",
+  "mutants": [
+    {
+      "applied": true,
+      "classification": "KILLED",
+      "id": "envelope_pin",
+      "mutated_sha256": "cb6b678ceb2dd07be8286817af46606d2bc905fdc5b1d5b62ca0361a3641d7a7",
+      "original_sha256": "9d1c969af99ee3d842c86d0e3f0db035766c8ab9a4053057a054ebe688852f99",
+      "restored_byte_exact": true,
+      "source": "guardian/protocol.py"
+    },
+    {
+      "applied": true,
+      "classification": "KILLED",
+      "id": "caller_identity",
+      "mutated_sha256": "772b80ed5bc3eead19e4e410c8e6203aae0c63ddc9ada1b6ade3a928387b04b3",
+      "original_sha256": "e39750cb85b8fc02313b57e611c0b90ea1eba3b3c6d23caf506712de42c88757",
+      "restored_byte_exact": true,
+      "source": "guardian/ipc.py"
+    },
+    {
+      "applied": true,
+      "classification": "KILLED",
+      "id": "server_identity",
+      "mutated_sha256": "772b09bbe3805d141d1e20b5255ef8aeddf09d7ceb99b5a5b122deafd4cc0554",
+      "original_sha256": "e39750cb85b8fc02313b57e611c0b90ea1eba3b3c6d23caf506712de42c88757",
+      "restored_byte_exact": true,
+      "source": "guardian/ipc.py"
+    },
+    {
+      "applied": true,
+      "classification": "KILLED",
+      "id": "policy_pin",
+      "mutated_sha256": "0b0df4f7438fe348e471e22ca3dff1ae1a0248c8dcfe66b0e49e8af8fcb95e97",
+      "original_sha256": "e2084614efe452c35533815de52de1508b6ab119b5e3395a47e29789c43f75c0",
+      "restored_byte_exact": true,
+      "source": "guardian/hardened.py"
+    },
+    {
+      "applied": true,
+      "classification": "KILLED",
+      "id": "resource_identity",
+      "mutated_sha256": "6f62abbd2c6be826f8937c96d54436e6d73301f53d2215ca38035c6f033f3d20",
+      "original_sha256": "e2084614efe452c35533815de52de1508b6ab119b5e3395a47e29789c43f75c0",
+      "restored_byte_exact": true,
+      "source": "guardian/hardened.py"
+    },
+    {
+      "applied": true,
+      "classification": "KILLED",
+      "id": "directory_identity",
+      "mutated_sha256": "85744b69a94e65055839f59f6c23713b2d0e377fbca22e39541db2f19ddbc053",
+      "original_sha256": "e2084614efe452c35533815de52de1508b6ab119b5e3395a47e29789c43f75c0",
+      "restored_byte_exact": true,
+      "source": "guardian/hardened.py"
+    },
+    {
+      "applied": true,
+      "classification": "KILLED",
+      "id": "enforcement",
+      "mutated_sha256": "05901855d7de87cf045265c2cdbc9653901a96d32baed24f228225b690b95780",
+      "original_sha256": "e2084614efe452c35533815de52de1508b6ab119b5e3395a47e29789c43f75c0",
+      "restored_byte_exact": true,
+      "source": "guardian/hardened.py"
+    },
+    {
+      "applied": true,
+      "classification": "KILLED",
+      "id": "recovery_gate",
+      "mutated_sha256": "eda62ea0c2ea422ed2e4dc76c75887047493621106cde81a5c6935d3df14375d",
+      "original_sha256": "e2084614efe452c35533815de52de1508b6ab119b5e3395a47e29789c43f75c0",
+      "restored_byte_exact": true,
+      "source": "guardian/hardened.py"
+    },
+    {
+      "applied": true,
+      "classification": "KILLED",
+      "id": "filetype",
+      "mutated_sha256": "d89583de1cffa4177dfa17e8e537c8d1558d65028331202bcdebcef195ef22e2",
+      "original_sha256": "edca1956b4abbace1a7ae569173008d105c979e90a8d94380d7ab457fdfc20a6",
+      "restored_byte_exact": true,
+      "source": "guardian/broker.py"
+    },
+    {
+      "applied": true,
+      "classification": "KILLED",
+      "id": "acl",
+      "mutated_sha256": "36bdca2b95d65d0fb3e5f6ebd1b8aeecb1ce218ccd92fd9f8d54f603052fc030",
+      "original_sha256": "150c68d23422369926819400f56b27a29cbbdecdbbb1510f2056afc36af53f17",
+      "restored_byte_exact": true,
+      "source": "tools/v02_lab.py"
+    },
+    {
+      "applied": true,
+      "classification": "KILLED",
+      "id": "journal_state",
+      "mutated_sha256": "8d660e16924b961ebdb488b67321a489557538169dce313699e1bdf3a524aab2",
+      "original_sha256": "473a0b58079e88513527521119b149571010955a75a4211dac3a222c5619aaf6",
+      "restored_byte_exact": true,
+      "source": "guardian/recovery.py"
+    }
+  ],
+  "passed": true,
+  "schema": "guardian.mutations.v02",
+  "seconds": 126.62383569998201
+}

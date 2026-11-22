@@ -1,0 +1,15 @@
+{
+  "base": "299487d7d7884b2cb2adc7df86b6485ee18daba7",
+  "core_sha256": "6bb44b71c62f54a3e1da2c11c73de5cf33766b8146c9c73f67711b9c07f0f1f6",
+  "dependency_scope": "local trusted-host synthetic lab; no external SDK or customer data",
+  "image": {
+    "build": "cc -O2 -static -o worker worker.c -lcrypto -ldl -pthread",
+    "image": "sha256:c7363bd6adf6d1465f0057c1c1f73586fd16e55eeec614b6e670d00989c43059",
+    "scope": "local-synthetic-only",
+    "worker_sha256": "aea1148ecbdae6159656e83bf418eee0cd4b8b77c0716bde38e8721cfc4a48c3",
+    "worker_source_sha256": "76610a80c9f50d8f7456b895e9982fe22ab4d14676d9a7600e2cbfdba5e04f15"
+  },
+  "main_observed": "76a76ad6f6f6d661e0a00b49236e2ad247429271",
+  "repository": "https://github.com/pipavlo82/trustless-guardian",
+  "requirements_sha256": "8e8ef602eff67f90dd874b8e0980506497a58a7efa067d846c099a585b770b60"
+}

@@ -1,0 +1,100 @@
+[
+  {
+    "identity": {
+      "appcontainer": true,
+      "appcontainer_sid": "S-1-15-2-1829955224-2381990708-2747792818-2416284121-1155476183-2817497484-549671904",
+      "capability_count": 0,
+      "elevated": false,
+      "impersonation_level": 1,
+      "integrity_sid": "S-1-16-4096",
+      "user_sha256": "2fe1ac64678a911a232a386c32c34a250891a53a3fdbff7ca63882cf9ef06f41"
+    },
+    "request_sha256": "2ff8c2bc21a97131faf42b91e792170f2c14ed9dafd2d3ead241fdc55414bae7",
+    "response": {
+      "decision": "ALLOW",
+      "execution": "COMMITTED",
+      "reason": "EXACT_POLICY_MATCH",
+      "receipt": {
+        "body": {
+          "after_base64": "YXBwcm92ZWQ6cG9zaXRpdmU=",
+          "after_sha256": "e79a792393c71088b51660d4d2b9fde4b0070f6c0c84e3e3839b64995f113ca5",
+          "before_base64": "aW5pdGlhbAo=",
+          "before_sha256": "da68f54607d5f5644954096ce1597c006c5bb9f2497e07441bf064b81003ef8a",
+          "decision": {
+            "decision": "ALLOW",
+            "reason": "EXACT_POLICY_MATCH",
+            "scope": {
+              "action": "replace_utf8",
+              "actor": "S-1-15-2-1829955224-2381990708-2747792818-2416284121-1155476183-2817497484-549671904",
+              "content_sha256": "e79a792393c71088b51660d4d2b9fde4b0070f6c0c84e3e3839b64995f113ca5",
+              "expires_at": 1030,
+              "nonce": "positive",
+              "policy_version": "guardian.local-file.v0",
+              "resource": "sample",
+              "scope": "whole-file-laboratory"
+            },
+            "status": "VERIFIED"
+          },
+          "execution": "LOCAL_WRITE_OBSERVED",
+          "external_execution": "UNVERIFIABLE",
+          "policy": {
+            "action": "replace_utf8",
+            "actors": [
+              "S-1-15-2-1829955224-2381990708-2747792818-2416284121-1155476183-2817497484-549671904"
+            ],
+            "content_prefix": "approved:",
+            "max_bytes": 128,
+            "max_ttl": 60,
+            "resource": "sample",
+            "schema": "guardian.policy.v0",
+            "scope": "whole-file-laboratory",
+            "version": "guardian.local-file.v0"
+          },
+          "policy_sha256": "6785422854c00a745aaff2b4e900a9d941001b78ceb256de2372dd889f05e243",
+          "principal": "S-1-15-2-1829955224-2381990708-2747792818-2416284121-1155476183-2817497484-549671904",
+          "profile": "guardian.local-file.v02",
+          "request": {
+            "action": "replace_utf8",
+            "actor": "S-1-15-2-1829955224-2381990708-2747792818-2416284121-1155476183-2817497484-549671904",
+            "content": "approved:positive",
+            "evidence": {
+              "before_sha256": "da68f54607d5f5644954096ce1597c006c5bb9f2497e07441bf064b81003ef8a"
+            },
+            "expires_at": 1030,
+            "nonce": "positive",
+            "policy_version": "guardian.local-file.v0",
+            "resource": "sample",
+            "schema": "guardian.action.v0",
+            "scope": "whole-file-laboratory"
+          },
+          "request_sha256": "649298c8589518083912eef76800ff306b6e79dbee8936142f0536769f767357",
+          "resource_identity": [
+            2830515730,
+            65536,
+            3155923
+          ],
+          "used_nonces": [],
+          "verification_time": 1000
+        },
+        "previous": "0000000000000000000000000000000000000000000000000000000000000000",
+        "schema": "guardian.evidence.v0",
+        "sha256": "a3d08555aec56757dea2c8c1405177cef742c54bf54c18c33e503efddab40e71"
+      },
+      "scope": {
+        "action": "replace_utf8",
+        "actor": "S-1-15-2-1829955224-2381990708-2747792818-2416284121-1155476183-2817497484-549671904",
+        "content_sha256": "e79a792393c71088b51660d4d2b9fde4b0070f6c0c84e3e3839b64995f113ca5",
+        "expires_at": 1030,
+        "nonce": "positive",
+        "policy_version": "guardian.local-file.v0",
+        "resource": "sample",
+        "scope": "whole-file-laboratory"
+      },
+      "status": "VERIFIED"
+    },
+    "thread_after_auth": {
+      "present": false,
+      "winerror": 1008
+    }
+  }
+]

@@ -1,0 +1,679 @@
+{
+  "artifacts": {
+    "v04-cold-replay.zip": "8d68cb94cccd6eccbe61b25c5ecfb6c89b2f62f33bda5ee1ea8ef1df338f445b",
+    "v04-hosted-diagnostics.zip": "adbc7cfda0070a35dbb7af70c074671c602d6dfabdb621bf494fff9cb98ee95b",
+    "v04-originals-and-diagnostics.zip": "31433ba3108405008e616e3b4cdac00b5d3e40964ae81ec140a9d7dcdc7e2f28"
+  },
+  "branch": "research/guardian-enforcement-v0",
+  "ci": {
+    "accounts_created": false,
+    "creation_failure_isolation": {
+      "distinguishing_handle": "0x18b",
+      "original_error": 5,
+      "original_handle": "0x8b",
+      "token_security_properties_unchanged": true
+    },
+    "desktop_read_access": true,
+    "existing_acl_changes": false,
+    "explicit_current_desktop_did_not_resolve": true,
+    "head": "a4193593252864a7201b811682d47485ea3722f6",
+    "hosted_enforcement": "NOT_COVERED",
+    "portable": "SUCCESS",
+    "pr_run": 40210319213,
+    "privileges_enabled": false,
+    "push_run": 40210315112,
+    "python_started": false,
+    "reduced_child_created": true,
+    "remaining_blocker": "LIMITED_CHILD_STARTUP_NOT_OBSERVED; cmd and Python remain STILL_ACTIVE after resume, thread waits for LPC reply; deeper cause UNVERIFIABLE",
+    "resume_previous_count": 1,
+    "status": "CI_BLOCKED"
+  },
+  "defects": [
+    {
+      "finding": "Unexpected ordinary exception after real permitted write became NOT_EXECUTED through legacy dispatch",
+      "fixed_witness": "runtime_after_write",
+      "id": "G04-01"
+    },
+    {
+      "finding": "Same-nonce restart with ambiguous durable state returned NOT_EXECUTED",
+      "fixed_witness": "crash_written",
+      "id": "G04-02"
+    }
+  ],
+  "delivery_sha": "See the Git commit containing this inventory; no self-referential commit hash is invented.",
+  "execution_claim": "LABORATORY_VERIFIED for finite local Windows filesystem controls",
+  "external_execution": "UNVERIFIABLE",
+  "files_changed_from_start": [
+    ".github/workflows/guardian.yml",
+    "README.md",
+    "artifacts.sha256.json",
+    "docs/CRASH_RECOVERY.md",
+    "docs/SECURITY_BOUNDARIES.md",
+    "docs/WINDOWS_REPLAY_PROTOCOL.md",
+    "evidence/README.md",
+    "evidence/v04-cold-replay.inventory.json",
+    "evidence/v04-cold-replay.zip",
+    "evidence/v04-originals-and-diagnostics.inventory.json",
+    "evidence/v04-originals-and-diagnostics.zip",
+    "guardian/dispatch.py",
+    "guardian/hardened.py",
+    "research/V04_CONFORMANCE_RESULTS.md",
+    "research/V04_EXECUTION_OUTCOME_AUDIT.md",
+    "research/V04_IMPERSONATION_WITNESS.md",
+    "research/V04_INDEPENDENT_REPLAY.md",
+    "research/V04_MUTATION_REPORT.md",
+    "research/V04_SECURITY_GAP_AUDIT.md",
+    "research/V04_WINDOWS_CI_DIAGNOSIS.md",
+    "tests/test_v04.py",
+    "tools/ci_entry.py",
+    "tools/v04_campaign.py",
+    "tools/v04_ci_probe.py",
+    "tools/v04_mutations.py",
+    "tools/v04_native.py",
+    "tools/v04_oracle.py",
+    "tools/v04_startup_probe.py",
+    "tools/v04_token_probe.py",
+    "tools/v04_worker.py",
+    "tools/validate_v04.py",
+    "research/V04_SUMMARY.json",
+    "evidence/v04-hosted-diagnostics.zip",
+    "evidence/v04-hosted-diagnostics.inventory.json"
+  ],
+  "impersonation": {
+    "equivalence": "NOT_ESTABLISHED",
+    "historical_v03": "3 KILLED / 1 SURVIVED, unchanged",
+    "new_same_identity_diagnostic": "KILLED physical guard removal; actual levels 1/2/3 observed",
+    "production_exploit": "NOT_DEMONSTRATED",
+    "production_profile_level_gt1_reachability": "NOT_COVERED"
+  },
+  "independence": {
+    "hosted_token_diagnostics": "OBSERVED on separate Windows Server 2022 runner environments; not enforcement",
+    "independent_human_reviewer": "NOT_COVERED",
+    "oracle": "separate process and ctypes implementation, no Guardian policy/broker/IPC/recovery imports",
+    "second_windows_enforcement": "NOT_COVERED"
+  },
+  "limitations": [
+    "No file/SQLite atomicity or exactly-once execution",
+    "No independently verified power-loss behavior",
+    "No production reconciliation/status protocol",
+    "Trusted host, configuration, runtime and time remain assumptions",
+    "Distinct AppContainer SIDs share base user; different controllers not proven",
+    "Broker/administrator/kernel compromise and arbitrary Windows escapes outside demonstrated scope",
+    "No authority from native VERIFIED receipt alone"
+  ],
+  "local_cold_replay": {
+    "bypass": {
+      "normal": {
+        "completed": true,
+        "denied": 9,
+        "positive": true,
+        "unchanged": true
+      },
+      "optimized": {
+        "completed": true,
+        "denied": 9,
+        "positive": true,
+        "unchanged": true
+      },
+      "repeat": {
+        "completed": true,
+        "denied": 9,
+        "positive": true,
+        "unchanged": true
+      }
+    },
+    "checkout": {
+      "head": "6c015ce4d738890c0f64932e1bdfd9b845f61969",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "python": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+      "status": ""
+    },
+    "elapsed_command_seconds": 1899.3292276002467,
+    "external_execution": "UNVERIFIABLE",
+    "independent_human_review": "NOT_COVERED",
+    "mutations": {
+      "v0": {
+        "normal": {
+          "CONTROL_BROKEN": 0,
+          "CRASHED": 0,
+          "KILLED": 15,
+          "NOT_APPLIED": 0,
+          "SURVIVED": 0
+        },
+        "optimized": {
+          "CONTROL_BROKEN": 0,
+          "CRASHED": 0,
+          "KILLED": 15,
+          "NOT_APPLIED": 0,
+          "SURVIVED": 0
+        },
+        "repeat": {
+          "CONTROL_BROKEN": 0,
+          "CRASHED": 0,
+          "KILLED": 15,
+          "NOT_APPLIED": 0,
+          "SURVIVED": 0
+        }
+      },
+      "v02": {
+        "normal": {
+          "CONTROL_BROKEN": 0,
+          "CRASHED": 0,
+          "KILLED": 11,
+          "NOT_APPLIED": 0,
+          "SURVIVED": 0
+        },
+        "optimized": {
+          "CONTROL_BROKEN": 0,
+          "CRASHED": 0,
+          "KILLED": 11,
+          "NOT_APPLIED": 0,
+          "SURVIVED": 0
+        },
+        "repeat": {
+          "CONTROL_BROKEN": 0,
+          "CRASHED": 0,
+          "KILLED": 11,
+          "NOT_APPLIED": 0,
+          "SURVIVED": 0
+        }
+      },
+      "v03": {
+        "normal": {
+          "CONTROL_BROKEN": 0,
+          "CRASHED": 0,
+          "KILLED": 3,
+          "NOT_APPLIED": 0,
+          "SURVIVED": 1
+        },
+        "optimized": {
+          "CONTROL_BROKEN": 0,
+          "CRASHED": 0,
+          "KILLED": 3,
+          "NOT_APPLIED": 0,
+          "SURVIVED": 1
+        },
+        "repeat": {
+          "CONTROL_BROKEN": 0,
+          "CRASHED": 0,
+          "KILLED": 3,
+          "NOT_APPLIED": 0,
+          "SURVIVED": 1
+        }
+      },
+      "v04": {
+        "normal": {
+          "CONTROL_BROKEN": 0,
+          "CRASHED": 0,
+          "KILLED": 5,
+          "NOT_APPLIED": 0,
+          "SURVIVED": 0
+        },
+        "optimized": {
+          "CONTROL_BROKEN": 0,
+          "CRASHED": 0,
+          "KILLED": 5,
+          "NOT_APPLIED": 0,
+          "SURVIVED": 0
+        },
+        "repeat": {
+          "CONTROL_BROKEN": 0,
+          "CRASHED": 0,
+          "KILLED": 5,
+          "NOT_APPLIED": 0,
+          "SURVIVED": 0
+        }
+      }
+    },
+    "outer_commands": [
+      {
+        "argv": [
+          "C:\\Users\\msi\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+          "-B",
+          "tools/validate_v03.py",
+          "--out",
+          "D:\\PAVLO HQ\\Workspaces\\guardian-v04-cold-20261025\\build\\cold\\v03"
+        ],
+        "exit_code": 0,
+        "name": "v03-regression",
+        "seconds": 697.7628841000842
+      },
+      {
+        "argv": [
+          "C:\\Users\\msi\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+          "-B",
+          "tools/v04_campaign.py",
+          "--out",
+          "D:\\PAVLO HQ\\Workspaces\\guardian-v04-cold-20261025\\build\\cold\\normal"
+        ],
+        "exit_code": 0,
+        "name": "normal",
+        "seconds": 92.17982030007988
+      },
+      {
+        "argv": [
+          "C:\\Users\\msi\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+          "-B",
+          "tools/v04_campaign.py",
+          "--out",
+          "D:\\PAVLO HQ\\Workspaces\\guardian-v04-cold-20261025\\build\\cold\\repeat"
+        ],
+        "exit_code": 0,
+        "name": "repeat",
+        "seconds": 91.85392170003615
+      },
+      {
+        "argv": [
+          "C:\\Users\\msi\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+          "-B",
+          "-O",
+          "tools/v04_campaign.py",
+          "--out",
+          "D:\\PAVLO HQ\\Workspaces\\guardian-v04-cold-20261025\\build\\cold\\optimized"
+        ],
+        "exit_code": 0,
+        "name": "optimized",
+        "seconds": 98.75013930001296
+      },
+      {
+        "argv": [
+          "C:\\Users\\msi\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+          "-B",
+          "tools/mutations.py",
+          "--out",
+          "D:\\PAVLO HQ\\Workspaces\\guardian-v04-cold-20261025\\build\\cold\\v0-mutations-repeat"
+        ],
+        "exit_code": 0,
+        "name": "v0-mutations-repeat",
+        "seconds": 115.80259940004908
+      },
+      {
+        "argv": [
+          "C:\\Users\\msi\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+          "-B",
+          "-O",
+          "tools/mutations.py",
+          "--out",
+          "D:\\PAVLO HQ\\Workspaces\\guardian-v04-cold-20261025\\build\\cold\\v0-mutations-optimized"
+        ],
+        "exit_code": 0,
+        "name": "v0-mutations-optimized",
+        "seconds": 127.06125479994807
+      },
+      {
+        "argv": [
+          "C:\\Users\\msi\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+          "-B",
+          "tools/v02_mutations.py",
+          "--out",
+          "D:\\PAVLO HQ\\Workspaces\\guardian-v04-cold-20261025\\build\\cold\\v02-mutations-repeat"
+        ],
+        "exit_code": 0,
+        "name": "v02-mutations-repeat",
+        "seconds": 132.9936941000633
+      },
+      {
+        "argv": [
+          "C:\\Users\\msi\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+          "-B",
+          "-O",
+          "tools/v02_mutations.py",
+          "--out",
+          "D:\\PAVLO HQ\\Workspaces\\guardian-v04-cold-20261025\\build\\cold\\v02-mutations-optimized"
+        ],
+        "exit_code": 0,
+        "name": "v02-mutations-optimized",
+        "seconds": 133.71553460008
+      },
+      {
+        "argv": [
+          "C:\\Users\\msi\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+          "-B",
+          "tools/v03_mutations.py",
+          "--out",
+          "D:\\PAVLO HQ\\Workspaces\\guardian-v04-cold-20261025\\build\\cold\\v03-mutations-repeat"
+        ],
+        "exit_code": 0,
+        "name": "v03-mutations-repeat",
+        "seconds": 60.09919999993872
+      },
+      {
+        "argv": [
+          "C:\\Users\\msi\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+          "-B",
+          "-O",
+          "tools/v03_mutations.py",
+          "--out",
+          "D:\\PAVLO HQ\\Workspaces\\guardian-v04-cold-20261025\\build\\cold\\v03-mutations-optimized"
+        ],
+        "exit_code": 0,
+        "name": "v03-mutations-optimized",
+        "seconds": 60.346850700094365
+      },
+      {
+        "argv": [
+          "C:\\Users\\msi\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+          "-B",
+          "tools/v04_mutations.py",
+          "--out",
+          "D:\\PAVLO HQ\\Workspaces\\guardian-v04-cold-20261025\\build\\cold\\mutations-normal"
+        ],
+        "exit_code": 0,
+        "name": "mutations-normal",
+        "seconds": 90.12774449994322
+      },
+      {
+        "argv": [
+          "C:\\Users\\msi\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+          "-B",
+          "tools/v04_mutations.py",
+          "--out",
+          "D:\\PAVLO HQ\\Workspaces\\guardian-v04-cold-20261025\\build\\cold\\mutations-repeat"
+        ],
+        "exit_code": 0,
+        "name": "mutations-repeat",
+        "seconds": 98.2868663999252
+      },
+      {
+        "argv": [
+          "C:\\Users\\msi\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+          "-B",
+          "-O",
+          "tools/v04_mutations.py",
+          "--out",
+          "D:\\PAVLO HQ\\Workspaces\\guardian-v04-cold-20261025\\build\\cold\\mutations-optimized"
+        ],
+        "exit_code": 0,
+        "name": "mutations-optimized",
+        "seconds": 100.34871769999154
+      }
+    ],
+    "passed": true,
+    "scenarios": {
+      "v0": {
+        "normal": {
+          "count": 17,
+          "passed": true
+        },
+        "optimized": {
+          "count": 17,
+          "passed": true
+        },
+        "repeat": {
+          "count": 17,
+          "passed": true
+        }
+      },
+      "v02": {
+        "normal": {
+          "count": 41,
+          "passed": true
+        },
+        "optimized": {
+          "count": 41,
+          "passed": true
+        },
+        "repeat": {
+          "count": 41,
+          "passed": true
+        }
+      },
+      "v03": {
+        "normal": {
+          "count": 21,
+          "passed": true
+        },
+        "optimized": {
+          "count": 21,
+          "passed": true
+        },
+        "repeat": {
+          "count": 21,
+          "passed": true
+        }
+      },
+      "v04": {
+        "normal": {
+          "count": 15,
+          "passed": true
+        },
+        "optimized": {
+          "count": 15,
+          "passed": true
+        },
+        "repeat": {
+          "count": 15,
+          "passed": true
+        }
+      }
+    },
+    "schema": "guardian.v04.aggregate.v0",
+    "semantic_determinism": {
+      "v0": true,
+      "v02": true,
+      "v03": true,
+      "v04": true
+    },
+    "semantic_sha256": {
+      "v0": {
+        "normal": "d723638ac4ded84070d5d832c85fbfdd153f28bdafa965cf0142254cf6f5aac5",
+        "optimized": "d723638ac4ded84070d5d832c85fbfdd153f28bdafa965cf0142254cf6f5aac5",
+        "repeat": "d723638ac4ded84070d5d832c85fbfdd153f28bdafa965cf0142254cf6f5aac5"
+      },
+      "v02": {
+        "normal": "bf942e4341ceac799d382be75dfa0cb463da27cf79aae4ebc102899b74cea6f0",
+        "optimized": "bf942e4341ceac799d382be75dfa0cb463da27cf79aae4ebc102899b74cea6f0",
+        "repeat": "bf942e4341ceac799d382be75dfa0cb463da27cf79aae4ebc102899b74cea6f0"
+      },
+      "v03": {
+        "normal": "fae96bb69da6e96263dde67cf340d3dc35bc86d0987634d52cd54ba1ba6dc1db",
+        "optimized": "fae96bb69da6e96263dde67cf340d3dc35bc86d0987634d52cd54ba1ba6dc1db",
+        "repeat": "fae96bb69da6e96263dde67cf340d3dc35bc86d0987634d52cd54ba1ba6dc1db"
+      },
+      "v04": {
+        "normal": "2aacb90649b87df9bef2332942024daa3a5048f2a949c3d9854c94b2701183dd",
+        "optimized": "2aacb90649b87df9bef2332942024daa3a5048f2a949c3d9854c94b2701183dd",
+        "repeat": "2aacb90649b87df9bef2332942024daa3a5048f2a949c3d9854c94b2701183dd"
+      }
+    },
+    "source_sha256": {
+      "guardian/__init__.py": "b026295b2cdb2e49afbff47b981eab4b3b758a2b9167b2fc3f1a5228ab923c58",
+      "guardian/adapters.py": "f1155262624fa651ba08c350f4643ca9df5878d465a6ac09c87a2cc382562208",
+      "guardian/broker.py": "edca1956b4abbace1a7ae569173008d105c979e90a8d94380d7ab457fdfc20a6",
+      "guardian/dispatch.py": "3be3fdaf5a3eba38dec8a2c7c0e3b39047af10a6e30cd494e1f6218b704e06e5",
+      "guardian/evidence.py": "6f97f38bffb178d9b5857935e212be8178967aaa3bf13bd20ac085eedb0a82fd",
+      "guardian/gateway.py": "8972baeee3b705cbcdd6689c9e9e4472dbe54c266bb547c787ee2bfcd23ed28a",
+      "guardian/hardened.py": "e2084614efe452c35533815de52de1508b6ab119b5e3395a47e29789c43f75c0",
+      "guardian/ipc.py": "e39750cb85b8fc02313b57e611c0b90ea1eba3b3c6d23caf506712de42c88757",
+      "guardian/policy.py": "7c26fe4d430209c247496727253c45892a1f25f8f2c392aadd089f3d15244f52",
+      "guardian/protocol.py": "9d1c969af99ee3d842c86d0e3f0db035766c8ab9a4053057a054ebe688852f99",
+      "guardian/recovery.py": "473a0b58079e88513527521119b149571010955a75a4211dac3a222c5619aaf6",
+      "guardian/verifier.py": "69376b7fbb7882e4a5734ee4fd80a8d66f5984b30834d31a007c66c2fa3f716f",
+      "guardian/verify_v02.py": "991a2455eae254f81fbbead1c420db540ac36dd44e36d65473751410dcf505b5",
+      "guardian/windows.py": "209cfff7da85b21bbff483edf0797986416b7f6e971de37a1ae43952f826fb46",
+      "tests/test_guardian.py": "07b02aa8873005783f4ca20c69744c5c74a943987a28bd606c2dc8fec5758466",
+      "tests/test_v02.py": "64f0476611764e78de56569372f0bb44b31223535680382a4a8571395dec92e7",
+      "tests/test_v03.py": "500d3c90a06a525088ef300f01f8093859cce5a50dfeaa9db206a1f65e3afcda",
+      "tests/test_v04.py": "eaf98d038c1908e59288d56bfd79b4aa9ff7d8ec89f397f9d0cd79cadec1c37e",
+      "tools/agent_worker.py": "fef14baec388a06f3d7441aee7074b44dea14693e5361299879edf2f0bb3edb8",
+      "tools/ci_diagnostics.py": "fe93b8471565d31efc6b570dffb5eb434117a3c5137c1754dfacf80481d8194c",
+      "tools/ci_entry.py": "d7a888cb281fd3cfb1b154371fa7b0a681472d14f0b500b6d5ed66b0afcc1030",
+      "tools/ci_tokens.py": "0755fdce28bc549d1bc4713c91bff6f3e10439ef460f5e887cd109fce4244629",
+      "tools/evidence.py": "32e6aa3e89fdb31f61fac99f516a2cdf87877d6f2d21bf25afa9b6eb3815a6d5",
+      "tools/handle_control.py": "96becde90acb0665f1a40659d3ae00ca62b915362efaedfd120948d2762e9491",
+      "tools/integrity.py": "fb00ee069e913202b38b8b301604d99a04749d1a36aff28d6deedcfd8f5e2852",
+      "tools/lab.py": "6c7f5699c9174750d2f256de0fbd6580e4206c6f5e2f5a47e883f11985976573",
+      "tools/mutation_witness.py": "55cdc6070ac421d41be54775da4847595608590d19960b1316d43e537f8feedd",
+      "tools/mutations.py": "a3466c9d6e4aafb0072e6160ddfa829c962c5f6fbadac47146a329830d637a9c",
+      "tools/native_probe.py": "61bd4279a7e27fa4429dcbbdf292cfee1f1e3b14b67fae041e04a2815a1f5af3",
+      "tools/ownership_control.py": "8637421140b5e85a097847542e93ca3abb26ace7ad474bd98c1e3ad49093e9ae",
+      "tools/prepare.py": "17aa74fa94a6d9917226c0adea8ced996764e78e768f157f0b45e1bb4edd0afa",
+      "tools/v02_campaign.py": "ac392d99a1404b47cd17d54dfecf879809ba3c298d03c316944e092351794b90",
+      "tools/v02_lab.py": "150c68d23422369926819400f56b27a29cbbdecdbbb1510f2056afc36af53f17",
+      "tools/v02_mutations.py": "91e154aaa34f066d171c92a1b3232106e690fc981cbb1908de159edf11ff9f7e",
+      "tools/v02_worker.py": "f0146bd2966b1f2ad8933988393f12cba5878bcf7f706c347702d0f78f977102",
+      "tools/v03_campaign.py": "19905d61f0486f370146c00ff35a09eb25335322643687e60c69cbf24a5a7643",
+      "tools/v03_harness_control.py": "b48b4fa2c89c834dce74489484613f6f910d10bf2b9c77648d5da9b07e3e8ff3",
+      "tools/v03_mutations.py": "5b5bc1a11eb537046d5c49ada6b84ef622ad9344ee75ca930780c14a7eeade05",
+      "tools/v03_worker.py": "2b316074a8135ee0089d212e6b3a38c504d6c59fe8f7425ba5a0624dd74727ea",
+      "tools/v04_campaign.py": "af7407345930126ad21890880276f414245ffec7ea97edb6442c86083308a478",
+      "tools/v04_ci_probe.py": "2b0efad66e99cb7f46fc7b56455e21dc5971cd3af46154993232db12636c9a28",
+      "tools/v04_mutations.py": "77de60557975a5a957ff7e55cbff705228859d8c16dcd30ec239aba75114ac24",
+      "tools/v04_native.py": "a660e99e1559a5b77c2cda5472e2e4b9b5c7cbd3868ba26745ca0fcc91ffbacd",
+      "tools/v04_oracle.py": "ab60e55b02aae5af5e1154824cbf760f027e00e8626df54bb779ff6259ac2cca",
+      "tools/v04_token_probe.py": "5b39712270192c0a41b3ee12ed1bf640c09e47a4fbd195538e1d66a190f3def6",
+      "tools/v04_worker.py": "40c7eaa75a14a9a6928f92671089851e225332c601420b3fcb330f560e278506",
+      "tools/validate.py": "67c8b6ee06ed7f3c0c32b66ae21f5f0fa1e10ca65df2a089a450ab52666f6c21",
+      "tools/validate_v02.py": "6e2acbcf27890f99cf1c9c5aa7e464ec8c7ef22eb55d13653d1a1617a99655a3",
+      "tools/validate_v03.py": "b306b9d06aba1d6c3b76a7bab3e7e21e7f6a890e6d44f42808934755e41ed1b3",
+      "tools/validate_v04.py": "6dc62423d2d71d218b902dd256a933e862eecc55a547d51981bc95a2f7f164ac"
+    },
+    "units": {
+      "normal": {
+        "count": 25,
+        "passed": true
+      },
+      "optimized": {
+        "count": 25,
+        "passed": true
+      },
+      "repeat": {
+        "count": 25,
+        "passed": true
+      }
+    }
+  },
+  "native_evidence_to_action": "DESIGN_ONLY / NOT_COVERED",
+  "native_source_review": {
+    "receiptos-verify": {
+      "files": {
+        "LICENSE": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+        "src/core/claim-surface.mjs": "b5a0237d3c642a91a89c7b73666e3e0f6d33a319495ddae08a0f86e34476ae1e",
+        "src/core/verify-v2.mjs": "1c3b876fe7309b16075bd07f61cfdaf0437cf3e06ea6b28f3c369325cc8c5a3c"
+      },
+      "head": "f39ac3b289be6baef1140c53976d525d8eb45c8c",
+      "native_execution": "NOT_COVERED",
+      "origin_main": "f39ac3b289be6baef1140c53976d525d8eb45c8c",
+      "status": "",
+      "writes": false
+    },
+    "recompute-kit": {
+      "files": {
+        "LICENSE": "405d0af6743b62b00a440d519b85fd9c3f159ff85b3bcfcd8c683e6372b4a7aa",
+        "research/chain-neutral-receipt-anchor-proof-v0/adapter.mjs": "b3f4e8b3f5b551c06dc4592ba1415a1ee5ea2bbd56e57cf6788c8063a0d956e4"
+      },
+      "head": "b4537d73bda4e4df73c4b105ee516a43c351ba02",
+      "native_execution": "NOT_COVERED",
+      "origin_main": "b4537d73bda4e4df73c4b105ee516a43c351ba02",
+      "status": "",
+      "writes": false
+    },
+    "verifiable-execution-claim-authorization": {
+      "files": {
+        "LICENSE": "650bc878c1af8e12d81ff387e7af547dad094836b1feb322654695447e0a618c",
+        "src/integration/engine.py": "81707638fa076486e71e18df981cc7daaf0e91870f53d457870c0af09fd8fc3c"
+      },
+      "head": "e2aca1a029203f1d5c73db2f8872b4240e793bfb",
+      "native_execution": "NOT_COVERED",
+      "origin_main": "e2aca1a029203f1d5c73db2f8872b4240e793bfb",
+      "status": "",
+      "writes": false
+    }
+  },
+  "pr": "https://github.com/pipavlo82/trustless-guardian/pull/1",
+  "preservation": {
+    "changed": [],
+    "guardian_and_functional_harness_byte_identical": true,
+    "local_tested_sha": "6c015ce4d738890c0f64932e1bdfd9b845f61969",
+    "local_to_delivery_python_differences": {
+      "tools/ci_entry.py": {
+        "current": "1f1d238d7318e25243d15647204028023b6ed60d305f7260cb6b606f97740fff",
+        "tested": "d7a888cb281fd3cfb1b154371fa7b0a681472d14f0b500b6d5ed66b0afcc1030"
+      },
+      "tools/v04_ci_probe.py": {
+        "current": "c60e9777142a82d0d53e0c4738f5fcbd79f9387b53b1d7f8fef003ab0c5d3c4e",
+        "tested": "2b0efad66e99cb7f46fc7b56455e21dc5971cd3af46154993232db12636c9a28"
+      }
+    },
+    "protected_sha256": {
+      "LICENSE": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "THIRD_PARTY_NOTICES.md": "f46d81fca986c81babd23e85ac94d51ecf1ecf7bc204119582827e4c6c6ebd2b",
+      "evidence/fresh-replay-v0.inventory.json": "085e0c5552bdd5299f4b26c4069527d00537ea43ece3e8523952bd912a2aaa65",
+      "evidence/fresh-replay-v0.zip": "12470bea792e7c732fc5c10492a4a6865bbd949d610e809da7c490a80c2013d5",
+      "evidence/hosted-ci-initial-failure.inventory.json": "8f67100eff0c563e35cae4e56ccedd293118c8754f10ec55661a79ebee875839",
+      "evidence/hosted-ci-initial-failure.zip": "2b47ff570757319917aa22a693864603a0cfc7f269c914dd623052ab87033662",
+      "evidence/local-run-v0.inventory.json": "cd4e92f6326a8d36bc18dab280774470724e733149c4d75d4723f204eaadcadd",
+      "evidence/local-run-v0.zip": "9aaac972c3c54f0bd784e801f7dc31f046bf6e7d417b8e8a6b959fd3f8ea0255",
+      "evidence/public-replay-v0.inventory.json": "226a23dda65bc8b5408ce9220a6ca8f95fd07c903ff290aac7e2db25c5b1184e",
+      "evidence/public-replay-v0.zip": "ea2dcd9e99a87e1e4f1c0ef9942a23129dde2a634273d695f20a1fd53e53a51e",
+      "evidence/v02-final-corroboration.json": "bca92a49f2d6dbc261e72f69c7496f676baafad32aa1d6c1702eb7db11dd7832",
+      "evidence/v02-hosted-f70-failure.inventory.json": "12bfbe8821990f0b99a1f3d5514c6029f5e9d7ac5a1975163120cf2630ef8b17",
+      "evidence/v02-hosted-f70-failure.zip": "be104570f28926831215552f5187dd977b38d4b0962904acccb3fe217b87d8a9",
+      "evidence/v02-local-replay.inventory.json": "c4e499637666b27e690b4784be71bff91c11551cc4a5ec4f7bcbb6eea40fef2f",
+      "evidence/v02-local-replay.zip": "6c91855b06983f4d7bb8e28a933f5aaed05ea43f7cd210bc066eadf74ba05922",
+      "evidence/v02-public-f70-replay.inventory.json": "99d6aa9dfae4adfc0e01ba25a18b9cd3d931b1f46de8955772af4cc0a2592bc3",
+      "evidence/v02-public-f70-replay.zip": "6558b3ee18bde4a938872fe90f27303955c7f8c6cf7613deefb02ea3b8749412",
+      "evidence/v03-baseline-and-audit.inventory.json": "640feac3148201ac9cc323c55c85f5046fea305f27671a8605aaf03609e7c25b",
+      "evidence/v03-baseline-and-audit.zip": "2f25d00fa0ad0a7ca885aedff08014a503c01f68428e3fec5b46596753193a32",
+      "evidence/v03-cold-replay.inventory.json": "65afe75eb594fc09041a094dd19d20228d9d950c2eb5b0dc2a684b127ba0553c",
+      "evidence/v03-cold-replay.zip": "d0429923e35a836feb1ab6620d4860d5b0d572a348de3d45858a77d1ef427783",
+      "evidence/v03-local-replay.inventory.json": "f91e9ce94219b00beb7377ffeacc17aa1f3e52e1c9243c860baf74630a6e09d0",
+      "evidence/v03-local-replay.zip": "db0b44bfb239037c133e093ec3d010b94860fedf54f1517df782777ace5df25d",
+      "evidence/v03-strict-cold-replay.inventory.json": "ad6ac57a18aa2895249e488d6598032c8887441068eb52b01704a7a223840c18",
+      "evidence/v03-strict-cold-replay.zip": "c5db6552344eede8db5fbab1ed5f6b4c472ba25cee63b9ed7b34f41e7b324b05",
+      "research/V02_SUMMARY.json": "5a29d4423ec107197b9b36b9710270f23df7c7973227526478ce0fd51678487d",
+      "research/V03_CI_ROOT_CAUSE.md": "c650f62f719349c56bfcf789f0ab3bb93898865bee61e9ca56931ac1d93f5495",
+      "research/V03_CONFORMANCE_RESULTS.md": "6dc348c45eef905f1043dcf9c471d803fe8544823a226d327c7d3688a725905d",
+      "research/V03_INDEPENDENT_REPLAY.md": "8f0513170c9acbe64c3602b6f83de01510be5db7c5801169d4530aff7dc713c4",
+      "research/V03_MUTATION_REPORT.md": "bca77349d6601f1ff126770959c01b474e671e748dcd31d6bd0161c0b6f66b7c",
+      "research/V03_SECURITY_AUDIT.md": "bd0f4ec1fd89f111c7f9947c6334c770ee46cb1c76727af7f42f9a9436328ed0",
+      "research/V03_SUMMARY.json": "7ea0b13a546d36c414d3004dfa22b9cd4e836e1387b57b1a34afb620b1e2725f",
+      "runtime-lock.json": "80ff355ed4b26aced021f500a4a1a191af0306b11b39a2f283f70fc8991e6ae5"
+    },
+    "starting_sha": "d64bef31fb35800be8af60e6d5a63d80a6afd020",
+    "tracked_changes": [
+      "M\t.github/workflows/guardian.yml",
+      "M\tREADME.md",
+      "M\tartifacts.sha256.json",
+      "M\tdocs/CRASH_RECOVERY.md",
+      "M\tdocs/SECURITY_BOUNDARIES.md",
+      "A\tdocs/WINDOWS_REPLAY_PROTOCOL.md",
+      "A\tevidence/v04-cold-replay.inventory.json",
+      "A\tevidence/v04-cold-replay.zip",
+      "A\tevidence/v04-originals-and-diagnostics.inventory.json",
+      "A\tevidence/v04-originals-and-diagnostics.zip",
+      "A\tguardian/dispatch.py",
+      "M\tguardian/hardened.py",
+      "A\tresearch/V04_CONFORMANCE_RESULTS.md",
+      "A\tresearch/V04_EXECUTION_OUTCOME_AUDIT.md",
+      "A\tresearch/V04_IMPERSONATION_WITNESS.md",
+      "A\tresearch/V04_INDEPENDENT_REPLAY.md",
+      "A\tresearch/V04_MUTATION_REPORT.md",
+      "A\tresearch/V04_SECURITY_GAP_AUDIT.md",
+      "A\tresearch/V04_WINDOWS_CI_DIAGNOSIS.md",
+      "A\ttests/test_v04.py",
+      "M\ttools/ci_entry.py",
+      "A\ttools/v04_campaign.py",
+      "A\ttools/v04_ci_probe.py",
+      "A\ttools/v04_mutations.py",
+      "A\ttools/v04_native.py",
+      "A\ttools/v04_oracle.py",
+      "A\ttools/v04_startup_probe.py",
+      "A\ttools/v04_token_probe.py",
+      "A\ttools/v04_worker.py",
+      "A\ttools/validate_v04.py"
+    ],
+    "untracked": []
+  },
+  "production_ready": false,
+  "protected_main": "aaa941cf3566a6931cba539e4d8147d940459171",
+  "recommendation": "HOLD",
+  "reproduce": [
+    "git checkout --detach 6c015ce4d738890c0f64932e1bdfd9b845f61969",
+    "python -B tools/validate_v04.py --out build/review-v04",
+    "python -B tools/integrity.py"
+  ],
+  "reviewed_code_sha": "a4193593252864a7201b811682d47485ea3722f6",
+  "schema": "guardian.research-summary.v04",
+  "starting_sha": "d64bef31fb35800be8af60e6d5a63d80a6afd020"
+}

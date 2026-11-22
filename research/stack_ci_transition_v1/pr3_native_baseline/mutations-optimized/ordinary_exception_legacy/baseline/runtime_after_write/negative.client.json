@@ -1,0 +1,12 @@
+{
+  "completed": true,
+  "response": {
+    "decision": "DENY",
+    "execution": "RECOVERY_REQUIRED",
+    "failure_stage": "WRITTEN",
+    "reason": "EXECUTION_OUTCOME_UNCERTAIN",
+    "retry_permitted": false,
+    "scope": null,
+    "status": "UNVERIFIABLE"
+  }
+}

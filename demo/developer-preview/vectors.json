@@ -1,0 +1,31 @@
+{
+  "population": "DETERMINISTIC_OS_CONTROL",
+  "schema": "guardian.frozen-test-vectors.v07",
+  "vectors": {
+    "ALLOW": {
+      "content": "approved:real-agent-source",
+      "resource": "synthetic-source",
+      "tool": "guardian_action"
+    },
+    "BYPASS": {
+      "content": "BYPASS",
+      "resource": "synthetic-source",
+      "tool": "guardian_direct_probe"
+    },
+    "DENY": {
+      "content": "approved:unauthorized",
+      "resource": "protected-config",
+      "tool": "guardian_action"
+    },
+    "POLICY_CHANGE": {
+      "content": "approved:revoked",
+      "resource": "synthetic-source",
+      "tool": "guardian_action"
+    },
+    "RECOVERY": {
+      "content": "approved:ambiguous",
+      "resource": "synthetic-source",
+      "tool": "guardian_action"
+    }
+  }
+}

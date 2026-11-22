@@ -1,0 +1,36 @@
+{
+  "additions": {
+    "research/guardian_mutual_ipc_v1/REPAIR_CONTRACT.md": "8bb76bcf91b79d90059a07fd72eb41c27fb40184b146f86e80b1f36337c0fa42",
+    "research/guardian_mutual_ipc_v1/bounded_io.py": "c7ba8527b807f89002e2a8a962220305c5d92145ab00cd22dc957775212dc0b8",
+    "research/guardian_mutual_ipc_v1/replay_policy.py": "cd96d7aee057a3912c006fc020f4d05fd139d6cdae076504e9272bd7465040d4",
+    "research/guardian_mutual_ipc_v1/tests/repair_fixtures/expired_root.json": "af908726d4cfee0b2ec0804043ec04902eb2686a9a1c161127f9b041faa2df09",
+    "research/guardian_mutual_ipc_v1/tests/repair_fixtures/malformed_nonce.json": "9a2b7b907aea01a8ab5ebcdb47f94f3fabc676f0c95765da6998a646a5c3cc44",
+    "research/guardian_mutual_ipc_v1/tests/repair_fixtures/positive.json": "abdc67f206f86b434925463e242904edc55e2a5412a7d58c99773134bf2f8b0a",
+    "research/guardian_mutual_ipc_v1/tests/repair_fixtures/revoked_root.json": "869a8c9b2148095ea9a668597188f49490723db564fe75995ea2c5fbfee4857c",
+    "research/guardian_mutual_ipc_v1/tests/repair_fixtures/wrong_agent.json": "0f2abcfcf8e9954a2d11d530673b06b8a3c011b595434991cdc36f9d04bcfdeb",
+    "research/guardian_mutual_ipc_v1/tests/test_repair.py": "e11b4d16ad2c84859e7a3b9af59015b0b564dfd0e9e8857ceefe9e058a8c0503"
+  },
+  "replacements": {
+    "research/guardian_mutual_ipc_v1/broker.py": {
+      "previous_sha256": "05157a404d3015063af1d755171ff69f84442d1886c8fce987c378ad649b2adb",
+      "sha256": "c687799b0dd32865f40d1bc4ef6e9ff9110253022e57d3b60e298e5a5389b914"
+    },
+    "research/guardian_mutual_ipc_v1/client.py": {
+      "previous_sha256": "185740d12ad344ba094b1c237e1550dbb77e62221cbe58f85016ee54527d7627",
+      "sha256": "3a44a9d94b7714d4beac99209637ac9f69a6a3c3057e156f772086bb3ca7896f"
+    },
+    "research/guardian_mutual_ipc_v1/lab_server.py": {
+      "previous_sha256": "7f64044d58860ae971b94efbb60bc550b89c137e93759f31009e2bd64c324cac",
+      "sha256": "59d6c1ed7f715ce268dd7c9de5c1cbc76740ac862946a0d7aece494106fd5d12"
+    },
+    "research/guardian_mutual_ipc_v1/native.py": {
+      "previous_sha256": "80a6f3d2f3b71dc0c138e4d3353f4b7815c446a35538c8c52d0a5ad436dcf7fa",
+      "sha256": "87e3a9aceb4087d7636263c16a647113e9f731209f33d58befbdc709b87fb880"
+    },
+    "research/guardian_mutual_ipc_v1/verify_evidence.py": {
+      "previous_sha256": "0d51449f4d792361ede2e610b25d681412acfab64611edac85c4d219e082d8eb",
+      "sha256": "e2e5ba065a2aa8fb703fb79aed16f0a6abe90d85842b4b03b351a096fe5df62c"
+    }
+  },
+  "schema": "guardian.authorized-additions.v4"
+}

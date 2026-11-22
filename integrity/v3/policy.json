@@ -1,0 +1,23 @@
+{
+  "schema": "guardian.layered-integrity.v3",
+  "base_commit": "5d98af242d4869d07bbfa6c5fb0028d7bb31d67d",
+  "frozen": {
+    "manifest": "integrity/v3/pr5-base.sha256.json",
+    "manifest_sha256": "3c8270a1948a4dfe217ab44d93e69a4505e0cedfbc00c8b2e777c296e4104822",
+    "entries": 307
+  },
+  "authorized": {
+    "manifest": "integrity/v3/replay-challenge-files.sha256.json",
+    "manifest_sha256": "67da3139f982128740c82c4ff4fad6a3bb75c72c3a318c714b2c0f04e4cabe10",
+    "additions": 22,
+    "replacements": 2
+  },
+  "control_files": [
+    "integrity/v3/policy.json",
+    "integrity/v3/pr5-base.sha256.json",
+    "integrity/v3/replay-challenge-files.sha256.json"
+  ],
+  "bootstrap_trust": [
+    ".github/workflows/replay-challenge-v1.yml"
+  ]
+}

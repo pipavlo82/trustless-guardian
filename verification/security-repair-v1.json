@@ -1,0 +1,84 @@
+{
+  "base_commit": "23bc33f81a7216b11efd7e614eb065275fd67a1e",
+  "branch": "repair/full-guardian-security-v1",
+  "gateway": {
+    "binding_defects_reproduced": 4,
+    "input_report_mutations": {
+      "CONTROL_BROKEN": 0,
+      "CRASHED": 0,
+      "KILLED": 15,
+      "NOT_APPLIED": 0,
+      "SURVIVED": 0
+    },
+    "metrics_scope": "PREDECLARED_SYNTHETIC_ONLY",
+    "source_mutations": {
+      "CONTROL_BROKEN": 0,
+      "CRASHED": 0,
+      "KILLED": 16,
+      "NOT_APPLIED": 0,
+      "SURVIVED": 0
+    },
+    "v0_original_metrics": {"FN": 18, "FP": 6, "TN": 276, "TP": 52},
+    "v0_projection_on_v1_holdout": {"FN": 4, "FP": 8, "TN": 80, "TP": 4},
+    "v1_holdout": {"FN": 0, "FP": 0, "TN": 88, "TP": 8}
+  },
+  "historical": {
+    "legacy_inventory_entries": 210,
+    "legacy_manifest_sha256": "7638540733f2654d4f95cd6e5294e7bdb4026c3e0a835a6a29092d41069303cb",
+    "pr1_head": "03f6ffc6f4b983cfcc39f401f47165021e67e673",
+    "pr1_portable_replay": "PASS",
+    "pr3_additions_entries": 26
+  },
+  "implementation_commit": "93f0d2d68edf4cb31c3d477c766ddfd8e9f7b569",
+  "integrity": {
+    "actual_files": 273,
+    "authorized_replacements": 1,
+    "frozen_entries": 236,
+    "repair_additions": 32,
+    "status": "PASS"
+  },
+  "integrity_mutations": {
+    "CONTROL_BROKEN": 0,
+    "CRASHED": 0,
+    "KILLED": 11,
+    "NOT_APPLIED": 0,
+    "SURVIVED": 0
+  },
+  "linux": {
+    "checks_passed": 14,
+    "checks_total": 14,
+    "production_authenticated_invocation": "NOT_COVERED",
+    "rootless_daemon": "NOT_COVERED",
+    "status": "VERIFIED_LOCAL_PILOT"
+  },
+  "production_ready": false,
+  "schema": "guardian.security-repair-verification.v1",
+  "tests": {
+    "modes": ["normal", "repeat", "python-O"],
+    "passed_each": 177,
+    "status": "PASS"
+  },
+  "verdict": "HOLD",
+  "windows": {
+    "checks": {
+      "appcontainer_identity": "VERIFIED",
+      "broker_permissions": "VERIFIED",
+      "execution_and_crash_recovery": "VERIFIED",
+      "file_access_bypass": "VERIFIED",
+      "named_pipe_authentication": "VERIFIED",
+      "restricted_token_child_startup": "VERIFIED"
+    },
+    "fresh_clone_initial_runtime_precondition": "CONTROL_BROKEN",
+    "guardian_run": 43050138511,
+    "hosted_core_status": "VERIFIED",
+    "hosted_report_sha256": "a0dc2fa3a4e8dea3689fe251703a260f3052120fbd2dda98e66a70f21420ef7c",
+    "hosted_run": 43050138530,
+    "pinned_runtime_sha256": "4acbed6dd1c744b0376e3b1cf57ce906f9dc9e95e68824584c8099a63025a3c3",
+    "post_prepare_runtime_precondition": "VERIFIED_PINNED_SHA256",
+    "production_ready": false,
+    "startup_api": "TWO_STAGE_CREATEPROCESSASUSERW",
+    "status": "VERIFIED",
+    "v02_case_count": 41,
+    "v04_scenario_count": 15
+  }
+}

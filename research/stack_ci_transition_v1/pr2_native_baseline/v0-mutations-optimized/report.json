@@ -1,0 +1,154 @@
+{
+  "counts": {
+    "CONTROL_BROKEN": 0,
+    "CRASHED": 0,
+    "KILLED": 15,
+    "NOT_APPLIED": 0,
+    "SURVIVED": 0
+  },
+  "mutants": [
+    {
+      "applied": true,
+      "classification": "KILLED",
+      "id": "actor",
+      "mutated_sha256": "094ab04530049e4cf1548cb7fc953cd4b0ef2f9762e90deaa8167b258ddd2dc6",
+      "original_sha256": "7c26fe4d430209c247496727253c45892a1f25f8f2c392aadd089f3d15244f52",
+      "restored_byte_exact": true,
+      "source": "guardian\\policy.py"
+    },
+    {
+      "applied": true,
+      "classification": "KILLED",
+      "id": "action",
+      "mutated_sha256": "c0e111535bd21214b28984be1cf8a4f1e1489b85925c525820cf4fd633829edf",
+      "original_sha256": "7c26fe4d430209c247496727253c45892a1f25f8f2c392aadd089f3d15244f52",
+      "restored_byte_exact": true,
+      "source": "guardian\\policy.py"
+    },
+    {
+      "applied": true,
+      "classification": "KILLED",
+      "id": "resource",
+      "mutated_sha256": "d4934cbf07ba45cc8fc80b890fc11acadd2799601a0be9c46fbd0e2df3c392c0",
+      "original_sha256": "7c26fe4d430209c247496727253c45892a1f25f8f2c392aadd089f3d15244f52",
+      "restored_byte_exact": true,
+      "source": "guardian\\policy.py"
+    },
+    {
+      "applied": true,
+      "classification": "KILLED",
+      "id": "scope",
+      "mutated_sha256": "1cbeaf146ea4c4d9c1e8a05fdce21f9ed605aec7ac09b60ebe92cc785e10b016",
+      "original_sha256": "7c26fe4d430209c247496727253c45892a1f25f8f2c392aadd089f3d15244f52",
+      "restored_byte_exact": true,
+      "source": "guardian\\policy.py"
+    },
+    {
+      "applied": true,
+      "classification": "KILLED",
+      "id": "version",
+      "mutated_sha256": "0f07f7d19c1a70dac0d3df8a7166bc786dbbeff58fe66d52ed78b34ae3c1f61f",
+      "original_sha256": "7c26fe4d430209c247496727253c45892a1f25f8f2c392aadd089f3d15244f52",
+      "restored_byte_exact": true,
+      "source": "guardian\\policy.py"
+    },
+    {
+      "applied": true,
+      "classification": "KILLED",
+      "id": "expiry",
+      "mutated_sha256": "ada6e9d635d29b3a8b64e66e5f2e84a9b4ca0f52e41ab636f5c455e1e0f7ebf0",
+      "original_sha256": "7c26fe4d430209c247496727253c45892a1f25f8f2c392aadd089f3d15244f52",
+      "restored_byte_exact": true,
+      "source": "guardian\\policy.py"
+    },
+    {
+      "applied": true,
+      "classification": "KILLED",
+      "id": "replay",
+      "mutated_sha256": "9afdb956e747db1505864e0e14307a63cf567f962f4c745fef0063d643ed4905",
+      "original_sha256": "7c26fe4d430209c247496727253c45892a1f25f8f2c392aadd089f3d15244f52",
+      "restored_byte_exact": true,
+      "source": "guardian\\policy.py"
+    },
+    {
+      "applied": true,
+      "classification": "KILLED",
+      "id": "evidence",
+      "mutated_sha256": "ece181ee8d24723bb9083ef0afd586af96fea9b1669a3901674e6a50bf97e351",
+      "original_sha256": "7c26fe4d430209c247496727253c45892a1f25f8f2c392aadd089f3d15244f52",
+      "restored_byte_exact": true,
+      "source": "guardian\\policy.py"
+    },
+    {
+      "applied": true,
+      "classification": "KILLED",
+      "id": "precondition",
+      "mutated_sha256": "0792e6be7cea247afc4a1d15c7079be3780079203a87340430f56f1ceb19f55e",
+      "original_sha256": "7c26fe4d430209c247496727253c45892a1f25f8f2c392aadd089f3d15244f52",
+      "restored_byte_exact": true,
+      "source": "guardian\\policy.py"
+    },
+    {
+      "applied": true,
+      "classification": "KILLED",
+      "id": "content",
+      "mutated_sha256": "d562c31d9a89d933d3b36a12d7b15c39e8540b8911c49aa2e57c6bc23fcf2947",
+      "original_sha256": "7c26fe4d430209c247496727253c45892a1f25f8f2c392aadd089f3d15244f52",
+      "restored_byte_exact": true,
+      "source": "guardian\\policy.py"
+    },
+    {
+      "applied": true,
+      "classification": "KILLED",
+      "id": "policy_pin",
+      "mutated_sha256": "5d2c2543bf7ed2f1c13d69c855dcc8f5d40bdb4115d97e1fcaf4e2c2d9269b77",
+      "original_sha256": "edca1956b4abbace1a7ae569173008d105c979e90a8d94380d7ab457fdfc20a6",
+      "restored_byte_exact": true,
+      "source": "guardian\\broker.py"
+    },
+    {
+      "applied": true,
+      "classification": "KILLED",
+      "id": "resource_identity",
+      "mutated_sha256": "0afec73081394b76866be040fa7a950256db809525550194275d94f9977087d5",
+      "original_sha256": "edca1956b4abbace1a7ae569173008d105c979e90a8d94380d7ab457fdfc20a6",
+      "restored_byte_exact": true,
+      "source": "guardian\\broker.py"
+    },
+    {
+      "applied": true,
+      "classification": "KILLED",
+      "id": "enforcement",
+      "mutated_sha256": "217952060eed9240701f960b9a05199a2b04b4ada3274c3c978cba5d72417d27",
+      "original_sha256": "edca1956b4abbace1a7ae569173008d105c979e90a8d94380d7ab457fdfc20a6",
+      "restored_byte_exact": true,
+      "source": "guardian\\broker.py"
+    },
+    {
+      "applied": true,
+      "classification": "KILLED",
+      "id": "nonce_consumption",
+      "mutated_sha256": "c7f598f31605e58af2afcfb0b5d7655375a0a21f0cb557e4a66b8ae215c687cc",
+      "original_sha256": "edca1956b4abbace1a7ae569173008d105c979e90a8d94380d7ab457fdfc20a6",
+      "restored_byte_exact": true,
+      "source": "guardian\\broker.py"
+    },
+    {
+      "applied": true,
+      "classification": "KILLED",
+      "id": "acl",
+      "mutated_sha256": "db41915f1ff859d9012c779202f3bbb17da58269c7f4d9355e3f9e85c694b7b7",
+      "original_sha256": "209cfff7da85b21bbff483edf0797986416b7f6e971de37a1ae43952f826fb46",
+      "restored_byte_exact": true,
+      "source": "guardian\\windows.py"
+    }
+  ],
+  "schema": "guardian.mutations.v0",
+  "seconds": 110.44766549998894,
+  "unexecuted_boundaries": [
+    "hardlink/reparse broker guard",
+    "kernel/AppContainer internals",
+    "concurrent broker instances",
+    "crash recovery"
+  ]
+}

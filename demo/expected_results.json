@@ -1,0 +1,18 @@
+{
+  "schema": "guardian.demo-expectations.v05",
+  "laboratory": {
+    "ALLOW": "COMMITTED",
+    "DENY": "REFUTED",
+    "BYPASS": "OS_REJECTED",
+    "POLICY_CHANGE": "REFUTED",
+    "RECOVERY": "UNVERIFIABLE"
+  },
+  "real_agent": {
+    "ALLOW": "NOT_COVERED",
+    "DENY": "NOT_COVERED",
+    "BYPASS": "NOT_COVERED",
+    "POLICY_CHANGE": "NOT_COVERED",
+    "RECOVERY": "NOT_COVERED"
+  },
+  "note": "Laboratory clients are scripted OS controls, not coding agents. Runtime startup is not completion of an AI task."
+}

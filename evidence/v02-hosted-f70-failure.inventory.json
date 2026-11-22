@@ -1,0 +1,30 @@
+{
+  "archive_sha256": "be104570f28926831215552f5187dd977b38d4b0962904acccb3fe217b87d8a9",
+  "members": {
+    "metadata/pr.json": {
+      "bytes": 3624,
+      "sha256": "b9359dbadabc1680e8451ed7370ff4e2b58cf9fe6eb189163aa4a829480b82c9"
+    },
+    "metadata/pr.raw.log": {
+      "bytes": 53878,
+      "sha256": "775629a0a14b794ec97dc44874f85474fd348c808c93816e18ccac684fc414f8"
+    },
+    "metadata/push.json": {
+      "bytes": 3616,
+      "sha256": "42a7e5df3487de8dfbd0ca65a8466af38fd0e33765f72daac29addf39b8d62d6"
+    },
+    "metadata/push.raw.log": {
+      "bytes": 49699,
+      "sha256": "cb4c2fe03c858503fdef9e648378fafbbc9920764452c3a6f761f98e9baf5d9c"
+    },
+    "pr/ci-launch.json": {
+      "bytes": 796,
+      "sha256": "b61342b319389266106ec8ab7681c37131793d346f86c7738fc2c773d69c6dbe"
+    },
+    "push/ci-launch.json": {
+      "bytes": 796,
+      "sha256": "b61342b319389266106ec8ab7681c37131793d346f86c7738fc2c773d69c6dbe"
+    }
+  },
+  "schema": "guardian.evidence-archive.v0"
+}
