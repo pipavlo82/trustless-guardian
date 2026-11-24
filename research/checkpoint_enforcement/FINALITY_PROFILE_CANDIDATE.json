@@ -1,0 +1,23 @@
+{
+  "schema": "guardian.finalized-head-profile.candidate.v0",
+  "runtime_support": "NOT_IMPLEMENTED",
+  "chain_id": 84532,
+  "contract_address": null,
+  "contract_runtime_code_hash": null,
+  "proxy_implementation_and_upgrade_authority": null,
+  "guardian_checkpoint_stream": null,
+  "checkpoint_issuer_authority": null,
+  "independent_consensus_trust_root": null,
+  "finalized_block_reference": null,
+  "storage_slot_and_state_proof": null,
+  "maximum_accepted_head_age_policy": null,
+  "publication_cessation_policy": "HOLD",
+  "contradictory_finalized_heads_policy": "HOLD",
+  "reorg_or_finality_violation_policy": "HOLD",
+  "rpc_quorum_is_consensus_proof": false,
+  "historical_inclusion_is_latest": false,
+  "same_admin_keys_are_independent": false,
+  "on_missing_required_pin_or_proof": "LATEST_HEAD_NOT_ESTABLISHED / HOLD",
+  "receipt65_is_guardian_checkpoint": false,
+  "production": "HOLD"
+}

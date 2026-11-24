@@ -9,6 +9,9 @@ import os
 from pathlib import Path
 import sqlite3
 import time
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+from research.checkpoint_enforcement.gate import protected, recheck_current
 
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PublicKey
 try:
@@ -26,6 +29,7 @@ def gate(folder, stage):
     while not (Path(folder)/("reconcile-"+stage+".continue")).exists():
         time.sleep(.05)
 
+@protected('recovery', lambda args, kw: args[0] if args else kw['root'])
 def reconcile(root):
     root=Path(root).resolve()
     def fail(status,reason):
@@ -108,6 +112,7 @@ def reconcile(root):
             db.execute("INSERT INTO unified_transitions VALUES (?,?,?,?)",
                 (r["grant_id"],5,"RECEIPT_PUBLISHED","COMMITTED"))
             gate(root,"before_commit")
+            recheck_current('before_reconciliation_commit')
             db.commit()
         gate(root,"after_commit")
         post=verify(root)
