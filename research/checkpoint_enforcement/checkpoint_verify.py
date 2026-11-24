@@ -38,13 +38,17 @@ def chain_valid(chain,policy):
         signed(cp,policy['checkpoint_public'],b'guardian.checkpoint.v1\x00');r=cp['record']
         require(set(r)==keys,'CHECKPOINT_FIELDS')
         require(r['schema']=='guardian.checkpoint.v1' and r['scope']=='LAB_OBSERVATION_NOT_AUTHORIZATION','DOMAIN')
-        require(r['state_profile']=='guardian-sql-logical-ascii-v1' and r['observation']=='quiescent-copy-sqlite-read-transaction-backup','SNAPSHOT_PROFILE')
+        require(r['state_profile'] in ('guardian-sql-logical-ascii-v1','guardian-sql-bootstrap-ascii-v1') and r['observation']=='quiescent-copy-sqlite-read-transaction-backup','SNAPSHOT_PROFILE')
+        if r['state_profile']=='guardian-sql-bootstrap-ascii-v1':
+            require(i==1 and r['recovery_state']=='EMPTY' and all(r[k] is None for k in ('attempt_id','container_id','receipt_sha256','dispatch_sha256','committed_evidence_head')),'BOOTSTRAP_POSITION')
         require(type(r['sequence']) is int and r['sequence']==i and r['previous_checkpoint_head']==previous,'SIGNED_CHAIN_CONSISTENCY')
         require(r['key_id']==digest(bytes.fromhex(policy['checkpoint_public'])),'KEY_ID')
         require(r['guardian_id']==policy['guardian_id'] and r['session_id']==policy['session_id'],'CHECKPOINT_IDENTITY')
         require(r['source_sha']==policy['source_sha'] and r['policy_sha256']==policy['native_policy_sha256'],'POLICY_SOURCE_BINDING')
         here=[r[k] for k in ('guardian_id','session_id','grant_id','attempt_id','container_id')]
-        require(identity is None or here==identity,'CROSS_HISTORY_CHAIN');identity=here
+        if identity is not None:
+            require(here[:3]==identity[:3] and all(old is None or old==new for old,new in zip(identity[3:],here[3:])),'CROSS_HISTORY_CHAIN')
+        identity=here
         previous=h(cp)
     return chain[-1]
 def state(root,policy,scratch):
@@ -83,17 +87,46 @@ def state(root,policy,scratch):
     require(before=={str(p):digest(p.read_bytes()) for p in paths},'CHANGED_DURING_READ')
     def normal(row):return {k:str(v) if type(v) is int else v for k,v in row.items()}
     return {'admission':normal(a),'transitions':[normal(v) for v in tr],'evidence':ev,'policy_sha256':pol}
+def bootstrap_state(root,policy,scratch):
+    """Explicit signed empty-admission state with independently pinned intent.
+    Missing evidence is never interpreted as zero; both SQL tables must exist and
+    be empty, and exact signed grant/request intent must be available.
+    """
+    scratch.mkdir(parents=True,exist_ok=False)
+    paths=list(root.glob('state.sqlite*'))+[root/'policy.json',root/'intent/request.json',root/'intent/grant.json']
+    before={str(p):digest(p.read_bytes()) for p in paths}
+    for p in root.glob('state.sqlite*'):shutil.copy2(p,scratch/p.name)
+    with closing(sqlite3.connect((scratch/'state.sqlite').as_uri()+'?mode=ro',uri=True)) as c:
+        c.execute('BEGIN')
+        require(c.execute('pragma integrity_check').fetchone()[0]=='ok','SQLITE_INTEGRITY')
+        require(c.execute('pragma journal_mode').fetchone()[0]=='wal','WAL_MODE')
+        require(c.execute('select count(*) from unified_admissions').fetchone()[0]==0 and c.execute('select count(*) from unified_transitions').fetchone()[0]==0,'BOOTSTRAP_NOT_EMPTY')
+    q=parse((root/'intent/request.json').read_bytes());g=parse((root/'intent/grant.json').read_bytes());native=policy['native_pins']
+    VerifyKey(bytes.fromhex(native['grant_public'])).verify(encode(g['payload']),base64.b64decode(g['signature'],validate=True))
+    bind={k:q[k] for k in ('request_id','operation','agent_id','resource_id','tool','destination','service')};bind['body_sha256']=digest(encode(q['body']))
+    require(bind==g['payload']['binding'] and digest(encode(bind))==g['payload']['binding_sha256'],'BOOTSTRAP_REQUEST_BINDING')
+    require(digest((root/'intent/request.json').read_bytes())==native['request_sha256'],'REQUEST_PIN')
+    require(q['body']['proposal']['session_id']==policy['session_id'],'SESSION')
+    require(digest((root/'policy.json').read_bytes())==policy['native_policy_sha256'],'LOCAL_POLICY_CHANGED')
+    require(before=={str(p):digest(p.read_bytes()) for p in paths},'CHANGED_DURING_READ')
+    return {'admission':None,'transitions':[],'intent':{'request_sha256':native['request_sha256'],'grant_sha256':digest((root/'intent/grant.json').read_bytes()),'grant_id':g['payload']['grant_id']},'policy_sha256':policy['native_policy_sha256']}
+
 def verify(case,policy,scratch,lab=False):
     result={'status':'HOLD','trusted_latest_head':'NOT_ESTABLISHED','scope':'SYNTHETIC_REMOTE_ONLY','dispatch_allowed':False,'reconciliation_allowed':False,'observations':[]}
     try:
         require(policy['profile']=='guardian.lab-checkpoint-trust.v1' and not policy['revoked'],'TRUST_POLICY')
         require(policy['remote_independence']=='SAME_ADMIN_NOT_ESTABLISHED','UNSUPPORTED_TRUST_CLAIM')
         cp=chain_valid(parse((case/'chain.json').read_bytes()),policy)
-        s=state(case/'state',policy,scratch);r=cp['record'];a=s['admission'];e=s['evidence']
+        r=cp['record'];bootstrap=r['state_profile']=='guardian-sql-bootstrap-ascii-v1'
+        s=bootstrap_state(case/'state',policy,scratch) if bootstrap else state(case/'state',policy,scratch)
         require(digest(encode(s))==r['state_digest'],'STATE_DIGEST_BINDING')
-        require(r['recovery_state']==a['state'] and r['journal_head']==digest(encode(s['transitions'])),'STATE_JOURNAL_BINDING')
-        require(r['committed_evidence_head']==(e['receipt.json'] if a['state']=='COMMITTED' else None),'COMMITTED_HEAD_BINDING')
-        for field,expected in [('grant_id',a['grant_id']),('attempt_id',a['attempt_id']),('container_id',a['container_id']),('receipt_sha256',e['receipt.json']),('dispatch_sha256',e['dispatch.json'])]:require(r[field]==expected,'STATE_IDENTITY_BINDING')
+        require(r['journal_head']==digest(encode(s['transitions'])),'STATE_JOURNAL_BINDING')
+        if bootstrap:require(r['grant_id']==s['intent']['grant_id'],'BOOTSTRAP_GRANT_BINDING')
+        else:
+            a=s['admission'];e=s['evidence']
+            require(r['recovery_state']==a['state'],'STATE_JOURNAL_BINDING')
+            require(r['committed_evidence_head']==(e['receipt.json'] if a['state']=='COMMITTED' else None),'COMMITTED_HEAD_BINDING')
+            for field,expected in [('grant_id',a['grant_id']),('attempt_id',a['attempt_id']),('container_id',a['container_id']),('receipt_sha256',e['receipt.json']),('dispatch_sha256',e['dispatch.json'])]:require(r[field]==expected,'STATE_IDENTITY_BINDING')
         heads=[]
         for _ in range(2):
             nonce=secrets.token_hex(32);body=encode({'nonce':nonce});start=time.time()

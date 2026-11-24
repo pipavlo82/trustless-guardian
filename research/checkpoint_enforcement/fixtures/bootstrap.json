@@ -1,0 +1,177 @@
+{
+  "chain": [
+    {
+      "record": {
+        "attempt_id": null,
+        "committed_evidence_head": null,
+        "container_id": null,
+        "dispatch_sha256": null,
+        "grant_id": "lab-grant-2c4b65d5e29936777853e7811312580d",
+        "guardian_id": "guardian-rc3-native-lab",
+        "journal_head": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "key_id": "ba22e01169499bf73b40d2c75113058d0a3886d565d684c0cd7cd8761798c346",
+        "observation": "quiescent-copy-sqlite-read-transaction-backup",
+        "policy_sha256": "ff00e920f423a9323517c925728effe4f00c668e697beb13cf78eb7edf420b3e",
+        "previous_checkpoint_head": null,
+        "receipt_sha256": null,
+        "recovery_state": "EMPTY",
+        "schema": "guardian.checkpoint.v1",
+        "scope": "LAB_OBSERVATION_NOT_AUTHORIZATION",
+        "sequence": 1,
+        "session_id": "594fbbcd209d22d864012a0e5f2c52e1b06661cbdc5beed9dd777471518ef676",
+        "source_sha": "b01f3eeb7ca4ee1873a0c27615adb1bf07d781a2",
+        "state_digest": "06896f0e8108f43ff9b267540fa18dd244628e4e61382ef21ce645da7fa0d19a",
+        "state_profile": "guardian-sql-bootstrap-ascii-v1"
+      },
+      "signature": "YcbD3eM4RTZ0m5uHCxn/0kGVkhZL13TVT43LTdHgoebi4D5umZybnXTp3GzPFK3Yg/8V9GbmH+khAxZmzK0pCA=="
+    },
+    {
+      "record": {
+        "attempt_id": "attempt-50759c6f72c0199790dc998c45e58b5d",
+        "committed_evidence_head": null,
+        "container_id": "c4f88448ce05ce9661e32cff1cc3e4622b4126095da23880e513cb584aee9f35",
+        "dispatch_sha256": "b597ab7b6af6ad01693f9be90c2704b120b5e53a26acd70d98ba147b4f8c5ff8",
+        "grant_id": "lab-grant-2c4b65d5e29936777853e7811312580d",
+        "guardian_id": "guardian-rc3-native-lab",
+        "journal_head": "538b60e38ee933a08cac152ac651816238a91c9fc90bc3749df21f2f4a16e993",
+        "key_id": "ba22e01169499bf73b40d2c75113058d0a3886d565d684c0cd7cd8761798c346",
+        "observation": "quiescent-copy-sqlite-read-transaction-backup",
+        "policy_sha256": "ff00e920f423a9323517c925728effe4f00c668e697beb13cf78eb7edf420b3e",
+        "previous_checkpoint_head": "601deaa169801951b7beaefa555def06b40d8508b8d59f07181e8c72e21b88db",
+        "receipt_sha256": "81f8995f9f6988c0e3cb53f04175fd423d7ba8a1d803abd0dbef59b87f0a22e7",
+        "recovery_state": "RESULT_OBSERVED",
+        "schema": "guardian.checkpoint.v1",
+        "scope": "LAB_OBSERVATION_NOT_AUTHORIZATION",
+        "sequence": 2,
+        "session_id": "594fbbcd209d22d864012a0e5f2c52e1b06661cbdc5beed9dd777471518ef676",
+        "source_sha": "b01f3eeb7ca4ee1873a0c27615adb1bf07d781a2",
+        "state_digest": "93f87806a7d25e2c3c4b753951bef6ba8599d3a46f9d6bae535ee826f6a39c7e",
+        "state_profile": "guardian-sql-logical-ascii-v1"
+      },
+      "signature": "RdLVDZa1n42otXUZOSyc//yZHZOqYxKrwKmM/UDSNAfbdhNDwNIMyG9g+ZtPtKrrhvXdfOZ9FLcOPPlMWku7CA=="
+    },
+    {
+      "record": {
+        "attempt_id": "attempt-50759c6f72c0199790dc998c45e58b5d",
+        "committed_evidence_head": "81f8995f9f6988c0e3cb53f04175fd423d7ba8a1d803abd0dbef59b87f0a22e7",
+        "container_id": "c4f88448ce05ce9661e32cff1cc3e4622b4126095da23880e513cb584aee9f35",
+        "dispatch_sha256": "b597ab7b6af6ad01693f9be90c2704b120b5e53a26acd70d98ba147b4f8c5ff8",
+        "grant_id": "lab-grant-2c4b65d5e29936777853e7811312580d",
+        "guardian_id": "guardian-rc3-native-lab",
+        "journal_head": "e8385587657703c5168486103d4c686456ad1619acaeb451dac2972ed3a980a3",
+        "key_id": "ba22e01169499bf73b40d2c75113058d0a3886d565d684c0cd7cd8761798c346",
+        "observation": "quiescent-copy-sqlite-read-transaction-backup",
+        "policy_sha256": "ff00e920f423a9323517c925728effe4f00c668e697beb13cf78eb7edf420b3e",
+        "previous_checkpoint_head": "5b029c805db20209b1c8a3826eb29404b050a565da39e9f682f8d086a6014a82",
+        "receipt_sha256": "81f8995f9f6988c0e3cb53f04175fd423d7ba8a1d803abd0dbef59b87f0a22e7",
+        "recovery_state": "COMMITTED",
+        "schema": "guardian.checkpoint.v1",
+        "scope": "LAB_OBSERVATION_NOT_AUTHORIZATION",
+        "sequence": 3,
+        "session_id": "594fbbcd209d22d864012a0e5f2c52e1b06661cbdc5beed9dd777471518ef676",
+        "source_sha": "b01f3eeb7ca4ee1873a0c27615adb1bf07d781a2",
+        "state_digest": "b690da7d45fca973816acdf0c8d59ede0c16eac865e0e10577a35bf0955ec986",
+        "state_profile": "guardian-sql-logical-ascii-v1"
+      },
+      "signature": "XVsIF5VAPAboAf7Hb0UOEisnLPEJiAuP4zUo93IQPMEmojw4G9AEmUrjCzl8k1XWJiSnn1JxrxpJHRKEJtTDBw=="
+    }
+  ],
+  "trust": {
+    "checkpoint_public": "14b003c7c042293e2feca740d705de3bdc1089cb694579a84a112b720bbf933b",
+    "endpoint": "http://127.0.0.1:60357/head",
+    "guardian_id": "guardian-rc3-native-lab",
+    "minimum_head": "58fb8a0bf55d66a31bba3a7bca87044ca4a2289ef8f8c9b8aa4e982145bbe4d4",
+    "minimum_sequence": 3,
+    "native_pins": {
+      "grant_public": "c9ce5000870d71e04293ba25b73ab7d4a72ff451229b789cba197a2606629d00",
+      "image": "sha256:c7363bd6adf6d1465f0057c1c1f73586fd16e55eeec614b6e670d00989c43059",
+      "receipt_public": "c5b2c066caa4b26f88ab8b73558a048947a7766482cfe6669c83fac80b698a13",
+      "request_sha256": "0537d8ef5b21db58b6bcbcd2b4b94d31af66d5d2cdfbea69aa91137960e34d25",
+      "worker_sha256": "aea1148ecbdae6159656e83bf418eee0cd4b8b77c0716bde38e8721cfc4a48c3"
+    },
+    "native_policy_sha256": "ff00e920f423a9323517c925728effe4f00c668e697beb13cf78eb7edf420b3e",
+    "profile": "guardian.lab-checkpoint-trust.v1",
+    "remote_independence": "SAME_ADMIN_NOT_ESTABLISHED",
+    "revoked": false,
+    "session_id": "594fbbcd209d22d864012a0e5f2c52e1b06661cbdc5beed9dd777471518ef676",
+    "source_sha": "b01f3eeb7ca4ee1873a0c27615adb1bf07d781a2"
+  },
+  "request": {
+    "agent_id": "resonance-agent-v5",
+    "body": {
+      "native_transcript_sha256": "47fbc2e473abb45aa5dd02bdfbe468f51ff9566cc8bb77b2aac33b7116813bca",
+      "policy_sha256": "92a39b4021317363df2683a8a43d5ca8c84882a47a58149b717ec67cbcde84b8",
+      "proposal": {
+        "agent_id": "resonance-agent-v5",
+        "broker_id": "guardian-lab",
+        "channel_id": "guardian-resonance-7570f41152f340e470d594bf",
+        "client_challenge": "e7db58f31c70a3e315181924826980e202bf97c045237889602edb0bd1c8a7bb",
+        "decision": "OBSERVE",
+        "docker_errors": {
+          "legacy": 5,
+          "linux": 5
+        },
+        "key_id": "lab-ed25519",
+        "nonce": "635abe0e496c09f4073e178c59a5b7e8f4709cae104500d9e69fb66874c8823e",
+        "op": "PROPOSE_TOOL",
+        "protocol": "guardian.mutual-ipc-auth.v1",
+        "resource_id": "resonance-synthetic-observation-v0",
+        "session_id": "594fbbcd209d22d864012a0e5f2c52e1b06661cbdc5beed9dd777471518ef676",
+        "ticks": 3,
+        "tool": "resonance.synthetic-hash-only.v0",
+        "trust_root_version": "lab-root-v1"
+      },
+      "rc2_decision_action": "OBSERVE",
+      "rc2_intent_sha256": "e7a5b9eea75610a26f44a495f01144962f5d9a2374dc73332de9f47f163cae9c",
+      "rc2_telemetry_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "destination": "docker://disposable/tmp/guardian-action",
+    "operation": "RUN_TOOL",
+    "request_id": "checkpoint-positive-594fbbcd209d",
+    "resource_id": "synthetic-request-hash",
+    "schema": "guardian.authenticated-request.v1",
+    "service": "LOCAL_LAB",
+    "tool": "synthetic_request_hash"
+  },
+  "grant": {
+    "payload": {
+      "admission_scope": "guardian.synthetic-hash.lab.v1",
+      "anomaly_authorization_input": false,
+      "authorization": "ALLOW",
+      "binding": {
+        "agent_id": "resonance-agent-v5",
+        "body_sha256": "7fb57eef7e7dde4d61455bb00923a45f1e1b58144085eb0df3819ff19bf52bac",
+        "destination": "docker://disposable/tmp/guardian-action",
+        "operation": "RUN_TOOL",
+        "request_id": "checkpoint-positive-594fbbcd209d",
+        "resource_id": "synthetic-request-hash",
+        "service": "LOCAL_LAB",
+        "tool": "synthetic_request_hash"
+      },
+      "binding_sha256": "5df34577af75eea5c9a025dcca176c53793ffe77d1574d240e6c506136c4cb9c",
+      "expires_at": 1795561950,
+      "grant_id": "lab-grant-2c4b65d5e29936777853e7811312580d",
+      "grant_key_fingerprint": "7be5404de8ff598c4df8c202",
+      "image_identity": "sha256:c7363bd6adf6d1465f0057c1c1f73586fd16e55eeec614b6e670d00989c43059",
+      "not_before": 1795561890,
+      "role": "LAB_SYNTHETIC",
+      "schema": "guardian.execution-grant.v2",
+      "subject": "S-1-15-2-111-222-333",
+      "trust_version": "ephemeral-local-lab-v1",
+      "wallet": "",
+      "worker_sha256": "aea1148ecbdae6159656e83bf418eee0cd4b8b77c0716bde38e8721cfc4a48c3"
+    },
+    "public_key_fingerprint": "7be5404de8ff598c4df8c202",
+    "signature": "lpdVj+7cc4zpaoIY1Lw5+FtQvYdVagGehvKm81guaJQ2UTRibM9jwUlsSt+foFpRMnjv4G3N9fHtRMVF0V2BCg=="
+  },
+  "policy": {
+    "enabled": true,
+    "epoch": 1,
+    "expires_at": 1795562009,
+    "not_before": 1795561889,
+    "revoked": false,
+    "schema": "guardian.synthetic-policy.v1",
+    "sid": "S-1-15-2-111-222-333"
+  },
+  "scope": "public synthetic fixture; expired grant is not live authorization"
+}

@@ -14,6 +14,9 @@ import tempfile
 import threading
 
 _active = threading.local()
+# The minimal distribution builder fixes this to True. Removing environment
+# variables cannot disable protected mode in that artifact, including direct CLI.
+PACKAGED_REQUIRED = False
 
 
 class CheckpointHold(Exception):
@@ -94,7 +97,8 @@ class ExternalCheckpointGate:
                 case = scratch / 'case'; state = case / 'state'; state.mkdir(parents=True)
                 for name in ('policy.json',): shutil.copy2(self.root/name, state/name)
                 for source in self.root.glob('state.sqlite*'): shutil.copy2(source, state/source.name)
-                shutil.copytree(self.root/'job', state/'job')
+                if (self.root/'job').exists():shutil.copytree(self.root/'job', state/'job')
+                if (self.root/'intent').exists():shutil.copytree(self.root/'intent', state/'intent')
                 shutil.copy2(cfg['chain_path'], case/'chain.json')
                 self.case = case
             # Recheck fresh remote head against the immutable admitted snapshot while
@@ -111,6 +115,11 @@ class ExternalCheckpointGate:
                 if 'REMOTE_FRESHNESS' in reason or 'REMOTE_BELOW_HIGH_WATER' in reason:
                     raise CheckpointHold('LATEST_HEAD_NOT_ESTABLISHED:'+reason)
                 raise CheckpointHold('HOLD_HEAD_MISMATCH:'+reason)
+            # Retain exact signed remote replies for independent retrospective audit.
+            audit = self.root/'checkpoint-observations'
+            audit.mkdir(exist_ok=True)
+            import uuid
+            (audit/(uuid.uuid4().hex+'.json')).write_text(json.dumps(result,sort_keys=True)+'\n',encoding='utf-8',newline='\n')
             return {'status':'CURRENT','scope':'SYNTHETIC_REMOTE_ONLY','operation':operation}
         except CheckpointHold:
             raise
@@ -124,7 +133,7 @@ def protected(operation, root_selector):
     """
     def decorate(function):
         def entry(*args, **kwargs):
-            required = os.environ.get('GUARDIAN_EXTERNAL_CHECKPOINT_REQUIRED')
+            required = '1' if PACKAGED_REQUIRED else os.environ.get('GUARDIAN_EXTERNAL_CHECKPOINT_REQUIRED')
             if required is None:
                 return function(*args, **kwargs)  # explicit compatibility, unchanged semantics
             try:
@@ -132,6 +141,12 @@ def protected(operation, root_selector):
                 gate = ExternalCheckpointGate(root_selector(args, kwargs))
                 with gate.serialize():
                     gate.require_current(operation)
+                    if operation == 'dispatch' and (gate.case/'state/intent').exists():
+                        from .checkpoint_verify import parse, encode
+                        for pos,name in ((0,'request'),(1,'grant')):
+                            value=args[pos] if len(args)>pos else kwargs[name]
+                            if encode(value)!=encode(parse((gate.case/'state/intent'/(name+'.json')).read_bytes())):
+                                raise CheckpointHold('HOLD_HEAD_MISMATCH:DISPATCH_INTENT_BINDING')
                     return function(*args, **kwargs)
             except CheckpointHold as exc:
                 return {'status':'HOLD','reason':str(exc),'launches':0,'dispatches':0,
@@ -143,7 +158,7 @@ def protected(operation, root_selector):
 
 
 def recheck_current(operation):
-    if os.environ.get('GUARDIAN_EXTERNAL_CHECKPOINT_REQUIRED') is None:
+    if not PACKAGED_REQUIRED and os.environ.get('GUARDIAN_EXTERNAL_CHECKPOINT_REQUIRED') is None:
         return
     gate = getattr(_active, 'gate', None)
     if gate is None: raise CheckpointHold('LATEST_HEAD_NOT_ESTABLISHED:NO_OPERATION_LEASE')

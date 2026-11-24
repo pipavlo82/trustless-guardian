@@ -19,6 +19,13 @@ class CheckpointEnforcement(unittest.TestCase):
     def test_disabled_preserves_other_authorization(self):
         self.assertEqual(self.invoke({},'.')['status'],'OTHER_AUTHORIZATION_REFUSED')
 
+    def test_packaged_mode_cannot_be_disabled_by_environment(self):
+        from research.checkpoint_enforcement import gate
+        with patch.object(gate,'PACKAGED_REQUIRED',True):
+            for value in [None,'0','']:
+                env={} if value is None else {'GUARDIAN_EXTERNAL_CHECKPOINT_REQUIRED':value}
+                self.assertEqual(self.invoke(env,'.')['status'],'HOLD')
+
     def test_missing_config_holds(self):
         self.assertEqual(self.invoke({'GUARDIAN_EXTERNAL_CHECKPOINT_REQUIRED':'1'},'.')['status'],'HOLD')
 
@@ -54,6 +61,13 @@ class CheckpointEnforcement(unittest.TestCase):
         from research.scoped_execution_lab_v3.reconcile_v3_hardened import reconcile
         with patch.dict(os.environ,{'GUARDIAN_EXTERNAL_CHECKPOINT_REQUIRED':'1'},clear=True):result=reconcile('missing')
         self.assertEqual(result['checkpoint_gate'],'ENFORCED')
+
+    def test_recovery_hold_precedes_native_readback(self):
+        from research.scoped_execution_lab_v3 import reconcile_v3_hardened as r
+        with patch.dict(os.environ,{'GUARDIAN_EXTERNAL_CHECKPOINT_REQUIRED':'1'},clear=True), patch.object(r,'verify',side_effect=RuntimeError('READBACK_BEFORE_ADMISSION')) as observed:
+            result=r.reconcile('missing')
+        self.assertEqual(result['status'],'HOLD')
+        self.assertFalse(observed.called)
 
     def test_sqlite_connection_closed_on_negative_witness(self):
         with tempfile.TemporaryDirectory() as name:
