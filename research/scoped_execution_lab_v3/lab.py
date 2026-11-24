@@ -22,6 +22,7 @@ from research.replay_challenge_v1.receipt import issue_execution_receipt
 from .atomic_receipt import publish
 from .lifecycle_support import record, worker_readback, crash_gate
 from .unified_admission import advance as unified_advance
+from research.checkpoint_enforcement.gate import protected, recheck_current
 
 HERE = Path(__file__).resolve().parent
 IMAGE_PIN = json.loads((HERE/'image.json').read_bytes())
@@ -72,6 +73,7 @@ def docker(argv, timeout=15):
     return subprocess.run(['docker', *argv], capture_output=True, timeout=timeout,
                           creationflags=getattr(subprocess, 'CREATE_NO_WINDOW', 0))
 
+@protected('dispatch', lambda args, kw: Path((args[4] if len(args)>4 else kw['state']).path).parent)
 def execute(request, grant, grant_public, receipt_key, state, policy, sid, now, out, *, deadline=15):
     """No caller-controlled image, worker, command, path, environment, or mounts."""
     out = Path(out); out.mkdir(parents=True, exist_ok=False)
@@ -122,6 +124,7 @@ def execute(request, grant, grant_public, receipt_key, state, policy, sid, now, 
             crash_gate(out,'wal_dispatch_recorded')
             # Fixed source and bounded shell output; run to files, never buffer arbitrary output in RAM.
             with (out/'stdout.bin').open('wb') as so, (out/'stderr.bin').open('wb') as se:
+                recheck_current('before_docker_start')
                 proc = subprocess.Popen(['docker','start','-a',name],stdout=so,stderr=se,creationflags=getattr(subprocess,'CREATE_NO_WINDOW',0))
                 launches += 1; started = True
                 if os.environ.get('GUARDIAN_V3_CRASH_GATE') == 'after_docker_start':

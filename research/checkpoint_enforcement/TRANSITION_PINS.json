@@ -1,0 +1,18 @@
+{
+  "base_sha": "294c8a33ef29c0a08dbaa4c32a77a601b777a5b3",
+  "files": {
+    "research/scoped_execution_lab_v3/lab.py": {
+      "published_sha256": "ebcd765254fef9dbd466a24c15e5b0d2fa8984153a9316a2b913d12396a2d2b4",
+      "candidate_sha256": "0ef6ed8ae56ea150e1e2df6dd6354a3e43cdeeb4eb2b63774f9f21e4e9943a31"
+    },
+    "research/scoped_execution_lab_v3/reconcile_v3_hardened.py": {
+      "published_sha256": "78805241726b7ddd8d3b2207e8d6b26b2eb4effb4aa9856f8d84ffe8a23b82b4",
+      "candidate_sha256": "f4e3d673309d459e59f51120ea05c9bb612ddefaab55ddf72f4fb5527abd7d28"
+    },
+    "research/scoped_execution_lab_v3/guardian_rc2_server.py": {
+      "published_sha256": "c6908b8000c9917c007e5363f018079876e020baae3216ca77319baea102189e",
+      "candidate_sha256": "944e8fc381844f0b39204cbc142e1c9bd58b6e9f90620b8c443eb5754e387e95"
+    }
+  },
+  "production": "HOLD"
+}

@@ -42,6 +42,12 @@ def put(path: Path, value) -> None:
 
 
 def main() -> int:
+    # Recovery entrypoint uses the same gated authoritative reconciler; no new recovery algorithm.
+    if len(sys.argv) == 3 and sys.argv[1] == '--recover':
+        from research.scoped_execution_lab_v3.reconcile_v3_hardened import reconcile
+        result = reconcile(Path(sys.argv[2]).resolve())
+        print(json.dumps(result, sort_keys=True))
+        return 0 if result.get('status') == 'LOCAL_RECONCILED_EXTERNAL_HOLD' else 2
     parser = argparse.ArgumentParser()
     for name in ("channel", "sid", "ready", "out", "trust", "intent"):
         parser.add_argument("--" + name, required=True)

@@ -1,0 +1,1 @@
+Derived from existing local ReceiptOS strict-json.mjs SHA-256 4efcb72608603d84c17e3f4cae080964ecd216e36fd1953aee43d66ee11bc4db. Node hash/Buffer removed; browser TextEncoder, text-only input, 256KiB limit. Original unchanged. No Receipt SDK code copied.

@@ -1,0 +1,5 @@
+<!doctype html><html lang="uk"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Guardian checkpoint — local review</title>
+<style>body{font:17px system-ui;background:#10151d;color:#e5eef7;max-width:900px;margin:48px auto;padding:20px}button{font:inherit;padding:12px 20px}pre{white-space:pre-wrap;overflow-wrap:anywhere}p{line-height:1.6}</style>
+<h1>Guardian checkpoint — локальне review</h1><p>Окремий read-only кандидат. Підпис та вибраний state digest не доводять актуальність зовнішнього head або виконання worker. Production HOLD.</p>
+<button id="run">Перевірити локальні fixtures</button><pre id="result">Не перевірено</pre>
+<script type="module">import {run} from './tests.mjs';document.querySelector('#run').onclick=async()=>{const f=await(await fetch('/fixture.json')).json();const r=await run(f);document.querySelector('#result').textContent=JSON.stringify(r,null,2);};</script></html>

@@ -27,6 +27,8 @@ jobs:
           python-version: '3.12'
       - name: Install hash-locked authentication dependencies
         run: python -m pip install --disable-pip-version-check --require-hashes -r requirements-auth-v1.txt
+      - name: Install pinned checkpoint verifier dependency
+        run: python -m pip install --disable-pip-version-check --no-deps --require-hashes -r requirements-checkpoint-v1.txt
       - name: Preserve inherited Guardian tests in normal repeat and optimized modes
         run: |
           python -B tools/guardian_regression_assessment_v1.py --out build/guardian-regression-v1/normal.json
@@ -74,6 +76,8 @@ jobs:
           python-version: '3.12'
       - name: Install hash-locked authentication dependencies
         run: python -m pip install --disable-pip-version-check --require-hashes -r requirements-auth-v1.txt
+      - name: Install pinned checkpoint verifier dependency
+        run: python -m pip install --disable-pip-version-check --no-deps --require-hashes -r requirements-checkpoint-v1.txt
       - name: Preserve inherited Guardian tests in normal repeat and optimized modes
         shell: pwsh
         run: |

@@ -1,0 +1,5 @@
+# Checkpoint research verifier: pinned PyNaCl wheels for Python 3.12 on Linux x86_64 / Windows amd64.
+# Install after requirements-auth-v1.txt using --require-hashes --no-deps.
+PyNaCl==1.6.2 \
+    --hash=sha256:62985f233210dee6548c223301b6c25440852e13d59a8b81490203c3227c5ba0 \
+    --hash=sha256:22de65bb9010a725b0dac248f353bb072969c94fa8d6b1f34b87d7953cf7bbe4
